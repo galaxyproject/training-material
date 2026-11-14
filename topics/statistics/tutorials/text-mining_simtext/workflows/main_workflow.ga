@@ -1,0 +1,199 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "In this workflow the similarity among set of search queries (e.g. genes) is analyzed based on the associated vocabulary in PubMed. The last tool is an interactive tool that enables the inspection of the data.",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "",
+            "name": ""
+        }
+    ],
+    "format-version": "0.1",
+    "name": "Simtext training workflow",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 302.5,
+                "height": 81,
+                "left": 399,
+                "right": 599,
+                "top": 221.5,
+                "width": 200,
+                "x": 399,
+                "y": 221.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "ad71fad8-ef64-470f-891a-257ca4316fd6",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/pubmed_by_queries/pubmed_by_queries/0.0.2",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "PubMed query",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 432.5,
+                "height": 112,
+                "left": 626,
+                "right": 826,
+                "top": 320.5,
+                "width": 200,
+                "x": 626,
+                "y": 320.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/pubmed_by_queries/pubmed_by_queries/0.0.2",
+            "tool_shed_repository": {
+                "changeset_revision": "02e46a96e98a",
+                "name": "pubmed_by_queries",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"abstract\": \"false\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"number\": \"500\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "918db7a9-14d9-4cab-85fd-34d8791d28d3",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "0813cbe0-f6e4-4e3a-a85b-b443e5f97332"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/pmids_to_pubtator_matrix/pmids_to_pubtator_matrix/0.0.2",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "PMIDs to PubTator",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 432.5,
+                "height": 112,
+                "left": 854,
+                "right": 1054,
+                "top": 320.5,
+                "width": 200,
+                "x": 854,
+                "y": 320.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/pmids_to_pubtator_matrix/pmids_to_pubtator_matrix/0.0.2",
+            "tool_shed_repository": {
+                "changeset_revision": "69714f06f18b",
+                "name": "pmids_to_pubtator_matrix",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"byid\": \"false\", \"categories\": [\"Gene\", \"Disease\"], \"input\": {\"__class__\": \"ConnectedValue\"}, \"number\": \"100\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "4ffbee0f-d699-49e3-bf5d-50520d273ab1",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "02b09bfc-bfc1-47d7-b389-04d926e6b5b8"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "interactive_tool_simtext_app",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "matrix": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "simtext_app",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 346.5,
+                "height": 122,
+                "left": 1089,
+                "right": 1289,
+                "top": 224.5,
+                "width": 200,
+                "x": 1089,
+                "y": 224.5
+            },
+            "post_job_actions": {},
+            "tool_id": "interactive_tool_simtext_app",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"matrix\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "aa5c3877-6243-4a19-92a6-3530c2f57d22",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "05e1fd38-276e-42d0-9c9c-60ed7c2c22c9"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "text-mining",
+	"statistics",
+        "visualisation",
+        "PubMed",
+        "PubTator"
+    ],
+    "uuid": "7f29bb34-2bc9-49ba-bc21-00b5e295d9d9",
+    "version": 5
+}

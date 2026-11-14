@@ -1,0 +1,690 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Label-free data analysis using MaxQuant",
+    "format-version": "0.1",
+    "name": "Proteomics: MaxQuant workflow",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Protein_database"
+                }
+            ],
+            "label": "Protein_database",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 525.6999969482422,
+                "height": 82.19999694824219,
+                "left": -15,
+                "right": 185,
+                "top": 443.5,
+                "width": 200,
+                "x": -15,
+                "y": 443.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "90cc78f2-681e-4855-8e66-e4884558be47",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "bc660f8d-110e-4c33-909b-66c0c29748c9"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Sample1"
+                }
+            ],
+            "label": "Sample1",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 637.3000030517578,
+                "height": 61.80000305175781,
+                "left": -49,
+                "right": 151,
+                "top": 575.5,
+                "width": 200,
+                "x": -49,
+                "y": 575.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "eb754bfe-49b1-406d-8eb9-842b8f1fab22",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "9a0693dc-6c4d-4fe8-8c8d-4846938278c3"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Sample2"
+                }
+            ],
+            "label": "Sample2",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 766.3000030517578,
+                "height": 61.80000305175781,
+                "left": -42,
+                "right": 158,
+                "top": 704.5,
+                "width": 200,
+                "x": -42,
+                "y": 704.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "321c3baa-dd58-45ce-9a28-ee1eb7332f0f",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "0a8fcb2d-5b66-4e0f-bb8c-46017c426cf2"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_opts|fasta_files": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "paramGroups_0|files": [
+                    {
+                        "id": 1,
+                        "output_name": "output"
+                    },
+                    {
+                        "id": 2,
+                        "output_name": "output"
+                    }
+                ]
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MaxQuant",
+            "outputs": [
+                {
+                    "name": "proteinGroups",
+                    "type": "tabular"
+                },
+                {
+                    "name": "mqpar",
+                    "type": "xml"
+                },
+                {
+                    "name": "peptides",
+                    "type": "tabular"
+                },
+                {
+                    "name": "ptxqc_report",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 780.8999938964844,
+                "height": 408.3999938964844,
+                "left": 310,
+                "right": 510,
+                "top": 372.5,
+                "width": 200,
+                "x": 310,
+                "y": 372.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ea0a1d50c83f",
+                "name": "maxquant",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"fasta\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_opts\": {\"ftype\": \".thermo.raw\", \"fasta_files\": {\"__class__\": \"ConnectedValue\"}, \"identifier_parse_rule\": \">.*\\\\|(.*)\\\\|\", \"description_parse_rule\": \">(.*) OS\"}, \"output_opts\": {\"dry_run\": \"false\", \"output\": [\"proteinGroups\", \"mqpar\", \"peptides\"]}, \"paramGroups\": [{\"__index__\": 0, \"files\": {\"__class__\": \"ConnectedValue\"}, \"maxMissedCleavages\": \"1\", \"fixedModifications\": [\"Carbamidomethyl (C)\"], \"variableModifications\": null, \"enzymes\": [\"Trypsin/P\"], \"digestion_mode\": \"0\", \"quant_method\": {\"select_quant_method\": \"lfq\", \"__current_case__\": 2, \"lfqMinRatioCount\": \"2\", \"lfqMinEdgesPerNode\": \"3\", \"lfqAvEdgesPerNode\": \"6\", \"lfqSkipNorm\": \"true\"}}], \"protein_quant\": {\"peptides_for_quantification\": \"1\", \"only_unmod_prot\": {\"unmod_prot\": \"True\", \"__current_case__\": 0, \"mods_used_prot_quant\": [\"Acetyl (Protein N-term)\", \"Oxidation (M)\"], \"discard_unmod_cpart_peptides\": \"true\"}, \"lfq_opts\": {\"separateLfq\": \"false\", \"lfqStabilizeLargeRatios\": \"true\", \"lfqRequireMsms\": \"true\", \"do_ibaq\": {\"ibaq\": \"False\", \"__current_case__\": 1}, \"advancedSiteIntensities\": \"true\"}}, \"qc\": {\"do_it\": \"true\", \"__current_case__\": 0, \"parameters\": \"true\", \"summary\": \"true\", \"proteingroups\": \"true\", \"evidence\": \"true\", \"msms\": \"true\", \"msmsscans\": \"true\"}, \"search_opts\": {\"template\": null, \"min_peptide_len\": \"7\", \"max_peptide_mass\": \"4600\", \"min_unique_pep\": \"1\", \"calc_peak_properties\": \"false\", \"match_between_runs\": \"false\", \"incl_contaminants\": \"true\", \"decoy_mode\": \"revert\", \"psm_fdr\": \"0.01\", \"protein_fdr\": \"0.01\", \"min_pep_length\": \"8\", \"max_pep_length\": \"25\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.6.10.43+galaxy3",
+            "type": "tool",
+            "uuid": "ae1d3f39-d1a8-4cd3-9534-64cc69f175a9",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "peptides",
+                    "uuid": "fe9cec5c-de9c-4c39-bddd-e7dd199f2564"
+                },
+                {
+                    "label": null,
+                    "output_name": "ptxqc_report",
+                    "uuid": "360aa96f-bebf-46b6-9b30-1d6940779216"
+                },
+                {
+                    "label": null,
+                    "output_name": "proteinGroups",
+                    "uuid": "c155ddc4-7084-4830-836d-b71f7557a86e"
+                },
+                {
+                    "label": null,
+                    "output_name": "mqpar",
+                    "uuid": "23b1a6e3-3da7-4c60-951b-71b1f4da33ba"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "proteinGroups"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 465.6999969482422,
+                "height": 93.19999694824219,
+                "left": 530,
+                "right": 730,
+                "top": 372.5,
+                "width": 200,
+                "x": 530,
+                "y": 372.5
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"cond\": \"c38!=\\\"+\\\"\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "295e41a6-0642-414e-a939-8179f8b5f47d",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "7d51c925-9c11-4125-98f3-abe19bc22825"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "Grep1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Select",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 470.6999969482422,
+                "height": 93.19999694824219,
+                "left": 745,
+                "right": 945,
+                "top": 377.5,
+                "width": 200,
+                "x": 745,
+                "y": 377.5
+            },
+            "post_job_actions": {},
+            "tool_id": "Grep1",
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"false\", \"pattern\": \"(HUMAN)|(Majority)\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "f582f3e8-8308-49c3-a1ee-3ba9051f5a85",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "e88a2cae-98f1-471d-9131-338a6e1169fd"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 465.6999969482422,
+                "height": 93.19999694824219,
+                "left": 970,
+                "right": 1170,
+                "top": 372.5,
+                "width": 200,
+                "x": 970,
+                "y": 372.5
+            },
+            "post_job_actions": {},
+            "tool_id": "Cut1",
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"columnList\": \"c8,c32,c33\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "99557c29-6927-4736-afff-9a2be53e967e",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "a97baff1-6f76-4400-98c7-138666974448"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "infile": {
+                    "id": 6,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Sort",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 344.6999969482422,
+                "height": 93.19999694824219,
+                "left": 1162,
+                "right": 1362,
+                "top": 251.5,
+                "width": 200,
+                "x": 1162,
+                "y": 251.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"header\": \"1\", \"ignore_case\": \"false\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"sortkeys\": [{\"__index__\": 0, \"column\": \"2\", \"order\": \"r\", \"style\": \"g\"}], \"unique\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "c6da37e8-98fc-4ab2-8ec1-9a55510b09c5",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "44df6e3d-01b3-4136-b18b-694f4d153b32"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Compute",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 585.6999969482422,
+                "height": 93.19999694824219,
+                "left": 1190,
+                "right": 1390,
+                "top": 492.5,
+                "width": 200,
+                "x": 1190,
+                "y": 492.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0",
+            "tool_shed_repository": {
+                "changeset_revision": "be25c075ed54",
+                "name": "column_maker",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"avoid_scientific_notation\": \"no\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"cond\": \"log(c2,2)\", \"header_lines_conditional\": {\"header_lines_select\": \"yes\", \"__current_case__\": 1, \"header_new_column_name\": \"log2 intensity sample1\"}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"round\": \"no\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.3.0",
+            "type": "tool",
+            "uuid": "a73294a5-050b-436a-95c2-7042aa30bab3",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "ec3d0fb2-8ce0-48d9-92d5-590c2644e326"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "infile": {
+                    "id": 7,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Sort",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 339.6999969482422,
+                "height": 93.19999694824219,
+                "left": 1410,
+                "right": 1610,
+                "top": 246.5,
+                "width": 200,
+                "x": 1410,
+                "y": 246.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"header\": \"1\", \"ignore_case\": \"false\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"sortkeys\": [{\"__index__\": 0, \"column\": \"3\", \"order\": \"r\", \"style\": \"g\"}], \"unique\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "3f46dbc8-6684-4e43-bfca-114671eff459",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "9ea6d4d3-05a4-4b64-a36c-eb4417be546d"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input": {
+                    "id": 8,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Compute",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 585.6999969482422,
+                "height": 93.19999694824219,
+                "left": 1410,
+                "right": 1610,
+                "top": 492.5,
+                "width": 200,
+                "x": 1410,
+                "y": 492.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0",
+            "tool_shed_repository": {
+                "changeset_revision": "be25c075ed54",
+                "name": "column_maker",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"avoid_scientific_notation\": \"no\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"cond\": \"log(c3,2)\", \"header_lines_conditional\": {\"header_lines_select\": \"yes\", \"__current_case__\": 1, \"header_new_column_name\": \"log2 intensity sample2\"}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"round\": \"no\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.3.0",
+            "type": "tool",
+            "uuid": "f164eec0-10d2-446d-ada7-db67303384f9",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "1905e349-23d8-4b81-a156-7e22977d3593"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input": {
+                    "id": 10,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 766.6999969482422,
+                "height": 93.19999694824219,
+                "left": 1568,
+                "right": 1768,
+                "top": 673.5,
+                "width": 200,
+                "x": 1568,
+                "y": 673.5
+            },
+            "post_job_actions": {},
+            "tool_id": "Cut1",
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"columnList\": \"c4,c5\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "7e308945-aa0f-494a-a59f-b960614e0a03",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "70c5c495-69e5-41e2-aefa-2bcc18aa5fd4"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input": {
+                    "id": 10,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Compute",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 598.6999969482422,
+                "height": 93.19999694824219,
+                "left": 1707,
+                "right": 1907,
+                "top": 505.5,
+                "width": 200,
+                "x": 1707,
+                "y": 505.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0",
+            "tool_shed_repository": {
+                "changeset_revision": "be25c075ed54",
+                "name": "column_maker",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"avoid_scientific_notation\": \"no\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"cond\": \"c4-c5\", \"header_lines_conditional\": {\"header_lines_select\": \"yes\", \"__current_case__\": 1, \"header_new_column_name\": \"log2 Fold Change\"}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"round\": \"no\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.3.0",
+            "type": "tool",
+            "uuid": "55d7d873-c11c-47ce-8c53-022ab234f8e1",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "f61c7a19-b543-4f5a-afe0-44c06bb28cd4"
+                }
+            ]
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input": {
+                    "id": 12,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Histogram",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 465.6999969482422,
+                "height": 93.19999694824219,
+                "left": 1850,
+                "right": 2050,
+                "top": 372.5,
+                "width": 200,
+                "x": 1850,
+                "y": 372.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4",
+            "tool_shed_repository": {
+                "changeset_revision": "6f134426c2b0",
+                "name": "histogram",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"breaks\": \"0\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"density\": \"true\", \"frequency\": \"false\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"numerical_column\": \"6\", \"title\": \"log2 Fold Change\", \"xlab\": \"V1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.4",
+            "type": "tool",
+            "uuid": "0cffa4b8-d1df-4339-a6f8-18041a18c7e2",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "8b6f54e6-bea6-4dac-9226-f5468661fcd5"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "proteomics"
+    ],
+    "uuid": "378abe92-8171-44e4-b0af-d26b9fd6b560",
+    "version": 1
+}

@@ -1,0 +1,36 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nclinical_train"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nclinical_test"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nomics1_train"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nomics1_test"]
+  4[color=lightblue,label="ℹ️ Input Dataset\nomics2_train"]
+  5[color=lightblue,label="ℹ️ Input Dataset\nomics2_test"]
+  6[label="Flexynesis"]
+  5 -> 6 [label="output"]
+  4 -> 6 [label="output"]
+  1 -> 6 [label="output"]
+  3 -> 6 [label="output"]
+  0 -> 6 [label="output"]
+  2 -> 6 [label="output"]
+  k5e712e2e383148d695b73426c86fa2c5[color=lightseagreen,label="Output\nCox and KM plots"]
+  6 -> k5e712e2e383148d695b73426c86fa2c5
+  k37e6485da16d4191973fdeb5301d6949[color=lightseagreen,label="Output\nflexynesis output"]
+  6 -> k37e6485da16d4191973fdeb5301d6949
+  7[label="Extract prediction file"]
+  6 -> 7 [label="results"]
+  8[label="Extract test Embeddings"]
+  6 -> 8 [label="results"]
+  9[label="Calculate median of predicted value"]
+  7 -> 9 [label="output"]
+  10[label="add boolean column for high and low risk"]
+  7 -> 10 [label="output"]
+  11[label="rename boolean to high and low"]
+  10 -> 11 [label="out_file1"]
+  12[label="High-Low risk groups embedding plot"]
+  8 -> 12 [label="output"]
+  11 -> 12 [label="outfile"]
+  k22e93b7f787c4d589b25f159bc3688b4[color=lightseagreen,label="Output\nHigh-Low_risk_groups_embedding_pca_plot"]
+  12 -> k22e93b7f787c4d589b25f159bc3688b4
+}

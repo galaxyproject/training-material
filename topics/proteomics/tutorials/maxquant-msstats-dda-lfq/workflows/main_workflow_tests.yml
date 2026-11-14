@@ -1,0 +1,41 @@
+- doc: Test outline for main_workflow.ga
+  job:
+    Protein Groups:
+      class: File
+      location: https://zenodo.org/record/4896554/files/MaxQuant_proteingroups.tabular
+    Evidence:
+      class: File
+      location: https://zenodo.org/record/4896554/files/MaxQuant_Evidence.tabular
+    annotation file:
+      class: File
+      location: https://zenodo.org/record/4896554/files/input_annotation_file.tabular
+    comparison matrix:
+      class: File
+      location: https://zenodo.org/record/4896554/files/input_comparison_matrix.tabular
+  outputs:
+    significant metastasized:
+      asserts:
+        has_n_lines:
+          n: 86
+    significant rdeb:
+      asserts:
+        has_n_lines:
+          n: 13
+    metastasized uniprot:
+      asserts:
+        has_line:
+          line: ">sp|O00231|PSD11_HUMAN 26S proteasome non-ATPase regulatory subunit 11 OS=Homo sapiens OX=9606 GN=PSMD11 PE=1 SV=3"
+    Upregulated proteins in metastasized cSCC:
+      asserts:
+        has_size:
+          value: 146000
+          delta: 20000
+    Upregulated proteins in RDEB cSCC:
+      asserts:
+        has_size:
+          value: 79000
+          delta: 20000
+    rdeb uniprot:
+      asserts:
+        has_line:
+          line: ">sp|P04259|K2C6B_HUMAN Keratin, type II cytoskeletal 6B OS=Homo sapiens OX=9606 GN=KRT6B PE=1 SV=5"

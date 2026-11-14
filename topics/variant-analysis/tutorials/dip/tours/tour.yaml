@@ -1,0 +1,352 @@
+---
+id: dip
+name: Calling variants in diploid systems
+description: >-
+    In this tutorial we will deal with calling and annotating variants, as well as manipulating data with GEMINI.
+title_default: dip
+steps:
+  - title: Introduction
+    content: >-
+      Today we hear a lot about personalized medicine. Yet the personalization is defined by the genetic make up of the individual. In this tutorial we will discuss how this information can be uncovered from the genomic sequencing data.
+    backdrop: true
+  - title: Calling variants
+    content: >-
+      Variant calling is a complex field that was significantly propelled by advances in DNA sequencing and efforts of large scientific consortia such as the <a href="http://www.1000genomes.org/">1000 Genomes</a>. Here we summarize basic ideas central to Genotype and Variant calling. First, let’s contrast the two things although they often go together:<ul>
+        <li><b>Variant calling</b> - identification of positions where the sequenced sample is different from the reference sequence (or <a href="https://github.com/vgteam/vg">reference genome graph</a>)</li>
+        <li><b>Genotype calling</b> - identifying individual’s genotype at variable sites.</li></ul>
+    backdrop: true
+  - title: Calling variants
+    content: >-
+      A typical workflow for variation discovery involves the following steps (e.g., see Nielsen et al. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3593722/">2011</a>):<ul>
+        <li>Mapping reads against the reference genome</li>
+        <li>Thresholding BAM datasets by, for example, retaining paired, properly mapped reads</li>
+        <li>Performing quality score recalibration</li>
+        <li>Performing realignment</li>
+        <li>Performing variant calling/genotype assignment</li>
+        <li>Performing filtering and genotype quality score recalibration</li>
+        <li>Annotating variants and performing downstream analyses</li>
+      </ul>
+      However, continuing evolution of variant detection methods has made some of these steps obsolete. For instance, omitting quality score recalibration and re-alignment (steps 3 and 4 above) when using haplotype-aware variant callers such as <a href="https://github.com/ekg/freebayes">FreeBayes</a> does not have an effect on the resulting calls (see Brad Chapman’s methodological comparisons at <a href="https://bit.ly/1S9kFJN">bcbio</a>). Before going forward with an actual genotype calling in Galaxy let’s take a look as some basic ideas behind modern variant callers.
+    backdrop: true
+  - title: How does SNP calling and genotyping work?
+    content: |-
+      Consider a set of sequencing reads derived from a diploid individual
+       <pre><code>REFERENCE:  atcatgacggcaGtagcatat
+       --------------------------------
+       READ1:     atcatgacggcaGtagcatat
+       READ2:         tgacggcaGtagcatat
+       READ3:     atcatgacggcaAtagca
+       READ4:            cggcaGtagcatat
+       READ5:     atcatgacggcaGtagc</code></pre>
+       The capitalized position contains a <b>G → A</b> <a href="https://en.wikipedia.org/wiki/Transition_(genetics)">transition</a>. So, in principle this can be a heterozygous site with two alleles <b>G</b> and <b>A</b>. A commonly used naïve procedure would define a site as heterozygous if there is a non-reference allele with frequency between 20% and 80%. In this case <b>A</b> is present in 1/5 or 20% of the cases, so we can say that this is a heterozygous site. Yet it is only represented by a single read and thus is hardly reliable. Here are some of the possibilities that would explain this variant. It can be:<ul>
+         <li>a true variant</li>
+         <li>an experimental artifact, e.g. a library preparation error</li>
+         <li>a base calling error</li>
+         <li>an analysis error, e.g. a misalignment (though unlikely in the above example)</li></ul>
+    backdrop: true
+  - title: How does SNP calling and genotyping work?
+    content: |-
+      The modern variant callers attempt to assign a reliability estimate for each genotype call. This is done using Bayes reasoning (for a great visual explanation see <a href="https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/">blog</a> by Oscar Bonilla).
+    backdrop: true
+  - title: How does SNP calling and genotyping work?
+    content: |-
+      <a href="https://github.com/ekg/freebayes">FreeBayes</a> is an open source variant caller that has been battle-tested by the 1000 Genomes community and is extensively used today (also see <a href="https://bcbio.wordpress.com/">bcbio</a>). It has a number of features that simplify variant discovery workflows. These include (from FreeBayes github page):<ul>
+        <li><b>Indel realignment is accomplished internally</b> using a read-independent method, and issues resulting from discordant alignments are dramatically reduced through the direct detection of haplotypes</li>
+        <li><b>The need for base quality recalibration is avoided</b> through the direct detection of haplotypes. Sequencing platform errors tend to cluster (e.g. at the ends of reads), and generate unique, non-repeating haplotypes at a given locus</li>
+        <li><b>Variant quality recalibration is avoided</b> by incorporating a number of metrics, such as read placement bias and allele balance, directly into the Bayesian model</li>
+        <li><b>Ability to incorporate non-diploid cases</b> such as pooled datasets or data from polyploid samples.</li></ul>
+    backdrop: true
+  - title: How does SNP calling and genotyping work?
+    content: |-
+      Freebayes is a <i>haplotype-based</i> variant caller. This implies that instead of looking at an individual positions within an alignment of reads to the reference genome, it looks at a haplotype window, length of which is dynamically determined (see section 3.2. in <a href="https://arxiv.org/pdf/1207.3907v2.pdf">FreeBayes manuscript</a>).
+    backdrop: true
+  - title: How does SNP calling and genotyping work?
+    content: |-
+      In this example we will perform variant calling and annotation using <a href="https://jimb.stanford.edu/giab/">genome in the bottle data</a>. Specifically, we will use Ashkenazim Father-Mother-Son trio data from the Personal Genome Project:<ul>
+        <li>HG002 - NA24385 - huAA53E0 (son)</li>
+        <li>HG003 - NA24149 - hu6E4515 (father)</li>
+        <li>HG004 - NA24143 - hu8E87A9 (mother)</li></ul>
+      Yet for a quick tutorial these datasets are way too big, so we created a <a href="https://doi.org/10.5281/zenodo.60520">downsampled dataset</a>. This dataset was produced by mapping the trio reads against the <code>hg19</code> version of the human genome, merging the resulting bam files together (we use readgroups to label individual reads so they can be traced to each of the original individuals), and restricting alignments to a small portion of chromosome 19 containing the <a href="https://www.ncbi.nlm.nih.gov/gene?cmd=Retrieve&dopt=Graphics&list_uids=5442">POLRMT</a> gene.
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      Create a new history for this exercise. Click on this button and then
+      "Create New"
+    placement: left
+  - title: Importing data via links
+    content: Import the data from <a href="https://zenodo.org/record/60520">Zenodo</a>.'
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Import the files named <b>GIAB-Ashkenazim-Trio.txt</b> (tabular format) and <b>GIAB-Ashkenazim-Trio-hg19</b> (BAM format) from <a href="https://zenodo.org/record/60520">Zenodo</a>.
+    placement: right
+    textinsert: |-
+      https://zenodo.org/record/60520/files/GIAB-Ashkenazim-Trio.txt?download=1
+      https://zenodo.org/record/60520/files/GIAB-Ashkenazim-Trio-hg19.gz?download=1
+    backdrop: false
+  - title: Uploading the input data
+    content: Specify the used genome for the BAM dataset as <b>Human Feb 2009</b>
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Generating FreeBayes calls
+    element: '#tool-search-query'
+    content: Search for 'FreeBayes' tool.
+    placement: right
+    textinsert: FreeBayes
+  - title: Generating FreeBayes calls
+    element: '#tool-search'
+    content: Click on the 'FreeBayes' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffreebayes%2Ffreebayes%2F1.1.0.46-0"]
+        .tool-old-link
+  - title: Generating FreeBayes calls
+    element: '#tool-search'
+    content: Run the tool with the following parameters<ul>
+      <li>"Choose the source for the reference genome” to 'locally cached'</li>
+      <li>"BAM dataset" to the uploaded <b>GIAB-Ashkenazim-Trio-hg19</b> BAM dataset</li>
+      <li>"Using reference genome" to 'hg19'</li>
+      <li>"Choose parameter selection level” to '5. Full list of options'</li>
+      <li>"Algorithmic features” to 'Set algorithmic features'</li>
+      <li>"Calculate the marginal probability of genotypes and report as GQ in each sample field in the VCF output" to 'Yes'</li>
+      </ul>
+    position: right
+  - title: Generating FreeBayes calls
+    content: This will produce a dataset in <a href="http://www.1000genomes.org/wiki/Analysis/variant-call-format">VCF</a> format containing 35 putative variants. Before we can continue, we need to post-process this dataset by breaking compound variants into multiple independent variants.
+    backdrop: true
+  - title: Simplify variant representation
+    element: '#tool-search-query'
+    content: Search for 'VcfAllelicPrimitives' tool.
+    placement: right
+    textinsert: VcfAllelicPrimitives
+  - title: Simplify variant representation
+    element: '#tool-search'
+    content: Click on the 'VcfAllelicPrimitives' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fvcfallelicprimitives%2Fvcfallelicprimitives%2F1.0.0_rc1%2Bgalaxy0"]
+        .tool-old-link
+  - title: Simplify variant representation
+    element: '#tool-search'
+    content: Run the tool with the following parameters<ul>
+      <li>"Select VCF dataset” to the output of <b>FreeBayes</b></li>
+      <li>"Maintain site and allele-level annotations when decomposing" to 'Yes'</li>
+      <li>"Maintain genotype-level annotations when decomposing" to 'Yes'</li>
+      </ul>
+    position: right
+  - title: Simplify variant representation
+    content: <b>VCFAllelicPrimitives</b> generates a VCF files containing 37 records (the input VCF only contained 35). This is because a multiple nucleotide polymorphism at position 618851 have been converted to two.
+    backdrop: true
+  - title: Annotating variants with SnpEff
+    content: At this point we are ready to begin annotating variants using <a href="http://snpeff.sourceforge.net/SnpEff.html">SnpEff</a>. SnpEff <i>“…annotates and predicts the effects of variants on genes (such as amino acid changes)…”</i> and so is critical for functional interpretation of variation data.
+    backdrop: true
+  - title: Annotating variants
+    element: '#tool-search-query'
+    content: Search for 'SnpEff' tool.
+    placement: right
+    textinsert: SnpEff
+  - title: Annotating variants
+    element: '#tool-search'
+    content: Click on the 'SnpEff' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsnpeff%2FsnpEff%2F4.3r.1"]
+        .tool-old-link
+  - title: Annotating variants
+    element: '#tool-search'
+    content: Run the tool with the following parameters<ul>
+      <li>"Sequence changes (SNPs, MNPs, InDels)” to the VCF output of <b>VcfAllelicPrimitives</b></li>
+      <li>"Genome source" to 'Locally installed reference genome'</li>
+      <li>"Genome" to 'hg19'</li>
+      </ul>
+    position: right
+  - title: Annotating variants
+    element: '#history-options-button'
+    content: >-
+      SnpEff will generate two outputs:<ul>
+        <li>an annotated VCF file</li>
+        <li>an HTML report</li></ul>
+      The report contains a number of useful metrics such as distribution of variants across gene features or changes to codons.
+    placement: left
+  - title: Manipulating variation data with GEMINI
+    content: Now that we have an annotated VCF file it is time to peek inside our variation data. <a href="http://quinlanlab.org/">Aaron Quinlan</a>, creator of <a href="http://gemini.readthedocs.org/en/latest/index.html">GEMINI</a>, calls it Detective work.
+    backdrop: true
+  - title: Loading data into GEMINI
+    content: The first step is to convert a VCF file we would like to analyze into a GEMINI database. For this we will use <b>GEMINI Load</b> tool. GEMINI takes as input a VCF file and a <a href="https://www.cog-genomics.org/plink2/formats#ped">PED</a> file describing the relationship between samples.
+    backdrop: true
+  - title: Loading data into GEMINI
+    element: '#tool-search-query'
+    content: Search for 'GEMINI load' tool.
+    placement: right
+    textinsert: GEMINI load
+  - title: Loading data into GEMINI
+    element: '#tool-search'
+    content: Click on the 'GEMINI load' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fgemini_load%2Fgemini_load%2F0.18.1.0"]
+        .tool-old-link
+  - title: Loading data into GEMINI
+    element: '#tool-search'
+    content: Run the tool with the following parameters<ul>
+      <li>"VCF file to be loaded in the GEMINI database” to the VCF output of <b>SnpEff</b></li>
+      <li>"Sample information file in PED+ format" to the uploaded <b>GIAB-Ashkenazim-Trio.txt</b> tabular</li>
+      <li>"Choose a gemini annotation database" to the most recent available release</li>
+      </ul>
+    position: right
+  - title: Loading data into GEMINI
+    element: '#history-options-button'
+    content: >-
+      This will create an SQLite database in your history.
+    placement: left
+  - title: Loading data into GEMINI
+    element: '#tool-search-query'
+    content: Search for 'GEMINI db_info' tool.
+    placement: right
+    textinsert: GEMINI db_info
+  - title: Loading data into GEMINI
+    element: '#tool-search'
+    content: Click on the 'GEMINI db_info' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fgemini_db_info%2Fgemini_db_info%2F0.18.1.0"]
+        .tool-old-link
+  - title: Loading data into GEMINI
+    element: '#tool-search'
+    content: Run the tool with the following parameters<ul>
+      <li>"GEMINI database" to the output of <b>GEMINI load</b></li>
+      </ul>
+    position: right
+  - title: Loading data into GEMINI
+    element: '#history-options-button'
+    content: >-
+      This produces a list of all database tables and their columns. The latest version of the GEMINI database schema can be found <a href="https://gemini.readthedocs.org/en/latest/content/database_schema.html">here</a>.
+    placement: left
+  - title: Querying the GEMINI database
+    content: The GEMINI database can be queried using the versatile SQL language (more on SQL <a href="https://swcarpentry.github.io/sql-novice-survey">here</a>). In Galaxy this is done using the <b>GEMINI query</b> tool. Within this tool SQL commands are typed directly into the <b>The query to be issued to the database</b> text box. Let’s begin getting information from some of the tables we discovered using the <b>GEMINI db_info</b> tool before.
+    backdrop: true
+  - title: GEMINI tutorials
+    content: The next examples are taken from “<a href="https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf">Introduction to GEMINI</a>” tutorial. For extensive documentation see “<a href="https://gemini.readthedocs.org/en/latest/content/querying.html">Querying the GEMINI database</a>”.
+    backdrop: true
+  - title: Selecting “novel” variants that are not annotated in dbSNP database
+    element: '#tool-search-query'
+    content: Search for 'GEMINI query' tool.
+    placement: right
+    textinsert: GEMINI query
+  - title: Selecting “novel” variants that are not annotated in dbSNP database
+    element: '#tool-search'
+    content: Click on the 'GEMINI query' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fgemini_query%2Fgemini_query%2F0.18.1.0"]
+        .tool-old-link
+  - title: Selecting “novel” variants that are not annotated in dbSNP database
+    element: '#tool-search'
+    content: Run the tool with the following parameters<ul>
+      <li>"GEMINI database" to the output of <b>GEMINI load</b></li>
+      <li>"The query to be issued to the database" to 'SELECT count(*) FROM variants WHERE in_dbsnp == 0'</li>
+      </ul>
+    position: right
+  - title: Selecting “novel” variants that are not annotated in dbSNP database
+    element: '#history-options-button'
+    content: >-
+      Inspect the output. As we can see in the output dataset, there are 21 variants that are not annotated in dbSNP.
+    placement: left
+  - title: Find variants within the POLRMT gene
+    element: '#tool-search-query'
+    content: Search for 'GEMINI query' tool.
+    placement: right
+    textinsert: GEMINI query
+  - title: Find variants within the POLRMT gene
+    element: '#tool-search'
+    content: Click on the 'GEMINI query' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fgemini_query%2Fgemini_query%2F0.18.1.0"]
+        .tool-old-link
+  - title: Find variants within the POLRMT gene
+    element: '#tool-search'
+    content: Run the tool with the following parameters<ul>
+      <li>"GEMINI database" to the output of <b>GEMINI load</b></li>
+      <li>"The query to be issued to the database" to 'SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT' '</li>
+      </ul>
+    position: right
+  - title: Selecting “novel” variants that are not annotated in dbSNP database
+    element: '#history-options-button'
+    content: >-
+      Inspect the output. Since the <b>variants</b> table has a large number of columns, in the query above we had to select only the most interesting columns. The output shows the variants found within the POLRMT gene.
+    placement: left
+  - title: Querying genotypes
+    content: |-
+      GEMINI provides access to genotype, sequencing depth, genotype quality, and genotype likelihoods for each individual (subjectID):<ul>
+        <li><b>gt_types.subjectID</b> - three types of genotype types: HOM_REF, HET, HOM_ALT</li>
+        <li><b>gt_quals.subjectID</b> - genotype quality</li>
+        <li><b>gt_depths.subjectID</b> - total number of reads in this subject at position</li>
+        <li><b>gt_ref_depths.subjectID</b> - number of reference allele reads in this subject at position</li>
+        <li><b>gt_alt_depths.subjectID</b> - number of alternate allele reads in this subject at position</li></ul>
+    backdrop: true
+  - title: Questions
+    content: |-
+      <ul>
+        <li>At how many sites does child have a non-reference allele?</li>
+        <li>At how many sites both father and son have non reference alleles?</li>
+        <li>List genotypes for father and son where they have non-reference alleles.</ul>
+    backdrop: false
+  - title: Using wildcards
+    content: |-
+      Wildcards simply writing SQL expressions when searching across multiple terms. The syntax for genotype filter wildcards is:<ul>
+        <li>(COLUMN).(SAMPLE_WILDCARD).(SAMPLE_WILDCARD_RULE).(RULE_ENFORCEMENT)</li></ul>
+    backdrop: false
+  - title: Question
+    content: |-
+      <ul>
+        <li>At which variants are every sample heterozygous?</li></ul>
+    backdrop: false
+  - title: Going further
+    content: |-
+      This short tutorial should give you an overall idea on how generate variant data in Galaxy and process it with GEMINI. Yet there is much more to learn :)
+    backdrop: false
+  - title: Key points
+    content: |-
+      <ul>
+        <li>Variants versus Genotypes</li>
+        <li>Bayesian approach to variant calling</li>
+        <li>Freebayes calls variant using haplotype windows</li>
+        <li>SNPEff allows functional annotation of variants</li>
+        <li>Gemini is a flexible system for analyzing variation patterns</li>
+      </ul>
+    backdrop: true

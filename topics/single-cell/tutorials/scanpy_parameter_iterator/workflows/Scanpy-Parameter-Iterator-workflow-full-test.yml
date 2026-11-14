@@ -1,0 +1,68 @@
+- doc: Test outline for Scanpy-Parameter-Iterator-workflow-full-(imported-from-URL)
+  job:
+    'Scanpy RunPCA: AnnData object':
+      class: File
+      path: 'test-data/Scanpy RunPCA: AnnData object.h5ad'
+      filetype: h5ad
+    'Scanpy ComputeGraph on data X and data Y: Graph object AnnData':
+      class: File
+      path: 'test-data/Scanpy ComputeGraph on data X and data Y: Graph object AnnData.h5ad'
+      filetype: h5ad
+    'Scanpy RunUMAP on data X: UMAP object AnnData':
+      class: File
+      path: 'test-data/Scanpy RunUMAP on data X: UMAP object AnnData.h5ad'
+      filetype: h5ad
+  outputs:
+    'Scanpy ComputeGraph on collection X: Graph object AnnData (n-neighbours)':
+      element_tests:
+        n-neighbors_15:
+          path: 'test-data/Scanpy ComputeGraph on collection X: Graph object AnnData
+            (n-neighbours)_n-neighbors_15.h5ad'
+    'Scanpy FindCluster on collection X: Clusters AnnData (resolution)':
+      element_tests:
+        resolution_0.6:
+          path: 'test-data/Scanpy FindCluster on collection X: Clusters AnnData (resolution)_resolution_0.6.h5ad'
+    'Scanpy RunTSNE on collection X: tSNE object AnnData (n-neighbours)':
+      element_tests:
+        n-neighbors_15:
+          path: 'test-data/Scanpy RunTSNE on collection X: tSNE object AnnData (n-neighbours)_n-neighbors_15.h5ad'
+    'Scanpy RunUMAP on collection X: UMAP object AnnData (perplexity)':
+      element_tests:
+        perplexity_30.0:
+          path: 'test-data/Scanpy RunUMAP on collection X: UMAP object AnnData (perplexity)_perplexity_30.0.h5ad'
+    resolution_umap_plots:
+      element_tests:
+        resolution_0.6:
+          path: test-data/resolution_umap_plots_resolution_0.6.png
+    resolution_tsne_plots:
+      element_tests:
+        resolution_0.6:
+          path: test-data/resolution_tsne_plots_resolution_0.6.png
+    'Scanpy RunUMAP on collection X: UMAP object AnnData (n-neighbours)':
+      element_tests:
+        n-neighbors_15:
+          path: 'test-data/Scanpy RunUMAP on collection X: UMAP object AnnData (n-neighbours)_n-neighbors_15.h5ad'
+    'Scanpy FindCluster on collection X: Clusters AnnData (perplexity)':
+      element_tests:
+        perplexity_30.0:
+          path: 'test-data/Scanpy FindCluster on collection X: Clusters AnnData (perplexity)_perplexity_30.0.h5ad'
+    'Scanpy FindCluster on collection X: Clusters AnnData (n-neighbours)':
+      element_tests:
+        n-neighbors_15:
+          path: 'test-data/Scanpy FindCluster on collection X: Clusters AnnData (n-neighbours)_n-neighbors_15.h5ad'
+    'Scanpy RunTSNE on collection X: tSNE object AnnData (perplexity)':
+      element_tests:
+        perplexity_30.0:
+          path: 'test-data/Scanpy RunTSNE on collection X: tSNE object AnnData (perplexity)_perplexity_30.0.h5ad'
+    resolution_pca_plots:
+      element_tests:
+        resolution_0.6:
+          path: test-data/resolution_pca_plots_resolution_0.6.png
+    perplexity_plots:
+      element_tests:
+        perplexity_30.0:
+          path: test-data/perplexity_plots_perplexity_30.0.png
+    n-neighbors_plots:
+      element_tests:
+        n-neighbors_15:
+          path: test-data/n-neighbors_plots_n-neighbors_15.png

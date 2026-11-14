@@ -1,0 +1,532 @@
+﻿---
+id: network-analysis-with-heinz
+name: Network analysis with Heinz
+description: >-
+  In this tutorial, we will perform a network analysis using Heinz (<a
+  href="https://github.com/ls-cwi/heinz">GitHub</a>, <a
+  href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2718639/">publication</a>)
+  in Galaxy. The data comes from the study <a
+  href="https://academic.oup.com/bioinformatics/article/32/11/1678/2240171">May
+  et al</a>., and we will reproduce some of the computational steps from this
+  study with simplified data and parameters to speed up the analysis for the
+  purposes of this tutorial.
+title_default: network-analysis-with-heinz
+steps:
+  - title: Overview
+    content: >-
+      The human microbiome plays a key role in health and disease. Thanks to
+      comparative metatranscriptomics, the cellular functions that are
+      deregulated by the microbiome in disease can now be computationally
+      explored. Unlike gene-centric approaches, pathway-based methods provide a
+      systemic view of such functions; however, they typically consider each
+      pathway in isolation and in its entirety. They can therefore overlook the
+      key differences that (i) span multiple pathways, (ii) contain
+      bidirectionally deregulated components, (iii) are confined to a pathway
+      region. To capture these properties, computational methods that reach
+      beyond the scope of predefined pathways are needed.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      In this tutorial, we will perform a network analysis using Heinz (<a
+      href="https://github.com/ls-cwi/heinz">GitHub</a>, <a
+      href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2718639/">publication</a>)
+      in Galaxy. The data comes from the study <a
+      href="https://academic.oup.com/bioinformatics/article/32/11/1678/2240171">May
+      et al</a>., and we will reproduce some of the computational steps from
+      this study with simplified data and parameters to speed up the analysis
+      for the purposes of this tutorial.
+    backdrop: true
+  - title: Results may vary
+    content: >-
+      Your results may be slightly different from the ones presented in this
+      tutorial due to differing versions of tools or reference data, or because
+      of stochastic processes in the algorithms.
+    backdrop: true
+  - title: Obtaining and preparing data
+    content: >-
+      The study <a
+      hre="https://academic.oup.com/bioinformatics/article/32/11/1678/2240171">May
+      et al.</a> includes the computation steps starting from the raw RNAseq
+      datasets. The operations that processed raw data into the interpreted data
+      are beyond the scope of this tutorial. To learn that, please refer to the
+      relevant topics in the Galaxy training material. In this tutorial, we
+      start with the interpreted data, which are KO (<a
+      href="https://www.genome.jp/kegg/ko.html">KEGG Orthology</a>) count data.
+      All the data needed for this tutorial are available from <a
+      href="https://zenodo.org/record/1344105">Zenodo</a>.
+    backdrop: true
+  - title: What is KO count?
+    content: >-
+      KOs are organism-independent identifiers that group together proteins of
+      similar biochemical functions. It is a term specific to <a
+      href="https://www.genome.jp/kegg/">KEGG</a> database. It is a group
+      concept, similar to the concept “pathway”, which includes a bunch of
+      molecules and their interactions. Take a random line in our dataset,
+      “K01369 7” as an example, the first column represents the KO ID, and the
+      second column — the numeric value is the KO counts. If we understand it by
+      the face value, it is 7 protein molecules that are counted from our
+      dataset as this KO “K01369”; but we usually mingle proteins with genes
+      because we often assume that each protein corresponds to a gene, so it can
+      be understood as 7 genes. Now we are working on the microbial RNAseq data,
+      and the assumption is also used subconsciously.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Understanding our input data
+    content: >-
+      According to the study <a
+      href="https://academic.oup.com/bioinformatics/article/32/11/1678/2240171">May
+      et al.</a>, dental caries (DC) dataset in this tutorial came from an
+      experiment that comprised of supragingival plaque samples collected from
+      all dental surfaces of 36 individuals who had either a caries-positive
+      (disease) or a caries-negative (health) oral profile. Each of the 36
+      samples was sequenced, pre-processed and transformed into KO counts. We
+      will use these count data as the starting point to perform the network
+      analysis. <br><br>The count data of the 36 samples are separated into 36
+      files, organized into two groups: ‘CP’ (caries-positive) and ‘CN’
+      (caries-negative)
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the new data
+    content: Click on <b>Collections</b tab.
+    backdrop: false
+  - title: Uploading the input data
+    content: Click on Paste/Fetch Data
+    backdrop: false
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the links here for (Disease, CP) files from <a
+      href="https://zenodo.org/record/1344105">zenodo</a>.
+    placement: right
+    textinsert: |-
+      https://zenodo.org/record/1344105/files/2241_CP_DZ_PairTo_2242.txt
+      https://zenodo.org/record/1344105/files/2126_CP_MZ_PairTo_2125.txt
+      https://zenodo.org/record/1344105/files/2991_CP_DZ_PairTo_2992.txt
+      https://zenodo.org/record/1344105/files/2931_CP_DZ_PairTo_2930.txt
+      https://zenodo.org/record/1344105/files/2284_CP_DZ_PairTo_2283.txt
+      https://zenodo.org/record/1344105/files/2125_CP_MZ_PairTo_2126.txt
+      https://zenodo.org/record/1344105/files/4131_CP_DZ_PairTo_4132.txt
+      https://zenodo.org/record/1344105/files/2954_CP_DZ_PairTo_2955.txt
+      https://zenodo.org/record/1344105/files/2170_CP_MZ_PairTo_2169.txt
+      https://zenodo.org/record/1344105/files/2955_CP_DZ_PairTo_2954.txt
+      https://zenodo.org/record/1344105/files/2011_CP_DZ_PairTo_2012.txt
+      https://zenodo.org/record/1344105/files/2012_CP_DZ_PairTo_2011.txt
+      https://zenodo.org/record/1344105/files/2269_CP_DZ_PairTo_2270.txt
+      https://zenodo.org/record/1344105/files/3215_CP_MZ_PairTo_3214.txt
+      https://zenodo.org/record/1344105/files/2354_CP_DZ_PairTo_2355.txt
+      https://zenodo.org/record/1344105/files/3306_CP_DZ_PairTo_3307.txt
+      https://zenodo.org/record/1344105/files/2061_CP_DZ_PairTo_2062.txt
+      https://zenodo.org/record/1344105/files/2355_CP_DZ_PairTo_2354.txt
+      https://zenodo.org/record/1344105/files/2242_CP_DZ_PairTo_2241.txt
+    backdrop: false
+  - title: Uploading the input data
+    content: Click on "Start" to start loading the data to history
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-build'
+    content: Click on "Build"
+    placement: right
+    postclick:
+      - '#btn-build'
+  - title: Uploading the new data
+    content: Enter 'CP' in <b>Name</b>. Finish by clicking <b>Create list</b>.
+    backdrop: false
+  - title: Upload control (healthy) datasets
+    content: >-
+      We need to repeat the previous steps with the samples from healthy
+      individuals
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: Open the Galaxy Upload Manager again
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the new data
+    content: Click on <b>Collections</b tab.
+    backdrop: false
+  - title: Uploading the input data
+    content: Click on Paste/Fetch Data
+    backdrop: false
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the links here for (Healthy, CN) files from <a
+      href="https://zenodo.org/record/1344105">zenodo</a>.
+    placement: right
+    textinsert: |-
+      https://zenodo.org/record/1344105/files/2310_CN_DZ_PairTo_2309.txt
+      https://zenodo.org/record/1344105/files/2062_CN_DZ_PairTo_2061.txt
+      https://zenodo.org/record/1344105/files/2191_CN_MZ_PairTo_2192.txt
+      https://zenodo.org/record/1344105/files/2052_CN_MZ_PairTo_2051.txt
+      https://zenodo.org/record/1344105/files/2051_CN_MZ_PairTo_2052.txt
+      https://zenodo.org/record/1344105/files/2192_CN_MZ_PairTo_2191.txt
+      https://zenodo.org/record/1344105/files/2234_CN_DZ_PairTo_2233.txt
+      https://zenodo.org/record/1344105/files/2233_CN_DZ_PairTo_2234.txt
+      https://zenodo.org/record/1344105/files/2270_CN_DZ_PairTo_2269.txt
+      https://zenodo.org/record/1344105/files/2225_CN_MZ_PairTo_2226.txt
+      https://zenodo.org/record/1344105/files/4132_CN_DZ_PairTo_4131.txt
+      https://zenodo.org/record/1344105/files/2309_CN_DZ_PairTo_2310.txt
+      https://zenodo.org/record/1344105/files/2992_CN_DZ_PairTo_2991.txt
+      https://zenodo.org/record/1344105/files/3214_CN_MZ_PairTo_3215.txt
+      https://zenodo.org/record/1344105/files/2169_CN_MZ_PairTo_2170.txt
+      https://zenodo.org/record/1344105/files/2930_CN_DZ_PairTo_2931.txt
+      https://zenodo.org/record/1344105/files/3307_CN_DZ_PairTo_3306.txt
+    backdrop: false
+  - title: Uploading the input data
+    content: Click on "Start" to start loading the data to history
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-build'
+    content: Click on "Build"
+    placement: right
+    postclick:
+      - '#btn-build'
+  - title: Uploading the new data
+    content: Enter 'CN' in <b>Name</b>. Finish by clicking <b>Create list</b>.
+    backdrop: false
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How many samples do you have in our disease collection (CP)? How many healthy samples (CN)?</li>
+        <li>How many columns in each file? What are these columns?</li>
+      </ul>
+    backdrop: false
+  - title: What is differential expression analysis?
+    content: >-
+      The definition of differential expression analysis given by <a
+      href="https://www.ebi.ac.uk/training/online/course/functional-genomics-ii-common-technologies-and-data-analysis-methods/differential-gene">EBI</a>
+      means taking the normalised read count data and performing statistical
+      analysis to discover quantitative changes in expression levels between
+      experimental groups. For example, we use statistical testing to decide
+      whether, for a given gene, an observed difference in read counts is
+      significant, that is, whether it is greater than what would be expected
+      just due to natural random variation.
+    backdrop: true
+  - title: What is differential expression analysis?
+    content: >-
+      In principle, DEA is a causal analysis; but in reality, it is hampered by
+      the complexity of the experimental situation and measurement. Back to our
+      datasets, CP and CN, they are from two experimental groups. By DEA, we
+      hope to pinpoint the candidate genes relevant to dental caries first, then
+      we will use Heinz to infer the related pathways.
+    backdrop: true
+  - title: Which tools are available for DEA?
+    content: >-
+      There are a few canned tools commonly used for DEA, like <a
+      href="https://bioconductor.org/packages/release/bioc/html/limma.html">Limma</a>
+      and <a
+      href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html">DESeq2</a>.
+      If you are interested, you may look up the pros and cons of each tool.
+      Here we use DESeq2.
+    backdrop: true
+  - title: DEA via DESeq2
+    element: '#tool-search-query'
+    content: Search for "DESeq2" tool
+    placement: right
+    textinsert: DESeq2
+  - title: DEA via DESeq2
+    element: '#tool-search'
+    content: Click on the "DESeq2" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdeseq2%2Fdeseq2%2F2.11.40.2"]
+        .tool-old-link
+  - title: DEA via DESeq2
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>“Specify a factor name” to `dental_caries` (under 1: Factor)</li>
+        <li>“Specify a factor level”: to `CP` (under 1: Factor level)<ul>
+          <li>“Counts file(s)” to `CP` (collection)</li></ul></li>
+        <li>“Specify a factor level” to `CN` (under 2: Factor level)<ul>
+          <li>“Counts file(s)” to `CN` (collection)</li></ul></li>
+        <li>“Files have header” to `No`</li>
+        <li>“Visualising the analysis results” to `No`</li>
+      </ul>
+    position: left
+  - title: DEA via DESeq2
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      It takes a few minutes to finish DESseq2. After the analysis is finished,
+      have a look at the file.
+    position: left
+  - title: Fit a BUM model (a mixture model)
+    content: >-
+      From a statistical point of view, p-values are uniformly distributed under
+      null hypothesis; in other words, under alternative hypothesis, the noise
+      component (which holds under null hypothesis) will be adequately modeled
+      by a uniform distribution.
+    backdrop: true
+  - title: Why do we need a mixture model?
+    content: >-
+      To avoid making this tutorial sound like a math class, let’s focus on the
+      philosophy of using a statistical model. In the graph above, we have
+      visualized the p-values; those bins have some shapes; by viewing the
+      figure, it is possible for us to cherrypick the data points (KO) with mesh
+      eyes, but it must be tedious and boring, nobody wants to spend a few days
+      on doing this. In this situation, computers come into play; however,
+      unlike humans, computers cannot understand the graph but mathematical
+      formulas, that’s why we need to fix the data into a statistical model
+      (denoted by the red curve and blue line in the graph), which computers can
+      understand easily.
+    backdrop: true
+  - title: Fit a BUM model (a mixture model)
+    content: >-
+      Before fitting to BUM model in Galaxy, we need to prepare the input data
+      for the tool <b>Fit a BUM model</b>, that’s a file that only contains
+      p-values.
+    backdrop: true
+  - title: extract p-values from DESeq2 output
+    element: '#tool-search-query'
+    content: Search for "cut" tool
+    placement: right
+    textinsert: cut
+  - title: extract p-values from DESeq2 output
+    element: '#tool-search'
+    content: Click on the "cut" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Cut1"] .tool-old-link'
+  - title: extract p-values from DESeq2 output
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>“Cut columns” to `c6`</li>
+        <li>“Delimited by” to `TAB`</li>
+        <li>“From” to the output of DESeq2</li>
+      </ul>
+    position: left
+  - title: Fit a BUM model
+    element: '#tool-search-query'
+    content: Search for "Fit a BUM model" tool
+    placement: right
+    textinsert: Fit a BUM model
+  - title: Fit a BUM model
+    element: '#tool-search'
+    content: Click on the "Fit a BUM model" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fheinz%2Fheinz_bum%2F1.0"]
+  - title: Fit a BUM model
+    element: '#tool-search'
+    content: >-
+      Execute the tool with the default parameters on the output from the
+      previous step.
+    position: left
+  - title: Pinpoint the key pathways with Heinz
+    content: >-
+      After getting the parameters of the BUM model from the last step, we will
+      use Heinz to pinpoint the optimal subnetwork. Then we could look for the
+      key pathways relevant to the subnetwork. Before we continue, let’s figure
+      out what Heinz is actually doing.<br><br> Heinz is an algorithm for
+      searching an optimal subnetwork from a bigger network. You may wonder what
+      the network is here. Through the previous steps, we have got a list of
+      identities, that is a list of gene IDs with p-values, which form the nodes
+      of ‘the bigger network’, the relations between the nodes, that is the
+      edges, needs to be obtained from a background network, which represents a
+      pathway relation databases, such as <a
+      href="https://reactome.org/">Reactome</a> and <a
+      href="https://string-db.org/">STRING</a>. In this tutorial, we only use a
+      small sample background network for demonstration purposes. The background
+      network is represented as edges in a TXT file where each line denotes an
+      edge.
+    backdrop: true
+  - title: Upload the edge file from Zenodo
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload the edge file. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Upload the edge file from Zenodo
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Upload the edge file from Zenodo
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: Import the file from Zenodo.
+    placement: right
+    textinsert: 'https://zenodo.org/record/1344105/files/edge.txt'
+    backdrop: false
+  - title: Upload the edge file from Zenodo
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Upload the edge file from Zenodo
+    element: '#btn-close'
+    content: Hit the close button to close this window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Calculate Heinz scores
+    content: >-
+      As the first step, we need to calculate a Heinz score for each node, using
+      the BUM model parameters we obtained; meanwhile, we also need to specify
+      an FDR value as input. <br><br>FDR is short for false discovery rate,
+      which is a method of conceptualizing the rate of type I errors in null
+      hypothesis testing when conducting multiple comparisons, if you are
+      interested, view the detail in <a
+      href="https://en.wikipedia.org/wiki/False_discovery_rate">Wikipedia</a>.
+      <br><br>For different datasets and problems, we probably need to pick up
+      an FDR value separately. Here we set FDR to 0.11.<br><br> Similar to
+      <b>Fit a BUM model</b>, we also need to prepare the input data for the
+      tool <b>Calculate a Heinz score</b>.
+    backdrop: true
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What is the requirement of the input data format for <b>Calculate a Heinz score</b>?</li>
+      </ul>
+    backdrop: false
+  - title: extract geneID and p-values from DESeq2 output
+    element: '#tool-search-query'
+    content: Search for "cut" tool
+    placement: right
+    textinsert: cut
+  - title: extract geneID and p-values from DESeq2 output
+    element: '#tool-search'
+    content: Click on the "cut" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Cut1"] .tool-old-link'
+  - title: extract geneID and p-values from DESeq2 output
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>“Cut columns” to `c1,c6`</li>
+        <li>“Delimited by” to `TAB`</li>
+        <li>“From” to the output of DESeq2</li>
+      </ul>
+    position: left
+  - title: calculate Heinz scores
+    element: '#tool-search-query'
+    content: Search for "Calculate a Heinz score" tool
+    placement: right
+    textinsert: Calculate a Heinz score
+  - title: calculate Heinz scores
+    element: '#tool-search'
+    content: Click on the "Calculate a Heinz score" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fheinz%2Fheinz_scoring%2F1.0"]
+        .tool-old-link
+  - title: calculate Heinz scores
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>“A node file with p-values” to the output of the previous <b>cut</b> step</li>
+        <li>“FDR value” to `0.11`</li>
+        <li>“Choose your input type for BUM parameters” to the `output file of BUM model`</li>
+        <li>“Output file of BUM model as input: lambda on the first line and alpha, the second” to the output of <b>Fit a BUM model</b></li>
+      </ul>
+    position: left
+  - title: What is the Heinz score?
+    content: >-
+      To figure out this score without reading the formula, we can understand
+      Heinz score in this way. FDR is involved in calculating a p-value
+      threshold and any KO whose p-value is below this threshold is regarded as
+      significant, which means the Heinz score is positive (another calculation
+      in the formula). If we pick a higher FDR value, then we will have a higher
+      p-value threshold, and more KOs are probably regarded as significant. In
+      this situation, we probably have many false positive (those regarded as
+      significant are actually not) on the one hand; on the other hand, Heinz
+      will deliver a bigger subnetwork, which might be exhausting to analyze.
+      Therefore, we need to pick up an FDR value properly.
+    backdrop: true
+  - title: Run Heinz. Pinpoint the optimal subnetwork
+    content: >-
+      After getting Heinz scores, let’s run Heinz program to find the optimal
+      subnetwork from the background network which we mentioned earlier.
+    backdrop: true
+  - title: pinpoint the optimal subnetwork
+    element: '#tool-search-query'
+    content: Search for "Identify optimal scoring subnetwork" tool
+    placement: right
+    textinsert: Identify optimal scoring subnetwork
+  - title: pinpoint the optimal subnetwork
+    element: '#tool-search'
+    content: Click on the "Identify optimal scoring subnetwork" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fheinz%2Fheinz%2F1.0"]
+        .tool-old-link
+  - title: pinpoint the optimal subnetwork
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>“File containing Heinz scores” to the output of <b>Calculate a Heinz score</b></li>
+        <li>“Edge file” to the edge file uploaded</li>
+      </ul>
+    position: left
+  - title: Visualize the output. Visualize the optimal subnetwork
+    content: >-
+      The result we got from the last step is not very human-readable, is it? It
+      is a little painful to understand the Heinz result directly. Therefore we
+      need to visualize the output by making it into graphs.
+    backdrop: true
+  - title: visualize the optimal subnetwork
+    element: '#tool-search-query'
+    content: Search for "Visualize the optimal scoring subnetwork" tool
+    placement: right
+    textinsert: Visualize the optimal scoring subnetwork
+  - title: visualize the optimal subnetwork
+    element: '#tool-search'
+    content: Click on the "Visualize the optimal scoring subnetwork" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fheinz%2Fheinz_visualization%2F0.1.0"]
+        .tool-old-link
+  - title: visualize the optimal subnetwork
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>“Heinz output file” to the output of Identify optimal scoring subnetwork</li>
+      </ul>
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>According to the figure above, Why are some shapes are round, others square?</li>
+      </ul>
+    backdrop: false
+  - title: Conclusion
+    content: >-
+      Congrats! You have finished all the tools in Heinz workflow! You have
+      successfully run each tool and understood how it works. In real research,
+      running these tools are only part of the effort, we still need to invest a
+      huge amount of intelligence in making sense of the results and converting
+      them to knowledge, which is fraught with uncertainties and confounders,
+      where perhaps luck will come into play. So good luck!
+    backdrop: true
+  - title: Key points
+    content: |-
+      <ul>
+        <li>Using Heinz do the network analysis based on the metatranscriptomics or transcriptomics data.</li>
+        <li>Extracting the signals hidden in the p-value distribution of the differential expression analysis.</li>
+        <li>Visualizing the pinpointed subnetwork helps us understand the result better</li>
+        <li>Heinz helps narrow down the scope to find the key pathways</li>
+        <li>Multiple CPUs will accelerate the computation especially for the complex datasets</li>
+      </ul>
+    backdrop: true

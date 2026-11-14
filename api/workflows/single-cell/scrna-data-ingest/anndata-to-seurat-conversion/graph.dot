@@ -1,0 +1,24 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nAnnData"]
+  1[label="Inspect AnnData"]
+  0 -> 1 [label="output"]
+  k6d03d7138d714f6a9f83cd999f423ebf[color=lightseagreen,label="Output\nInspect AnnData: obs"]
+  1 -> k6d03d7138d714f6a9f83cd999f423ebf
+  2[label="Inspect AnnData"]
+  0 -> 2 [label="output"]
+  kea025a8a6f3a4e38a3afdb406886c7de[color=lightseagreen,label="Output\nInspect AnnData: X"]
+  2 -> kea025a8a6f3a4e38a3afdb406886c7de
+  3[label="Transpose"]
+  2 -> 3 [label="X"]
+  4[label="DropletUtils"]
+  3 -> 4 [label="out_file"]
+  5[label="Seurat Read10x"]
+  4 -> 5 [label="barcodes_out"]
+  4 -> 5 [label="genes_out"]
+  4 -> 5 [label="matrix_out"]
+  1 -> 5 [label="obs"]
+  ke5fec5dc470648e5832605e70290552d[color=lightseagreen,label="Output\nConverted Seurat object"]
+  5 -> ke5fec5dc470648e5832605e70290552d
+}

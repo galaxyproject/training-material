@@ -1,0 +1,155 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nBatched_AnnData"]
+  1[label="QC_AnnData"]
+  0 -> 1 [label="output"]
+  k3ff4e1beb9554f579eb3ed50d6e198de[color=lightseagreen,label="Output\nQC_Object"]
+  1 -> k3ff4e1beb9554f579eb3ed50d6e198de
+  2[label="Inspect AnnData"]
+  1 -> 2 [label="anndata_out"]
+  k5b8e785a78e245e7b7de23acc0966376[color=lightseagreen,label="Output\ngeneral"]
+  2 -> k5b8e785a78e245e7b7de23acc0966376
+  3[label="Inspect AnnData"]
+  1 -> 3 [label="anndata_out"]
+  k2c7d27f507f646e787a9f0cd5975b0e4[color=lightseagreen,label="Output\nobs"]
+  3 -> k2c7d27f507f646e787a9f0cd5975b0e4
+  4[label="Inspect AnnData"]
+  1 -> 4 [label="anndata_out"]
+  k149ab95b588b4710b2c16dc49f922008[color=lightseagreen,label="Output\nvar"]
+  4 -> k149ab95b588b4710b2c16dc49f922008
+  5[label="Scanpy filter"]
+  1 -> 5 [label="anndata_out"]
+  kbef9839b580c4ecb81e4b60a3e7a7b05[color=lightseagreen,label="Output\nGenes_Part_Object"]
+  5 -> kbef9839b580c4ecb81e4b60a3e7a7b05
+  6[label="Violin_log_genotype"]
+  1 -> 6 [label="anndata_out"]
+  kfef9d513240d4570ae91a6a7aa3c1cc8[color=lightseagreen,label="Output\nViolin_log_genotype"]
+  6 -> kfef9d513240d4570ae91a6a7aa3c1cc8
+  7[label="Violin_log_sex"]
+  1 -> 7 [label="anndata_out"]
+  k9b3298b76ba74fa6a5893a0748357315[color=lightseagreen,label="Output\nViolin_log_sex"]
+  7 -> k9b3298b76ba74fa6a5893a0748357315
+  8[label="Scatter_GenesxUMI"]
+  1 -> 8 [label="anndata_out"]
+  kdad9a687c56e457d939f00d4903b11fa[color=lightseagreen,label="Output\nScatter_GenesxUMI"]
+  8 -> kdad9a687c56e457d939f00d4903b11fa
+  9[label="Violin_log_batch"]
+  1 -> 9 [label="anndata_out"]
+  k53a94463291d4c6ca31149d407741fab[color=lightseagreen,label="Output\nViolin_log_batch"]
+  9 -> k53a94463291d4c6ca31149d407741fab
+  10[label="Scatter_GenesxMito"]
+  1 -> 10 [label="anndata_out"]
+  ka205514310234c9e831100979667416d[color=lightseagreen,label="Output\nScatter_GenesxMito"]
+  10 -> ka205514310234c9e831100979667416d
+  11[label="Scatter_UMIxMito"]
+  1 -> 11 [label="anndata_out"]
+  k608b45ff34dd47acb93124fba3220077[color=lightseagreen,label="Output\nScatter_UMIxMito"]
+  11 -> k608b45ff34dd47acb93124fba3220077
+  12[label="Genes_Filtered_Object"]
+  5 -> 12 [label="anndata_out"]
+  kc01b954ac2154511812b1075a0238b2a[color=lightseagreen,label="Output\nGenes_Filtered_Object"]
+  12 -> kc01b954ac2154511812b1075a0238b2a
+  13[label="Violin_log_genotype-Genes"]
+  12 -> 13 [label="anndata_out"]
+  kc0bdba4ad82c4b8ba697f2faf03f5fd0[color=lightseagreen,label="Output\nViolin_log_genotype-Genes"]
+  13 -> kc0bdba4ad82c4b8ba697f2faf03f5fd0
+  14[label="Scanpy filter"]
+  12 -> 14 [label="anndata_out"]
+  kd0a022d5fae74e4f8747bc2eebe47ec9[color=lightseagreen,label="Output\nUMI_Part_Object"]
+  14 -> kd0a022d5fae74e4f8747bc2eebe47ec9
+  15[label="UMI_Filtered_Object"]
+  14 -> 15 [label="anndata_out"]
+  kb937d38acbb64e6fae935afc178808a0[color=lightseagreen,label="Output\nUMI_Filtered_Object"]
+  15 -> kb937d38acbb64e6fae935afc178808a0
+  16[label="Violin_log_genotype-UMIs"]
+  15 -> 16 [label="anndata_out"]
+  k44d3fc0c4a9b4bc3845c2123197e50c8[color=lightseagreen,label="Output\nViolin_log_genotype-UMIs"]
+  16 -> k44d3fc0c4a9b4bc3845c2123197e50c8
+  17[label="Mito_Filtered_Object"]
+  15 -> 17 [label="anndata_out"]
+  kf7b225f7de7f4105845b7819943ed49f[color=lightseagreen,label="Output\nMito_Filtered_Object"]
+  17 -> kf7b225f7de7f4105845b7819943ed49f
+  18[label="Violin_log_genotype-Mito"]
+  17 -> 18 [label="anndata_out"]
+  k70420872165348a8a4017cac48c5aa80[color=lightseagreen,label="Output\nViolin_log_genotype-Mito"]
+  18 -> k70420872165348a8a4017cac48c5aa80
+  19[label="Cells_Filtered_Object"]
+  17 -> 19 [label="anndata_out"]
+  k310e2395f7b343878f623b6787a4d62b[color=lightseagreen,label="Output\nCells_Filtered_Object"]
+  19 -> k310e2395f7b343878f623b6787a4d62b
+  20[label="Normalised_Object"]
+  19 -> 20 [label="anndata_out"]
+  k876e2f9840964645ab283f40e181231f[color=lightseagreen,label="Output\nNormalised_Object"]
+  20 -> k876e2f9840964645ab283f40e181231f
+  21[label="Logarithmised_Object"]
+  20 -> 21 [label="anndata_out"]
+  ke65e8fc9e1db4024b5b218958bd7ec79[color=lightseagreen,label="Output\nLogarithmised_Object"]
+  21 -> ke65e8fc9e1db4024b5b218958bd7ec79
+  22[label="Frozen_Object"]
+  21 -> 22 [label="anndata_out"]
+  k34873f95806d46baa78e1ad7df07e4ad[color=lightseagreen,label="Output\nFrozen_Object"]
+  22 -> k34873f95806d46baa78e1ad7df07e4ad
+  23[label="FVG_Object"]
+  22 -> 23 [label="anndata"]
+  kbbd405350cb641ee8e7dc5e20d424d98[color=lightseagreen,label="Output\nFVG_Object"]
+  23 -> kbbd405350cb641ee8e7dc5e20d424d98
+  24[label="Scaled_Object"]
+  23 -> 24 [label="anndata_out"]
+  ka3f0a5ee79804929906ed2ac956c4ad0[color=lightseagreen,label="Output\nScaled_Object"]
+  24 -> ka3f0a5ee79804929906ed2ac956c4ad0
+  25[label="PCA_Object"]
+  24 -> 25 [label="anndata_out"]
+  kd9b31fc9158640738f85198376be883e[color=lightseagreen,label="Output\nPCA_Object"]
+  25 -> kd9b31fc9158640738f85198376be883e
+  26[label="PCA_Variance_Plot"]
+  25 -> 26 [label="anndata_out"]
+  k132c826cd8a843fbb96e7b2a7bb34115[color=lightseagreen,label="Output\nPCA_Variance_Plot"]
+  26 -> k132c826cd8a843fbb96e7b2a7bb34115
+  27[label="Neighbours_Object"]
+  25 -> 27 [label="anndata_out"]
+  k3a187b1a54d741f48cfd81689778228a[color=lightseagreen,label="Output\nNeighbours_Object"]
+  27 -> k3a187b1a54d741f48cfd81689778228a
+  28[label="tSNE_Object"]
+  27 -> 28 [label="anndata_out"]
+  kafb31ad68cdb4ab587dd1b853b706597[color=lightseagreen,label="Output\ntSNE_Object"]
+  28 -> kafb31ad68cdb4ab587dd1b853b706597
+  29[label="UMAP_Object"]
+  28 -> 29 [label="anndata_out"]
+  k93ee06ee76954501b697595a64b0d729[color=lightseagreen,label="Output\nUMAP_Object"]
+  29 -> k93ee06ee76954501b697595a64b0d729
+  30[label="Clustered_Object"]
+  29 -> 30 [label="anndata_out"]
+  k041a20e7a42048efba7fd0115995058a[color=lightseagreen,label="Output\nClustered_Object"]
+  30 -> k041a20e7a42048efba7fd0115995058a
+  31[label="DEGs-Genotype"]
+  30 -> 31 [label="anndata_out"]
+  k3a6e8af115994a8fa9fb468510616773[color=lightseagreen,label="Output\nRanked_Genes-by_Genotype"]
+  31 -> k3a6e8af115994a8fa9fb468510616773
+  32[label="DEGs-Louvain"]
+  30 -> 32 [label="anndata_out"]
+  k991651efa0864bbda93b3091ca145615[color=lightseagreen,label="Output\nRanked_Genes-Cluster"]
+  32 -> k991651efa0864bbda93b3091ca145615
+  k26a025c8d49447c7961a4197effa71d7[color=lightseagreen,label="Output\nanndata_out"]
+  32 -> k26a025c8d49447c7961a4197effa71d7
+  33[label="tSNE_Plot"]
+  32 -> 33 [label="anndata_out"]
+  k961add4ed0334a58ba59fae876d1bf40[color=lightseagreen,label="Output\ntSNE_Plot"]
+  33 -> k961add4ed0334a58ba59fae876d1bf40
+  34[label="PCA_Plot"]
+  32 -> 34 [label="anndata_out"]
+  kfb459c83eeaa4443a5ed00bee36ba862[color=lightseagreen,label="Output\nPCA_Plot"]
+  34 -> kfb459c83eeaa4443a5ed00bee36ba862
+  35[label="UMAP_Plot"]
+  32 -> 35 [label="anndata_out"]
+  k3236394b01ec4e3b858a8612e89bdc7e[color=lightseagreen,label="Output\nUMAP_Plot"]
+  35 -> k3236394b01ec4e3b858a8612e89bdc7e
+  36[label="Annotated_Object"]
+  32 -> 36 [label="anndata_out"]
+  k0b5b1a3ef01940408af35d2232605ea0[color=lightseagreen,label="Output\nAnnotated_Object"]
+  36 -> k0b5b1a3ef01940408af35d2232605ea0
+  37[label="Annotated_Plots"]
+  36 -> 37 [label="anndata"]
+  k7ded61ce8fd641c0bdbeda367c108694[color=lightseagreen,label="Output\nAnnotated_Plots"]
+  37 -> k7ded61ce8fd641c0bdbeda367c108694
+}

@@ -1,0 +1,60 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nInterleaced reads"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nTaxonomic profile"]
+  2[label="HUMAnN"]
+  0 -> 2 [label="output"]
+  1 -> 2 [label="output"]
+  k53259a0607834db8828e328e7337f5b3[color=lightseagreen,label="Output\nhumann_gene_families"]
+  2 -> k53259a0607834db8828e328e7337f5b3
+  k5aec39b6317a4fd0b90622d5a965e957[color=lightseagreen,label="Output\nhumann_pathabundance"]
+  2 -> k5aec39b6317a4fd0b90622d5a965e957
+  3[label="Split a HUMAnN table"]
+  2 -> 3 [label="gene_families_tsv"]
+  4[label="Regroup"]
+  2 -> 4 [label="gene_families_tsv"]
+  5[label="Renormalize"]
+  2 -> 5 [label="gene_families_tsv"]
+  k4bd1c47e66ac41ffbce951d0d86d2252[color=lightseagreen,label="Output\nrenormalize_gene_families"]
+  5 -> k4bd1c47e66ac41ffbce951d0d86d2252
+  6[label="Rename features"]
+  2 -> 6 [label="gene_families_tsv"]
+  7[label="Renormalize"]
+  2 -> 7 [label="pathabundance_tsv"]
+  k1715a5f63ac34ad2a0309307721e2b49[color=lightseagreen,label="Output\nrenormalize_pathabundance"]
+  7 -> k1715a5f63ac34ad2a0309307721e2b49
+  8[label="Split a HUMAnN table"]
+  2 -> 8 [label="pathabundance_tsv"]
+  9[label="Split a HUMAnN table"]
+  4 -> 9 [label="output"]
+  10[label="Rename features"]
+  4 -> 10 [label="output"]
+  11[label="Replace"]
+  5 -> 11 [label="output"]
+  12[label="Unpack pathway abundances"]
+  5 -> 12 [label="output"]
+  7 -> 12 [label="output"]
+  kb24357e8b6d34893af63ac4cf7494b33[color=lightseagreen,label="Output\nunpack_pathway_abundance"]
+  12 -> kb24357e8b6d34893af63ac4cf7494b33
+  13[label="Select"]
+  10 -> 13 [label="output"]
+  k946a04fd18544f088df11a3165651bae[color=lightseagreen,label="Output\ncc_go"]
+  13 -> k946a04fd18544f088df11a3165651bae
+  14[label="Select"]
+  10 -> 14 [label="output"]
+  k4f5f059739eb42ce8dd8d920b52231c3[color=lightseagreen,label="Output\nbp_go"]
+  14 -> k4f5f059739eb42ce8dd8d920b52231c3
+  15[label="Select"]
+  10 -> 15 [label="output"]
+  16[label="Split a HUMAnN table"]
+  13 -> 16 [label="out_file1"]
+  17[label="Split a HUMAnN table"]
+  14 -> 17 [label="out_file1"]
+  18[label="Sort"]
+  15 -> 18 [label="out_file1"]
+  k71abb759b51f4383a79127d8b1325e81[color=lightseagreen,label="Output\nsorted_mf_go"]
+  18 -> k71abb759b51f4383a79127d8b1325e81
+  19[label="Split a HUMAnN table"]
+  15 -> 19 [label="out_file1"]
+}

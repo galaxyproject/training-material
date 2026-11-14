@@ -1,0 +1,31 @@
+- doc: Test outline for Cell-Cycle-Regression-Workflow
+  job:
+    AnnData (After QC, normalisation, scaling):
+      class: File
+      location: https://zenodo.org/record/7311628/files/Processed_AnnData.h5ad
+      filetype: h5ad
+    S Phase Genes:
+      class: File
+      location: https://zenodo.org/record/7311628//files/sPhase.tabular
+      filetype: tabular
+    G2M Phase Genes:
+      class: File
+      location: https://zenodo.org/record/7311628//files/g2mPhase.tabular
+      filetype: tabular
+    Pasted Entry:
+      class: File
+      location: test-data/annotation_header.tabular
+      filetype: tabular
+  outputs:
+    anndata_out (Step 20):
+      asserts:
+        has_h5_keys:
+            keys: "obs/G2M_score"
+            keys: "obs/S_score"
+            keys: "var/CC_genes"
+            keys: "uns/pca"
+    out_png (Step 22):
+      asserts:
+        has_size:
+          value: 133331
+          delta: 2700

@@ -1,0 +1,1260 @@
+---
+id: ecoli_comparison
+name: Making sense of a newly assembled genome
+description: >-
+  In this tutorial, we will compare an assembly of <i>E. coli</i> C to
+  assemblies of all other complete genes of this species.
+title_default: ecoli_comparison
+steps:
+  - title: Introduction
+    content: >-
+      <i>E. coli</i> is one of the most studied organisms. There are
+      hundreds of complete genomes (in fact, the total number of <i>E.
+      coli</i> assemblies in Genbank is over 10,500). Here we will shows how
+      to uploaded all (!) complete <i>E. coli</i> genomes at once.
+    backdrop: true
+  - title: Getting complete <i>E. coli</i> genomes into Galaxy
+    content: >-
+      Our initial objective is to compare our assembly against all complete
+      <i>E. coli</i> genomes to identify the most related ones and to find any
+      interesting genome alterations. In order to do this we need to align our
+      assembly against all other genomes. And in order to do that we need to
+      first obtain all these other genomes.<br><br> <a
+      href="https://www.ncbi.nlm.nih.gov/">NCBI</a> is the resource that would
+      store all complete <i>E. coli</i> genomes. Specifically, they can be found
+      <a href="https://www.ncbi.nlm.nih.gov/genome/genomes/167">here</a>. As we
+      will see, this list contains over 500 genomes and so uploading them by
+      hand will likely result in carpal tunnel syndrome, which we want to
+      prevent. Galaxy has several features that are specifically designed for
+      uploading and managing large sets of similar types of data. The following
+      two <b>Hands-on</b> sections show how they can be used to import all
+      completed <i>E. coli</i> genomes into Galaxy.
+    backdrop: true
+  - title: Preparing a list of all complete <i>E. coli</i> genomes
+    content: >-
+      Open the <a href="https://www.ncbi.nlm.nih.gov/genome/genomes/167">NCBI
+      list of of <i>E. coli</i> genomes</a> in a new window and position two
+      browser windows (one the tutorial and the one you just opened) side by
+      side. Then follow the steps in the following <a
+      href="https://vimeo.com/271328293">video</a>.
+    backdrop: true
+  - title: Preparing a list of all complete <i>E. coli</i> genomes
+    content: >-
+      Now that the list is formatted as a table in a spreadsheet, it is time to
+      upload it into Galaxy. There is a problem though: the URLs (web addresses)
+      in the list do not actually point to sequence files that we would need to
+      perform alignments. Instead they point to directories. For example, this
+      URL: <br><br>
+      ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/008/865/GCA_000008865.1_ASM886v1
+      <br><br> points to a directory (rather than a file) containing many files,
+      most of which we do not need.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Preparing a list of all complete <i>E. coli</i> genomes
+    content: >-
+      So to download sequence files we need to edit URLs by adding filenames to
+      them. For example, in the case of the URL shown above we need to add
+      <b>/GCA_000008865.1_ASM886v1</b> and <b>_genomic.fna.gz</b> to the end to
+      get this: <br><br>
+      ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/008/865/GCA_000008865.1_ASM886v1/GCA_000008865.1_ASM886v1_genomic.fna.gz
+      <br><br> This can be done as a two step process where we first copy the
+      end part of the existing URL (<b>/GCA_000008865.1_ASM886v1</b>) and then
+      add a fixed string <b>_genomic.fna.gz</b> to the end of it. Doing this by
+      hand is crazy and trying to do it in a spreadsheet is complicated.
+      Fortunately, Galaxy’s new rule-based uploader can help, as shown in the
+      next <b>Hands-on</b> section.
+    backdrop: true
+  - title: Preparing assembly
+    content: >-
+      Before starting any analyses we need to upload the assembly produced in <a
+      href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/unicycler-assembly/tutorial.html">Unicycler
+      tutorial</a> from Zenodo.
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the link here from <a
+      href="https://zenodo.org/record/1306128/">zenodo</a> and choose type as
+      `fasta`.
+    placement: right
+    textinsert: 'https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna'
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Preparing assembly
+    content: >-
+      The assembly we just uploaded has two issues that need to be addressed
+      before proceeding with our analysis<ul> <li>It contains two sequences -
+      the one of <i>E. coli</i> C genome (the one we really need) and another
+      representing phage phiX174 (a by product of Illumina sequencing where it
+      is used as a spike-in DNA).</li> <li>Sequences have unwieldy names like
+      `>1 length=4576293 depth=1.00x circular=true`. We need to rename it to
+      something more meaningful.</li></ul> Let’s fix these two problems. Because
+      phiX173 is around 5,000bp, we can remove those sequences by setting a
+      minimum length of 10,000.
+    backdrop: true
+  - title: Fixing assembly
+    element: '#tool-search-query'
+    content: Search for "Filter sequences by length" tool
+    placement: right
+    textinsert: Filter sequences by length
+  - title: Fixing assembly
+    element: '#tool-search'
+    content: Click on the "Filter sequences by length" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffasta_filter_by_length%2Ffasta_filter_by_length%2F1.1"]
+        .tool-old-link
+  - title: Fixing assembly
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Fasta file" to the dataset you’ve just uploaded</li>
+        <li>"Minimal length": to `10000`</li>
+      </ul>
+    position: left
+  - title: Fixing assembly
+    element: '#tool-search-query'
+    content: Search for "Text transformation with sed" tool
+    placement: right
+    textinsert: sed
+  - title: Fixing assembly
+    element: '#tool-search'
+    content: Click on the "Text transformation with sed" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sed_tool%2F1.1.1"]
+        .tool-old-link
+  - title: Fixing assembly
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"File to process" to the output from the previous tool execution</li>
+        <li>"SED program": to `s/^>1.*$/>Ecoli_C/`</li>
+      </ul>
+    position: left
+  - title: Regular Expressions
+    content: >-
+      Detailed description of <a
+      href="https://en.wikipedia.org/wiki/Regular_expression">Regular
+      Expressions</a> is outside of the scope of this tutorial, but there are
+      other great resources. Start with <a
+      href="http://v4.software-carpentry.org/regexp/index.html">Software
+      Carpentry Regular Expressions tutorial</a>.
+    backdrop: true
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What is the meaning of `^` character is SED expression?</li>
+        <li>Where do you go to learn more about regular expressions?</li>
+      </ul>
+    backdrop: false
+  - title: Generating alignments
+    content: >-
+      Now everything is loaded and ready to go. We will now align our assembly
+      against each of the <i>E. coli</i> genomes we have uploaded into the
+      collection. To do this we will use <a
+      href="https://lastz.github.io/lastz/">LASTZ</a>—an aligner designed for
+      long sequences.
+    backdrop: true
+  - title: Running LASTZ
+    element: '#tool-search-query'
+    content: Search for "LASTZ" tool
+    placement: right
+    textinsert: LASTZ
+  - title: Running LASTZ
+    element: '#tool-search'
+    content: Click on the "LASTZ" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Flastz%2Flastz_wrapper_2%2F1.3.2"]
+        .tool-old-link
+  - title: Running LASTZ
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Select TARGET sequence(s)" to `from your history`</li>
+        <li>"Select a reference dataset": to the <i>E. coli</i> genomes we uploaded earlier (collection input)</li>
+        <li>"Select QUERY sequence(s)" to our assembly which was prepared in the previous step</li>
+        <li>"Perform chaining of HSPs with no penalties" to `Yes` (in <b>Chaining</b> section)</li>
+        <li>"Specify the output format" to `blastn` (in <b>Output</b> section)</li>
+      </ul>
+    position: left
+  - title: Running LASTZ
+    content: >-
+      It will take a while! Please understand that alignment is not an
+      instantaneous process: allow several hours for these jobs to clear.
+    backdrop: true
+  - title: Running LASTZ
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      LASTZ produced data in so-called `blastn` format (because we explicitly
+      told LASTZ to output in this format, see previous step).<br>The alignment
+      information produced by LASTZ is a collection. In this collection each
+      element contains alignment data between each of the <i>E. coli</i> genomes
+      and our assembly.
+    position: left
+  - title: Collapsing collection
+    content: >-
+      Collections are a wonderful way to organize large sets of data and
+      parallelize data processing like we did here with LASTZ. However, at this
+      point we need to combine all data into one dataset.
+    backdrop: true
+  - title: Combining collection into a single dataset
+    element: '#tool-search-query'
+    content: Search for "Collapse Collection" tool
+    placement: right
+    textinsert: Collapse Collection
+  - title: Combining collection into a single dataset
+    element: '#tool-search'
+    content: Click on the "Collapse Collection" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fcollapse_collections%2Fcollapse_dataset%2F4.0"]
+        .tool-old-link
+  - title: Combining collection into a single dataset
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Collection of files to collapse" to the output of <b>LASTZ</b> (collecion input)</li>
+      </ul>
+    position: left
+  - title: Collapsing collection
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      This will produce one gigantic table (over 12 million lines) containing
+      combined LASTZ output for all genomes.
+    position: left
+  - title: Getting taste of the alignment data
+    content: >-
+      To make further analyses we need to get an idea about alignment data
+      generated with LASTZ. To do this let’s select a random subsample of the
+      large dataset we’ve generated above. This is necessary because processing
+      the entire dataset will take time and will not give us a better insight
+      anyway. So first we will select 10,000 lines from the alignment data.
+    backdrop: true
+  - title: Selecting random subset of data
+    element: '#tool-search-query'
+    content: Search for "Select random lines from a file" tool
+    placement: right
+    textinsert: Select random lines
+  - title: Selecting random subset of data
+    element: '#tool-search'
+    content: Click on the "Select random lines from a file" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=random_lines1"] .tool-old-link'
+  - title: Selecting random subset of data
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Randomly select" to `10000`</li>
+        <li>"from" to the output from <b>Collapse Collection</b></li>
+      </ul>
+    position: left
+  - title: Graphing alignment data
+    content: Now we can visualize this dataset to discover generalities.
+    backdrop: true
+  - title: Graphing alignment data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      <ul>
+        <li>Expand random subset of alignment data generated on the previous step by clicking on it.</li>
+        <li>Click on <b>Vizualize this data</b> button with <b>Charts</b> icon.</li>
+        <li>In the central panel you will see a list of visualizations. Select <b>Scatter plot (NVD3)</b></li>
+        <li>Click <b>Select data</b> button</li>
+        <li>Set <b>Values for x-axis</b> to `Column: 3` (alignment identity)</li>
+        <li>Set <b>Values for y-axis</b> to `Column: 4` (alignment length)</li>
+      </ul> You can also click on <b>configuration button</b> and specify axis
+      labels etc.
+    position: left
+  - title: Graphing alignment data
+    content: >-
+      By inspecting the result you can see that most alignments are short and
+      have relatively low identity. Thus we can filter the original dataset by
+      identity and length. Judging from this graph we can select alignment
+      longer than 10,000 bp with identity above 90%.
+    backdrop: false
+  - title: Filtering data
+    element: '#tool-search-query'
+    content: Search for "Filter data on any column using simple expressions" tool
+    placement: right
+    textinsert: Filter data
+  - title: Filtering data
+    element: '#tool-search'
+    content: >-
+      Click on the "Filter data on any column using simple expressions" tool to
+      open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Filter1"] .tool-old-link'
+  - title: Filtering data
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Filter" to the the <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html#hands-on-combining-collection-into-a-single-dataset">full dataset</a></li>
+        <li>"With following condition" to `c3 >= 90 and c4 >= 10000`</li>
+      </ul>
+    position: left
+  - title: Aggregating data
+    content: >-
+      Remember, our objective is to find the genomes that are most similar to
+      ours. Given the alignment data in the table we just created we can define
+      similarity as follows:<br><br> <i>Genomes that have the smallest number of
+      alignment blocks but the highest overall alignment length are most similar
+      to our assembly. This essentially means that they have longest
+      uninterrupted region of high similarity to our assembly.</i><br><br>
+      However, to extract this information from our data we need to aggregate
+      it. In other words, for each <i>E. coli</i> genome we need to calculate
+      the total number of alignment blocks, their combined length, and average
+      identity.
+    backdrop: false
+  - title: Aggregating the data
+    element: '#tool-search-query'
+    content: Search for "Datamash (operations on tabular data)" tool
+    placement: right
+    textinsert: Datamash
+  - title: Aggregating the data
+    element: '#tool-search'
+    content: Click on the "Datamash (operations on tabular data)" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdatamash_ops%2Fdatamash_ops%2F1.0.6"]
+        .tool-old-link
+  - title: Aggregating the data
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Input tabular dataset" to the output of the previous `Filter` step</li>
+        <li>"Group by fields" to `1`</li>
+        <li>"Sort input" to `Yes`</li>
+        <li>"Operation to perform on each group"<ul>
+          <li>"Type" to `Count`</li>
+          <li>"On column" to `Column: 1`</li></ul></li>
+        <li>Click <b>Insert operation to perform on each group</b> button twice to add two more input boxes.</li>
+        <li>"Operation to perform on each group":<ul>
+          <li>"Type" to `Mean`</li>
+          <li>"On column" to `Column: 3`</li></ul></li>
+        <li>"Operation to perform on each group":<ul>
+          <li>"Type" to `Sum`</li>
+          <li>"On column" to `Column: 4`</li></ul></li>
+      </ul>
+    position: left
+  - title: Finding closest relatives
+    content: >-
+      The dataset generated above lists each <i>E. coli</i> genome accession
+      only once and will have aggregate information for the number of alignment
+      blocks, mean identity, and total length. Let’s graph these data.
+    backdrop: true
+  - title: Graphing aggregated data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      <ul>
+        <li>Expand the aggregated data generated on the previous step by clicking on it.</li>
+        <li>Click on <b>Vizualize this data</b> button with <b>Charts</b> icon.</li>
+        <li>In the central panel you will see a list of visualizations. Select <b>Scatter plot (NVD3)</b></li>
+        <li>Click <b>Select data</b> button</li>
+        <li>Set <b>Data point labels</b> to `Column: 1` (Accession number of each <i>E. coli</i> genome)</li>
+        <li>Set <b>Values for x-axis</b> to `Column: 2` (alignment identity)</li>
+        <li>Set <b>Values for y-axis</b> to `Column: 4` (alignment length)</li>
+      </ul> You can also click on <b>configuration button</b> and specify axis
+      labels etc.
+    position: left
+  - title: Graphing aggregated data
+    content: >-
+      A group of three dots in the upper left corner of this scatter plot
+      represents genomes that are most similar to our assembly: they have a
+      SMALL number of alignment blocks but HIGH total alignment length. Mousing
+      over these three dots (if you set <b>Data point labels</b> correctly in
+      the previous step) will reveal their accession numbers: `LT906474.1`,
+      `CP024090.1`, and `CP020543.1`. It is possible that when you repeat these
+      steps the set of sequences in NCBI will have changed and you will obtain
+      different accession numbers. Keep this in mind.
+    backdrop: false
+  - title: Extracting into about best hits
+    content: Let’s find table entries corresponding to these.
+    backdrop: true
+  - title: Extracting into about best hits
+    element: '#tool-search-query'
+    content: Search for "Select lines that match an expression" tool
+    placement: right
+    textinsert: Select lines
+  - title: Extracting into about best hits
+    element: '#tool-search'
+    content: Click on the "Select lines that match an expression" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Grep1"] .tool-old-link'
+  - title: Extracting into about best hits
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Select lines from" to the output from <b>Datamash</b></li>
+        <li>"the pattern" to `LT906474|CP024090|CP020543`</li>
+      </ul>
+    position: left
+  - title: Extracting into about best hits
+    element: '.history-right-panel .list-items > *:first'
+    content: Inspect the output. The highest number shows the closest to our assembly.
+    position: left
+  - title: Comparing genome architectures
+    content: >-
+      Now that we know the three genomes most closely related to ours, let’s
+      take a closer look at them. First we will re-download sequence and
+      annotation data.
+    backdrop: true
+  - title: Uploading sequences and annotations
+    content: >-
+      Using the three accession listed above we will fetch necessary data from
+      NCBI. Follow the steps in the <a
+      href="https://vimeo.com/272379016">video</a>. At the end of this you
+      should have two collections: one containing genomic sequences and another
+      containing annotations.
+    backdrop: true
+  - title: Visualizing rearrangements
+    content: >-
+      Now we will perform alignments between our assembly and the three most
+      closely related genomes to get a detailed look at any possible genome
+      architecture changes. We will again use LASTZ.
+    backdrop: true
+  - title: Aligning again
+    element: '#tool-search-query'
+    content: Search for "LASTZ" tool
+    placement: right
+    textinsert: LASTZ
+  - title: Aligning again
+    element: '#tool-search'
+    content: Click on the "LASTZ" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Flastz%2Flastz_wrapper_2%2F1.3.2"]
+        .tool-old-link
+  - title: Aligning again
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Select TARGET sequence(s)" to `from your history`</li>
+        <li>"Select a reference dataset": to the dataset collection of the three genomes (in the video above we called it "DNA")</li>
+        <li>"Select QUERY sequence(s)" to our assembly which was prepared in the beginning ("Text transformation on data...")</li>
+        <li>"Perform chaining of HSPs with no penalties" to `Yes` (in <b>Chaining</b> section)</li>
+        <li>"Specify the output format" to `Customized general` (in <b>Output</b> section)</li>
+        <li>In "Select which fields to include" choose the following:<ul>
+          <li>score</li>
+          <li>name1</li>
+          <li>strand</li>
+          <li>zstart</li>
+          <li>end1</li>
+          <li>length1</li>
+          <li>name2</li>
+          <li>strand2</li>
+          <li>zstart2</li>
+          <li>end2</li>
+          <li>identity</li>
+          <li>number</li></ul></li>
+        <li>"Create a dotplot representation of alignments?" to `Yes`</li>
+      </ul>
+    position: left
+  - title: Aligning again
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      If you are not sure how to interpret Dot Plots <a
+      href="https://training.galaxyproject.org/training-material/topics/assembly/images/dotplot.png">here</a>
+      is a great explanation by <a href="http://schatz-lab.org/">Michael
+      Schatz</a>.
+    position: left
+  - title: Producing a Genome Browser for this experiment
+    content: >-
+      The dot plots we’ve produced above are great, but they are static. It
+      would be wonderful to load these data into a genome browser where one can
+      zoom in and out as well as add tracks such as those containing genes. To
+      create a browser we need a genome and a set of tracks. Tracks are features
+      such as genes or SNPs with start and end positions corresponding to a
+      coordinate system provided by the genome. Thus the first thing to do is to
+      create a genome that would represent our experiment. We can create such a
+      genome by simply combining the three genomes of closely related strains
+      with our assembly in a single dataset—a hybrid genome.<br><br> The first
+      step will be collapsing the collection containing the three genomes into a
+      single file.
+    backdrop: true
+  - title: Creating a single FASTA dataset with all genomes
+    element: '#tool-search-query'
+    content: Search for "Collapse Collection" tool
+    placement: right
+    textinsert: Collapse Collection
+  - title: Creating a single FASTA dataset with all genomes
+    element: '#tool-search'
+    content: Click on the "Collapse Collection" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fcollapse_collections%2Fcollapse_dataset%2F4.0"]
+        .tool-old-link
+  - title: Creating a single FASTA dataset with all genomes
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Collection of files to collapse" to the three genomes (collection) (in the video above we called it "best hits")</li>
+      </ul>
+    position: left
+  - title: Creating a single FASTA dataset with all genomes
+    content: >-
+      However, there is a problem in the output with FASTA headers. We need to
+      make the format similar to the one in LASTZ. For this we will use
+      <b>sed</b> tool we already used.
+    backdrop: true
+  - title: Fixing assembly
+    element: '#tool-search-query'
+    content: Search for "Text transformation with sed" tool
+    placement: right
+    textinsert: sed
+  - title: Fixing assembly
+    element: '#tool-search'
+    content: Click on the "Text transformation with sed" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sed_tool%2F1.1.1"]
+        .tool-old-link
+  - title: Fixing assembly
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"File to process" to the output from the <b>collapse collection</b></li>
+        <li>"SED program": to `s/\ Esc.*$//`</li>
+      </ul>
+    position: left
+  - title: Creating a single FASTA dataset with all genomes
+    content: >-
+      To make sure that everything completed correctly let’s grab FASTA headers
+      from all sequences in the dataset produced by the last tool.
+    backdrop: true
+  - title: Grepping FASTA headers
+    element: '#tool-search-query'
+    content: Search for "Search in textfiles (grep)" tool
+    placement: right
+    textinsert: Search in textfiles (grep)
+  - title: Grepping FASTA headers
+    element: '#tool-search'
+    content: Click on the "Search in textfiles (grep)" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_grep_tool%2F1.1.1"]
+        .tool-old-link
+  - title: Grepping FASTA headers
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Select lines from" to the output of the previous step</li>
+        <li>"Regular Expression": to `^>`</li>
+      </ul>
+    position: left
+  - title: Grepping FASTA headers
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      If everything went well we will see something like this:
+        >CP020543.1
+        >CP024090.1
+        >LT906474.1
+    position: left
+  - title: Grepping FASTA headers
+    content: >-
+      Finally, we need to add our own assembly to the FASTA dataset containing
+      the three genomes. This can be done by a simple concatenation.
+    backdrop: true
+  - title: Concatenate FASTA files
+    element: '#tool-search-query'
+    content: Search for "Concatenate datasets tail-to-head (cat)" tool
+    placement: right
+    textinsert: Concatenate datasets
+  - title: Concatenate FASTA files
+    element: '#tool-search'
+    content: Click on the "Concatenate datasets tail-to-head (cat)" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_cat%2F0.1.0"]
+        .tool-old-link
+  - title: Concatenate FASTA files
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Datasets to concatenate" to the output of sed tool we performed one step ago</li>
+        <li>Click <b>Insert Dataset</b> button<ul>
+          <li>"Select" to our assembly (its name begins with "Text transformation on..."" but is located earlier in the history)</li></ul</li>
+      </ul>
+    position: left
+  - title: Starting a custom IGV browser
+    content: >-
+      The resulting dataset contains four sequences: three genomes plus our
+      assembly. Let’s start a browser using these sequences.<ul>
+        <li>Go to <a href="http://software.broadinstitute.org/software/igv/download">IGV web page</a> and launch a browser appropriate for your platform. Wait for it to start. It will display human genome, but we will change that.</li>
+        <li>Go back to your Galaxy session and expand the dataset generated during the last step.</li>
+        <li>Click on `local` link in <b>display with IGV local</b></li>
+        <li>Wait a bit and IGV will refresh displaying "chromosomes" of our hybrid genome</li></ul>
+    backdrop: true
+  - title: Preparing and displaying alignments
+    content: >-
+      So far we computed alignments using LASTZ. Because we ran LASTZ on a
+      collection containing genomic sequences, LASTZ produced a collection as
+      well (actually two collections: one containing alignments an the other
+      with dot plots). To display alignments in the browser we need to do
+      several things<ul>
+        <li>Fix unwanted % signs in LASTZ output</li>
+        <li>Create names for alignment blocks</li>
+        <li>Convert LASTZ output into <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1">BED</a> format</li>
+        <li>Create a single BED track containing alignments against all four genomes.</li></ul>
+    backdrop: true
+  - title: Removing % character from LASTZ output
+    element: '#tool-search-query'
+    content: Search for "Text transformation with sed" tool
+    placement: right
+    textinsert: sed
+  - title: Removing % character from LASTZ output
+    element: '#tool-search'
+    content: Click on the "Text transformation with sed" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_sed_tool%2F1.1.1"]
+        .tool-old-link
+  - title: Removing % character from LASTZ output
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"File to process" to the output of LASTZ</li>
+        <li>"SED program": to `s/\%//`</li>
+      </ul>
+    position: left
+  - title: Creating unique alignment identifiers
+    content: >-
+      One of the fields chosen by us for <a
+      href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html#hands-on-aligning-again">LASTZ
+      run</a> is <b>number</b>. This is an incrementing number given by LASTZ to
+      every alignment block so it can be uniquely identified. The problem is
+      that by running LASTZ on a collection of three genomes it generated a
+      number for each output independently starting with <b>1</b> each time. So
+      these alignments identified are unique within each individual run but are
+      redundant for multiple runs. We can fix that by pre-pending each alignment
+      identified (column 13) with the name of the target sequence (column 2).
+      This would create alignments that are truly unique. For example, in the
+      case of the LASTZ output shown above alignment identifier <b>1</b> will
+      become `CP020543.11`, <b>2</b> will become `CP020543.12` and so on. Here
+      is how we will do that.
+    backdrop: true
+  - title: Creating unique alignment identifiers
+    element: '#tool-search-query'
+    content: Search for "Merge Columns together" tool
+    placement: right
+    textinsert: Merge Columns together
+  - title: Creating unique alignment identifiers
+    element: '#tool-search'
+    content: Click on the "Merge Columns together" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=mergeCols1"] .tool-old-link'
+  - title: Creating unique alignment identifiers
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Select data" to the output of the previous step</li>
+        <li>"Merge column": to `Column: 2`</li>
+        <li>"with column" to `Column: 13`</li>
+      </ul>
+    position: left
+  - title: Creating unique alignment identifiers
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The tool added a new column (Column 14) containing a merge between the
+      target name and alignment id.
+    position: left
+  - title: Collapsing all alignment info into a single dataset
+    element: '#tool-search-query'
+    content: Search for "Collapse Collection" tool
+    placement: right
+    textinsert: Collapse Collection
+  - title: Collapsing all alignment info into a single dataset
+    element: '#tool-search'
+    content: Click on the "Collapse Collection" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fcollapse_collections%2Fcollapse_dataset%2F4.0"]
+        .tool-old-link
+  - title: Collapsing all alignment info into a single dataset
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Collection of files to collapse" to the output of the previous step</li>
+      </ul>
+    position: left
+  - title: Collapsing all alignment info into a single dataset
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Let’s look again at the data we generated in the last step.<br>Alignments
+      are regions of high similarity between two sequences. Therefore each
+      alignment block has two sets of coordinates associated with it: start/end
+      in the first sequences (target) and start/end in the second sequence
+      (query). But BED only has one set of coordinates. Thus we can create two
+      BEDs: one using coordinates from the target and the other one from query.
+      To create the first BED we will cut six columns from the dataset produced
+      at the last step. Specifically, to produce the target BED we will cut
+      columns 2, 4, 5, 14, 12, and 8. To produce the query BED columns
+      7,9,10,14,12,8 will be cut.
+    position: left
+  - title: Creating target BED
+    element: '#tool-search-query'
+    content: Search for "Cut columns from a table" tool
+    placement: right
+    textinsert: Cut columns
+  - title: Creating target BED
+    element: '#tool-search'
+    content: Click on the "Cut columns from a table" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Cut1"] .tool-old-link'
+  - title: Creating target BED
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Cut columns" to `c2,c4,c5,c14,c12,c8`</li>
+        <li>"From" to the output of the previous step</li>
+      </ul>
+    position: left
+  - title: Creating query BED
+    content: Now let’s do a similar operation to create query BED.
+    backdrop: true
+  - title: Creating query BED
+    element: '#tool-search-query'
+    content: Search for "Cut columns from a table" tool
+    placement: right
+    textinsert: Cut columns
+  - title: Creating query BED
+    element: '#tool-search'
+    content: Click on the "Cut columns from a table" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Cut1"] .tool-old-link'
+  - title: Creating query BED
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Cut columns" to `c7,c9,c10,c14,c12,c8`</li>
+        <li>"From" to the output of <b>collection collapse</b></li>
+      </ul>
+    position: left
+  - title: Merging Target and Query BEDs
+    content: >-
+      Now we can merge these two datasets into a single BED dataset that will be
+      ready for display in the browser.
+    backdrop: true
+  - title: Merging Target and Query BEDs
+    element: '#tool-search-query'
+    content: Search for "Concatenate datasets tail-to-head (cat)" tool
+    placement: right
+    textinsert: Concatenate datasets
+  - title: Merging Target and Query BEDs
+    element: '#tool-search'
+    content: Click on the "Concatenate datasets tail-to-head (cat)" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_cat%2F0.1.0"]
+        .tool-old-link
+  - title: Merging Target and Query BEDs
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Datasets to concatenate" to the output of the step before last</li>
+        <li>Click <b>Insert Dataset</b> button<ul>
+          <li>"1: Dataset" to the output of the previous step</li></ul</li>
+      </ul>
+    position: left
+  - title: Merging Target and Query BEDs
+    content: >-
+      Now we have a single BED that combines everything. Before displaying it in
+      the browser we need to tell Galaxy that it is in fact a BED dataset.
+    backdrop: true
+  - title: Changing dataset type
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      We want to rename them it to something more meaningful<ul>
+        <li>Click on the pencil icon beside the file to "Edit Attributes".</li>
+        <li>Change the "<b>Name:</b>" accordingly.</li>
+        <li>Change the "<b>Datatype:</b>" to `bed`.</li>
+      </ul>
+    position: left
+  - title: Display alignments in the browser
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      <ul>
+        <li>Expand the latest data</li>
+        <li>You will see <b>display with IGV local</b>. Click this.</li>
+      </ul>
+    position: left
+  - title: Analyzing the deletion for gene content
+    content: >-
+      Earlier we <a
+      href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html#hands-on-uploading-sequences-and-annotations">downloaded</a>
+      gene annotations for the three genomes most closely related to our
+      assembly. The data was downloaded as a collection containing annotations
+      for <b>CP020543.1</b>, <b>CP024090.1</b>, and <b>LT906474.1</b>. The
+      annotation data contains multiple columns described by NCBI as follows
+      (you can look at the actual data by finding the annotation collection from
+      above (called <b>GENES</b> if you followed the <a
+      href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html#hands-on-uploading-sequences-and-annotations">video</a>)).
+      Our objective is to convert these data into BED. In this analysis we want
+      to initially concentrate on protein coding regions. To do this let’s
+      select all lines from the annotation datasets that contain the term `CDS`.
+    backdrop: true
+  - title: Retain CDS rows in annotation datasets
+    element: '#tool-search-query'
+    content: Search for "Select lines that match an expression" tool
+    placement: right
+    textinsert: Select lines
+  - title: Retain CDS rows in annotation datasets
+    element: '#tool-search'
+    content: Click on the "Select lines that match an expression" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Grep1"] .tool-old-link'
+  - title: Retain CDS rows in annotation datasets
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Select lines from" to the collection containing annotations (called GENES)</li>
+        <li>"the pattern" to `^CDS`</li>
+      </ul>
+    position: left
+  - title: Retain CDS rows in annotation datasets
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      This will produce a collection with three datasets just like the original
+      `GENES` collection but containing only CDS data. Next we need to cut out
+      only those columns that need to be included in the BED format. There is
+      one problem with this. We are trying to convert these data into <a
+      href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html#tip-tip-bed-format">6
+      column BED</a>. In this format the fifth column (score) must have a value
+      between 0 and 1000. To satisfy this requirement we will create a dummy
+      column that will always have a value of `0`.
+    position: left
+  - title: Creating a dummy score column
+    element: '#tool-search-query'
+    content: Search for "Add column to an existing dataset" tool
+    placement: right
+    textinsert: Add column to an existing dataset
+  - title: Creating a dummy score column
+    element: '#tool-search'
+    content: Click on the "Add column to an existing dataset" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=addValue"] .tool-old-link'
+  - title: Creating a dummy score column
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Add this value" to `0`</li>
+        <li>"From" to the collection produced at the previous step</li>
+      </ul>
+    position: left
+  - title: Cutting columns form annotation data
+    content: >-
+      This will create a 21st column containing `0` for all rows. Now we can cut
+      necessary columns from these datasets. These columns are 8 (start), 9
+      (end), 15 (gene symbol), 21 (dummy column we just created), and c10
+      (strand).
+    backdrop: true
+  - title: Cutting columns form annotation data
+    element: '#tool-search-query'
+    content: Search for "Cut columns from a table" tool
+    placement: right
+    textinsert: Cut columns
+  - title: Cutting columns form annotation data
+    element: '#tool-search'
+    content: Click on the "Cut columns from a table" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Cut1"] .tool-old-link'
+  - title: Cutting columns form annotation data
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Cut columns" to `c8,c9,c15,c21,c10`</li>
+        <li>"From" to the output of the previous step(collection)</li>
+      </ul>
+    position: left
+  - title: Collapsing annotations into a single BED dataset
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      As we mentioned above these datasets lack genome IDs such as `CP020543.1`.
+      However, the individual elements in the collection we’ve created already
+      have genome IDs (if you are unsure make sure you followed the directions
+      when <a
+      href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html#hands-on-uploading-sequences-and-annotations">creating
+      collection containing annotations</a>).
+    position: left
+  - title: Collapsing annotations into a single BED dataset
+    element: '#tool-search-query'
+    content: Search for "Collapse Collection" tool
+    placement: right
+    textinsert: Collapse Collection
+  - title: Collapsing annotations into a single BED dataset
+    element: '#tool-search'
+    content: Click on the "Collapse Collection" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fcollapse_collections%2Fcollapse_dataset%2F4.0"]
+        .tool-old-link
+  - title: Collapsing annotations into a single BED dataset
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Collection of files to collapse" to the output of the previous step</li>
+        <li>"Append File name" to `Yes`</li>
+        <li>"Where to add dataset name" to `Same line and each line in dataset`</li>
+      </ul>
+    position: left
+  - title: Changing dataset type
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Make sure the datatype is set to <b>bed</b>. Expand the output and click
+      on <b>display with IGV local</b>.
+    position: left
+  - title: Extracting genes programmatically
+    content: >-
+      Earlier we’ve been able to look at genes that appear to be deleted in our
+      assembly. But what we really need is to create a list that can be
+      interrogated further. For example, which of these genes are essential? We
+      can easily create such a list by overlapping coordinates of genes with
+      coordinates of our deletion. But to do this we first need to create a set
+      of coordinates corresponding to the deletion. This can be done by
+      complementing coordinates of alignments we created <a
+      href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html#hands-on-changing-dataset-type">earlier</a>.
+      <br><br>However, before we convert coordinates of alignments into their
+      complements we need to prepare a so called genome file, which is a list of
+      "chromosomes" and their lengths in our <a
+      href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html#hands-on-concatenate-fasta-files">hybrid
+      genome</a>.
+    backdrop: true
+  - title: Creating a genome file
+    element: '#tool-search-query'
+    content: Search for "Compute sequence length" tool
+    placement: right
+    textinsert: Compute sequence length
+  - title: Creating a genome file
+    element: '#tool-search'
+    content: Click on the "Compute sequence length" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffasta_compute_length%2Ffasta_compute_length%2F1.0.0"]
+        .tool-old-link
+  - title: Creating a genome file
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Compute length for these sequences" to the FASTA dataset we generated <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html#hands-on-concatenate-fasta-files">concatenated "hybrid" genome</a></li>
+      </ul>
+    position: left
+  - title: Sorting genome file
+    content: 'Next, we need to sort this file lexicographically.'
+    backdrop: true
+  - title: Sorting genome file
+    element: '#tool-search-query'
+    content: Search for "Sort data in ascending or descending order" tool
+    placement: right
+    textinsert: Sort data in
+  - title: Sorting genome file
+    element: '#tool-search'
+    content: Click on the "Sort data in ascending or descending order" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=sort1"] .tool-old-link'
+  - title: Sorting genome file
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Sort Dataset" to the output of the previous step</li>
+        <li>"on column" to `Column: 1`</li>
+        <li>"with flavor" to `Alphabetical sort`</li>
+        <li>"everything in" to `Ascending order`</li>
+      </ul>
+    position: left
+  - title: Sorting BED file
+    content: >-
+      Next we need to go back to the BED file containing <a
+      href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html#hands-on-changing-dataset-type">alignment
+      data</a> and sort it as well.
+    backdrop: true
+  - title: Sorting genome file
+    element: '#tool-search-query'
+    content: Search for "SortBED order the intervals" tool
+    placement: right
+    textinsert: SortBED
+  - title: Sorting genome file
+    element: '#tool-search'
+    content: Click on the "SortBED order the intervals" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbedtools%2Fbedtools_sortbed%2F2.27.0.0"]
+        .tool-old-link
+  - title: Sorting genome file
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Sort the following BED file" to our <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html#hands-on-changing-dataset-type">alignment BED</a></li>
+        <li>"Sort by" to `chromosome, then by start position (asc)`</li>
+      </ul>
+    position: left
+  - title: Sorting BED file
+    content: Now we can finally compute the complement of the sorted BED dataset.
+    backdrop: true
+  - title: Sorting genome file
+    element: '#tool-search-query'
+    content: >-
+      Search for "ComplementBed Extract intervals not represented by an interval
+      file" tool
+    placement: right
+    textinsert: ComplementBed
+  - title: Sorting genome file
+    element: '#tool-search'
+    content: >-
+      Click on the "ComplementBed Extract intervals not represented by an
+      interval file" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbedtools%2Fbedtools_complementbed%2F2.27.0.0"]
+  - title: Sorting genome file
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"BED/VCF/GFF file" to the output from the previous step</li>
+        <li>"Genome file" to `Genome file from your history`</li>
+        <li>"Genome file" to the sorted genome file we’ve generated <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html#hands-on-sorting-genome-file">two steps ago</a></li>
+      </ul>
+    position: left
+  - title: Display alignments in the browser
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      <ul>
+        <li>The output of this step can directly be viewed in IGV by clicking on <b>display with IGV local</b>.</li>
+      </ul>
+    position: left
+  - title: Sorting BED file
+    content: >-
+      At this point we have two BEDs: one just created and the other containing
+      <a
+      href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html#hands-on-collapsing-annotations-into-a-single-bed-dataset">gene
+      annotations</a>. We can simply intersect the two. <br>But before we do
+      that let’s filter all small intervals below 10,000 kb to remove noise.
+    backdrop: true
+  - title: Filtering BED on interval length
+    element: '#tool-search-query'
+    content: Search for "Filter data on any column using simple expressions" tool
+    placement: right
+    textinsert: Filter data
+  - title: Filtering BED on interval length
+    element: '#tool-search'
+    content: >-
+      Click on the "Filter data on any column using simple expressions" tool to
+      open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Filter1"] .tool-old-link'
+  - title: Filtering BED on interval length
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Filter" to the dataset from the last step</li>
+        <li>"With following condition" to `c3-c2>=10000`</li>
+      </ul>
+    position: left
+  - title: Restricting list of deleted regions to the common deletion
+    content: >-
+      You will notice that all three genomes have a region starting past
+      3,200,000 and only `CP020543.1` has another region starting at 1,668,702.
+      However, this region reflects some unique feature of `CP020543.1` rather
+      than that of our assembly. This is why we will concentrate on the common
+      region which is deleted in our genome, but is present in the three closely
+      related <i>E. coli</i> strains.
+    backdrop: true
+  - title: Restricting list of deleted regions to the common deletion
+    element: '#tool-search-query'
+    content: Search for "Filter data on any column using simple expressions" tool
+    placement: right
+    textinsert: Filter data
+  - title: Restricting list of deleted regions to the common deletion
+    element: '#tool-search'
+    content: >-
+      Click on the "Filter data on any column using simple expressions" tool to
+      open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Filter1"] .tool-old-link'
+  - title: Restricting list of deleted regions to the common deletion
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Filter" to the the <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html#hands-on-combining-collection-into-a-single-dataset">full dataset</a></li>
+        <li>"With following condition" to `c2 > 2000000`</li>
+      </ul>
+    position: left
+  - title: Restricting list of deleted regions to the common deletion
+    content: >-
+      Now we are ready to intersect these regions with gene coordinates we
+      formatted <a
+      href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html#hands-on-collapsing-annotations-into-a-single-bed-dataset">earlier</a>.
+    backdrop: true
+  - title: Restricting list of deleted regions to the common deletion
+    element: '#tool-search-query'
+    content: >-
+      Search for "Intersect intervals find overlapping intervals in various
+      ways" tool
+    placement: right
+    textinsert: Intersect intervals find overlapping
+  - title: Restricting list of deleted regions to the common deletion
+    element: '#tool-search'
+    content: >-
+      Click on the "Intersect intervals find overlapping intervals in various
+      ways" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbedtools%2Fbedtools_intersectbed%2F2.27.0.2"]
+        .tool-old-link
+  - title: Restricting list of deleted regions to the common deletion
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"File A to intersect with B" to the output of the previous step</li>
+        <li>"File(s) B to intersect with A" to the gene annotations in <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html#hands-on-collapsing-annotations-into-a-single-bed-dataset">BED format</a></li>
+        <li>"What should be written to the output file?" to `Write the original A and B entries plus the number of base pairs of overlap between the two features. Only A features with overlap are reported. Restricted by the fraction- and reciprocal option (-wo)`</li>
+      </ul>
+    position: left
+  - title: Are any of these genes essential?
+    content: >-
+      <a href="http://mbio.asm.org/content/9/1/e02096-17">Goodall et al.
+      (2018)</a> have recently published a list of essential genes for <i>E.
+      coli</i> K-12. We can use their data to answer this question. This paper
+      contains a supplementary file in Excel format listing genes and whether
+      they are essential or not. To actually use these data we need to first
+      convert it into TAB-delimited format. This can be done using any
+      spreadsheet application such as Google Sheets.
+    backdrop: true
+  - title: Converting a list of essential genes to TAB-delimited format
+    content: |-
+      <ul>
+        <li>Download <a href="http://mbio.asm.org/content/9/1/e02096-17/DC7/embed/inline-supplementary-material-7.xlsx">this file</a> to your computer.</li>
+        <li>Open your Google Drive and create a new Google Sheet</li>
+        <li>Go to <b>File</b> and select <b>Import</b></li>
+        <li>Within the <b>Import</b> dialog box select <b>Upload</b> and use it to upload the file downloaded at step 1</li>
+        <li>You will see the contents of the file</li>
+        <li>Remove the first two header rows so that there is only data and nothing else</li>
+        <li>Go to <b>File</b> and choose <b>Download as … TAB-separated values</b></li>
+      </ul>
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload the file. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#regular .upload-view-default .upload-box input'
+    content: Click on Choose local file
+    placement: right
+    postclick:
+      - '#regular .upload-view-default .upload-box input'
+  - title: Uploading the input data
+    content: Select the file on your local machine and start uploading.
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: Hit the close button to close this window.
+    placement: right
+  - title: Are there essential genes?
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The two truly important columns here are 1 (gene name) and 4 (is gene
+      essential?). Let’s join the results of the <a
+      href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html#hands-on-finding-genes-deleted-in-our-assembly">intersection</a>
+      with this list.
+    position: left
+  - title: Are there essential genes?
+    element: '#tool-search-query'
+    content: Search for "Join two Datasets side by side on a specified field" tool
+    placement: right
+    textinsert: Join two Datasets side
+  - title: Are there essential genes?
+    element: '#tool-search'
+    content: >-
+      Click on the "Join two Datasets side by side on a specified field" tool to
+      open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=join1"] .tool-old-link'
+  - title: Are there essential genes?
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Join" to the results of intersection</li>
+        <li>"using column" to `Column: 7`</li>
+        <li>"with" to the newly uploaded dataset with essential gene data</li>
+        <li>"and column" to `Column: 1`</li>
+      </ul>
+    position: left
+  - title: Are there essential genes?
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Once the tool is finished we will find that there are no essential genes
+      deleted from our assembly. So our version of <i>E. coli</i> C is safe!
+    position: left
+  - title: Key points
+    content: |-
+      <ul>
+        <li>We learned how to download large sets of completed genomes from NCBI</li>
+        <li>We learned how to use Galaxy's rule-based collection builder</li>
+        <li>We learned how to use a combination of Galaxy tools to create complex views of genome comparisons</li>
+        <li>We learned about idiosyncrasies of data formats and how to deal with them using Galaxy tools</li>
+      </ul>
+    backdrop: true

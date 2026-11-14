@@ -1,0 +1,90 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\noccurrence.txt"]
+  1[color=lightblue,label="ℹ️ Input Dataset\npivot_wider_jupytool_notebook.ipynb"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nceamarc_env.tsv"]
+  3[label="Advanced Cut"]
+  0 -> 3 [label="output"]
+  4[label="Column Regex Find And Replace"]
+  3 -> 4 [label="output"]
+  5[label="Column Regex Find And Replace"]
+  4 -> 5 [label="out_file1"]
+  6[label="Column Regex Find And Replace"]
+  5 -> 6 [label="out_file1"]
+  7[label="Column Regex Find And Replace"]
+  6 -> 7 [label="out_file1"]
+  8[label="Filter Tabular"]
+  7 -> 8 [label="out_file1"]
+  9[label="Column Regex Find And Replace"]
+  8 -> 9 [label="output"]
+  10[label="Column Regex Find And Replace"]
+  9 -> 10 [label="out_file1"]
+  11[label="Column Regex Find And Replace"]
+  10 -> 11 [label="out_file1"]
+  12[label="Column Regex Find And Replace"]
+  11 -> 12 [label="out_file1"]
+  13[label="Column Regex Find And Replace"]
+  12 -> 13 [label="out_file1"]
+  14[label="Merge Columns"]
+  13 -> 14 [label="out_file1"]
+  15[label="Advanced Cut"]
+  14 -> 15 [label="out_file1"]
+  16[label="Interactive JupyTool and notebook"]
+  1 -> 16 [label="output"]
+  15 -> 16 [label="output"]
+  k7fb591d38ea8482a9e5e65677bd84b7f[color=lightseagreen,label="Output\nocc_out"]
+  16 -> k7fb591d38ea8482a9e5e65677bd84b7f
+  17[label="GeoNearestNeighbor"]
+  2 -> 17 [label="output"]
+  16 -> 17 [label="output_dataset"]
+  k83137daf2a364dcf95c6e83d61e4ad7e[color=lightseagreen,label="Output\nocc_env_out"]
+  17 -> k83137daf2a364dcf95c6e83d61e4ad7e
+  k2382b3dd599f46e8a2a90a1e0dbcea44[color=lightseagreen,label="Output\ninfo_out"]
+  17 -> k2382b3dd599f46e8a2a90a1e0dbcea44
+  18[label="BRT tool prediction"]
+  2 -> 18 [label="output"]
+  17 -> 18 [label="occ_env_out"]
+  kf547e0d3170344c18b804c888b5ca641[color=lightseagreen,label="Output\ncoll_pred"]
+  18 -> kf547e0d3170344c18b804c888b5ca641
+  k2686d92f843a43af914fd29858062861[color=lightseagreen,label="Output\ncoll_val"]
+  18 -> k2686d92f843a43af914fd29858062861
+  k85c25b317709497e826341cc62e906f2[color=lightseagreen,label="Output\ncoll_distri"]
+  18 -> k85c25b317709497e826341cc62e906f2
+  k0416cae1755545819b9ef88751cdaf00[color=lightseagreen,label="Output\ncoll_plots"]
+  18 -> k0416cae1755545819b9ef88751cdaf00
+  19[label="TaxaSeeker"]
+  2 -> 19 [label="output"]
+  17 -> 19 [label="occ_env_out"]
+  18 -> 19 [label="outputpred"]
+  ke7754a18be6c424a8c625b4e8b76f976[color=lightseagreen,label="Output\nsummary"]
+  19 -> ke7754a18be6c424a8c625b4e8b76f976
+  kb2b5737484764403b19dbdae6ff848fd[color=lightseagreen,label="Output\ntaxa"]
+  19 -> kb2b5737484764403b19dbdae6ff848fd
+  k3354c9bd07cc40ab956cd50db102e34a[color=lightseagreen,label="Output\ntaxa_clean"]
+  19 -> k3354c9bd07cc40ab956cd50db102e34a
+  20[label="ClusterEstimate"]
+  2 -> 20 [label="output"]
+  18 -> 20 [label="outputpred"]
+  19 -> 20 [label="output2"]
+  ke64d118852d642f784cbe6850a71ccb3[color=lightseagreen,label="Output\nSIH_index"]
+  20 -> ke64d118852d642f784cbe6850a71ccb3
+  k60803b3799ad4adb8aa096205612a012[color=lightseagreen,label="Output\ndata_to_clus"]
+  20 -> k60803b3799ad4adb8aa096205612a012
+  k76e1ff89238f4dcfa30812ace76bd49f[color=lightseagreen,label="Output\ndatabio_table"]
+  20 -> k76e1ff89238f4dcfa30812ace76bd49f
+  21[label="ClaraClust"]
+  2 -> 21 [label="output"]
+  20 -> 21 [label="output3"]
+  20 -> 21 [label="output2"]
+  k6d2bb15057784885853865cd6ac2c049[color=lightseagreen,label="Output\nSIH_plot"]
+  21 -> k6d2bb15057784885853865cd6ac2c049
+  k5bb295d1c67a46e1b468af8a057a3957[color=lightseagreen,label="Output\ncluster_points"]
+  21 -> k5bb295d1c67a46e1b468af8a057a3957
+  k41493767655b453d910f8cd04b17f04a[color=lightseagreen,label="Output\ncluster_info"]
+  21 -> k41493767655b453d910f8cd04b17f04a
+  22[label="EcoMap"]
+  21 -> 22 [label="output2"]
+  k87ec75fb11b14f1b82f68df49c204828[color=lightseagreen,label="Output\neco_map"]
+  22 -> k87ec75fb11b14f1b82f68df49c204828
+}

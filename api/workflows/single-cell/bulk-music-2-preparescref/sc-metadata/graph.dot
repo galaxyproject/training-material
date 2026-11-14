@@ -1,0 +1,16 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[label="EBI SCXA Data Retrieval"]
+  1[label="Cut"]
+  0 -> 1 [label="design_tsv"]
+  2[label="Add line to file"]
+  0 -> 2 [label="barcode_tsv"]
+  3[label="Reformatting metadata columns"]
+  1 -> 3 [label="out_file1"]
+  4[label="Join two Datasets"]
+  2 -> 4 [label="outfile"]
+  3 -> 4 [label="out_file1"]
+  5[label="Advanced Cut"]
+  4 -> 5 [label="out_file1"]
+}

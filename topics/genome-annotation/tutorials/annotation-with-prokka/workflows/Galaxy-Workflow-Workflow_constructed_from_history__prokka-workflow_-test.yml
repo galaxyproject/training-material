@@ -1,0 +1,12 @@
+---
+- doc: Test sample data for the workflow
+  job:
+    contigs.fasta:
+      class: File
+      location: https://zenodo.org/record/1156405/files/contigs.fasta
+      filetype: fasta
+  outputs:
+    gff_output:
+      asserts:
+        has_text:
+          text: 'gnl|V|P_6 1 132734'

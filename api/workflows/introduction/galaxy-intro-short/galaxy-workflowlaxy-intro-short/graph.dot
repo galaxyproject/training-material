@@ -1,0 +1,15 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nmutant_R1"]
+  1[label="FastQC"]
+  0 -> 1 [label="output"]
+  2[label="Filter by quality"]
+  0 -> 2 [label="output"]
+  k135226c209d5427daf4bc5d0eefc0b68[color=lightseagreen,label="Output\nfilter1"]
+  2 -> k135226c209d5427daf4bc5d0eefc0b68
+  3[label="Filter by quality"]
+  0 -> 3 [label="output"]
+  kd351f15867e54dc2a8d27ecee619b61a[color=lightseagreen,label="Output\nfilter2"]
+  3 -> kd351f15867e54dc2a8d27ecee619b61a
+}

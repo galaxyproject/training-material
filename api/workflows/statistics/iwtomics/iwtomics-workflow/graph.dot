@@ -1,0 +1,23 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nETn_fixed.bed"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nControl.bed"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nfeatures_header.tabular"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nregions_header.tabular"]
+  4[color=lightblue,label="ℹ️ Input Dataset\nRecombination_hotspots.txt"]
+  5[label="IWTomics Load"]
+  4 -> 5 [label="output"]
+  2 -> 5 [label="output"]
+  0 -> 5 [label="output"]
+  1 -> 5 [label="output"]
+  3 -> 5 [label="output"]
+  6[label="IWTomics Test"]
+  5 -> 6 [label="outfeatures"]
+  5 -> 6 [label="outrdata"]
+  5 -> 6 [label="outregions"]
+  7[label="IWTomics Plot with Threshold"]
+  6 -> 7 [label="iwtomicsselectedfeatures"]
+  6 -> 7 [label="iwtomicsrdata"]
+  6 -> 7 [label="iwtomicstests"]
+}

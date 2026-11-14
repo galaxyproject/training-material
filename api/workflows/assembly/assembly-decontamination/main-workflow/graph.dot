@@ -1,0 +1,39 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nScaffolded assembly fasta"]
+  1[color=lightgreen,label="ℹ️ Input Parameter\nDatabase for Kraken2"]
+  2[label="soft-masking "]
+  0 -> 2 [label="output"]
+  3[label="hard-masking"]
+  2 -> 3 [label="outfile"]
+  4[label="ID non-target contaminants"]
+  1 -> 4 [label="output"]
+  3 -> 4 [label="output"]
+  kc380857b51804e82a14f8b575f10abaa[color=lightseagreen,label="Output\nKraken2 classification scores"]
+  4 -> kc380857b51804e82a14f8b575f10abaa
+  5[label="blast mitochondria DB"]
+  3 -> 5 [label="output"]
+  6[label="Cut"]
+  4 -> 6 [label="output"]
+  7[label="parsing blast output"]
+  5 -> 7 [label="output1"]
+  k1478af1e52f448feb9660a61e2014a58[color=lightseagreen,label="Output\nmito_scaff_names"]
+  7 -> k1478af1e52f448feb9660a61e2014a58
+  8[label="Filter"]
+  6 -> 8 [label="out_file1"]
+  k64156e28aaf045789a7ed6d21774c2c8[color=lightseagreen,label="Output\ncontaminants_table"]
+  8 -> k64156e28aaf045789a7ed6d21774c2c8
+  9[label="Cut"]
+  8 -> 9 [label="out_file1"]
+  10[label="concatenate scaffold lists"]
+  7 -> 10 [label="mito_scaff_names"]
+  9 -> 10 [label="out_file1"]
+  k77084ec5a14540c19cfc476d091105ae[color=lightseagreen,label="Output\nfull contaminant + mito scaffold list"]
+  10 -> k77084ec5a14540c19cfc476d091105ae
+  11[label="removing scaffolds "]
+  0 -> 11 [label="output"]
+  10 -> 11 [label="out_file1"]
+  k88a8e9edd92c4340aaadc6d450a336aa[color=lightseagreen,label="Output\nfinal decontaminated assembly"]
+  11 -> k88a8e9edd92c4340aaadc6d450a336aa
+}

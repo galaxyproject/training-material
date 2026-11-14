@@ -1,0 +1,27 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nBioImage.IO Model"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nImage for Prediction"]
+  2[label="Process image with BioImage.IO model"]
+  1 -> 2 [label="output"]
+  0 -> 2 [label="output"]
+  3[label="Split image along axes"]
+  2 -> 3 [label="output_predicted_image"]
+  4[label="Extract dataset"]
+  3 -> 4 [label="output"]
+  5[label="Extract dataset"]
+  3 -> 5 [label="output"]
+  6[label="Process images using arithmetic expressions"]
+  4 -> 6 [label="output"]
+  5 -> 6 [label="output"]
+  7[label="Threshold image"]
+  6 -> 7 [label="result"]
+  8[label="Convert binary image to label map"]
+  7 -> 8 [label="output"]
+  9[label="Overlay images"]
+  1 -> 9 [label="output"]
+  8 -> 9 [label="output"]
+  kbeb76f8f00d441dc94098241dbdb1f01[color=lightseagreen,label="Output\nout_png"]
+  9 -> kbeb76f8f00d441dc94098241dbdb1f01
+}

@@ -1,0 +1,28 @@
+---
+- doc: Test the workflow
+  job:
+      Interleaced reads:
+        class: File
+        location: https://zenodo.org/record/7940872/files/T1A_Interlaced_non-rRNA_reads.fastq
+        filetype: fastqsanger
+      Taxonomic profile:
+        class: File
+        location: https://zenodo.org/record/4776250/files/T1A_MetaPhlAn_Predicted_taxon_relative_abundances.tabular
+        filetype: fastqsanger
+  outputs:
+    humann_gene_families:
+      asserts:
+        has_text:
+          text: "UniRef90_A3DCI4"
+    cc_go:
+      asserts:
+        has_text:
+          text: "GO:0000015: [CC] phosphopyruvate hydratase complex"
+    bp_go:
+      asserts:
+        has_text:
+          text: "GO:0000027: [BP] ribosomal large subunit assembly"
+    sorted_mf_go:
+      asserts:
+        has_text:
+          text: "GO:0000030: [MF] mannosyltransferase activity"

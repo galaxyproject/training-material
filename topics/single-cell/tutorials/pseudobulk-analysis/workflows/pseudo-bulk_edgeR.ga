@@ -1,0 +1,651 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Pseudobulk Analysis Workflow for Tutorial ",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0002-5857-1477",
+            "name": "Diana Chiang Jurado"
+        },
+        {
+            "class": "Person",
+            "identifier": "0000-0002-5192-126X",
+            "name": "Pavankumar Videm"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "Pseudobulk with decoupler and edgeR tutorial workflow",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "ncm_pdcs_subset.h5ad"
+                }
+            ],
+            "label": "ncm_pdcs_subset.h5ad",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 360
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "90da9299-2ded-42cf-8acc-29a83fd915d7",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Retrieve general information of the AnnData object",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy1",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Inspect AnnData Object",
+            "name": "Inspect AnnData",
+            "outputs": [
+                {
+                    "name": "general",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 320,
+                "top": 90
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.9+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "afe044e6bc93",
+                "name": "anndata_inspect",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"inspect\": {\"info\": \"general\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.10.9+galaxy1",
+            "type": "tool",
+            "uuid": "87fafb13-baa2-4b4f-9c0d-f2565e7a8514",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "General AnnData Information",
+                    "output_name": "general",
+                    "uuid": "e76ac983-3089-4a4f-be16-49de8d491ba4"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "Filter pDC and/or Non_Classical_Monocyte clusters for DEG analysis. ",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.10.2+galaxy3",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "adata": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Filter Cell-Type",
+            "name": "Scanpy filter",
+            "outputs": [
+                {
+                    "name": "anndata_out",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "left": 310,
+                "top": 490
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.10.2+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "5813f9920877",
+                "name": "scanpy_filter",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata\": {\"__class__\": \"ConnectedValue\"}, \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"filter_any\", \"__current_case__\": 2, \"var_obs\": \"obs\", \"filter\": {\"filter\": \"key\", \"__current_case__\": 0, \"key\": \"annotated\", \"filter_key\": {\"type\": \"text\", \"__current_case__\": 1, \"filter\": \"equal\", \"value\": \"pDC\"}}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.10.2+galaxy3",
+            "type": "tool",
+            "uuid": "33651d37-d922-4d9e-90d8-9f90b326d7c3",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "anndata_out",
+                    "output_name": "anndata_out",
+                    "uuid": "41908539-a944-457b-b02f-cf3464971b8e"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "Generate pseudobulk counts, samples metadata, genes metadata files plus two plots to inspect the pseudobulk results. ",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/decoupler_pseudobulk/decoupler_pseudobulk/1.4.0+galaxy8",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Pseudobulk with decoupler",
+            "name": "Decoupler pseudo-bulk",
+            "outputs": [
+                {
+                    "name": "count_matrix",
+                    "type": "tabular"
+                },
+                {
+                    "name": "samples_metadata",
+                    "type": "tabular"
+                },
+                {
+                    "name": "genes_metadata",
+                    "type": "tabular"
+                },
+                {
+                    "name": "plot_output",
+                    "type": "png"
+                },
+                {
+                    "name": "filter_by_expr_plot",
+                    "type": "png"
+                },
+                {
+                    "name": "genes_ignore_per_contrast_field",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 640,
+                "top": 170
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ebi-gxa/decoupler_pseudobulk/decoupler_pseudobulk/1.4.0+galaxy8",
+            "tool_shed_repository": {
+                "changeset_revision": "09c833d9b03b",
+                "name": "decoupler_pseudobulk",
+                "owner": "ebi-gxa",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adata_obs_fields_to_merge\": null, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"factor_fields\": \"tissue\", \"filter_expr\": true, \"filter_per_contrast\": {\"filter\": \"no\", \"__current_case__\": 1}, \"groupby\": \"annotated\", \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"layer\": \"raw_counts\", \"min_cells\": \"10\", \"min_counts\": \"10\", \"min_counts_per_sample\": \"20\", \"min_total_counts\": \"1000\", \"mode\": \"sum\", \"plot_filtering_figsize\": \"13 13\", \"plot_samples_figsize\": \"13 13\", \"produce_anndata\": false, \"produce_plots\": true, \"sample_key\": \"batch\", \"use_raw\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.4.0+galaxy8",
+            "type": "tool",
+            "uuid": "e0bb17a0-9e02-4c63-a832-21226644e8ac",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "genes_metadata",
+                    "output_name": "genes_metadata",
+                    "uuid": "90c68071-01bf-471a-958a-9f391556debd"
+                },
+                {
+                    "label": "samples_metadata",
+                    "output_name": "samples_metadata",
+                    "uuid": "0de9d115-6e5a-446b-abc1-15c11dcaefb1"
+                },
+                {
+                    "label": "count_matrix",
+                    "output_name": "count_matrix",
+                    "uuid": "7ff680d1-cd92-43fe-a9cf-9eb53a76996a"
+                },
+                {
+                    "label": "plot_output",
+                    "output_name": "plot_output",
+                    "uuid": "c23b46c6-de2f-4c4d-886d-2f83ad61017a"
+                },
+                {
+                    "label": "filter_by_expr_plot",
+                    "output_name": "filter_by_expr_plot",
+                    "uuid": "6f8d0a60-352e-49bd-82e2-68f4c64d529f"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "replace [ --+*^]+ with _ for easier file handling",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.3+galaxy1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "infile": {
+                    "id": 3,
+                    "output_name": "samples_metadata"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Replace Text",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 930,
+                "top": 330
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.3+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "86755160afbf",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"find_pattern\": \"[ --+*^]+\", \"replace_pattern\": \"_\"}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.3+galaxy1",
+            "type": "tool",
+            "uuid": "6e4da0c3-b721-4558-946c-06eb03a2cb5c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.3+galaxy1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "infile": {
+                    "id": 3,
+                    "output_name": "count_matrix"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Replace Text",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1190,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.3+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "86755160afbf",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"find_pattern\": \"[ --+*^]+\", \"replace_pattern\": \"_\"}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.3+galaxy1",
+            "type": "tool",
+            "uuid": "6516043c-0d69-4a95-a1b5-0aff3c67ba43",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input_tabular": {
+                    "id": 3,
+                    "output_name": "genes_metadata"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Remove columns",
+            "outputs": [
+                {
+                    "name": "output_tabular",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1190,
+                "top": 150
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "2040e4c2750a",
+                "name": "column_remove_by_header",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"headers\": [{\"__index__\": 0, \"name\": \"start\"}, {\"__index__\": 1, \"name\": \"end\"}, {\"__index__\": 2, \"name\": \"width\"}], \"input_tabular\": {\"__class__\": \"ConnectedValue\"}, \"keep_columns\": false, \"strip_characters\": \"#\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0",
+            "type": "tool",
+            "uuid": "0bbaec87-d92d-433a-8118-27a275b9a80c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "infile": {
+                    "id": 4,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Replace Text",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1170,
+                "top": 330
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "86755160afbf",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"replacements\": [{\"__index__\": 0, \"column\": \"2\", \"find_pattern\": \"^([0-9])(.+)\", \"replace_pattern\": \"GG_\\\\\\\\1\\\\\\\\2\"}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.3+galaxy1",
+            "type": "tool",
+            "uuid": "70753d41-560d-43a0-aeb5-d0aacb0b0553",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Samples Metadata",
+                    "output_name": "outfile",
+                    "uuid": "06fde552-a874-4272-81e7-b9ca26987826"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "infile": {
+                    "id": 7,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Generating Contrast File",
+            "name": "Text reformatting",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1430,
+                "top": 330
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "86755160afbf",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"code\": \"BEGIN { print \\\"header\\\" } NR > 1 { if (!seen[$2]++) words[++count]=$2 } END { for (i=1; i<=count; i++) for (j=i+1; j<=count; j++) print words[i]\\\"-\\\"words[j] }\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.3+galaxy1",
+            "type": "tool",
+            "uuid": "7f280423-a1ed-4efa-99ee-e8edc49c16d6",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Contrast File",
+                    "output_name": "outfile",
+                    "uuid": "abbea492-6106-4370-a968-e5e1a3142033"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/edger/edger/3.36.0+galaxy5",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "anno|geneanno": {
+                    "id": 6,
+                    "output_name": "output_tabular"
+                },
+                "contrasts|cinfo": {
+                    "id": 8,
+                    "output_name": "outfile"
+                },
+                "input|counts": {
+                    "id": 5,
+                    "output_name": "outfile"
+                },
+                "input|fact|finfo": {
+                    "id": 7,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool edgeR",
+                    "name": "anno"
+                },
+                {
+                    "description": "runtime parameter for tool edgeR",
+                    "name": "contrasts"
+                },
+                {
+                    "description": "runtime parameter for tool edgeR",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "edgeR",
+            "outputs": [
+                {
+                    "name": "outTables",
+                    "type": "input"
+                },
+                {
+                    "name": "outReport",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 1730,
+                "top": 110
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/edger/edger/3.36.0+galaxy5",
+            "tool_shed_repository": {
+                "changeset_revision": "ae2aad0a6d50",
+                "name": "edger",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"adv\": {\"lfc\": \"0.0\", \"pVal\": \"0.05\", \"pAdjust\": \"BH\", \"normalisationOption\": \"TMM\", \"robOption\": true, \"lrtOption\": false}, \"anno\": {\"annoOpt\": \"yes\", \"__current_case__\": 0, \"geneanno\": {\"__class__\": \"ConnectedValue\"}}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"contrasts\": {\"contrastOpt\": \"file\", \"__current_case__\": 1, \"cinfo\": {\"__class__\": \"ConnectedValue\"}}, \"f\": {\"filt\": {\"filt_select\": \"no\", \"__current_case__\": 1}}, \"formula\": \"~ 0 + tissue\", \"input\": {\"format\": \"matrix\", \"__current_case__\": 1, \"counts\": {\"__class__\": \"ConnectedValue\"}, \"fact\": {\"ffile\": \"yes\", \"__current_case__\": 0, \"finfo\": {\"__class__\": \"ConnectedValue\"}}}, \"out\": {\"normCounts\": false, \"rscript\": false, \"rdaOption\": false}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.36.0+galaxy5",
+            "type": "tool",
+            "uuid": "0bb1b9c5-e10c-4255-ad1c-18ddfc750d3e",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "outTables",
+                    "output_name": "outTables",
+                    "uuid": "14e63c6b-511c-468d-954e-cb115be9ac95"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input": {
+                    "id": 9,
+                    "output_name": "outTables"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 2010,
+                "top": 190
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"first\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "238f565e-e1ab-4611-b126-42df305b6179",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "output",
+                    "output_name": "output",
+                    "uuid": "2f1d41da-719c-4226-9de0-856c6a086091"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input_tabular": {
+                    "id": 10,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Remove columns",
+            "outputs": [
+                {
+                    "name": "output_tabular",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2260,
+                "top": 190
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "2040e4c2750a",
+                "name": "column_remove_by_header",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"headers\": [{\"__index__\": 0, \"name\": \"X\"}, {\"__index__\": 1, \"name\": \"logFC\"}, {\"__index__\": 2, \"name\": \"PValue\"}, {\"__index__\": 3, \"name\": \"FDR\"}], \"input_tabular\": {\"__class__\": \"ConnectedValue\"}, \"keep_columns\": true, \"strip_characters\": \"#\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0",
+            "type": "tool",
+            "uuid": "0cc6935f-eff6-4cb5-a6aa-f7a6711d143a",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "DEG Table",
+                    "output_name": "output_tabular",
+                    "uuid": "352ef726-9dff-4fb8-81af-006dd9c7126d"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.6",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input": {
+                    "id": 11,
+                    "output_name": "output_tabular"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Volcano Plot",
+            "outputs": [
+                {
+                    "name": "plot",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 2520,
+                "top": 190
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.6",
+            "tool_shed_repository": {
+                "changeset_revision": "99ace6c1ff57",
+                "name": "volcanoplot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"fdr_col\": \"4\", \"header\": \"yes\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"label_col\": \"1\", \"labels\": {\"label_select\": \"signif\", \"__current_case__\": 0, \"top_num\": \"40\"}, \"lfc_col\": \"2\", \"lfc_thresh\": \"0.0\", \"out_options\": {\"rscript_out\": false}, \"plot_options\": {\"boxes\": false, \"title\": \"Differential Expression Volcano Plot\", \"xlab\": null, \"ylab\": null, \"xmin\": null, \"xmax\": null, \"ymax\": null, \"legend\": null, \"legend_labs\": \"Down,Not Sig,Up\"}, \"pval_col\": \"3\", \"signif_thresh\": \"0.05\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.6",
+            "type": "tool",
+            "uuid": "294a3ebe-e852-4a9d-a468-104cb2c8d3b0",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Volcano Plot DEG",
+                    "output_name": "plot",
+                    "uuid": "5e9faae5-8b4f-4a6c-8098-69937c9e5b80"
+                }
+            ]
+        }
+    },
+     "tags": [
+        "single-cell",
+        "pseudobulk"
+    ],
+    "uuid": "ceb15cc9-f32c-4ade-a7da-ddf59ab9ccdb",
+    "version": 10
+}

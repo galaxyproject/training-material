@@ -1,0 +1,37 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nBenzenesulfonyl chloride"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nEthylamine"]
+  2[label="Compound conversion"]
+  0 -> 2 [label="output"]
+  kaff8fa4fc2544f05956052bad6c7e04a[color=lightseagreen,label="Output\nBenzenesulfonyl chloride SDF"]
+  2 -> kaff8fa4fc2544f05956052bad6c7e04a
+  3[label="Search ChEMBL database"]
+  0 -> 3 [label="output"]
+  k044d2c0892ed45c99868ee802998d92c[color=lightseagreen,label="Output\nSubstructures from ChEMBL database"]
+  3 -> k044d2c0892ed45c99868ee802998d92c
+  4[label="Search ChEMBL database"]
+  0 -> 4 [label="output"]
+  k99274b60732d4276969fccc3673a872a[color=lightseagreen,label="Output\nLipinski substructures from ChEMBL database"]
+  4 -> k99274b60732d4276969fccc3673a872a
+  5[label="Compound conversion"]
+  1 -> 5 [label="output"]
+  k77ad7b99576146a3b9a61dd3d8e2baac[color=lightseagreen,label="Output\nEthylamine SDF"]
+  5 -> k77ad7b99576146a3b9a61dd3d8e2baac
+  6[label="Reaction maker"]
+  2 -> 6 [label="outfile"]
+  5 -> 6 [label="outfile"]
+  kf9d1d7fde854469ba4646811998e058e[color=lightseagreen,label="Output\nReaction product"]
+  6 -> kf9d1d7fde854469ba4646811998e058e
+  kb0bd7ed2a80b44ce994b999e1d472281[color=lightseagreen,label="Output\nReaction maker logfile"]
+  6 -> kb0bd7ed2a80b44ce994b999e1d472281
+  7[label="Visualisation"]
+  6 -> 7 [label="outfile"]
+  kfc618f3f6aa54970841d56f4eabf47b7[color=lightseagreen,label="Output\nVisualisation of reaction product"]
+  7 -> kfc618f3f6aa54970841d56f4eabf47b7
+  8[label="Drug-likeness"]
+  6 -> 8 [label="outfile"]
+  k7ad8c184e10d4fcea4023e79da6e09ac[color=lightseagreen,label="Output\nDrug-likeness of product molecule"]
+  8 -> k7ad8c184e10d4fcea4023e79da6e09ac
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang='en'>
+<meta charset='utf-8' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<head>
+	<script src='js/glimma.min.js'></script>
+	<link rel='stylesheet' href='css/glimma.min.css'>
+	<title>Glimma Plots</title>
+	<script>
+		function clickAdjPval() {
+			if ($('th:contains(Adj.PValue)').text()) $('th:contains(Adj.PValue)').click(); // sort table by adjusted p-value
+		}
+	</script>
+</head>
+<body onload=clickAdjPval()>
+	<div class='container'>
+	</div>
+	<script src='js/MD-Plot.js'></script>
+	<script>
+		glimma.init.processCharts();
+		glimma.init.processTables();
+		glimma.init.processLinkages();
+		glimma.init.processInputs();
+	</script>
+</body>
+</html>

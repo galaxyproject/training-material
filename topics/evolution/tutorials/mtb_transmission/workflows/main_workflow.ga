@@ -1,0 +1,373 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Given a set of VCF files and the reference genome used to do the mapping and SNP calling, create a multifasta file containing the genomes of all samples and calculate the matrix of pairwise SNP distances",
+    "format-version": "0.1",
+    "name": "From VCFs to SNP distance matrix",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Collection of VCFs to analyze"
+                }
+            ],
+            "label": "Collection of VCFs to analyze",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 602.3000183105469,
+                "height": 89.10000610351562,
+                "left": 562.0999755859375,
+                "right": 782.0999755859375,
+                "top": 513.2000122070312,
+                "width": 220,
+                "x": 562.0999755859375,
+                "y": 513.2000122070312
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "a3701b5d-9f74-46b4-ae97-51c432933230",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Reference genome of the MTBC ancestor"
+                }
+            ],
+            "label": "Reference genome of the MTBC ancestor",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 789.7333526611328,
+                "height": 111.53334045410156,
+                "left": 865.0999755859375,
+                "right": 1085.0999755859375,
+                "top": 678.2000122070312,
+                "width": 220,
+                "x": 865.0999755859375,
+                "y": 678.2000122070312
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "899dca08-73f5-4ac1-9d19-313414c90a1e",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "We will ensure at this step that variants to build the MSA are fixed variants and that we low-confidence filter repetitive regions of the MTB genome",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.1.3+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input1": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Filter TB variants",
+            "name": "TB Variant Filter",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "bottom": 636.7333526611328,
+                "height": 122.53334045410156,
+                "left": 866.0999755859375,
+                "right": 1086.0999755859375,
+                "top": 514.2000122070312,
+                "width": 220,
+                "x": 866.0999755859375,
+                "y": 514.2000122070312
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput1": {
+                    "action_arguments": {
+                        "newname": "#{input1}.filter.vcf"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.1.3+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3b1e7c170b10",
+                "name": "tb_variant_filter",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filter_options\": {\"show_filter_options\": \"yes\", \"__current_case__\": 0, \"region_filter\": [\"pe_ppe\", \"uvp\"], \"indel_window_size\": \"5\", \"min_percentage_alt\": \"90.0\", \"min_depth\": \"30\"}, \"filters\": [\"region_filter\", \"close_to_indel_filter\", \"min_percentage_alt_filter\", \"snv_only_filter\"], \"input1\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.3+galaxy0",
+            "type": "tool",
+            "uuid": "b6ef7486-0dc1-4f0c-ad2d-038f648670b8",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output1",
+                    "uuid": "87f8ad83-d43e-4e44-8bed-33415b7add79"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "The complete genome of each of the samples is generated by inserting the SNPs defined in the respective VCF in the reference genome that was used for mapping and SNP calling",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.9+galaxy2",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_file": {
+                    "id": 2,
+                    "output_name": "output1"
+                },
+                "reference_source|fasta_ref": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool bcftools consensus",
+                    "name": "input_file"
+                },
+                {
+                    "description": "runtime parameter for tool bcftools consensus",
+                    "name": "reference_source"
+                },
+                {
+                    "description": "runtime parameter for tool bcftools consensus",
+                    "name": "sec_default"
+                }
+            ],
+            "label": "Generate the complete genome of each of the samples",
+            "name": "bcftools consensus",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "bottom": 734.0333557128906,
+                "height": 209.83334350585938,
+                "left": 1144.0999755859375,
+                "right": 1364.0999755859375,
+                "top": 524.2000122070312,
+                "width": 220,
+                "x": 1144.0999755859375,
+                "y": 524.2000122070312
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_file": {
+                    "action_arguments": {
+                        "newname": "#{input_file}"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.9+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "a87ae767b01d",
+                "name": "bcftools_consensus",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chain\": \"false\", \"input_file\": {\"__class__\": \"RuntimeValue\"}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"fasta_ref\": {\"__class__\": \"RuntimeValue\"}}, \"rename\": \"true\", \"sec_default\": {\"mask\": {\"__class__\": \"RuntimeValue\"}, \"iupac_codes\": \"false\", \"sample\": \"\", \"select_haplotype\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.9+galaxy2",
+            "type": "tool",
+            "uuid": "967af052-882a-427c-825e-e88f59ac50b3",
+            "workflow_outputs": [
+                {
+                    "label": "#{input_file}",
+                    "output_name": "output_file",
+                    "uuid": "ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "All genomes are concatenated in a single multifasta file. Because all o them have the same length, this may be seen as a multiple sequence alignment.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "inputs": {
+                    "id": 3,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Concatenate datasets",
+                    "name": "inputs"
+                }
+            ],
+            "label": "Concatenate genomes to build a MSA",
+            "name": "Concatenate datasets",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 647.7333526611328,
+                "height": 122.53334045410156,
+                "left": 1519.0999755859375,
+                "right": 1739.0999755859375,
+                "top": 525.2000122070312,
+                "width": 220,
+                "x": 1519.0999755859375,
+                "y": 525.2000122070312
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "f46f0e4f75c4",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"inputs\": {\"__class__\": \"RuntimeValue\"}, \"queries\": [], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.1",
+            "type": "tool",
+            "uuid": "e0b536e1-c56c-41ed-9600-905d0cf58e97",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "c1fe096c-2693-4128-8139-4285bcd394ad"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "Discard invariant positions from the MSA to simplify the file so only contains positions with at least one SNP in at least one strain.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snp_sites/snp_sites/2.5.1+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input_fasta": {
+                    "id": 4,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Finds SNP sites",
+                    "name": "input_fasta"
+                }
+            ],
+            "label": "Keep only variable positions",
+            "name": "Finds SNP sites",
+            "outputs": [
+                {
+                    "name": "output_fasta",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "bottom": 647.1666870117188,
+                "height": 144.9666748046875,
+                "left": 1843.0999755859375,
+                "right": 2063.0999755859375,
+                "top": 502.20001220703125,
+                "width": 220,
+                "x": 1843.0999755859375,
+                "y": 502.20001220703125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snp_sites/snp_sites/2.5.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "5804f786060d",
+                "name": "snp_sites",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_fasta\": {\"__class__\": \"RuntimeValue\"}, \"out_type\": {\"ot_select\": \"alignment\", \"__current_case__\": 0, \"formats\": [\"-m\"], \"b\": \"false\", \"c\": \"false\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.5.1+galaxy0",
+            "type": "tool",
+            "uuid": "3718c889-5f1c-4cc7-977c-eaa564753c9b",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_fasta",
+                    "uuid": "2931ef4f-28d7-4701-bee0-292177bf0841"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "From the MSA. Calculate pairwise SNP distances between samples. ",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.6.3+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "output_fasta"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SNP distance matrix",
+                    "name": "input"
+                }
+            ],
+            "label": "Calculate SNP distances",
+            "name": "SNP distance matrix",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 662.6000213623047,
+                "height": 167.40000915527344,
+                "left": 2173.10009765625,
+                "right": 2393.10009765625,
+                "top": 495.20001220703125,
+                "width": 220,
+                "x": 2173.10009765625,
+                "y": 495.20001220703125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.6.3+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "1959cc43b414",
+                "name": "snp_dists",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"a\": \"false\", \"b\": \"false\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"k\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.6.3+galaxy0",
+            "type": "tool",
+            "uuid": "e5f85c1b-43cc-417e-8e02-79ecc511b4ec",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "2dff3ea9-ce2d-48eb-b9eb-90b3b6034ae6"
+                }
+            ]
+        }
+    },
+    "tags": ["evolution"],
+    "uuid": "69bd4977-643c-4024-bf24-7632d691f8cf",
+    "version": 4
+}

@@ -1,0 +1,24 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[label="Expression matrix"]
+  1[label="Metadata"]
+  2[label="annotateMyIDs"]
+  0 -> 2 [label="output_tabular"]
+  k8415bac06beb467da0fafb6465987ff7[color=lightseagreen,label="Output\nannotateMyIDs on input dataset(s): Annotated IDs"]
+  2 -> k8415bac06beb467da0fafb6465987ff7
+  3[label="Regex Find And Replace"]
+  1 -> 3 [label="output"]
+  4[color=lightcoral,label="🛠️ Subworkflow\nCopy of Convert from Ensembl to GeneSymbol, summing duplicate genes"]
+  2 -> 4 [label="out_tab"]
+  0 -> 4 [label="output_tabular"]
+  5[label="Construct Expression Set Object"]
+  4 -> 5 [label="Gene Symbol Count Matrix"]
+  3 -> 5 [label="out_file1"]
+  6[label="Manipulate Expression Set Object"]
+  5 -> 6 [label="out_rds"]
+  k88196d0b72544794b08a5409f19c8323[color=lightseagreen,label="Output\nManipulate Expression Set Object on input dataset(s): ExpressionSet Object"]
+  6 -> k88196d0b72544794b08a5409f19c8323
+  7[label="Manipulate Expression Set Object"]
+  5 -> 7 [label="out_rds"]
+}

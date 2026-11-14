@@ -1,0 +1,516 @@
+From e225e715232182a312682fc202d3432437654e9d Mon Sep 17 00:00:00 2001
+From: John Chilton <jmchilton@gmail.com>
+Date: Tue, 27 Apr 2021 17:23:52 -0400
+Subject: [PATCH] Add user favorite extensions.
+
+---
+ .../User/FavoriteExtensions/List.test.js      | 97 +++++++++++++++++++
+ .../User/FavoriteExtensions/List.vue          | 82 ++++++++++++++++
+ .../User/FavoriteExtensions/index.js          |  1 +
+ client/src/entry/analysis/AnalysisRouter.js   |  6 ++
+ client/src/layout/menu.js                     |  5 +
+ lib/galaxy/managers/users.py                  | 17 ++++
+ lib/galaxy/model/__init__.py                  |  5 +
+ lib/galaxy/model/mapping.py                   |  9 ++
+ .../0177_add_user_favorite_extensions.py      | 37 +++++++
+ .../webapps/galaxy/api/user_favorites.py      | 66 +++++++++++++
+ lib/galaxy/webapps/galaxy/buildapp.py         |  1 +
+ lib/galaxy_test/api/test_users.py             | 27 ++++++
+ 12 files changed, 353 insertions(+)
+ create mode 100644 client/src/components/User/FavoriteExtensions/List.test.js
+ create mode 100644 client/src/components/User/FavoriteExtensions/List.vue
+ create mode 100644 client/src/components/User/FavoriteExtensions/index.js
+ create mode 100644 lib/galaxy/model/migrate/versions/0177_add_user_favorite_extensions.py
+ create mode 100644 lib/galaxy/webapps/galaxy/api/user_favorites.py
+
+diff --git a/client/src/components/User/FavoriteExtensions/List.test.js b/client/src/components/User/FavoriteExtensions/List.test.js
+new file mode 100644
+index 0000000000..7efa1c76ec
+--- /dev/null
++++ b/client/src/components/User/FavoriteExtensions/List.test.js
+@@ -0,0 +1,97 @@
++import axios from "axios";
++import MockAdapter from "axios-mock-adapter";
++import { mount } from "@vue/test-utils";
++import { getLocalVue } from "jest/helpers";
++import List from "./List";
++import flushPromises from "flush-promises";
++
++jest.mock("app");
++
++const localVue = getLocalVue();
++const propsData = {};
++
++describe("User/FavoriteExtensions/List.vue", () => {
++    let wrapper;
++    let axiosMock;
++
++    beforeEach(() => {
++        axiosMock = new MockAdapter(axios);
++        axiosMock.onGet("api/datatypes").reply(200, ["fasta", "fastq"]);
++        axiosMock.onGet("api/users/current/favorites/extensions").reply(200, ["fasta"]);
++    });
++
++    afterEach(() => {
++        axiosMock.restore();
++    });
++
++    it("should start loading and then render list", async () => {
++        wrapper = mount(List, {
++            propsData,
++            localVue,
++        });
++        expect(wrapper.vm.loading).toBeTruthy();
++        await flushPromises();
++        expect(wrapper.vm.loading).toBeFalsy();
++        const el = wrapper.find("#favorite-extensions");
++        expect(el.exists()).toBe(true);
++        expect(el.find("[data-extension-target]").exists()).toBe(true);
++    });
++
++    it("should mark favorite and not favorite with different links", async () => {
++        wrapper = mount(List, {
++            propsData,
++            localVue,
++        });
++        await flushPromises();
++        const el = wrapper.find("#favorite-extensions");
++        const els = el.findAll("[data-extension-target]");
++        expect(els.length).toBe(2);
++        const fastaEntry = els.at(0);
++        expect(fastaEntry.attributes("data-extension-target")).toBe("fasta");
++        expect(fastaEntry.find(".unmark-favorite").exists()).toBe(true);
++        expect(fastaEntry.find(".mark-favorite").exists()).toBe(false);
++
++        const fastqEntry = els.at(1);
++        expect(fastqEntry.attributes("data-extension-target")).toBe("fastq");
++        expect(fastqEntry.find(".mark-favorite").exists()).toBe(true);
++        expect(fastqEntry.find(".unmark-favorite").exists()).toBe(false);
++    });
++
++    it("should post to mark favorites", async () => {
++        wrapper = mount(List, {
++            propsData,
++            localVue,
++        });
++        await flushPromises();
++        const el = wrapper.find("#favorite-extensions");
++        const els = el.findAll("[data-extension-target]");
++        const fastqEntry = els.at(1);
++        const markFastq = fastqEntry.find(".mark-favorite a");
++        expect(markFastq.exists()).toBe(true);
++
++        axiosMock.onPost("api/users/current/favorites/extensions/fastq").reply(200, "fastq");
++        axiosMock.onGet("api/users/current/favorites/extensions").reply(200, ["fasta", "fastq"]);
++        markFastq.trigger("click");
++        await flushPromises();
++        expect(wrapper.vm.favoriteExtensions.indexOf("fastq") >= 0).toBe(true);
++    });
++
++    it("should delete to unmark favorites", async () => {
++        wrapper = mount(List, {
++            propsData,
++            localVue,
++        });
++        await flushPromises();
++        const el = wrapper.find("#favorite-extensions");
++        const els = el.findAll("[data-extension-target]");
++        const fastaEntry = els.at(0);
++        const unmarkFasta = fastaEntry.find(".unmark-favorite a");
++        expect(unmarkFasta.exists()).toBe(true);
++
++        axiosMock.onDelete("api/users/current/favorites/extensions/fasta").reply(200);
++        axiosMock.onGet("api/users/current/favorites/extensions").reply(200, []);
++        unmarkFasta.trigger("click");
++        await flushPromises();
++        expect(wrapper.vm.favoriteExtensions.indexOf("fasta") < 0).toBe(true);
++    });
++});
+diff --git a/client/src/components/User/FavoriteExtensions/List.vue b/client/src/components/User/FavoriteExtensions/List.vue
+new file mode 100644
+index 0000000000..e5e7d07ab2
+--- /dev/null
++++ b/client/src/components/User/FavoriteExtensions/List.vue
+@@ -0,0 +1,82 @@
++<template>
++    <div class="favorite-extensions-card">
++        <b-alert variant="error" show v-if="errorMessage">
++            {{ errorMessage }}
++        </b-alert>
++        <loading-span v-if="loading" message="Loading favorite extensions" />
++        <ul id="favorite-extensions" v-else>
++            <li v-for="extension in extensions" :key="extension" :data-extension-target="extension">
++                <span
++                    class="favorite-link unmark-favorite"
++                    v-if="favoriteExtensions.indexOf(extension) >= 0"
++                    title="Unmark as favorite"
++                >
++                    <a href="#" @click="unmarkAsFavorite(extension)">(X)</a>
++                </span>
++                <span class="favorite-link mark-favorite" v-else title="Mark as favorite">
++                    <a href="#" @click="markAsFavorite(extension)">(+)</a>
++                </span>
++                {{ extension }}
++            </li>
++        </ul>
++    </div>
++</template>
++
++<script>
++import axios from "axios";
++import { getGalaxyInstance } from "app";
++import LoadingSpan from "components/LoadingSpan";
++import { errorMessageAsString } from "utils/simple-error";
++
++export default {
++    components: {
++        LoadingSpan,
++    },
++    data() {
++        const Galaxy = getGalaxyInstance();
++        return {
++            datatypesUrl: `${Galaxy.root}api/datatypes`,
++            favoriteExtensionsUrl: `${Galaxy.root}api/users/current/favorites/extensions`,
++            extensions: null,
++            favoriteExtensions: null,
++            errorMessage: null,
++        };
++    },
++    created() {
++        this.loadDatatypes();
++        this.loadFavorites();
++    },
++    computed: {
++        loading() {
++            return this.extensions == null || this.favoriteExtensions == null;
++        },
++    },
++    methods: {
++        loadDatatypes() {
++            axios
++                .get(this.datatypesUrl)
++                .then((response) => {
++                    this.extensions = response.data;
++                })
++                .catch(this.handleError);
++        },
++        loadFavorites() {
++            axios
++                .get(this.favoriteExtensionsUrl)
++                .then((response) => {
++                    this.favoriteExtensions = response.data;
++                })
++                .catch(this.handleError);
++        },
++        markAsFavorite(extension) {
++            axios.post(`${this.favoriteExtensionsUrl}/${extension}`).then(this.loadFavorites).catch(this.handleError);
++        },
++        unmarkAsFavorite(extension) {
++            axios.delete(`${this.favoriteExtensionsUrl}/${extension}`).then(this.loadFavorites).catch(this.handleError);
++        },
++        handleError(error) {
++            this.errorMessage = errorMessageAsString(error);
++        },
++    },
++};
++</script>
+diff --git a/client/src/components/User/FavoriteExtensions/index.js b/client/src/components/User/FavoriteExtensions/index.js
+new file mode 100644
+index 0000000000..c897f34a3b
+--- /dev/null
++++ b/client/src/components/User/FavoriteExtensions/index.js
+@@ -0,0 +1 @@
++export { default as FavoriteExtensions } from "./List.vue";
+diff --git a/client/src/entry/analysis/AnalysisRouter.js b/client/src/entry/analysis/AnalysisRouter.js
+index b409c8374f..61b01f85fa 100644
+--- a/client/src/entry/analysis/AnalysisRouter.js
++++ b/client/src/entry/analysis/AnalysisRouter.js
+@@ -32,6 +32,7 @@ import InteractiveTools from "components/InteractiveTools/InteractiveTools.vue";
+ import WorkflowList from "components/Workflow/WorkflowList.vue";
+ import HistoryImport from "components/HistoryImport.vue";
+ import { HistoryExport } from "components/HistoryExport/index";
++import { FavoriteExtensions } from "components/User/FavoriteExtensions/index";
+ import HistoryView from "components/HistoryView.vue";
+ import WorkflowInvocationReport from "components/Workflow/InvocationReport.vue";
+ import WorkflowRun from "components/Workflow/Run/WorkflowRun.vue";
+@@ -67,6 +68,7 @@ export const getAnalysisRouter = (Galaxy) => {
+             "(/)user(/)cloud_auth": "show_cloud_auth",
+             "(/)user(/)external_ids": "show_external_ids",
+             "(/)user(/)(:form_id)": "show_user_form",
++            "(/)user(/)favorite(/)extensions": "show_user_favorite_extensions",
+             "(/)pages(/)create(/)": "show_pages_create",
+             "(/)pages(/)edit(/)": "show_pages_edit",
+             "(/)pages(/)sharing(/)": "show_pages_sharing",
+@@ -157,6 +159,10 @@ export const getAnalysisRouter = (Galaxy) => {
+             this.page.display(new FormWrapper.View(_.extend(model[form_id], { active_tab: "user" })));
+         },
+ 
++        show_user_favorite_extensions: function () {
++            this._display_vue_helper(FavoriteExtensions, {});
++        },
++
+         show_interactivetool_list: function () {
+             this._display_vue_helper(InteractiveTools);
+         },
+diff --git a/client/src/layout/menu.js b/client/src/layout/menu.js
+index 062191b492..de91d9670c 100644
+--- a/client/src/layout/menu.js
++++ b/client/src/layout/menu.js
+@@ -314,6 +314,11 @@ export function fetchMenu(options = {}) {
+                     url: "workflows/invocations",
+                     target: "__use_router__",
+                 },
++                {
++                    title: _l("Favorite Extensions"),
++                    url: "/user/favorite/extensions",
++                    target: "__use_router__",
++                },
+             ],
+         };
+         if (Galaxy.config.visualizations_visible) {
+diff --git a/lib/galaxy/managers/users.py b/lib/galaxy/managers/users.py
+index 3407a6bd75..f15bb4c5d6 100644
+--- a/lib/galaxy/managers/users.py
++++ b/lib/galaxy/managers/users.py
+@@ -590,6 +590,23 @@ class UserManager(base.ModelManager, deletable.PurgableManagerMixin):
+                 log.exception('Subscribing to the mailing list has failed.')
+                 return "Subscribing to the mailing list has failed."
+ 
++    def get_favorite_extensions(self, user):
++        return [fe.value for fe in user.favorite_extensions]
++
++    def add_favorite_extension(self, user, extension):
++        fe = model.UserFavoriteExtension(value=extension)
++        user.favorite_extensions.append(fe)
++        self.session().add(user)
++        self.session().flush()
++
++    def delete_favorite_extension(self, user, extension):
++        fes = [fe for fe in user.favorite_extensions if fe.value == extension]
++        if len(fes) == 0:
++            raise exceptions.RequestParameterInvalidException("Attempted to unfavorite extension not marked as a favorite.")
++        fe = fes[0]
++        self.session().delete(fe)
++        self.session().flush()
++
+     def activate(self, user):
+         user.active = True
+         self.session().add(user)
+diff --git a/lib/galaxy/model/__init__.py b/lib/galaxy/model/__init__.py
+index 2c0b8a4dc4..69a74b0ad2 100644
+--- a/lib/galaxy/model/__init__.py
++++ b/lib/galaxy/model/__init__.py
+@@ -6617,6 +6617,11 @@ class UserPreference(RepresentById):
+         self.value = value
+ 
+ 
++class UserFavoriteExtension(RepresentById):
++    def __init__(self, value=None):
++        self.value = value
++
++
+ class UserAction(RepresentById):
+     def __init__(self, id=None, create_time=None, user_id=None, session_id=None, action=None, params=None, context=None):
+         self.id = id
+diff --git a/lib/galaxy/model/mapping.py b/lib/galaxy/model/mapping.py
+index 5aaef76a03..0fdba0e4b7 100644
+--- a/lib/galaxy/model/mapping.py
++++ b/lib/galaxy/model/mapping.py
+@@ -1583,6 +1583,12 @@ model.UserPreference.table = Table(
+     Column("name", Unicode(255), index=True),
+     Column("value", Text))
+ 
++model.UserFavoriteExtension.table = Table(
++    "user_favorite_extension", metadata,
++    Column("id", Integer, primary_key=True),
++    Column("user_id", Integer, ForeignKey("galaxy_user.id"), index=True),
++    Column("value", Text))
++
+ model.UserAction.table = Table(
+     "user_action", metadata,
+     Column("id", Integer, primary_key=True),
+@@ -1671,6 +1677,7 @@ simple_mapping(model.WorkerProcess)
+ 
+ # User tables.
+ mapper_registry.map_imperatively(model.UserPreference, model.UserPreference.table, properties={})
++mapper_registry.map_imperatively(model.UserFavoriteExtension, model.UserFavoriteExtension.table, properties={})
+ mapper_registry.map_imperatively(model.UserAction, model.UserAction.table, properties=dict(
+     # user=relation( model.User.mapper )
+     user=relation(model.User)
+@@ -1928,6 +1935,8 @@ mapper_registry.map_imperatively(model.User, model.User.table, properties=dict(
+     _preferences=relation(model.UserPreference,
+         backref="user",
+         collection_class=attribute_mapped_collection('name')),
++    favorite_extensions=relation(model.UserFavoriteExtension,
++        backref="user"),
+     # addresses=relation( UserAddress,
+     #     primaryjoin=( User.table.c.id == UserAddress.table.c.user_id ) ),
+     values=relation(model.FormValues,
+diff --git a/lib/galaxy/model/migrate/versions/0177_add_user_favorite_extensions.py b/lib/galaxy/model/migrate/versions/0177_add_user_favorite_extensions.py
+new file mode 100644
+index 0000000000..e0d1a4dded
+--- /dev/null
++++ b/lib/galaxy/model/migrate/versions/0177_add_user_favorite_extensions.py
+@@ -0,0 +1,37 @@
++"""
++Migration script to add the user_favorite_extension table.
++"""
++
++import logging
++
++from sqlalchemy import Column, ForeignKey, Integer, MetaData, Table, Text
++
++log = logging.getLogger(__name__)
++metadata = MetaData()
++
++UserFavoriteExtension_table = Table(
++    "user_favorite_extension", metadata,
++    Column("id", Integer, primary_key=True),
++    Column("user_id", Integer, ForeignKey("galaxy_user.id"), index=True),
++    Column("value", Text, index=True, unique=True)
++)
++
++
++def upgrade(migrate_engine):
++    metadata.bind = migrate_engine
++    print(__doc__)
++    metadata.reflect()
++    try:
++        UserFavoriteExtension_table.create()
++    except Exception:
++        log.exception("Creating user_favorite_extension table failed.")
++
++
++def downgrade(migrate_engine):
++    metadata.bind = migrate_engine
++    # Load existing tables
++    metadata.reflect()
++    try:
++        UserFavoriteExtension_table.drop()
++    except Exception:
++        log.exception("Dropping user_favorite_extension table failed.")
+diff --git a/lib/galaxy/webapps/galaxy/api/user_favorites.py b/lib/galaxy/webapps/galaxy/api/user_favorites.py
+new file mode 100644
+index 0000000000..3587a9056e
+--- /dev/null
++++ b/lib/galaxy/webapps/galaxy/api/user_favorites.py
+@@ -0,0 +1,66 @@
++"""
++API operations allowing clients to determine datatype supported by Galaxy.
++"""
++import logging
++from typing import List
++
++from fastapi import Path
++
++from galaxy.managers.context import ProvidesUserContext
++from galaxy.managers.users import UserManager
++from . import (
++    depends,
++    DependsOnTrans,
++    Router,
++)
++
++log = logging.getLogger(__name__)
++
++router = Router(tags=['user_favorites'])
++
++ExtensionPath: str = Path(
++    ...,  # Mark this Path parameter as required
++    title="Extension",
++    description="Target file extension for target operation."
++)
++
++
++@router.cbv
++class FastAPIUserFavorites:
++    user_manager: UserManager = depends(UserManager)
++
++    @router.get(
++        '/api/users/current/favorites/extensions',
++        summary="List user favroite data types",
++        response_description="List of data types",
++    )
++    def index(
++        self,
++        trans: ProvidesUserContext = DependsOnTrans,
++    ) -> List[str]:
++        """Gets the list of user's favorite data types."""
++        return self.user_manager.get_favorite_extensions(trans.user)
++
++    @router.post(
++        '/api/users/current/favorites/extensions/{extension}',
++        summary="Mark an extension as the current user's favorite.",
++        response_description="The extension.",
++    )
++    def create(
++        self,
++        extension: str = ExtensionPath,
++        trans: ProvidesUserContext = DependsOnTrans,
++    ) -> str:
++        self.user_manager.add_favorite_extension(trans.user, extension)
++        return extension
++
++    @router.delete(
++        '/api/users/current/favorites/extensions/{extension}',
++        summary="Unmark an extension as the current user's favorite.",
++    )
++    def delete(
++        self,
++        extension: str = ExtensionPath,
++        trans: ProvidesUserContext = DependsOnTrans,
++    ) -> str:
++        self.user_manager.delete_favorite_extension(trans.user, extension)
+diff --git a/lib/galaxy/webapps/galaxy/buildapp.py b/lib/galaxy/webapps/galaxy/buildapp.py
+index 7fbe248c66..76fe7cd819 100644
+--- a/lib/galaxy/webapps/galaxy/buildapp.py
++++ b/lib/galaxy/webapps/galaxy/buildapp.py
+@@ -155,6 +155,7 @@ def app_pair(global_conf, load_app_kwds=None, wsgi_preflight=True, **kwargs):
+     webapp.add_client_route('/tours/{tour_id}')
+     webapp.add_client_route('/user')
+     webapp.add_client_route('/user/{form_id}')
++    webapp.add_client_route('/user/favorite/extensions')
+     webapp.add_client_route('/visualizations')
+     webapp.add_client_route('/visualizations/edit')
+     webapp.add_client_route('/visualizations/sharing')
+diff --git a/lib/galaxy_test/api/test_users.py b/lib/galaxy_test/api/test_users.py
+index e6fbfec6ee..7dc82d7179 100644
+--- a/lib/galaxy_test/api/test_users.py
++++ b/lib/galaxy_test/api/test_users.py
+@@ -171,6 +171,33 @@ class UsersApiTestCase(ApiTestCase):
+         search_response = get(url).json()
+         assert "cat1" in search_response
+ 
++    def test_favorite_extensions(self):
++        index_response = self._get("users/current/favorites/extensions")
++        index_response.raise_for_status()
++        index = index_response.json()
++        assert isinstance(index, list)
++        assert len(index) == 0
++
++        create_response = self._post("users/current/favorites/extensions/fasta")
++        create_response.raise_for_status()
++
++        index_response = self._get("users/current/favorites/extensions")
++        index_response.raise_for_status()
++        index = index_response.json()
++        assert isinstance(index, list)
++        assert len(index) == 1
++
++        assert "fasta" in index
++
++        delete_response = self._delete("users/current/favorites/extensions/fasta")
++        delete_response.raise_for_status()
++
++        index_response = self._get("users/current/favorites/extensions")
++        index_response.raise_for_status()
++        index = index_response.json()
++        assert isinstance(index, list)
++        assert len(index) == 0
++
+     def __url(self, action, user):
+         return self._api_url(f"users/{user['id']}/{action}", params=dict(key=self.master_api_key))
+ 
+-- 
+2.30.1 (Apple Git-130)
+

@@ -1,0 +1,46 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nFeature table"]
+  1[label="MFAssignR KMDNoise"]
+  0 -> 1 [label="output"]
+  2[label="MFAssignR HistNoise"]
+  0 -> 2 [label="output"]
+  3[label="MFAssignR SNplot"]
+  0 -> 3 [label="output"]
+  k74da5be706ed475ca95a813cc74dd124[color=lightseagreen,label="Output\nSNplot"]
+  3 -> k74da5be706ed475ca95a813cc74dd124
+  4[label="MFAssignR IsoFiltR"]
+  0 -> 4 [label="output"]
+  5[label="MFAssignR MFAssignCHO"]
+  4 -> 5 [label="iso_out"]
+  4 -> 5 [label="mono_out"]
+  k36722438d25d410787fa3340ac8f55f6[color=lightseagreen,label="Output\nplots"]
+  5 -> k36722438d25d410787fa3340ac8f55f6
+  6[label="MFAssignR RecalList"]
+  5 -> 6 [label="Unambig"]
+  k96ae5d5efc6d4523a3adfdc2dc9fab45[color=lightseagreen,label="Output\nrecal_series"]
+  6 -> k96ae5d5efc6d4523a3adfdc2dc9fab45
+  7[label="MFAssignR FindRecalSeries"]
+  6 -> 7 [label="recal_series"]
+  k650605983645458d82cd0613189020f3[color=lightseagreen,label="Output\nfinal_series"]
+  7 -> k650605983645458d82cd0613189020f3
+  8[label="MFAssignR Recal"]
+  5 -> 8 [label="Unambig"]
+  4 -> 8 [label="iso_out"]
+  4 -> 8 [label="mono_out"]
+  7 -> 8 [label="final_series"]
+  k1f370a51f49b476fad9e09b69a168158[color=lightseagreen,label="Output\nMZplot"]
+  8 -> k1f370a51f49b476fad9e09b69a168158
+  9[label="MFAssignR MFAssign"]
+  8 -> 9 [label="Iso"]
+  8 -> 9 [label="Mono"]
+  k0b738f04c31c4949890d00e15b465187[color=lightseagreen,label="Output\nNone"]
+  9 -> k0b738f04c31c4949890d00e15b465187
+  kcafc72e0b9d04eb1a8a19f87ea72690e[color=lightseagreen,label="Output\nAmbig"]
+  9 -> kcafc72e0b9d04eb1a8a19f87ea72690e
+  k378afd46c89643939e6cc379609a39d1[color=lightseagreen,label="Output\nUnambig"]
+  9 -> k378afd46c89643939e6cc379609a39d1
+  k7456324f04c045738abffda0567b7732[color=lightseagreen,label="Output\nplots"]
+  9 -> k7456324f04c045738abffda0567b7732
+}

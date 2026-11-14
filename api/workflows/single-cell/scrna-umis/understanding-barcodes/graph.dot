@@ -1,0 +1,21 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nFastQ data"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nReads filter list"]
+  2[label="FastQC"]
+  0 -> 2 [label="output"]
+  k2908b4d82981460aaf3a6bc63b333e77[color=lightseagreen,label="Output\ntext_file"]
+  2 -> k2908b4d82981460aaf3a6bc63b333e77
+  k3f629c3a7de6416a82a55dd7363c42da[color=lightseagreen,label="Output\nhtml_file"]
+  2 -> k3f629c3a7de6416a82a55dd7363c42da
+  3[label="Filter sequences by ID"]
+  1 -> 3 [label="output"]
+  0 -> 3 [label="output"]
+  k1422ca8b1aed418d9821d5afff9ac4b5[color=lightseagreen,label="Output\noutput_pos"]
+  3 -> k1422ca8b1aed418d9821d5afff9ac4b5
+  4[label="UMI-tools extract"]
+  3 -> 4 [label="output_pos"]
+  kd762b0628f104f6088260a325ec6f4b8[color=lightseagreen,label="Output\nout_paired_collection"]
+  4 -> kd762b0628f104f6088260a325ec6f4b8
+}

@@ -1,0 +1,259 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "Mass spectrometry imaging: Loading and exploring MSI data",
+  "format-version": "0.1",
+  "name": "MS Imaging Loading Exploring Data",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "mouse_kidney_cut.i"
+        }
+      ],
+      "label": "mouse_kidney_cut.i",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 208.9204559326172,
+        "top": 239.99999237060547
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"mouse_kidney_cut.i\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "bd40d0ba-d5ce-496f-9988-c8be1f81a75d",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "internal calibrants.tab"
+        }
+      ],
+      "label": "internal calibrants.tab",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 199.92897033691406,
+        "top": 417.0028305053711
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"internal calibrants.tab\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "15455ea4-e2cc-4872-a441-d40e979c7660",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_data_exporter/cardinal_data_exporter/1.12.1.1",
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+        "infile": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool MSI data exporter",
+          "name": "infile"
+        }
+      ],
+      "label": null,
+      "name": "MSI data exporter",
+      "outputs": [
+        {
+          "name": "intensity_matrix",
+          "type": "tabular"
+        },
+        {
+          "name": "pixel_output",
+          "type": "tabular"
+        },
+        {
+          "name": "feature_output",
+          "type": "tabular"
+        },
+        {
+          "name": "summarized_mean",
+          "type": "tabular"
+        },
+        {
+          "name": "summarized_median",
+          "type": "tabular"
+        },
+        {
+          "name": "summarized_sd",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 490.93748474121094,
+        "top": 394.99999237060547
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_data_exporter/cardinal_data_exporter/1.12.1.1",
+      "tool_shed_repository": {
+        "changeset_revision": "e30d8b72415f",
+        "name": "cardinal_data_exporter",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"output_options\": \"[\\\"mz_tabular\\\", \\\"pixel_tabular\\\"]\", \"tabular_annotation\": \"{\\\"__current_case__\\\": 0, \\\"load_annotation\\\": \\\"no_annotation\\\"}\", \"__rerun_remap_job_id__\": null, \"centroids\": \"\\\"false\\\"\", \"processed_cond\": \"{\\\"__current_case__\\\": 0, \\\"processed_file\\\": \\\"no_processed\\\"}\", \"counting_calibrants\": \"{\\\"__current_case__\\\": 0, \\\"pixel_with_calibrants\\\": \\\"no_calibrants\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "1.12.1.1",
+      "type": "tool",
+      "uuid": "2fb59dde-237c-443b-9ab4-f339fff48c64",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/1.12.1.2",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "calibrant_file": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "infile": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool MSI Qualitycontrol",
+          "name": "calibrant_file"
+        },
+        {
+          "description": "runtime parameter for tool MSI Qualitycontrol",
+          "name": "infile"
+        }
+      ],
+      "label": null,
+      "name": "MSI Qualitycontrol",
+      "outputs": [
+        {
+          "name": "QC_report",
+          "type": "pdf"
+        }
+      ],
+      "position": {
+        "left": 489.9857635498047,
+        "top": 199.99999237060547
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/1.12.1.2",
+      "tool_shed_repository": {
+        "changeset_revision": "d4803c1e5e19",
+        "name": "cardinal_quality_report",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"calibrant_header\": \"\\\"true\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"calibrantratio\": \"[{\\\"__index__\\\": 0, \\\"distance\\\": \\\"200.0\\\", \\\"filenameratioplot\\\": \\\"\\\", \\\"mass1\\\": \\\"1224.63\\\", \\\"mass2\\\": \\\"1619.89\\\"}]\", \"__page__\": null, \"name_column\": \"\\\"2\\\"\", \"__rerun_remap_job_id__\": null, \"tabular_annotation\": \"{\\\"__current_case__\\\": 1, \\\"load_annotation\\\": \\\"no_annotation\\\"}\", \"centroids\": \"\\\"false\\\"\", \"calibrant_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"processed_cond\": \"{\\\"__current_case__\\\": 0, \\\"processed_file\\\": \\\"no_processed\\\"}\", \"do_pca\": \"\\\"false\\\"\", \"filename\": \"\\\"Mouse kidney introduction tutorial\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"plusminus_ppm\": \"\\\"200.0\\\"\", \"mz_column\": \"\\\"1\\\"\"}",
+      "tool_version": "1.12.1.2",
+      "type": "tool",
+      "uuid": "23f62e03-66cc-442a-926b-962d9a1f4c0f",
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "infile": {
+          "id": 2,
+          "output_name": "feature_output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Sort",
+          "name": "infile"
+        }
+      ],
+      "label": null,
+      "name": "Sort",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 814.9573822021484,
+        "top": 319.99999237060547
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+      "tool_shed_repository": {
+        "changeset_revision": "a6f147a050a2",
+        "name": "text_processing",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"sortkeys\": \"[{\\\"__index__\\\": 0, \\\"column\\\": \\\"3\\\", \\\"order\\\": \\\"r\\\", \\\"style\\\": \\\"g\\\"}]\", \"__page__\": null, \"ignore_case\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"header\": \"\\\"1\\\"\", \"unique\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "1.1.1",
+      "type": "tool",
+      "uuid": "8fec4a92-c607-4f34-934b-c3b8769f938c",
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "Grep1",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "input": {
+          "id": 2,
+          "output_name": "pixel_output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Select",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "Select",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 808.9914398193359,
+        "top": 495.0141830444336
+      },
+      "post_job_actions": {},
+      "tool_id": "Grep1",
+      "tool_state": "{\"__page__\": null, \"pattern\": \"\\\"(xy_40_40)|(xy_23_70)|(xy_20_73)\\\"\", \"invert\": \"\\\"false\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.1",
+      "type": "tool",
+      "uuid": "9b86165d-4754-4015-a487-4341fcd00d0b",
+      "workflow_outputs": []
+    }
+  },
+  "tags": [
+    "proteomics"
+  ],
+  "uuid": "6a7f48e8-71af-4cf9-b917-a82a7cb3a601",
+  "version": 1
+}

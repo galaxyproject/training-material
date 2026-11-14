@@ -1,0 +1,363 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Galaxy Introduction Peaks2Genes - Part 1",
+    "format-version": "0.1",
+    "name": "Galaxy Introduction Peaks2Genes - Part 1",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Peaks",
+                    "name": "Peaks"
+                }
+            ],
+            "label": "Peaks",
+            "name": "Peaks",
+            "outputs": [],
+            "position": {
+                "left": 10,
+                "top": 10
+            },
+            "tool_id": null,
+            "tool_state": "{\"name\": \"Peaks\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "5827089b-d62d-47ad-bd3c-94bb09db46d2",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Genes",
+                    "name": "Genes"
+                }
+            ],
+            "label": "Genes",
+            "name": "Genes",
+            "outputs": [],
+            "position": {
+                "left": 10,
+                "top": 130
+            },
+            "tool_id": null,
+            "tool_state": "{\"name\": \"Genes\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "671479f6-42c1-4cc2-9136-90542c00b4f3",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "infile": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Select last",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 10
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"interval\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/mm9.len\", \"complement\": \"\", \"infile\": null, \"num_lines\": \"100\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "0e1a363e-7536-4e02-9940-99426346d95b",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "infile": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Replace Text",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 130
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"interval\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/mm9.len\", \"infile\": null, \"replacements\": [{\"__index__\": 0, \"column\": \"1\", \"find_pattern\": \"[0-9]+\", \"replace_pattern\": \"chr&\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.3",
+            "type": "tool",
+            "uuid": "80af880d-f4ce-4935-80cd-c96f69caf6cd",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/get_flanks/get_flanks1/1.0.0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Get flanks",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 250
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/get_flanks/get_flanks1/1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "077f404ae1bb",
+                "name": "get_flanks",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"bed\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/mm9.len\", \"direction\": \"Upstream\", \"input\": null, \"offset\": \"10000\", \"region\": \"start\", \"size\": \"12000\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "82a9297d-7236-42fc-ac30-99d6aee65ebe",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "infile": {
+                    "id": 3,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Replace Text",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 450,
+                "top": 10
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"interval\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/mm9.len\", \"infile\": null, \"replacements\": [{\"__index__\": 0, \"column\": \"1\", \"find_pattern\": \"chr20\", \"replace_pattern\": \"chrX\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.3",
+            "type": "tool",
+            "uuid": "24c79182-afa7-4b5f-a92c-0ed33f68c5ec",
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "infile": {
+                    "id": 5,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Replace Text",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 670,
+                "top": 10
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"interval\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/mm9.len\", \"infile\": null, \"replacements\": [{\"__index__\": 0, \"column\": \"1\", \"find_pattern\": \"chr21\", \"replace_pattern\": \"chrY\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.3",
+            "type": "tool",
+            "uuid": "d27004ea-3699-4c7b-b067-1f08f9c130dc",
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "CONVERTER_interval_to_bed_0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input1": {
+                    "id": 6,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Convert Genomic Intervals To BED",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "bed"
+                }
+            ],
+            "position": {
+                "left": 890,
+                "top": 10
+            },
+            "post_job_actions": {},
+            "tool_id": "CONVERTER_interval_to_bed_0",
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/mm9.len\", \"input1\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "bb70488a-911f-44e1-ac22-a2df0943c719",
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input1": {
+                    "id": 4,
+                    "output_name": "out_file1"
+                },
+                "input2": {
+                    "id": 7,
+                    "output_name": "output1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Intersect",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1110,
+                "top": 10
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "33b3f3688db4",
+                "name": "intersect",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"bed\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/mm9.len\", \"input1\": null, \"input2\": null, \"min\": \"1\", \"returntype\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "92bde190-f395-41f8-8291-c811cb4fb975",
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "Grouping1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input1": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Group",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1330,
+                "top": 10
+            },
+            "post_job_actions": {},
+            "tool_id": "Grouping1",
+            "tool_state": "{\"__input_ext\": \"bed\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/mm9.len\", \"groupcol\": \"1\", \"ignorecase\": \"false\", \"ignorelines\": null, \"input1\": null, \"operations\": [{\"__index__\": 0, \"optype\": \"length\", \"opcol\": \"1\", \"opround\": \"no\", \"opdefault\": \"\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.4",
+            "type": "tool",
+            "uuid": "5e50ede1-709c-4140-a6a4-456258797b9c",
+            "workflow_outputs": [
+                {"output_name": "out_file1", "label": "chr_count"}
+            ]
+        }
+    },
+    "tags": [
+        "introduction"
+    ],
+    "uuid": "9aa7199b-27ce-48ea-9972-177d57171f2c",
+    "version": 0
+}

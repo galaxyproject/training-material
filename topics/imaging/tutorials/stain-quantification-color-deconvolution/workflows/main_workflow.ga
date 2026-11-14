@@ -1,0 +1,1440 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "This workflow performs colour deconvolution and automated thresholding to quantify stained area in brightfield histological images (MT, IHC). It accepts whole slides or pre-cropped ROIs.",
+    "comments": [
+        {
+            "child_steps": [
+                15
+            ],
+            "color": "none",
+            "data": {
+                "title": "Generate ROIs of Stained Region"
+            },
+            "id": 3,
+            "position": [
+                1367.6,
+                0
+            ],
+            "size": [
+                444,
+                244
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                27,
+                28,
+                29
+            ],
+            "color": "pink",
+            "data": {
+                "title": "Final Results - Tabular File"
+            },
+            "id": 5,
+            "position": [
+                2841.7000000000003,
+                493.6
+            ],
+            "size": [
+                809,
+                490
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                16,
+                18,
+                25,
+                26,
+                19,
+                20,
+                22,
+                23,
+                1
+            ],
+            "color": "green",
+            "data": {
+                "title": "Quantification and Sanitation Steps for Outfile"
+            },
+            "id": 4,
+            "position": [
+                1408,
+                268.4
+            ],
+            "size": [
+                1377,
+                501
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                13
+            ],
+            "color": "black",
+            "data": {
+                "title": "Stained Area Detection"
+            },
+            "id": 2,
+            "position": [
+                1102.7,
+                268
+            ],
+            "size": [
+                290,
+                501
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                2,
+                12,
+                24,
+                4,
+                6,
+                7,
+                9,
+                10,
+                14,
+                17,
+                21
+            ],
+            "color": "none",
+            "data": {
+                "title": "Total Area Computing"
+            },
+            "id": 1,
+            "position": [
+                0.7999999999999999,
+                822.3000000000001
+            ],
+            "size": [
+                2789.4,
+                503
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                5,
+                8,
+                11,
+                3,
+                0
+            ],
+            "color": "turquoise",
+            "data": {
+                "title": "Image Preparation"
+            },
+            "id": 0,
+            "position": [
+                0,
+                266.5
+            ],
+            "size": [
+                1084,
+                502
+            ],
+            "type": "frame"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0002-5857-1477",
+            "name": "Diana Chiang Jurado"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "Histological Staining Area Quantification",
+    "readme": "# Histological Staining Area Quantification\n\n## Overview\nThis workflow quantifies stained tissue areas in brightfield histological images \nusing colour deconvolution and automated thresholding. It is designed for \n3-channel stainings compatible with the H-E-DAB (HED) colour space, such as \nMasson's Trichrome (MT) and Immunohistochemistry (IHC).\n\n## What does this workflow do?\n1. **Stain intensity normalization** (CLAHE) equalizes pixel intensity across images to reduce staining variability before deconvolution.\n2. **Colour deconvolution** separates the normalized image into individual stain channels (HED).\n3. **Channel splitting and extraction** isolates the target stain channel (default: Channel 2).\n4. **Automated thresholding** (Li method) generates a binary mask of stained vs. unstained regions.\n5. **Feature extraction** quantifies staining area and intensity per sample.\n6. **Output collation** merges all per-sample results into a single tabular file.\n\n## Input data requirements\n- **Format:** TIFF\n- **Type:** Brightfield microscopy images\n- **Staining:** Compatible with HED colour deconvolution (e.g., Masson's Trichrome, IHC)\n- **Content:** Whole slide images or pre-cropped regions of interest (ROIs)\n- **Structure:** Dataset collection (list) — one image per sample\n\n> ⚠️ Images must be pre-cropped to the region of interest before use.\n> The workflow does not perform ROI selection.\n\n## Output\nA tabular file (TSV) containing one row per sample with the following columns:\n- `sample_id` — sample identifier\n- `label` — pixel label (1 = stained region)\n- `mean_intensity` — mean pixel intensity within the stained region\n- `area` — total number of stained pixels\n- `area_filled` — stained area with internal holes filled\n- `total_area` — total pixel count of the input image (width × height)\n- `percent_area` — staining area as percentage of total image area\n\n## Important notes\n- Verify that **Channel 2** corresponds to your stain of interest before running.\n  This can be checked by inspecting the deconvolved image output.\n- The thresholding method is **Li**. If results are suboptimal, adjust the offset \n  in the Threshold step.\n- The workflow processes images as a **collection**, enabling batch analysis \n  of multiple samples in a single run.\n\n## Compatible stainings\n| Staining | Target channel |\n|----------|---------------|\n| Masson's Trichrome (MT) | Channel 2 (Eosin/collagen) |\n| Immunohistochemistry (IHC) | Channel 2 (DAB) |\n\n## Citation\nIf you use this workflow, please cite it via its WorkflowHub DOI.",
+    "report": {
+        "markdown": "# Histological Staining Area Quantification\n\n```galaxy\ninvocation_time()\n```\n\n---\n\n## Summary\n\nThis workflow quantifies stain area and intensity in brightfield microscopy histological images. Input images undergo colour deconvolution — an algorithm that mathematically separates overlapping stain signals into individual channels — to isolate the target stain from the haematoxylin counterstain. Automated thresholding then segments positively-stained pixels, and per-sample measurements are collated into a single tabular output.\n\nThe pre-set parameters use the H-E-DAB colour space, which is compatible with immunohistochemistry (IHC) with a DAB chromogen and Masson's Trichrome (MT). Other 3-channel staining protocols may also be supported by editing the colour deconvolution algorithm or thresholding type in the relevant workflow steps. The workflow expects RGB TIFF images — one region of interest (ROI) per collection element.\n\n```galaxy\nworkflow_image()\n```\n\n---\n\n## Run Configuration\n\nThe table below shows the parameters used in this workflow run. If any defaults were modified before running, please update this table accordingly before downloading the report.\n\n| Parameter | Default value |\n|-----------|--------------|\n| Colour deconvolution algorithm | H-E-DAB (HED) |\n| Target stain channel extracted | Channel 2 |\n| Thresholding method | Li (automated) |\n\n---\n\n## Input Images\n\nThe input to this workflow is a list collection of brightfield microscopy images. Each element should represent one region of interest from a tissue section. The images provided for this run are shown below.\n\n```galaxy\nvisualization(visualization_id=tiffviewer, input=\"ROI image for staining analysis\")\n```\n\n---\n\n## Staining Mask\n\nIf the run completed successfully, each input image will have been converted into a binary mask via colour deconvolution and automated thresholding. In this mask, **white pixels** represent regions classified as positively stained and **black pixels** represent background. This mask is what the quantification measurements are derived from.\n\n> ⚠️ **Quality check:** If the mask appears inverted (background is white, stained region is black) or nearly empty, verify that the correct stain channel was extracted. The default is Channel 2 — inspect the deconvolved intermediate image to confirm it corresponds to your stain of interest before proceeding to the results.\n\n```galaxy\nvisualization(visualization_id=tiffviewer, output=\"Selected Stain Channel Thresholded\")\n```\n\n---\n\n## Results\n\nIf the workflow completed successfully, the table below shows per-sample staining measurements — one row per input image.\n\nFor quantitative comparisons between samples or groups, **`percent_area`** is typically the primary outcome of interest, as it normalises staining area to image size and is directly suitable for downstream statistical analysis. **`area`** and **`area_filled`** may be used for absolute comparisons when all images are of consistent dimensions — `area_filled` is particularly useful when the stained region contains internal holes (e.g. dense fibrosis in Masson's Trichrome). **`mean_intensity`** can serve as a secondary measure of staining density, but note that due to deconvolution inversion, **lower values indicate stronger staining** — interpret accordingly.\n\n| Column | Description |\n|--------|-------------|\n| `sample_id` | Identifier derived from the input image filename |\n| `label` | Region label assigned by the thresholding step |\n| `mean_intensity` | Average pixel intensity within the detected region (lower = stronger stain, due to deconvolution inversion) |\n| `area` | Pixel count of the positively stained region |\n| `area_filled` | Stained area with internal holes filled |\n| `total_area` | Total pixel count of the input image (width × height) |\n| `percent_area` | Staining area as a percentage of total image area (`area / total_area × 100`) |\n\n```galaxy\nhistory_dataset_as_table(output=\"Tabular File: Staining Feature Results\", title=\"Staining Feature Results\")\n```\n\n```galaxy\nhistory_dataset_link(output=\"Tabular File: Staining Feature Results\", label=\"Download results (TSV)\")\n```\n\n---\n\n## Reproducibility\n\n```galaxy\nhistory_link()\n```\n\n```galaxy\nworkflow_license()\n```\n\n---\n\n## Citation\n\nIf you use this workflow in your research, please cite it via its WorkflowHub entry:\n**Diana Chiang Jurado** — *Histological Staining Area Quantification*, WorkflowHub, https://workflowhub.eu/workflows/2179, CC-BY-4.0."
+    },
+    "steps": {
+        "0": {
+            "annotation": "Brightfield histological image (whole slide or pre-cropped ROI) for staining quantification. Compatible stainings include Masson's Trichrome and IHC. Accepted format: TIFF.",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Brightfield histological image (whole slide or pre-cropped ROI) for staining quantification. Compatible stainings include Masson's Trichrome and IHC. Accepted format: TIFF.",
+                    "name": "ROI image for staining analysis"
+                }
+            ],
+            "label": "ROI image for staining analysis",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 20.171875,
+                "top": 458.2578125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\", \"fields\": null, \"column_definitions\": null}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "8d8971e7-b29d-428c-a2ec-9f964f89b4d3",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Add Sample ID column name .",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_text_file_with_recurring_lines/9.5+galaxy3",
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [],
+            "label": "Sample ID",
+            "name": "Create text file",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1995.9443671595936,
+                "top": 315.112483339031
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_text_file_with_recurring_lines/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"token_set\": [{\"__index__\": 0, \"line\": \"sample_id\", \"repeat_select\": {\"repeat_select_opts\": \"user\", \"__current_case__\": 0, \"times\": \"1\"}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "61caad88-c33b-4221-ac3d-4dda727b324d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_text_file_with_recurring_lines/9.5+galaxy3",
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [],
+            "label": "header for total area",
+            "name": "Create text file",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 2305.1936948064526,
+                "top": 913.1197455008507
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutfile": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_text_file_with_recurring_lines/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"token_set\": [{\"__index__\": 0, \"line\": \"total_area\", \"repeat_select\": {\"repeat_select_opts\": \"user\", \"__current_case__\": 0, \"times\": \"1\"}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "23f140e5-d09d-45bf-9b72-47d9b0c21882",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "Normalizes pixel intensity across images using CLAHE (Contrast Limited Adaptive Histogram Equalization) to reduce staining variability before color deconvolution.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.25.2+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Stain intensity normalization (CLAHE)",
+            "name": "Perform histogram equalization",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 244,
+                "top": 329.359375
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.25.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "99e0ef91ea5e",
+                "name": "2d_histogram_equalization",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"h_type\": \"clahe\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.25.2+galaxy0",
+            "type": "tool",
+            "uuid": "d4a887ee-2c66-4c58-af7f-b4113ee1e5bb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/8.0.0+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Show image info",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 314.22044193788025,
+                "top": 974.2997227256178
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/8.0.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "e28851b24032",
+                "name": "image_info",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "8.0.0+galaxy0",
+            "type": "tool",
+            "uuid": "8ffc6557-6365-46b2-961e-28019975c4b9",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "Performs colour deconvolution using the H-E-DAB (HED) transformation, separating the image into individual stain channels. Channel 1 = Hematoxylin, Channel 2 = Eosin/target stain, Channel 3 = Residuals. Higher pixel intensity indicates lower stain concentration.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/color_deconvolution/ip_color_deconvolution/0.9+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Color Deconvolution",
+            "name": "Perform color deconvolution or transformation",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 458.9921875,
+                "top": 330.46875
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tiff"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/color_deconvolution/ip_color_deconvolution/0.9+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "0cbdf78fee14",
+                "name": "color_deconvolution",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tiff\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"convtype\": \"rgb2hed\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"isolate_channel\": null, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.9+galaxy0",
+            "type": "tool",
+            "uuid": "13541484-b1a4-4b3e-aeea-7385334f1cbf",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Deconvolved Image",
+                    "output_name": "output",
+                    "uuid": "b4393dde-25b8-49ad-b48c-5d2df47c1408"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "Grep1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Width Extraction",
+            "name": "Select",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 611.4736628752854,
+                "top": 917.8293738519943
+            },
+            "post_job_actions": {},
+            "tool_id": "Grep1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"\", \"keep_header\": false, \"pattern\": \"Width =\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.4",
+            "type": "tool",
+            "uuid": "da2dce81-e316-4a7a-8272-0cbbd7da5b54",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "Grep1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Height Extraction",
+            "name": "Select",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 612.1340187674641,
+                "top": 1120.5653822735308
+            },
+            "post_job_actions": {},
+            "tool_id": "Grep1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"\", \"keep_header\": false, \"pattern\": \"Height =\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.4",
+            "type": "tool",
+            "uuid": "2dae9581-507e-442e-9beb-86ab0cdd85be",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "Splits multi-channel image into single-channel images. Extracts the target stain channel from the split image collection. Default index: 1 (Channel 2). Verify this corresponds to your stain of interest before running the workflow. The pixel data type is preserved.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.3.5+galaxy1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Split Image Channels for Staining Detection",
+            "name": "Split image along axes",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 665.7578125,
+                "top": 323.2265625
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.3.5+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "7191fd16988f",
+                "name": "split_image",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"axis\": \"C\", \"count\": null, \"input\": {\"__class__\": \"ConnectedValue\"}, \"offset\": \"0\", \"squeeze\": false, \"step\": \"1\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2.3.5+galaxy1",
+            "type": "tool",
+            "uuid": "32f6700c-df06-4bcc-a070-22d77b2d01c7",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Collection: Individual Deconvolved Channels",
+                    "output_name": "output",
+                    "uuid": "cbd8deec-7ea2-4715-bc9b-c1eea3c787fc"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/9.5+galaxy3",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "infile": {
+                    "id": 6,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Text transformation",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 953.4203075074834,
+                "top": 918.3928760243856
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv_opts\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"code\": \"s/.*= //\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "5f158fe1-70f9-4c38-806c-88417993a83b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/9.5+galaxy3",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "infile": {
+                    "id": 7,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Text transformation",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 950.8939905212409,
+                "top": 1157.7273472144357
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv_opts\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"code\": \"s/.*= //\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "3023c1cf-e64e-49d9-9238-1e4020304824",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "This step extracts the second image (usually the relevant stain channel) from each sub-collection in a collection of collections. Please verify the selected channel is correct before proceeding. The current index is set to extract dataset 2.",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Collection: Extract Stain Channel from Sub-Collections",
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 872.9453125,
+                "top": 509.2421875
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tiff"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"by_index\", \"__current_case__\": 2, \"index\": \"1\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "01518895-46e2-4ec3-aa0e-1898357255fa",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Selected Stain Channel",
+                    "output_name": "output",
+                    "uuid": "23ea738b-06ae-4688-ab4a-b29c196a9cfa"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "Paste1",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input1": {
+                    "id": 9,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 10,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Paste",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1284.258474326124,
+                "top": 1031.7227638855852
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionout_file1": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Paste1",
+            "tool_state": "{\"delimiter\": \"T\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input2\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "992876bb-8d03-4f22-a1d7-5f2bb479db30",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "Applies a threshold to the selected stain channel to segment stained areas for quantification.\nTool only process tiff files with 1 channel. ",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.25.2+galaxy0",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input": {
+                    "id": 11,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Threshold Stain Channel Collection",
+            "name": "Threshold image",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 1166.546875,
+                "top": 319.34375
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.25.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2ee04d2ebdcf",
+                "name": "2d_auto_threshold",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert_output\": false, \"th_method\": {\"method_id\": \"otsu\", \"__current_case__\": 1, \"offset\": \"0.0\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.25.2+galaxy0",
+            "type": "tool",
+            "uuid": "54fdcc2b-82f3-499e-950d-58f26f97bbba",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Selected Stain Channel Thresholded",
+                    "output_name": "output",
+                    "uuid": "a3923c7b-8253-4578-9647-b11f5bbd91a6"
+                }
+            ]
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1+galaxy0",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "input": {
+                    "id": 12,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Compute",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1547.6132267477944,
+                "top": 1041.2239899335314
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "61f9ddbc63ca",
+                "name": "column_maker",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"avoid_scientific_notation\": false, \"error_handling\": {\"auto_col_types\": true, \"fail_on_non_existent_columns\": true, \"non_computable\": {\"action\": \"--fail-on-non-computable\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"ops\": {\"header_lines_select\": \"no\", \"__current_case__\": 0, \"expressions\": [{\"__index__\": 0, \"cond\": \"c1 * c2\", \"add_column\": {\"mode\": \"\", \"__current_case__\": 0, \"pos\": \"\"}}]}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2.1+galaxy0",
+            "type": "tool",
+            "uuid": "ba077df7-adad-4e74-8527-02422379502e",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "This step detects CD11b positive regions from the binary mask and generates polygon ROIs for each stained blob. ROIs can be uploaded to OMERO for visual validation of the threshold.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/imagej2_analyze_particles_binary/imagej2_analyze_particles_binary/20240614+galaxy1",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "input": {
+                    "id": 13,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Generate ROIs of stained region",
+            "name": "Analyze particles",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                },
+                {
+                    "name": "rois",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1432.4331042492483,
+                "top": 62.92957948966583
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/imagej2_analyze_particles_binary/imagej2_analyze_particles_binary/20240614+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "0601a9056642",
+                "name": "imagej2_analyze_particles_binary",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"black_background\": \"yes\", \"circularity_max\": \"1.0\", \"circularity_min\": \"0.0\", \"display_results\": \"no\", \"exclude_edges\": \"no\", \"export_rois\": true, \"include_holes\": \"no\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"show\": \"Outlines\", \"size\": \"2-Infinity\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "20240614+galaxy1",
+            "type": "tool",
+            "uuid": "9848aab2-5e30-4083-8cfe-191d03cb690d",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "ROIs",
+                    "output_name": "rois",
+                    "uuid": "21505140-b70c-4dab-ba64-46e68c2121c7"
+                },
+                {
+                    "label": "ROIs Image",
+                    "output_name": "output",
+                    "uuid": "b05b07b2-2e6c-4d58-a92a-88c4c32828c3"
+                }
+            ]
+        },
+        "16": {
+            "annotation": "Extracts quantitative features (e.g., mean intensity) from the thresholded image to support staining analysis.\n\n",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.25.2+galaxy1",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "labels": {
+                    "id": 13,
+                    "output_name": "output"
+                },
+                "setup|intensities": {
+                    "id": 11,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Extract image features",
+                    "name": "setup"
+                }
+            ],
+            "label": "Extract Image Features",
+            "name": "Extract image features",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1444.203125,
+                "top": 523.6953125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.25.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "519fad2c552a",
+                "name": "2d_feature_extraction",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"labels\": {\"__class__\": \"ConnectedValue\"}, \"setup\": {\"mode\": \"with-intensities\", \"__current_case__\": 1, \"intensities\": {\"__class__\": \"ConnectedValue\"}, \"features\": [\"label\", \"mean_intensity\", \"area\", \"area_filled\"]}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.25.2+galaxy1",
+            "type": "tool",
+            "uuid": "d61dfcc3-4ccd-4c47-96bf-e49da6be08fd",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Collection of Tabular: Staining Quantification Results",
+                    "output_name": "output",
+                    "uuid": "19b9fc98-e80e-48f6-8bd9-a23a59e09e84"
+                }
+            ]
+        },
+        "17": {
+            "annotation": "",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 17,
+            "input_connections": {
+                "input": {
+                    "id": 14,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1821.639814485518,
+                "top": 1045.8774559344524
+            },
+            "post_job_actions": {},
+            "tool_id": "Cut1",
+            "tool_state": "{\"columnList\": \"c3\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "116344ab-b0c5-4557-abcc-3083046abb01",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "18": {
+            "annotation": "Extracts a dataset that will be used to obtain the header row for the final concatenated tabular file in a subsequent step.",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "input": {
+                    "id": 16,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Prepare Header Source Dataset",
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 1726.671875,
+                "top": 344.3359375
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"first\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "1097a76b-4cba-4881-8f8c-9f97817df691",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "19": {
+            "annotation": "",
+            "content_id": "Show tail1",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "input": {
+                    "id": 16,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Extract",
+            "name": "Select last",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1722.2334907503193,
+                "top": 497.80444924927417
+            },
+            "post_job_actions": {},
+            "tool_id": "Show tail1",
+            "tool_state": "{\"header\": false, \"input\": {\"__class__\": \"ConnectedValue\"}, \"lineNum\": \"1\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "f10a01b1-051d-49da-b13d-110abed4ab75",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "20": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.3",
+            "errors": null,
+            "id": 20,
+            "input_connections": {
+                "input_collection": {
+                    "id": 16,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Extract element identifiers",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1721.2881171595936,
+                "top": 628.6593583390311
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.3",
+            "tool_shed_repository": {
+                "changeset_revision": "3e27acfa4830",
+                "name": "collection_element_identifiers",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_collection\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.0.3",
+            "type": "tool",
+            "uuid": "d1deeb80-d601-43a7-a6f8-0e8fac4db155",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "21": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+            "errors": null,
+            "id": 21,
+            "input_connections": {
+                "input_list": {
+                    "id": 17,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Collapse Collection",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2080.5522041064874,
+                "top": 1035.8383369547973
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "90981f86000f",
+                "name": "collapse_collections",
+                "owner": "nml",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filename\": {\"add_name\": false, \"__current_case__\": 1}, \"input_list\": {\"__class__\": \"ConnectedValue\"}, \"one_header\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "5.1.0",
+            "type": "tool",
+            "uuid": "6ad7fa67-192f-4b34-8719-fac6d5939d27",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "22": {
+            "annotation": "Extracting header from source dataset to use in the final tabular file. ",
+            "content_id": "Show beginning1",
+            "errors": null,
+            "id": 22,
+            "input_connections": {
+                "input": {
+                    "id": 18,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Header Extraction",
+            "name": "Select first",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2001.5068671595936,
+                "top": 421.456233339031
+            },
+            "post_job_actions": {},
+            "tool_id": "Show beginning1",
+            "tool_state": "{\"header\": false, \"input\": {\"__class__\": \"ConnectedValue\"}, \"lineNum\": \"1\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "486c9721-6243-418e-8100-81f631210307",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "23": {
+            "annotation": "Allows to collapse a collection of tabular files with the individual samples quantification into one tabular file. ",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+            "errors": null,
+            "id": 23,
+            "input_connections": {
+                "input_list": {
+                    "id": 19,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Collapse Collection into one file",
+            "name": "Collapse Collection",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2057.5745298512807,
+                "top": 570.7237088011984
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "90981f86000f",
+                "name": "collapse_collections",
+                "owner": "nml",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filename\": {\"add_name\": false, \"__current_case__\": 1}, \"input_list\": {\"__class__\": \"ConnectedValue\"}, \"one_header\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "5.1.0",
+            "type": "tool",
+            "uuid": "60409625-0798-4941-8e99-c584bb7829d7",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "24": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.5+galaxy3",
+            "errors": null,
+            "id": 24,
+            "input_connections": {
+                "inputs": {
+                    "id": 2,
+                    "output_name": "outfile"
+                },
+                "queries_0|inputs2": {
+                    "id": 21,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Concatenate datasets",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2420.8549134661503,
+                "top": 1121.0412694791082
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionout_file1": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.5+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ab83aa685821",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"inputs\": {\"__class__\": \"ConnectedValue\"}, \"queries\": [{\"__index__\": 0, \"inputs2\": {\"__class__\": \"ConnectedValue\"}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy3",
+            "type": "tool",
+            "uuid": "9b79bf68-1433-4dab-be49-300101e29451",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "25": {
+            "annotation": "Combined the Sample ID with the header of the remaining columns.",
+            "content_id": "Paste1",
+            "errors": null,
+            "id": 25,
+            "input_connections": {
+                "input1": {
+                    "id": 1,
+                    "output_name": "outfile"
+                },
+                "input2": {
+                    "id": 22,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Paste header with Sample ID",
+            "name": "Paste",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2415.7071646002028,
+                "top": 348.7547766700709
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionout_file1": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Paste1",
+            "tool_state": "{\"delimiter\": \"T\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input2\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "160d6bf6-4083-4b7f-830a-d066d01c3636",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "26": {
+            "annotation": "This step joins a list of sample names with their corresponding quantification results. It pastes both files side by side, ensuring that each sample name is aligned with the correct row of the quantification table.",
+            "content_id": "Paste1",
+            "errors": null,
+            "id": 26,
+            "input_connections": {
+                "input1": {
+                    "id": 20,
+                    "output_name": "output"
+                },
+                "input2": {
+                    "id": 23,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Paste Sample Names with Tabular Results",
+            "name": "Paste",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2413.60233468274,
+                "top": 533.9472261757905
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionout_file1": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Paste1",
+            "tool_state": "{\"delimiter\": \"T\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input2\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "6cbf6c3b-20de-4be5-88c2-995705eec215",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "27": {
+            "annotation": "This final output file contains the merged measurement results for all samples, and can be used for further statistical analysis.",
+            "content_id": "cat1",
+            "errors": null,
+            "id": 27,
+            "input_connections": {
+                "input1": {
+                    "id": 25,
+                    "output_name": "out_file1"
+                },
+                "queries_0|input2": {
+                    "id": 26,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Tabular: Staining Feature Results",
+            "name": "Concatenate multiple datasets or collections",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2894.0496656392556,
+                "top": 579.2321697025587
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionout_file1": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "cat1",
+            "tool_state": "{\"input1\": {\"__class__\": \"ConnectedValue\"}, \"queries\": [{\"__index__\": 0, \"input2\": {\"__class__\": \"ConnectedValue\"}}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "7c99c8bf-d351-44d4-8c39-30a566de4f8e",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "28": {
+            "annotation": "",
+            "content_id": "Paste1",
+            "errors": null,
+            "id": 28,
+            "input_connections": {
+                "input1": {
+                    "id": 27,
+                    "output_name": "out_file1"
+                },
+                "input2": {
+                    "id": 24,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Paste",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 3120.6040125290237,
+                "top": 756.6511016847111
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionout_file1": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Paste1",
+            "tool_state": "{\"delimiter\": \"T\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input2\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "8121cab5-9830-4f73-9c1f-16640c7cbf90",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "29": {
+            "annotation": "Computes the proportion of positive signal area relative to total image area, expressed as percentage.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1+galaxy0",
+            "errors": null,
+            "id": 29,
+            "input_connections": {
+                "input": {
+                    "id": 28,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Percent area computation",
+            "name": "Compute",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 3382.046758866749,
+                "top": 755.991618533099
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "61f9ddbc63ca",
+                "name": "column_maker",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"avoid_scientific_notation\": false, \"error_handling\": {\"auto_col_types\": true, \"fail_on_non_existent_columns\": true, \"non_computable\": {\"action\": \"--fail-on-non-computable\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"ops\": {\"header_lines_select\": \"yes\", \"__current_case__\": 1, \"expressions\": [{\"__index__\": 0, \"cond\": \"c4 / c6 * 100\", \"add_column\": {\"mode\": \"\", \"__current_case__\": 0, \"pos\": \"\"}, \"new_column_name\": \"percent_area\"}]}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2.1+galaxy0",
+            "type": "tool",
+            "uuid": "ae102451-2b3c-4ede-89db-a18e52b7bb2a",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Tabular File: Staining Feature Results",
+                    "output_name": "out_file1",
+                    "uuid": "1c3f7fd0-bad7-4891-9f95-f1346e44c20f"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "name:Histology",
+        "name:HistologyStaining",
+        "name:MassonTrichrome",
+        "name:Immunohistochemistry",
+        "name:BrightfieldMicroscopy",
+        "name:ColorDeconvolution"
+    ],
+    "uuid": "02db9f12-538b-497f-8dfd-a4f8d86584fd",
+    "version": 2,
+    "release": "0.1.2"
+}

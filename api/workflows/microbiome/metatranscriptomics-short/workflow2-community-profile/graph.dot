@@ -1,0 +1,24 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nForward reads"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nReverse reads"]
+  2[label="MetaPhlAn"]
+  0 -> 2 [label="output"]
+  1 -> 2 [label="output"]
+  kb13521dbf5e74bf3b7fa673d13fc2911[color=lightseagreen,label="Output\nmetaphlan_predicted_taxons"]
+  2 -> kb13521dbf5e74bf3b7fa673d13fc2911
+  3[label="Cut"]
+  2 -> 3 [label="output_file"]
+  4[label="Krona pie chart"]
+  2 -> 4 [label="krona_output_file"]
+  5[label="Export to GraPhlAn"]
+  3 -> 5 [label="out_file1"]
+  6[label="Generation, personalization and annotation of tree"]
+  5 -> 6 [label="annotation"]
+  5 -> 6 [label="tree"]
+  7[label="GraPhlAn"]
+  6 -> 7 [label="output_tree"]
+  k21fca66fdce0496f994fdc8e855e0c8f[color=lightseagreen,label="Output\ngraphlan_output_image"]
+  7 -> k21fca66fdce0496f994fdc8e855e0c8f
+}

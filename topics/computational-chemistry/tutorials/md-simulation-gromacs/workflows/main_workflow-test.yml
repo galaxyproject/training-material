@@ -1,0 +1,14 @@
+---
+- doc: Test GROMACS Training workflow
+  job: {}
+  outputs:
+    gro_output:
+      asserts:
+        has_text:
+          text: "LYSOZYME in water"
+    xtc_output:
+      asserts:
+        has_size: 
+          value: 2337500
+          delta: 30000
+

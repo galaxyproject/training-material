@@ -1,0 +1,952 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "This is the workflow for the Batch Correction and Integration tutorial if you use Seurat.",
+    "comments": [
+        {
+            "child_steps": [
+                1,
+                2,
+                3,
+                4
+            ],
+            "color": "red",
+            "data": {
+                "title": "Inspect &amp; Split Data"
+            },
+            "id": 0,
+            "position": [
+                270.2437908505457,
+                0.0
+            ],
+            "size": [
+                330.8,
+                848.2
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                5,
+                6,
+                7,
+                8
+            ],
+            "color": "orange",
+            "data": {
+                "title": "Preprocessing &amp; Dimensional Reduction"
+            },
+            "id": 1,
+            "position": [
+                681.7437908505457,
+                360.2
+            ],
+            "size": [
+                1073.5,
+                341.1
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                9,
+                10,
+                11,
+                12,
+                13
+            ],
+            "color": "yellow",
+            "data": {
+                "title": "Cluster before Batch Correction"
+            },
+            "id": 2,
+            "position": [
+                1817.3437908505457,
+                149.29999999999998
+            ],
+            "size": [
+                1045,
+                528
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                14,
+                15
+            ],
+            "color": "lime",
+            "data": {
+                "title": "Integration/Batch Correction"
+            },
+            "id": 3,
+            "position": [
+                2908.2437908505453,
+                687.4000000000001
+            ],
+            "size": [
+                510.6,
+                294.7
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                16,
+                17,
+                18,
+                19,
+                20
+            ],
+            "color": "blue",
+            "data": {
+                "title": "Cluster after Batch Correction"
+            },
+            "id": 4,
+            "position": [
+                3511.2437908505453,
+                531.5999999999999
+            ],
+            "size": [
+                1082,
+                532.9
+            ],
+            "type": "frame"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0001-6979-6930",
+            "name": "Marisa Loach"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "Batch Correction - Seurat",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "A SeuratObject of human PBMCs profiled with seven different single cell technologies.",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "A SeuratObject of human PBMCs profiled with seven different single cell technologies.",
+                    "name": "Input_SeuratObject"
+                }
+            ],
+            "label": "Input_SeuratObject",
+            "name": "Input_SeuratObject",
+            "outputs": [],
+            "position": {
+                "left": 0.0,
+                "top": 227.78310181531384
+            },
+            "tool_id": null,
+            "tool_state": "{\"name\": \"Input_SeuratObject\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "65e83607-3fe5-4f97-92ce-a5051bde0040",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_data/seurat_data/5.0+galaxy0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Inspect before Split",
+            "name": "Seurat Data Management",
+            "outputs": [
+                {
+                    "name": "inspect_general",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 332.62013737533965,
+                "top": 62.75244811096637
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_data/seurat_data/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "4ec52a83ec82",
+                "name": "seurat_data",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"Inspect\", \"__current_case__\": 0, \"inspect\": {\"inspect\": \"General\", \"__current_case__\": 0}}, \"seurat_rds\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "72b75f77-58d0-455b-9bb3-bfb662d241f8",
+            "when": null,
+            "workflow_outputs": [
+                {"output_name": "inspect_general", "label": "Inspect_before_Split"}
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_data/seurat_data/5.0+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Data Management",
+            "outputs": [
+                {
+                    "name": "inspect_tabular",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 329.02494648110076,
+                "top": 236.67873552904877
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_data/seurat_data/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "4ec52a83ec82",
+                "name": "seurat_data",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"Inspect\", \"__current_case__\": 0, \"inspect\": {\"inspect\": \"Metadata\", \"__current_case__\": 4, \"view_metadata\": \"\"}}, \"seurat_rds\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "e54b158d-36d4-488e-ae41-6426725c2b98",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_integrate/seurat_integrate/5.0+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Integrate",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 339.81035459406127,
+                "top": 450.1507239408315
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_integrate/seurat_integrate/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "74fa68f4e579",
+                "name": "seurat_integrate",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"SplitLayers\", \"__current_case__\": 0, \"assay\": \"RNA\", \"factor\": \"Method\"}, \"seurat_rds\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "cd652f3f-9419-431c-8f55-ed5b22396a2f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_data/seurat_data/5.0+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 3,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": "Inspect after Split",
+            "name": "Seurat Data Management",
+            "outputs": [
+                {
+                    "name": "inspect_general",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 340.90523718214934,
+                "top": 651.6687766856601
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_data/seurat_data/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "4ec52a83ec82",
+                "name": "seurat_data",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"Inspect\", \"__current_case__\": 0, \"inspect\": {\"inspect\": \"General\", \"__current_case__\": 0}}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "0cd62757-6be3-45b4-a2c6-e43a1392c0ca",
+            "when": null,
+            "workflow_outputs": [
+                {"output_name": "inspect_general", "label": "Inspect_after_Split"}
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_preprocessing/seurat_preprocessing/5.0+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 3,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Preprocessing",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 706.9753548916301,
+                "top": 441.6374481670319
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_preprocessing/seurat_preprocessing/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "6bccf5f85f92",
+                "name": "seurat_preprocessing",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"NormalizeData\", \"__current_case__\": 0, \"assay\": \"\", \"normalization_method\": {\"normalization_method\": \"LogNormalize\", \"__current_case__\": 0}, \"scale_factor\": \"10000\", \"block_size\": null}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "04e1ddd3-64a2-4bdd-9957-2d159cc7fe24",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_preprocessing/seurat_preprocessing/5.0+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 5,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Preprocessing",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 968.5520704631401,
+                "top": 434.8434326363941
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_preprocessing/seurat_preprocessing/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "6bccf5f85f92",
+                "name": "seurat_preprocessing",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"FindVariableFeatures\", \"__current_case__\": 1, \"assay\": \"\", \"selection_method\": {\"selection_method\": \"vst\", \"__current_case__\": 0, \"loess_span\": \"0.3\", \"clip_max\": null, \"nfeatures\": \"2000\"}, \"num_bin\": \"20\", \"binning_method\": \"equal_width\", \"output_topN\": {\"output_topN\": \"false\", \"__current_case__\": 1}}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "e2bc80b4-9716-440e-b92a-ea5e6b8711a9",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_preprocessing/seurat_preprocessing/5.0+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 6,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Preprocessing",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 1229.8954261203394,
+                "top": 427.65321541767247
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_preprocessing/seurat_preprocessing/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "6bccf5f85f92",
+                "name": "seurat_preprocessing",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"ScaleData\", \"__current_case__\": 2, \"assay\": \"\", \"regress\": {\"regress\": \"false\", \"__current_case__\": 1}, \"scale_features\": {\"scale_features\": \"variable_features\", \"__current_case__\": 0}, \"split_by\": \"\", \"do_scale\": true, \"do_center\": true, \"scale_max\": \"10.0\", \"block_size\": \"1000\", \"min_cells_to_block\": \"3000\"}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "26771645-0933-4eb6-ab40-d2f7657ba776",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_reduce_dimension/seurat_reduce_dimension/5.0+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 7,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Run Dimensional Reduction",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 1494.8339726717777,
+                "top": 427.6532154176726
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_reduce_dimension/seurat_reduce_dimension/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "46ed93e8da30",
+                "name": "seurat_reduce_dimension",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"RunPCA\", \"__current_case__\": 0, \"assay\": \"\", \"npcs\": \"50\", \"rev_pca\": false, \"weight_by_var\": true, \"seed_use\": \"42\", \"approx\": true, \"features\": null, \"reduction_name\": \"pca\", \"reduction_key\": \"PC_\", \"print_pcs\": {\"print_pcs\": \"false\", \"__current_case__\": 0}}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "779061a3-2661-44c1-94d5-427a1ede0067",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 8,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Find Clusters",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 1830.903000886046,
+                "top": 413.47949519286453
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "51eb02d9b17a",
+                "name": "seurat_clustering",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"FindNeighbors\", \"__current_case__\": 0, \"reduction\": \"pca\", \"dims\": \"30\", \"k_param\": \"20\", \"nn_method\": {\"nn_method\": \"annoy\", \"__current_case__\": 1, \"annoy_metric\": \"euclidean\"}, \"adv\": {\"n_trees\": \"50\", \"l2_norm\": false, \"compute_snn\": {\"compute_snn\": \"TRUE\", \"__current_case__\": 1, \"prune_snn\": null, \"distance_matrix\": false}}}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "82500a71-de06-4111-8e59-b156ec001d1b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 9,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Find Clusters",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 2083.2586261622823,
+                "top": 406.289360259021
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "51eb02d9b17a",
+                "name": "seurat_clustering",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"FindClusters\", \"__current_case__\": 2, \"modularity_fxn\": \"1\", \"resolution\": \"2.0\", \"algorithm\": {\"algorithm\": \"1\", \"__current_case__\": 1}, \"n_start\": \"10\", \"n_iter\": \"10\", \"random_seed\": \"0\", \"group_singletons\": true, \"graph_name\": \"\", \"cluster_name\": \"unintegrated_clusters\"}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "b94eb1fa-b7ba-465b-9b61-1c6333d5cc35",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_reduce_dimension/seurat_reduce_dimension/5.0+galaxy0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 10,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Run Dimensional Reduction",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 2342.8046045260417,
+                "top": 411.68189974574506
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_reduce_dimension/seurat_reduce_dimension/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "46ed93e8da30",
+                "name": "seurat_reduce_dimension",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"RunUMAP\", \"__current_case__\": 2, \"reduction\": \"pca\", \"assay\": \"\", \"umap_method\": {\"umap_method\": \"uwot\", \"__current_case__\": 0}, \"n_neighbors\": \"30\", \"n_components\": \"2\", \"metric\": \"cosine\", \"run_umap_on\": {\"run_umap_on\": \"dims\", \"__current_case__\": 0, \"dims\": \"30\"}, \"adv\": {\"reduction_model\": \"\", \"n_epochs\": null, \"learning_rate\": \"1\", \"min_dist\": \"0.3\", \"spread\": \"1\", \"set_op_mix_ratio\": \"1.0\", \"local_connectivity\": \"1\", \"repulsion_strength\": \"1\", \"negative_sample_rate\": \"5\", \"a\": \"\", \"b\": \"\", \"uwot_sgd\": false, \"seed_use\": \"42\", \"angular_rp_forest\": false, \"reduction_name\": \"umap.unintegrated\", \"reduction_key\": \"UMAP_\"}}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "3f30ab0f-5376-4f83-8d47-1126e758ddfc",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 11,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 2604.3854530351164,
+                "top": 216.60909423786597
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "fee4b4eb0ef5",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"DimPlot\", \"__current_case__\": 5, \"dims_1\": \"1\", \"dims_2\": \"2\", \"reduction\": \"umap.unintegrated\", \"plot\": {\"cols\": \"\", \"pt_size\": null, \"order\": \"\", \"shuffle\": {\"shuffle\": \"FALSE\", \"__current_case__\": 1}, \"alpha\": \"1\", \"ncol\": null, \"raster\": {\"raster\": \"NULL\", \"__current_case__\": 0}, \"label\": {\"label\": \"FALSE\", \"__current_case__\": 1}, \"highlight\": {\"highlight\": \"false\", \"__current_case__\": 1}, \"na_value\": \"lightgrey\"}, \"adv\": {\"cells\": null, \"group_by\": \"\", \"split_by\": \"\", \"shape_by\": \"\"}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"false\", \"__current_case__\": 0}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "63befb5d-f409-4159-b67d-cedb1af077fb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 11,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": "UMAP Plot by Method before Batch Correction",
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 2608.9985316836382,
+                "top": 425.19692641923274
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "fee4b4eb0ef5",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"DimPlot\", \"__current_case__\": 5, \"dims_1\": \"1\", \"dims_2\": \"2\", \"reduction\": \"umap.unintegrated\", \"plot\": {\"cols\": \"\", \"pt_size\": null, \"order\": \"\", \"shuffle\": {\"shuffle\": \"FALSE\", \"__current_case__\": 1}, \"alpha\": \"1\", \"ncol\": null, \"raster\": {\"raster\": \"NULL\", \"__current_case__\": 0}, \"label\": {\"label\": \"FALSE\", \"__current_case__\": 1}, \"highlight\": {\"highlight\": \"false\", \"__current_case__\": 1}, \"na_value\": \"lightgrey\"}, \"adv\": {\"cells\": null, \"group_by\": \"Method\", \"split_by\": \"\", \"shape_by\": \"\"}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"false\", \"__current_case__\": 0}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "29afbc3b-47ac-4b64-a0c2-33c3f72bd770",
+            "when": null,
+            "workflow_outputs": [
+                {"output_name": "plot_out_png", "label": "UMAP_before_Split"}
+            ]
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_integrate/seurat_integrate/5.0+galaxy0",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 11,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Integrate",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 2940.2249855876717,
+                "top": 744.5295993317395
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_integrate/seurat_integrate/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "74fa68f4e579",
+                "name": "seurat_integrate",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"IntegrateLayers\", \"__current_case__\": 1, \"integration\": {\"integration_method\": \"CCAIntegration\", \"__current_case__\": 0, \"adv\": {\"k_filter\": null, \"dims\": \"30\", \"dims_to_integrate\": null, \"k_weight\": \"100\", \"weight_reduction\": \"\", \"sd_weight\": \"1.0\", \"preserve_order\": false}}, \"orig_reduction\": \"pca\", \"new_reduction\": \"integrated.cca\", \"assay\": \"\", \"features\": null, \"layers\": \"\", \"scale_layers\": \"\", \"normalization_method\": false}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "8f5df56c-50e8-472a-aa7a-bfe46cccc096",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_integrate/seurat_integrate/5.0+galaxy0",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 14,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Integrate",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 3177.914572337324,
+                "top": 743.344612480118
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_integrate/seurat_integrate/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "74fa68f4e579",
+                "name": "seurat_integrate",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"JoinLayers\", \"__current_case__\": 2, \"assay\": \"RNA\"}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "112940d4-0a0f-4b02-9c63-f40fe5844856",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 15,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Find Clusters",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 3550.014924424064,
+                "top": 728.3115018383503
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "51eb02d9b17a",
+                "name": "seurat_clustering",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"FindNeighbors\", \"__current_case__\": 0, \"reduction\": \"integrated.cca\", \"dims\": \"30\", \"k_param\": \"20\", \"nn_method\": {\"nn_method\": \"annoy\", \"__current_case__\": 1, \"annoy_metric\": \"euclidean\"}, \"adv\": {\"n_trees\": \"50\", \"l2_norm\": false, \"compute_snn\": {\"compute_snn\": \"TRUE\", \"__current_case__\": 1, \"prune_snn\": null, \"distance_matrix\": false}}}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "3cb530c7-a443-4c36-a6f2-074070fd289c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "17": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0",
+            "errors": null,
+            "id": 17,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 16,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Find Clusters",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 3800.5090873574754,
+                "top": 726.4512403969957
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "51eb02d9b17a",
+                "name": "seurat_clustering",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"FindClusters\", \"__current_case__\": 2, \"modularity_fxn\": \"1\", \"resolution\": \"2.0\", \"algorithm\": {\"algorithm\": \"1\", \"__current_case__\": 1}, \"n_start\": \"10\", \"n_iter\": \"10\", \"random_seed\": \"0\", \"group_singletons\": true, \"graph_name\": \"\", \"cluster_name\": \"cca_clusters\"}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "8390c05a-5937-4255-8380-22cdb04a5647",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "18": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_reduce_dimension/seurat_reduce_dimension/5.0+galaxy0",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 17,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Run Dimensional Reduction",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 4042.042646320594,
+                "top": 724.6494474252513
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_reduce_dimension/seurat_reduce_dimension/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "46ed93e8da30",
+                "name": "seurat_reduce_dimension",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"RunUMAP\", \"__current_case__\": 2, \"reduction\": \"integrated.cca\", \"assay\": \"\", \"umap_method\": {\"umap_method\": \"uwot\", \"__current_case__\": 0}, \"n_neighbors\": \"30\", \"n_components\": \"2\", \"metric\": \"cosine\", \"run_umap_on\": {\"run_umap_on\": \"dims\", \"__current_case__\": 0, \"dims\": \"30\"}, \"adv\": {\"reduction_model\": \"\", \"n_epochs\": null, \"learning_rate\": \"1\", \"min_dist\": \"0.3\", \"spread\": \"1\", \"set_op_mix_ratio\": \"1.0\", \"local_connectivity\": \"1\", \"repulsion_strength\": \"1\", \"negative_sample_rate\": \"5\", \"a\": \"\", \"b\": \"\", \"uwot_sgd\": false, \"seed_use\": \"42\", \"angular_rp_forest\": false, \"reduction_name\": \"umap.cca\", \"reduction_key\": \"UMAP_\"}}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "42468faf-ff9c-40c7-9821-12fe35903198",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "19": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 18,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 4346.42483407494,
+                "top": 587.5181052558572
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "fee4b4eb0ef5",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"DimPlot\", \"__current_case__\": 5, \"dims_1\": \"1\", \"dims_2\": \"2\", \"reduction\": \"umap.cca\", \"plot\": {\"cols\": \"\", \"pt_size\": null, \"order\": \"\", \"shuffle\": {\"shuffle\": \"FALSE\", \"__current_case__\": 1}, \"alpha\": \"1\", \"ncol\": null, \"raster\": {\"raster\": \"NULL\", \"__current_case__\": 0}, \"label\": {\"label\": \"FALSE\", \"__current_case__\": 1}, \"highlight\": {\"highlight\": \"false\", \"__current_case__\": 1}, \"na_value\": \"lightgrey\"}, \"adv\": {\"cells\": null, \"group_by\": \"\", \"split_by\": \"\", \"shape_by\": \"\"}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"false\", \"__current_case__\": 0}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "36a51149-172f-46bf-852f-a3b2b053e923",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "20": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 20,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 18,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": "UMAP Plot by Method after Batch Correction",
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 4343.0753371722585,
+                "top": 796.2257393158254
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "fee4b4eb0ef5",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"DimPlot\", \"__current_case__\": 5, \"dims_1\": \"1\", \"dims_2\": \"2\", \"reduction\": \"umap.cca\", \"plot\": {\"cols\": \"\", \"pt_size\": null, \"order\": \"\", \"shuffle\": {\"shuffle\": \"FALSE\", \"__current_case__\": 1}, \"alpha\": \"1\", \"ncol\": null, \"raster\": {\"raster\": \"NULL\", \"__current_case__\": 0}, \"label\": {\"label\": \"FALSE\", \"__current_case__\": 1}, \"highlight\": {\"highlight\": \"false\", \"__current_case__\": 1}, \"na_value\": \"lightgrey\"}, \"adv\": {\"cells\": null, \"group_by\": \"Method\", \"split_by\": \"\", \"shape_by\": \"\"}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"false\", \"__current_case__\": 0}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "4488dcdd-9657-4c02-bc8d-7618bea73ee0",
+            "when": null,
+            "workflow_outputs": [
+                {"output_name": "plot_out_png", "label": "UMAP_after_Split"}
+            ]
+        }
+    },
+    "tags": [
+        "name:singlecell",
+        "name:seurat"
+    ],
+    "uuid": "b4ceaa9d-4975-4af2-958d-ac0d468390b9",
+    "version": 1
+}

@@ -1,0 +1,56 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nAnnData to extract genes & cells annotations"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nAnnData before processing to extract clean expression matrix"]
+  2[label="Extract cell annotations"]
+  0 -> 2 [label="output"]
+  k9d66a21742694fb49a4e520eedbb0c9d[color=lightseagreen,label="Output\nExtracted cell annotations (obs)"]
+  2 -> k9d66a21742694fb49a4e520eedbb0c9d
+  3[label="Extract gene annotations"]
+  0 -> 3 [label="output"]
+  k03537e97d6684ce2ba6b2952a18a2752[color=lightseagreen,label="Output\nExtracted gene annotations (var)"]
+  3 -> k03537e97d6684ce2ba6b2952a18a2752
+  4[label="Extract clean expression matrix"]
+  1 -> 4 [label="output"]
+  k963462c84ae0486c8173d98339127850[color=lightseagreen,label="Output\nUnprocessed expression matrix"]
+  4 -> k963462c84ae0486c8173d98339127850
+  5[label="Filter out unwanted cell types"]
+  2 -> 5 [label="obs"]
+  k5dcb70298d03445dbb3ea3119e502be4[color=lightseagreen,label="Output\nCells without macrophages"]
+  5 -> k5dcb70298d03445dbb3ea3119e502be4
+  6[label="gene_short_name annotation"]
+  3 -> 6 [label="var"]
+  k15fd415b2d734a1d92ad200bb2e73853[color=lightseagreen,label="Output\nGenes table with gene_short_name colname"]
+  6 -> k15fd415b2d734a1d92ad200bb2e73853
+  7[label="Cut cells IDs"]
+  5 -> 7 [label="out_file1"]
+  kf9bde24943b944248285e437549223e2[color=lightseagreen,label="Output\nFiltered cells IDs "]
+  7 -> kf9bde24943b944248285e437549223e2
+  8[label="Cut genes IDs"]
+  6 -> 8 [label="out_file1"]
+  kb22efa1ddb99435f935774150ac9a437[color=lightseagreen,label="Output\nGenes IDs"]
+  8 -> kb22efa1ddb99435f935774150ac9a437
+  9[label="Filter matrix by cells"]
+  7 -> 9 [label="out_file1"]
+  4 -> 9 [label="X"]
+  kb45f18b6e38541a1a8f0f94e6616e2b3[color=lightseagreen,label="Output\nPre-filtered matrix (by cells)"]
+  9 -> kb45f18b6e38541a1a8f0f94e6616e2b3
+  10[label="Remove duplicate column cells IDs"]
+  9 -> 10 [label="out_file1"]
+  kf4d6a5819b4241dc9a4a278fe5d6591c[color=lightseagreen,label="Output\nFiltered matrix (by cells) "]
+  10 -> kf4d6a5819b4241dc9a4a278fe5d6591c
+  11[label="Transpose matrix"]
+  10 -> 11 [label="output"]
+  ke4eb8fb3202841fb8acab1c0a6e6bfe5[color=lightseagreen,label="Output\nfiltered matrix (by cells) transposed"]
+  11 -> ke4eb8fb3202841fb8acab1c0a6e6bfe5
+  12[label="Filter matrix by genes"]
+  8 -> 12 [label="out_file1"]
+  11 -> 12 [label="out_file"]
+  kc04812550187407c9f29f4c0069d9285[color=lightseagreen,label="Output\nPre-filtered matrix (by cells & genes)"]
+  12 -> kc04812550187407c9f29f4c0069d9285
+  13[label="Remove duplicate column genes IDs"]
+  12 -> 13 [label="out_file1"]
+  k4dcd8e6012984886be8faf1eac9f20f7[color=lightseagreen,label="Output\nFiltered matrix (by cells & genes)"]
+  13 -> k4dcd8e6012984886be8faf1eac9f20f7
+}

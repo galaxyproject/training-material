@@ -1,0 +1,332 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "Running molecular dynamics simulations using NAMD",
+  "format-version": "0.1",
+  "name": "MD NAMD",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "7cel.psf"
+        }
+      ],
+      "label": null,
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 10,
+        "top": 10
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"7cel.psf\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "ae09b2b3-e735-46e7-be28-eaf11cab2d24",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "7cel.crd"
+        }
+      ],
+      "label": null,
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 10,
+        "top": 130
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"7cel.crd\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "83bc3872-4bbf-4afd-aaf8-81a03780636a",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "setup",
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+        "crdin": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "psfin": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "System Setup",
+      "outputs": [
+        {
+          "name": "setup_pdb",
+          "type": "pdb"
+        },
+        {
+          "name": "setup_crd",
+          "type": "crd"
+        },
+        {
+          "name": "setup_psf",
+          "type": "psf"
+        },
+        {
+          "name": "structure_prm",
+          "type": "txt"
+        },
+        {
+          "name": "output",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 230,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "setup",
+      "tool_state": "{\"__page__\": null, \"psfin\": \"null\", \"buffer\": \"\\\"10\\\"\", \"crdin\": \"null\", \"__rerun_remap_job_id__\": null, \"extraprm\": \"{\\\"extrain\\\": \\\"no\\\", \\\"__current_case__\\\": 1}\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "0.1.1",
+      "type": "tool",
+      "uuid": "8ec7c262-af52-4448-8fa1-bdae5216de54",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "minimizer",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "crdin": {
+          "id": 2,
+          "output_name": "setup_crd"
+        },
+        "psfin": {
+          "id": 2,
+          "output_name": "setup_psf"
+        },
+        "structureprm": {
+          "id": 2,
+          "output_name": "structure_prm"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Energy Minimizer",
+      "outputs": [
+        {
+          "name": "pdbout",
+          "type": "pdb"
+        },
+        {
+          "name": "crdout",
+          "type": "crd"
+        },
+        {
+          "name": "psfout",
+          "type": "psf"
+        },
+        {
+          "name": "xplorpsfout",
+          "type": "psf"
+        },
+        {
+          "name": "pmespec",
+          "type": "txt"
+        },
+        {
+          "name": "bbrmsd",
+          "type": "txt"
+        },
+        {
+          "name": "scrmsd",
+          "type": "txt"
+        },
+        {
+          "name": "subsrmsd",
+          "type": "txt"
+        },
+        {
+          "name": "output",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 450,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "minimizer",
+      "tool_state": "{\"__page__\": null, \"structureprm\": \"null\", \"psfin\": \"null\", \"crdin\": \"null\", \"__rerun_remap_job_id__\": null, \"steps\": \"\\\"50\\\"\", \"extraprm\": \"{\\\"extrain\\\": \\\"no\\\", \\\"__current_case__\\\": 1}\", \"namdref\": \"{\\\"sub2\\\": \\\"ACC\\\", \\\"sub3\\\": \\\"GLYC\\\", \\\"sub1\\\": \\\"HET\\\", \\\"pro\\\": \\\"PRO\\\", \\\"__current_case__\\\": 0, \\\"ref\\\": \\\"yes\\\"}\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "0.1.1",
+      "type": "tool",
+      "uuid": "202adca1-afb5-4211-b702-dcf693be9a2b",
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "namd_nvt",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "pdbin": {
+          "id": 3,
+          "output_name": "pdbout"
+        },
+        "pmeshspec": {
+          "id": 3,
+          "output_name": "pmespec"
+        },
+        "psfin": {
+          "id": 3,
+          "output_name": "xplorpsfout"
+        },
+        "rest|bbrmsd": {
+          "id": 3,
+          "output_name": "bbrmsd"
+        },
+        "rest|scrmsd": {
+          "id": 3,
+          "output_name": "scrmsd"
+        },
+        "rest|subsrmsd": {
+          "id": 3,
+          "output_name": "subsrmsd"
+        },
+        "structureprm": {
+          "id": 2,
+          "output_name": "structure_prm"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "NAMD MD Simulator (NVT)",
+      "outputs": [
+        {
+          "name": "coorout",
+          "type": "data"
+        },
+        {
+          "name": "velout",
+          "type": "data"
+        },
+        {
+          "name": "xscout",
+          "type": "txt"
+        },
+        {
+          "name": "dcdout",
+          "type": "dcd"
+        },
+        {
+          "name": "output",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 670,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "namd_nvt",
+      "tool_state": "{\"__page__\": null, \"pmeshspec\": \"null\", \"temp\": \"\\\"300.0\\\"\", \"structureprm\": \"null\", \"psfin\": \"null\", \"__rerun_remap_job_id__\": null, \"simulation_time\": \"\\\"10\\\"\", \"rest\": \"{\\\"bbrmsd\\\": null, \\\"subs\\\": \\\"0.0\\\", \\\"bb\\\": \\\"1.0\\\", \\\"scrmsd\\\": null, \\\"__current_case__\\\": 0, \\\"subsrmsd\\\": null, \\\"sc\\\": \\\"0.1\\\", \\\"restraints\\\": \\\"yes\\\"}\", \"pdbin\": \"null\", \"extraprm\": \"{\\\"extrain\\\": \\\"no\\\", \\\"__current_case__\\\": 1}\", \"nproc\": \"\\\"4\\\"\", \"rst\": \"{\\\"__current_case__\\\": 1, \\\"restart\\\": \\\"no\\\"}\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "0.1.0",
+      "type": "tool",
+      "uuid": "79ae66a8-5b76-4c63-9552-62101a220317",
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "namd_npt",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "pdbin": {
+          "id": 3,
+          "output_name": "pdbout"
+        },
+        "pmeshspec": {
+          "id": 3,
+          "output_name": "pmespec"
+        },
+        "psfin": {
+          "id": 3,
+          "output_name": "xplorpsfout"
+        },
+        "rst|coor": {
+          "id": 4,
+          "output_name": "coorout"
+        },
+        "rst|vel": {
+          "id": 4,
+          "output_name": "velout"
+        },
+        "rst|xsc": {
+          "id": 4,
+          "output_name": "xscout"
+        },
+        "structureprm": {
+          "id": 2,
+          "output_name": "structure_prm"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "NAMD MD Simulator (NPT)",
+      "outputs": [
+        {
+          "name": "coorout",
+          "type": "data"
+        },
+        {
+          "name": "velout",
+          "type": "data"
+        },
+        {
+          "name": "xscout",
+          "type": "txt"
+        },
+        {
+          "name": "dcdout",
+          "type": "dcd"
+        },
+        {
+          "name": "output",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 890,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "namd_npt",
+      "tool_state": "{\"__page__\": null, \"pmeshspec\": \"null\", \"temp\": \"\\\"300.0\\\"\", \"structureprm\": \"null\", \"psfin\": \"null\", \"__rerun_remap_job_id__\": null, \"simulation_time\": \"\\\"100\\\"\", \"rest\": \"{\\\"restraints\\\": \\\"no\\\", \\\"__current_case__\\\": 1}\", \"pressure\": \"\\\"1.01325\\\"\", \"pdbin\": \"null\", \"extraprm\": \"{\\\"extrain\\\": \\\"no\\\", \\\"__current_case__\\\": 1}\", \"nproc\": \"\\\"4\\\"\", \"rst\": \"{\\\"coor\\\": null, \\\"vel\\\": null, \\\"__current_case__\\\": 0, \\\"restart\\\": \\\"yes\\\", \\\"xsc\\\": null}\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "0.1.0",
+      "type": "tool",
+      "uuid": "63e60f93-edb4-483f-b57f-c4397cfdedfb",
+      "workflow_outputs": []
+    }
+  },
+  "tags": [
+    "computational-chemistry"
+  ],
+  "uuid": "1e7fec03-d230-4775-984e-cc0ff5dffa12"
+}

@@ -1,0 +1,24 @@
+- doc: Test the Image Learner workflow for HAM10000 classification
+  job:
+    'images_96':
+      location: https://zenodo.org/api/records/17114688/files/images_96.zip/content
+      class: File
+      filetype: .zip
+    'image_metadata':
+      location: https://zenodo.org/api/records/17114688/files/image_metadata_new.csv/content
+      class: File
+      filetype: .csv
+  outputs:
+    report:
+      asserts:
+        has_text:
+          text: "Image Classification Report"
+    model:
+      asserts:
+        has_text:
+          text: "model"
+    predictions:
+      asserts:
+        has_n_columns:
+          n: 8
+

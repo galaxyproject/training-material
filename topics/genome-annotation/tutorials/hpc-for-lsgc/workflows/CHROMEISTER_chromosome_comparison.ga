@@ -1,0 +1,197 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "A workflow designed to compare chromosomes and study large-scale rearrangements using CHROMEISTER",
+    "format-version": "0.1",
+    "name": "CHROMEISTER chromosome comparison",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Query chromosome"
+                }
+            ],
+            "label": "Query chromosome",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 345.1999969482422,
+                "height": 82.19999694824219,
+                "left": 446,
+                "right": 646,
+                "top": 263,
+                "width": 200,
+                "x": 446,
+                "y": 263
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"fasta\"]}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "fdde703b-e59f-403b-be56-28b4fde66d17",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "e6b6ae7f-73c3-450e-a997-103138788bc6"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Reference chromosome"
+                }
+            ],
+            "label": "Reference chromosome",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 445.1999969482422,
+                "height": 82.19999694824219,
+                "left": 448,
+                "right": 648,
+                "top": 363,
+                "width": 200,
+                "x": 448,
+                "y": 363
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"fasta\"]}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "43a48ede-1c2e-4b0d-bf74-da212443a7de",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "1007eb1e-be5f-4f22-9d42-046f5e695dc4"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "db": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "query": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Chromeister",
+                    "name": "db"
+                },
+                {
+                    "description": "runtime parameter for tool Chromeister",
+                    "name": "query"
+                }
+            ],
+            "label": null,
+            "name": "Chromeister",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                },
+                {
+                    "name": "output_imagen",
+                    "type": "png"
+                },
+                {
+                    "name": "output_csv",
+                    "type": "csv"
+                },
+                {
+                    "name": "output_events",
+                    "type": "txt"
+                },
+                {
+                    "name": "output_events_png",
+                    "type": "png"
+                },
+                {
+                    "name": "output_score",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 793.4000244140625,
+                "height": 520.4000244140625,
+                "left": 851,
+                "right": 1051,
+                "top": 273,
+                "width": 200,
+                "x": 851,
+                "y": 273
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a",
+            "tool_shed_repository": {
+                "changeset_revision": "a6d1f83c46b4",
+                "name": "chromeister",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"db\": {\"__class__\": \"RuntimeValue\"}, \"diffuse\": \"4\", \"dimension\": \"1000\", \"grid\": \"true\", \"kmer\": \"32\", \"pngevents\": \"true\", \"query\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.5.a",
+            "type": "tool",
+            "uuid": "79507815-b059-4f21-b74e-8e390fbb4bf2",
+            "workflow_outputs": [
+                {
+                    "label": "Chromeister on input dataset(s): Detected events",
+                    "output_name": "output_events",
+                    "uuid": "58cf0c0c-9200-4ba4-9727-6d908ccdfa9a"
+                },
+                {
+                    "label": "Chromeister on input dataset(s): Comparison metainformation",
+                    "output_name": "output_csv",
+                    "uuid": "2afd0e7c-d1cf-4bfd-bec6-6cc237ff3e2c"
+                },
+                {
+                    "label": "Chromeister on input dataset(s): Comparison dotplot",
+                    "output_name": "output_imagen",
+                    "uuid": "c248576c-1c39-416c-99d0-40c520e3da67"
+                },
+                {
+                    "label": "Chromeister on input dataset(s): Comparison matrix",
+                    "output_name": "output",
+                    "uuid": "5f9aad77-f9ee-4932-ab22-bb5fd83f416c"
+                },
+                {
+                    "label": "Chromeister on input dataset(s): Comparison score",
+                    "output_name": "output_score",
+                    "uuid": "dea450c2-7126-43dc-af7a-9f2b704c76dd"
+                },
+                {
+                    "label": "Chromeister on input dataset(s): Detected events plot",
+                    "output_name": "output_events_png",
+                    "uuid": "9a03f722-5588-4a3f-b70e-0ec9979c16dd"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "genome-annotation"
+    ],
+    "uuid": "8af0d684-f3bd-4a5e-ad48-a499a87ed5db",
+    "version": 1
+}

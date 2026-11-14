@@ -1,0 +1,22 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nbody_fat_test"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nbody_fat_train"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nbody_fat_test_labels"]
+  3[label="Ensemble methods"]
+  1 -> 3 [label="output"]
+  1 -> 3 [label="output"]
+  4[label="Ensemble methods"]
+  0 -> 4 [label="output"]
+  3 -> 4 [label="outfile_fit"]
+  5[label="Plot actual vs predicted curves and residual plots"]
+  4 -> 5 [label="outfile_predict"]
+  2 -> 5 [label="output"]
+  kcf1a5f94f79d4d13b142c3e20e25b658[color=lightseagreen,label="Output\noutput_scatter_plot"]
+  5 -> kcf1a5f94f79d4d13b142c3e20e25b658
+  ke86ba3fd3f854ba9ad664c1e5caa875a[color=lightseagreen,label="Output\noutput_actual_vs_pred"]
+  5 -> ke86ba3fd3f854ba9ad664c1e5caa875a
+  k2cbc04d3d2d94623b63d51f1b024d611[color=lightseagreen,label="Output\noutput_residual_plot"]
+  5 -> k2cbc04d3d2d94623b63d51f1b024d611
+}

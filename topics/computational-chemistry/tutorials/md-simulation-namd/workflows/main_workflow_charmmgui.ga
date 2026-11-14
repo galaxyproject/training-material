@@ -1,0 +1,248 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "Running molecular dynamics simulations using NAMD",
+  "format-version": "0.1",
+  "name": "NAMD MD From CHARMM GUI",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "step3_pbcsetup.pdb"
+        }
+      ],
+      "label": null,
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 10,
+        "top": 10
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"step3_pbcsetup.pdb\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "180b4e05-b912-4c3e-8d7b-39027a6c9d65",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "step3_pbcsetup.xplor.ext.psf"
+        }
+      ],
+      "label": null,
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 10,
+        "top": 130
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"step3_pbcsetup.xplor.ext.psf\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "8829a91f-e5b5-44bd-977d-c4c308453ac6",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 2,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "checkfft.str"
+        }
+      ],
+      "label": null,
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 10,
+        "top": 250
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"checkfft.str\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "badde4ba-b790-406a-93e5-d622f4be8062",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 3,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "step2.1_waterbox.prm"
+        }
+      ],
+      "label": null,
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 10,
+        "top": 370
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"step2.1_waterbox.prm\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "de715d6e-ffac-4e42-9166-6dfeea0c244f",
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "namd_nvt",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "pdbin": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "pmeshspec": {
+          "id": 2,
+          "output_name": "output"
+        },
+        "psfin": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "structureprm": {
+          "id": 3,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "NAMD MD Simulator (NVT)",
+      "outputs": [
+        {
+          "name": "coorout",
+          "type": "data"
+        },
+        {
+          "name": "velout",
+          "type": "data"
+        },
+        {
+          "name": "xscout",
+          "type": "txt"
+        },
+        {
+          "name": "dcdout",
+          "type": "dcd"
+        },
+        {
+          "name": "output",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 230,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "namd_nvt",
+      "tool_state": "{\"__page__\": null, \"pmeshspec\": \"null\", \"temp\": \"\\\"300.0\\\"\", \"structureprm\": \"null\", \"psfin\": \"null\", \"__rerun_remap_job_id__\": null, \"simulation_time\": \"\\\"10\\\"\", \"rest\": \"{\\\"restraints\\\": \\\"no\\\", \\\"__current_case__\\\": 1}\", \"pdbin\": \"null\", \"extraprm\": \"{\\\"extrain\\\": \\\"no\\\", \\\"__current_case__\\\": 1}\", \"nproc\": \"\\\"12\\\"\", \"rst\": \"{\\\"__current_case__\\\": 1, \\\"restart\\\": \\\"no\\\"}\", \"dcd_freq\": \"\\\"1\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "0.1.1",
+      "type": "tool",
+      "uuid": "c97c7935-cb11-4a6e-bb97-61e02beb0423",
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "namd_npt",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "pdbin": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "pmeshspec": {
+          "id": 2,
+          "output_name": "output"
+        },
+        "psfin": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "rst|coor": {
+          "id": 4,
+          "output_name": "coorout"
+        },
+        "rst|vel": {
+          "id": 4,
+          "output_name": "velout"
+        },
+        "rst|xsc": {
+          "id": 4,
+          "output_name": "xscout"
+        },
+        "structureprm": {
+          "id": 3,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "NAMD MD Simulator (NPT)",
+      "outputs": [
+        {
+          "name": "coorout",
+          "type": "data"
+        },
+        {
+          "name": "velout",
+          "type": "data"
+        },
+        {
+          "name": "xscout",
+          "type": "txt"
+        },
+        {
+          "name": "dcdout",
+          "type": "dcd"
+        },
+        {
+          "name": "output",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 450,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "namd_npt",
+      "tool_state": "{\"__page__\": null, \"pmeshspec\": \"null\", \"temp\": \"\\\"300.0\\\"\", \"structureprm\": \"null\", \"psfin\": \"null\", \"__rerun_remap_job_id__\": null, \"simulation_time\": \"\\\"10\\\"\", \"rest\": \"{\\\"restraints\\\": \\\"no\\\", \\\"__current_case__\\\": 1}\", \"pressure\": \"\\\"1.01325\\\"\", \"pdbin\": \"null\", \"extraprm\": \"{\\\"extrain\\\": \\\"no\\\", \\\"__current_case__\\\": 1}\", \"nproc\": \"\\\"12\\\"\", \"rst\": \"{\\\"coor\\\": null, \\\"vel\\\": null, \\\"__current_case__\\\": 0, \\\"restart\\\": \\\"yes\\\", \\\"xsc\\\": null}\", \"dcd_freq\": \"\\\"1\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "0.1.2",
+      "type": "tool",
+      "uuid": "fcda9113-c822-4342-9046-868268b5a93e",
+      "workflow_outputs": []
+    }
+  },
+  "tags": [
+    "computational-chemistry"
+  ],
+  "uuid": "1cd115f1-208a-43d0-9b7e-ada301dd8da6"
+}

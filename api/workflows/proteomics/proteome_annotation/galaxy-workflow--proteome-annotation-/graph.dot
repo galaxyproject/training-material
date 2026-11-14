@@ -1,0 +1,27 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nInput dataset"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nInput dataset"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nInput dataset"]
+  3[label="Build tissue-specific expression dataset"]
+  4[label="Filter by keywords and/or numerical value"]
+  1 -> 4 [label="output"]
+  5[label="ID Converter"]
+  3 -> 5 [label="output"]
+  6[label="ID Converter"]
+  4 -> 6 [label="kept_lines"]
+  7[label="Venn diagram"]
+  4 -> 7 [label="kept_lines"]
+  0 -> 7 [label="output"]
+  2 -> 7 [label="output"]
+  8[label="Add expression data"]
+  6 -> 8 [label="output"]
+  9[label="Filter by keywords and/or numerical value"]
+  8 -> 9 [label="output"]
+  10[label="GO terms classification and enrichment analysis"]
+  5 -> 10 [label="output"]
+  9 -> 10 [label="kept_lines"]
+  11[label="Query pathway database"]
+  9 -> 11 [label="kept_lines"]
+}

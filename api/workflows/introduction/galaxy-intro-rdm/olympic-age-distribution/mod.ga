@@ -1,0 +1,247 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "",
+  "comments": [],
+  "format-version": "0.1",
+  "license": "MIT",
+  "name": "Olympic Age Distribution",
+  "report": {
+    "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+  },
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "Input Dataset Collection"
+        }
+      ],
+      "label": "Input Dataset Collection",
+      "name": "Input dataset collection",
+      "outputs": [],
+      "position": {
+        "left": 0,
+        "top": 104.91273183132873
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\", \"fields\": null, \"column_definitions\": null}",
+      "tool_version": null,
+      "type": "data_collection_input",
+      "uuid": "ee4606b0-d3bf-424c-b34d-49004fccad50",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1",
+      "errors": null,
+      "id": 1,
+      "input_connections": {
+        "input": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Compute",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 300.52615029420747,
+        "top": 101.25298537209633
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.1",
+      "tool_shed_repository": {
+        "changeset_revision": "aff5135563c6",
+        "name": "column_maker",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"input\", \"avoid_scientific_notation\": false, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"error_handling\": {\"auto_col_types\": false, \"fail_on_non_existent_columns\": true, \"non_computable\": {\"action\": \"--skip-non-computable\", \"__current_case__\": 1}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"input|__identifier__\": \"2010 Winter Olympics Vancouver\", \"ops\": {\"header_lines_select\": \"yes\", \"__current_case__\": 1, \"expressions\": [{\"__index__\": 0, \"cond\": \"int(c10)-int(c4)\", \"add_column\": {\"mode\": \"\", \"__current_case__\": 0, \"pos\": \"\"}, \"new_column_name\": \"age\"}]}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "2.1",
+      "type": "tool",
+      "uuid": "873269af-ec48-4913-aa73-f39b306d700d",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "Summary_Statistics1",
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+        "input": {
+          "id": 1,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Summary Statistics",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 586.3929877905606,
+        "top": 0
+      },
+      "post_job_actions": {},
+      "tool_id": "Summary_Statistics1",
+      "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"cond\": \"c16\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"input|__identifier__\": \"2010 Winter Olympics Vancouver\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "1.1.2",
+      "type": "tool",
+      "uuid": "fb165db5-36c6-4b2c-ba4a-65fce9ff1b5c",
+      "when": null,
+      "workflow_outputs": [
+        {
+          "label": "summary_statistics",
+          "output_name": "out_file1",
+          "uuid": "4cb62955-579d-4bed-8d45-b432b5c984f8"
+        }
+      ]
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "input_tabular": {
+          "id": 1,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Remove columns",
+      "outputs": [
+        {
+          "name": "output_tabular",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 580.2934103585067,
+        "top": 234.67104098894896
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "2040e4c2750a",
+        "name": "column_remove_by_header",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"headers\": [{\"__index__\": 0, \"name\": \"age\"}], \"input_tabular\": {\"__class__\": \"ConnectedValue\"}, \"input_tabular|__identifier__\": \"2010 Winter Olympics Vancouver\", \"keep_columns\": true, \"strip_characters\": \"#\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "1.0",
+      "type": "tool",
+      "uuid": "d24ef54c-98d5-4f11-8e35-c058b12fced2",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_histogram/ggplot2_histogram/3.5.1+galaxy1",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "input1": {
+          "id": 3,
+          "output_name": "output_tabular"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Histogram with ggplot2",
+      "outputs": [
+        {
+          "name": "output1",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 893.0187155168221,
+        "top": 180.54749198879827
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_histogram/ggplot2_histogram/3.5.1+galaxy1",
+      "tool_shed_repository": {
+        "changeset_revision": "6b9816a913de",
+        "name": "ggplot2_histogram",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"input\", \"adv\": {\"density\": \"counts\", \"facet\": \"none\", \"coloring\": {\"colorscheme\": \"Default\", \"__current_case__\": 0}, \"transform\": \"none\", \"scaling\": {\"plot_scaling\": \"Automatic\", \"__current_case__\": 0}, \"theme\": \"bw\", \"legend\": \"yes\"}, \"binwidth\": \"1.0\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input1|__identifier__\": \"2010 Winter Olympics Vancouver\", \"out\": {\"unit_output_dim\": \"in\", \"width_output_dim\": \"7.0\", \"height_output_dim\": \"7.0\", \"dpi_output_dim\": \"300.0\", \"additional_output_format\": \"none\"}, \"size\": \"1.0\", \"title\": \"Age distribution of athletes\", \"xlab\": \"Age\", \"ylab\": \"Count\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "3.5.1+galaxy1",
+      "type": "tool",
+      "uuid": "18d19624-bc89-4dfc-84ee-3f6cdb39f443",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/imagemagick_image_montage/imagemagick_image_montage/7.1.2-2+galaxy1",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "input": {
+          "id": 4,
+          "output_name": "output1"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Image Montage",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 1156.927148715513,
+        "top": 124.43137961390151
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/imagemagick_image_montage/imagemagick_image_montage/7.1.2-2+galaxy1",
+      "tool_shed_repository": {
+        "changeset_revision": "fc43cdc81408",
+        "name": "imagemagick_image_montage",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"label_options\": {\"label\": \"true\", \"__current_case__\": 0, \"label_indexes\": false}, \"pointsize\": \"60\", \"resize\": \"100\", \"title\": \"Age distribution of athletes in Olympic Games\", \"width\": \"4\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+      "tool_uuid": null,
+      "tool_version": "7.1.2-2+galaxy1",
+      "type": "tool",
+      "uuid": "748a27a2-d43d-454d-8cad-769287ff56af",
+      "when": null,
+      "workflow_outputs": []
+    }
+  },
+  "tags": [
+    "Introduction",
+    "GTN",
+    "Galaxy"
+  ],
+  "uuid": "a25c2860-f065-41c9-b5ec-b338d5407e1c",
+  "version": 3
+}

@@ -1,0 +1,30 @@
+---
+data_managers:
+    - id: toolshed.g2.bx.psu.edu/repos/iuc/data_manager_metaphlan2_database_downloader/data_manager_metaphlan2_download/2.6.0
+      # MetaPhlAn2 database
+      params:
+          - 'database': ''
+      items:
+          - db_v20
+      data_table_reload:
+          - metaphlan2_database
+
+    - id: toolshed.g2.bx.psu.edu/repos/iuc/data_manager_humann2_database_downloader/data_manager_humann2_download/0.9.9
+      # HUMAnN2 database: Nucleotide database: full chocophlan
+      params:
+          - 'db|database': 'chocophlan'
+          - 'db|build': ''
+      items:
+          - full
+      data_table_reload:
+          - humann2_nucleotide_database
+
+    - id: toolshed.g2.bx.psu.edu/repos/iuc/data_manager_humann2_database_downloader/data_manager_humann2_download/0.9.9
+      # HUMAnN2 database: Protein database: full uniref50
+      params:
+          - 'db|database': 'uniref'
+          - 'db|build': ''
+      items:
+          - uniref50_diamond
+      data_table_reload:
+          - humann2_protein_database

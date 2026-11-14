@@ -1,0 +1,3037 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0002-9906-0673",
+            "name": "Anna Syme"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "GPL-3.0-or-later",
+    "name": "Combined workflows for large genome assembly - upgraded ",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "long reads"
+                }
+            ],
+            "label": "long reads",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 37.09056155334109,
+                "top": 117.80110422489305
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "f9154ba8-6c56-4b8c-b3a6-79bf72638963",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "R1"
+                }
+            ],
+            "label": "R1",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 296.6915657131622
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "2152a89a-64b2-4e77-897e-97c2e951f0d4",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "R2"
+                }
+            ],
+            "label": "R2",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 18.331891780359495,
+                "top": 404.60599487314124
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "04ed4838-38d0-47c6-9692-af43b305750c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "minimap settings (for long reads)"
+                }
+            ],
+            "label": "minimap settings (for long reads)",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 953.979654343896,
+                "top": 53.88085686443145
+            },
+            "tool_id": null,
+            "tool_state": "{\"default\": \"map-ont\", \"parameter_type\": \"text\", \"optional\": true}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "925fcb63-babc-42b5-9510-c82277158288",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "3643a598-963e-42d9-b625-41f5256dee4a"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 4,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Reference genome for Quast"
+                }
+            ],
+            "label": "Reference genome for Quast",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 1271.7306972391564,
+                "top": 75.04279962197629
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "5bd59f90-9351-4b1e-bc0d-11fee8b4a435",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "id": 5,
+            "input_connections": {
+                "Illumina reads R1": {
+                    "id": 1,
+                    "input_subworkflow_step_id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "kmer counting - meryl - upgraded",
+            "outputs": [],
+            "position": {
+                "left": 418.129093197794,
+                "top": 384.1548472245897
+            },
+            "subworkflow": {
+                "a_galaxy_workflow": "true",
+                "annotation": "",
+                "comments": [],
+                "creator": [
+                    {
+                        "class": "Person",
+                        "identifier": "0000-0002-9906-0673",
+                        "name": "Anna Syme"
+                    }
+                ],
+                "format-version": "0.1",
+                "name": "kmer counting - meryl - upgraded",
+                "report": {
+                    "markdown": "\n# Workflow Execution Report\n\n\r\n```galaxy\nworkflow_display()\n```\r\n"
+                },
+                "steps": {
+                    "0": {
+                        "annotation": "",
+                        "content_id": null,
+                        "errors": null,
+                        "id": 0,
+                        "input_connections": {},
+                        "inputs": [
+                            {
+                                "description": "",
+                                "name": "Illumina reads R1"
+                            }
+                        ],
+                        "label": "Illumina reads R1",
+                        "name": "Input dataset",
+                        "outputs": [],
+                        "position": {
+                            "left": 0,
+                            "top": 31.5
+                        },
+                        "tool_id": null,
+                        "tool_state": "{\"optional\": false, \"tag\": null}",
+                        "tool_version": null,
+                        "type": "data_input",
+                        "uuid": "3daa3f25-6fff-4766-9d45-b991fd6751a5",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "1": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6",
+                        "errors": null,
+                        "id": 1,
+                        "input_connections": {
+                            "operation_type|input_reads": {
+                                "id": 0,
+                                "output_name": "output"
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool Meryl",
+                                "name": "operation_type"
+                            }
+                        ],
+                        "label": "Meryl - count kmers",
+                        "name": "Meryl",
+                        "outputs": [
+                            {
+                                "name": "read_db",
+                                "type": "meryldb"
+                            }
+                        ],
+                        "position": {
+                            "left": 228,
+                            "top": 103.5
+                        },
+                        "post_job_actions": {},
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6",
+                        "tool_shed_repository": {
+                            "changeset_revision": "29dabd8db6f2",
+                            "name": "meryl",
+                            "owner": "iuc",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"operation_type\": {\"command_type\": \"count-kmers\", \"__current_case__\": 0, \"count_operations\": \"count\", \"input_reads\": {\"__class__\": \"RuntimeValue\"}, \"options_kmer_size\": {\"kmer_size\": \"provide\", \"__current_case__\": 0, \"input_kmer_size\": \"21\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "1.3+galaxy6",
+                        "type": "tool",
+                        "uuid": "0a85d93b-8f53-4bc8-b89b-4be6f306f2c6",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": "Meryl on input dataset(s): read-db.meryldb",
+                                "output_name": "read_db",
+                                "uuid": "899ddd93-4c0f-4f81-a973-8120494ed983"
+                            }
+                        ]
+                    },
+                    "2": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6",
+                        "errors": null,
+                        "id": 2,
+                        "input_connections": {
+                            "operation_type|input_meryldb_02": {
+                                "id": 1,
+                                "output_name": "read_db"
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool Meryl",
+                                "name": "operation_type"
+                            }
+                        ],
+                        "label": "Meryl - generate histogram",
+                        "name": "Meryl",
+                        "outputs": [
+                            {
+                                "name": "read_db_hist",
+                                "type": "tabular"
+                            }
+                        ],
+                        "position": {
+                            "left": 465.5,
+                            "top": 110
+                        },
+                        "post_job_actions": {},
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6",
+                        "tool_shed_repository": {
+                            "changeset_revision": "29dabd8db6f2",
+                            "name": "meryl",
+                            "owner": "iuc",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"operation_type\": {\"command_type\": \"histogram-kmers\", \"__current_case__\": 4, \"input_meryldb_02\": {\"__class__\": \"RuntimeValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "1.3+galaxy6",
+                        "type": "tool",
+                        "uuid": "80dbb867-84f7-4349-ae1d-1c7b87d0dce7",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": null,
+                                "output_name": "read_db_hist",
+                                "uuid": "bf11e7cb-61a2-4c27-9aa1-4c7a42028330"
+                            }
+                        ]
+                    },
+                    "3": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0+galaxy2",
+                        "errors": null,
+                        "id": 3,
+                        "input_connections": {
+                            "input": {
+                                "id": 2,
+                                "output_name": "read_db_hist"
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool GenomeScope",
+                                "name": "input"
+                            }
+                        ],
+                        "label": "Genomescope",
+                        "name": "GenomeScope",
+                        "outputs": [
+                            {
+                                "name": "linear_plot",
+                                "type": "png"
+                            },
+                            {
+                                "name": "log_plot",
+                                "type": "png"
+                            },
+                            {
+                                "name": "transformed_linear_plot",
+                                "type": "png"
+                            },
+                            {
+                                "name": "transformed_log_plot",
+                                "type": "png"
+                            },
+                            {
+                                "name": "model",
+                                "type": "txt"
+                            },
+                            {
+                                "name": "summary",
+                                "type": "txt"
+                            },
+                            {
+                                "name": "progress",
+                                "type": "txt"
+                            }
+                        ],
+                        "position": {
+                            "left": 699.204345703125,
+                            "top": 0
+                        },
+                        "post_job_actions": {},
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0+galaxy2",
+                        "tool_shed_repository": {
+                            "changeset_revision": "01210c4e9144",
+                            "name": "genomescope",
+                            "owner": "iuc",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"advanced_options\": {\"topology\": null, \"initial_repetitiveness\": null, \"initial_heterozygosities\": \"\", \"transform_exp\": null, \"testing\": false, \"true_params\": \"\", \"trace_flag\": false, \"num_rounds\": null}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"kmer_length\": \"21\", \"lambda\": null, \"max_kmercov\": null, \"output_options\": {\"output_files\": [\"model_output\", \"summary_output\", \"progress_output\"], \"no_unique_sequence\": false}, \"ploidy\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "2.0+galaxy2",
+                        "type": "tool",
+                        "uuid": "fa7a5012-8bd0-4b35-b337-249245e0932b",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": null,
+                                "output_name": "model",
+                                "uuid": "ede2b1a5-4017-4aef-a6d2-bac5d17bc7b5"
+                            },
+                            {
+                                "label": null,
+                                "output_name": "progress",
+                                "uuid": "fedca588-8be6-4e13-9ff5-62387a5a90af"
+                            },
+                            {
+                                "label": "GenomeScope on input dataset(s) Transformed log plot",
+                                "output_name": "transformed_log_plot",
+                                "uuid": "efc727b6-1ef4-4c4c-8cce-35c7d3cc8aac"
+                            },
+                            {
+                                "label": null,
+                                "output_name": "summary",
+                                "uuid": "fd17af72-7c2a-4167-9880-7fbda525ccbb"
+                            },
+                            {
+                                "label": "GenomeScope on input dataset(s) Linear plot",
+                                "output_name": "linear_plot",
+                                "uuid": "c71ce055-98f0-4354-9397-2f8833b90cc4"
+                            },
+                            {
+                                "label": "GenomeScope on input dataset(s) Transformed linear plot",
+                                "output_name": "transformed_linear_plot",
+                                "uuid": "701df341-5767-44bc-ade2-6af498ab7467"
+                            },
+                            {
+                                "label": "GenomeScope on input dataset(s) Log plot",
+                                "output_name": "log_plot",
+                                "uuid": "85fa4004-b351-47b3-84aa-6788d338037a"
+                            }
+                        ]
+                    }
+                },
+                "tags": "",
+                "uuid": "2acfd319-771e-4e5b-bd88-2befc044d070"
+            },
+            "tool_id": null,
+            "type": "subworkflow",
+            "uuid": "bccba5ad-bcc1-4f36-b4c1-aefc4de56e3b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "id": 6,
+            "input_connections": {
+                "Input file: Illumina reads R1": {
+                    "id": 1,
+                    "input_subworkflow_step_id": 1,
+                    "output_name": "output"
+                },
+                "Input file: Illumina reads R2": {
+                    "id": 2,
+                    "input_subworkflow_step_id": 2,
+                    "output_name": "output"
+                },
+                "Input file: long reads": {
+                    "id": 0,
+                    "input_subworkflow_step_id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Data QC - upgraded",
+            "outputs": [],
+            "position": {
+                "left": 341.6127866591229,
+                "top": 0
+            },
+            "subworkflow": {
+                "a_galaxy_workflow": "true",
+                "annotation": "",
+                "comments": [],
+                "creator": [
+                    {
+                        "class": "Person",
+                        "identifier": "0000-0002-9906-0673",
+                        "name": "Anna Syme"
+                    }
+                ],
+                "format-version": "0.1",
+                "name": "Data QC - upgraded",
+                "report": {
+                    "markdown": "\n# Workflow Report for Data QC\n\n## Workflow steps\n\n```galaxy\nworkflow_display()\n```\n\n"
+                },
+                "steps": {
+                    "0": {
+                        "annotation": "",
+                        "content_id": null,
+                        "errors": null,
+                        "id": 0,
+                        "input_connections": {},
+                        "inputs": [
+                            {
+                                "description": "",
+                                "name": "Input file: long reads"
+                            }
+                        ],
+                        "label": "Input file: long reads",
+                        "name": "Input dataset",
+                        "outputs": [],
+                        "position": {
+                            "left": 0,
+                            "top": 0.0
+                        },
+                        "tool_id": null,
+                        "tool_state": "{\"optional\": false, \"tag\": null}",
+                        "tool_version": null,
+                        "type": "data_input",
+                        "uuid": "e2e4a70b-6e36-4b8b-bdf6-12b97189a6bd",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "1": {
+                        "annotation": "",
+                        "content_id": null,
+                        "errors": null,
+                        "id": 1,
+                        "input_connections": {},
+                        "inputs": [
+                            {
+                                "description": "",
+                                "name": "Input file: Illumina reads R1"
+                            }
+                        ],
+                        "label": "Input file: Illumina reads R1",
+                        "name": "Input dataset",
+                        "outputs": [],
+                        "position": {
+                            "left": 535.703125,
+                            "top": 21.0
+                        },
+                        "tool_id": null,
+                        "tool_state": "{\"optional\": false, \"tag\": null}",
+                        "tool_version": null,
+                        "type": "data_input",
+                        "uuid": "ea859a58-c81a-4ef6-9bd2-4ef2f17bb5a9",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "2": {
+                        "annotation": "",
+                        "content_id": null,
+                        "errors": null,
+                        "id": 2,
+                        "input_connections": {},
+                        "inputs": [
+                            {
+                                "description": "",
+                                "name": "Input file: Illumina reads R2"
+                            }
+                        ],
+                        "label": "Input file: Illumina reads R2",
+                        "name": "Input dataset",
+                        "outputs": [],
+                        "position": {
+                            "left": 530.703125,
+                            "top": 379.984375
+                        },
+                        "tool_id": null,
+                        "tool_state": "{\"optional\": false, \"tag\": null}",
+                        "tool_version": null,
+                        "type": "data_input",
+                        "uuid": "472adc05-88a5-4955-9e43-e82e9550ad08",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "3": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.42.0+galaxy1",
+                        "errors": null,
+                        "id": 3,
+                        "input_connections": {
+                            "mode|reads|files": {
+                                "id": 0,
+                                "output_name": "output"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Nanoplot: long reads",
+                        "name": "NanoPlot",
+                        "outputs": [
+                            {
+                                "name": "output_html",
+                                "type": "html"
+                            },
+                            {
+                                "name": "nanostats",
+                                "type": "tabular"
+                            },
+                            {
+                                "name": "nanostats_post_filtering",
+                                "type": "tabular"
+                            }
+                        ],
+                        "position": {
+                            "left": 240.84375,
+                            "top": 104.359375
+                        },
+                        "post_job_actions": {
+                            "HideDatasetActionlog_read_length": {
+                                "action_arguments": {},
+                                "action_type": "HideDatasetAction",
+                                "output_name": "log_read_length"
+                            },
+                            "HideDatasetActionnanostats": {
+                                "action_arguments": {},
+                                "action_type": "HideDatasetAction",
+                                "output_name": "nanostats"
+                            },
+                            "HideDatasetActionnanostats_post_filtering": {
+                                "action_arguments": {},
+                                "action_type": "HideDatasetAction",
+                                "output_name": "nanostats_post_filtering"
+                            },
+                            "HideDatasetActionread_length": {
+                                "action_arguments": {},
+                                "action_type": "HideDatasetAction",
+                                "output_name": "read_length"
+                            }
+                        },
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.42.0+galaxy1",
+                        "tool_shed_repository": {
+                            "changeset_revision": "a02b8b3f5a0c",
+                            "name": "nanoplot",
+                            "owner": "iuc",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"customization\": {\"color\": null, \"plots\": null, \"N50\": false}, \"filter\": {\"maxlength\": null, \"minlength\": null, \"drop_outliers\": false, \"downsample\": null, \"loglength\": false, \"percentqual\": false, \"alength\": false, \"minqual\": null, \"runtime_until\": null, \"readtype\": null, \"barcoded\": false, \"no_supplementary\": false}, \"mode\": {\"choice\": \"batch\", \"__current_case__\": 0, \"reads\": {\"type\": \"fastq\", \"__current_case__\": 0, \"files\": {\"__class__\": \"ConnectedValue\"}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "1.42.0+galaxy1",
+                        "type": "tool",
+                        "uuid": "3b8a87fe-1506-48d2-a4d9-f4dca8b6065d",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": "NanoPlot on input dataset(s): HTML report",
+                                "output_name": "output_html",
+                                "uuid": "73d0e4cf-366e-41c1-810a-b269638826b3"
+                            }
+                        ]
+                    },
+                    "4": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
+                        "errors": null,
+                        "id": 4,
+                        "input_connections": {
+                            "input_file": {
+                                "id": 1,
+                                "output_name": "output"
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool FastQC",
+                                "name": "adapters"
+                            },
+                            {
+                                "description": "runtime parameter for tool FastQC",
+                                "name": "contaminants"
+                            },
+                            {
+                                "description": "runtime parameter for tool FastQC",
+                                "name": "limits"
+                            }
+                        ],
+                        "label": "FastQC on R1",
+                        "name": "FastQC",
+                        "outputs": [
+                            {
+                                "name": "html_file",
+                                "type": "html"
+                            },
+                            {
+                                "name": "text_file",
+                                "type": "txt"
+                            }
+                        ],
+                        "position": {
+                            "left": 786.548095703125,
+                            "top": 0.5756988525390625
+                        },
+                        "post_job_actions": {
+                            "HideDatasetActionhtml_file": {
+                                "action_arguments": {},
+                                "action_type": "HideDatasetAction",
+                                "output_name": "html_file"
+                            },
+                            "HideDatasetActiontext_file": {
+                                "action_arguments": {},
+                                "action_type": "HideDatasetAction",
+                                "output_name": "text_file"
+                            }
+                        },
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
+                        "tool_shed_repository": {
+                            "changeset_revision": "5ec9f6bceaee",
+                            "name": "fastqc",
+                            "owner": "devteam",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"kmers\": \"7\", \"limits\": {\"__class__\": \"RuntimeValue\"}, \"min_length\": null, \"nogroup\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "0.74+galaxy0",
+                        "type": "tool",
+                        "uuid": "175dd690-5995-4bb7-8994-c73bc864e092",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "5": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
+                        "errors": null,
+                        "id": 5,
+                        "input_connections": {
+                            "input_file": {
+                                "id": 2,
+                                "output_name": "output"
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool FastQC",
+                                "name": "adapters"
+                            },
+                            {
+                                "description": "runtime parameter for tool FastQC",
+                                "name": "contaminants"
+                            },
+                            {
+                                "description": "runtime parameter for tool FastQC",
+                                "name": "limits"
+                            }
+                        ],
+                        "label": "FastQC on R2",
+                        "name": "FastQC",
+                        "outputs": [
+                            {
+                                "name": "html_file",
+                                "type": "html"
+                            },
+                            {
+                                "name": "text_file",
+                                "type": "txt"
+                            }
+                        ],
+                        "position": {
+                            "left": 792.53125,
+                            "top": 364.984375
+                        },
+                        "post_job_actions": {
+                            "HideDatasetActionhtml_file": {
+                                "action_arguments": {},
+                                "action_type": "HideDatasetAction",
+                                "output_name": "html_file"
+                            },
+                            "HideDatasetActiontext_file": {
+                                "action_arguments": {},
+                                "action_type": "HideDatasetAction",
+                                "output_name": "text_file"
+                            }
+                        },
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
+                        "tool_shed_repository": {
+                            "changeset_revision": "5ec9f6bceaee",
+                            "name": "fastqc",
+                            "owner": "devteam",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"adapters\": {\"__class__\": \"RuntimeValue\"}, \"contaminants\": {\"__class__\": \"RuntimeValue\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"kmers\": \"7\", \"limits\": {\"__class__\": \"RuntimeValue\"}, \"min_length\": null, \"nogroup\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "0.74+galaxy0",
+                        "type": "tool",
+                        "uuid": "bb99a593-dff8-4b5b-94b4-ac1b4e5d29e7",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "6": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1",
+                        "errors": null,
+                        "id": 6,
+                        "input_connections": {
+                            "results_0|software_cond|output_0|input": {
+                                "id": 4,
+                                "output_name": "text_file"
+                            },
+                            "results_0|software_cond|output_1|input": {
+                                "id": 5,
+                                "output_name": "text_file"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "MultiQC: combine fastQC reports",
+                        "name": "MultiQC",
+                        "outputs": [
+                            {
+                                "name": "stats",
+                                "type": "input"
+                            },
+                            {
+                                "name": "html_report",
+                                "type": "html"
+                            }
+                        ],
+                        "position": {
+                            "left": 1233.5,
+                            "top": 230.844970703125
+                        },
+                        "post_job_actions": {
+                            "HideDatasetActionstats": {
+                                "action_arguments": {},
+                                "action_type": "HideDatasetAction",
+                                "output_name": "stats"
+                            }
+                        },
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1",
+                        "tool_shed_repository": {
+                            "changeset_revision": "abfd8a6544d7",
+                            "name": "multiqc",
+                            "owner": "iuc",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"comment\": \"\", \"export\": false, \"flat\": false, \"results\": [{\"__index__\": 0, \"software_cond\": {\"software\": \"fastqc\", \"__current_case__\": 8, \"output\": [{\"__index__\": 0, \"type\": \"data\", \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"type\": \"data\", \"input\": {\"__class__\": \"ConnectedValue\"}}]}}], \"saveLog\": false, \"title\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "1.11+galaxy1",
+                        "type": "tool",
+                        "uuid": "3e29a59b-dca0-4993-b20d-495a3f17e291",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": "MultiQC on input dataset(s): Webpage",
+                                "output_name": "html_report",
+                                "uuid": "8baf8700-876e-4a74-ad99-6e656f3ba618"
+                            }
+                        ]
+                    }
+                },
+                "tags": "",
+                "uuid": "57eaff09-c635-4390-8def-78e2b904ce1a"
+            },
+            "tool_id": null,
+            "type": "subworkflow",
+            "uuid": "1e30109a-5cde-4d7d-adca-495cef3d1406",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "id": 7,
+            "input_connections": {
+                "Illumina reads R1": {
+                    "id": 1,
+                    "input_subworkflow_step_id": 0,
+                    "output_name": "output"
+                },
+                "Illumina reads R2": {
+                    "id": 2,
+                    "input_subworkflow_step_id": 1,
+                    "output_name": "output"
+                },
+                "long reads": {
+                    "id": 0,
+                    "input_subworkflow_step_id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Trim and filter reads - fastp - upgraded ",
+            "outputs": [],
+            "position": {
+                "left": 680.0336980235301,
+                "top": 174.9137955216761
+            },
+            "subworkflow": {
+                "a_galaxy_workflow": "true",
+                "annotation": "",
+                "comments": [],
+                "creator": [
+                    {
+                        "class": "Person",
+                        "identifier": "0000-0002-9906-0673",
+                        "name": "Anna Syme"
+                    }
+                ],
+                "format-version": "0.1",
+                "name": "Trim and filter reads - fastp - upgraded ",
+                "report": {
+                    "markdown": "\n# Workflow for Trim and Filter Reads\n\n## Workflow steps\n```galaxy\nworkflow_display()\n```\n\n\n\n\n"
+                },
+                "steps": {
+                    "0": {
+                        "annotation": "",
+                        "content_id": null,
+                        "errors": null,
+                        "id": 0,
+                        "input_connections": {},
+                        "inputs": [
+                            {
+                                "description": "",
+                                "name": "Illumina reads R1"
+                            }
+                        ],
+                        "label": "Illumina reads R1",
+                        "name": "Input dataset",
+                        "outputs": [],
+                        "position": {
+                            "left": 0,
+                            "top": 29.045160466974437
+                        },
+                        "tool_id": null,
+                        "tool_state": "{\"optional\": false, \"tag\": null}",
+                        "tool_version": null,
+                        "type": "data_input",
+                        "uuid": "00a54054-e3f7-4e4f-9195-563e54df899a",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "1": {
+                        "annotation": "",
+                        "content_id": null,
+                        "errors": null,
+                        "id": 1,
+                        "input_connections": {},
+                        "inputs": [
+                            {
+                                "description": "",
+                                "name": "Illumina reads R2"
+                            }
+                        ],
+                        "label": "Illumina reads R2",
+                        "name": "Input dataset",
+                        "outputs": [],
+                        "position": {
+                            "left": 0,
+                            "top": 145.03474842418325
+                        },
+                        "tool_id": null,
+                        "tool_state": "{\"optional\": false, \"tag\": null}",
+                        "tool_version": null,
+                        "type": "data_input",
+                        "uuid": "14062fd8-1aa9-4a18-94d8-bbbb0e1a9262",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "2": {
+                        "annotation": "",
+                        "content_id": null,
+                        "errors": null,
+                        "id": 2,
+                        "input_connections": {},
+                        "inputs": [
+                            {
+                                "description": "",
+                                "name": "long reads"
+                            }
+                        ],
+                        "label": "long reads",
+                        "name": "Input dataset",
+                        "outputs": [],
+                        "position": {
+                            "left": 576.5103981711648,
+                            "top": 35.50348455255681
+                        },
+                        "tool_id": null,
+                        "tool_state": "{\"optional\": false, \"tag\": null}",
+                        "tool_version": null,
+                        "type": "data_input",
+                        "uuid": "08eeb0d3-6ad6-4e7f-ac6a-d00c8e87fd08",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "3": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy0",
+                        "errors": null,
+                        "id": 3,
+                        "input_connections": {
+                            "single_paired|in1": {
+                                "id": 0,
+                                "output_name": "output"
+                            },
+                            "single_paired|in2": {
+                                "id": 1,
+                                "output_name": "output"
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool fastp",
+                                "name": "single_paired"
+                            },
+                            {
+                                "description": "runtime parameter for tool fastp",
+                                "name": "single_paired"
+                            }
+                        ],
+                        "label": "fastp on short reads",
+                        "name": "fastp",
+                        "outputs": [
+                            {
+                                "name": "out1",
+                                "type": "input"
+                            },
+                            {
+                                "name": "out2",
+                                "type": "input"
+                            },
+                            {
+                                "name": "report_html",
+                                "type": "html"
+                            },
+                            {
+                                "name": "report_json",
+                                "type": "json"
+                            }
+                        ],
+                        "position": {
+                            "left": 290.5382191051136,
+                            "top": 0
+                        },
+                        "post_job_actions": {
+                            "DeleteIntermediatesActionout1": {
+                                "action_arguments": {},
+                                "action_type": "DeleteIntermediatesAction",
+                                "output_name": "out1"
+                            },
+                            "RenameDatasetActionout1": {
+                                "action_arguments": {
+                                    "newname": "fastp_filtered_R1.fastq.gz"
+                                },
+                                "action_type": "RenameDatasetAction",
+                                "output_name": "out1"
+                            },
+                            "RenameDatasetActionout2": {
+                                "action_arguments": {
+                                    "newname": "fastp_filtered_R2.fastq.gz"
+                                },
+                                "action_type": "RenameDatasetAction",
+                                "output_name": "out2"
+                            },
+                            "RenameDatasetActionreport_html": {
+                                "action_arguments": {
+                                    "newname": "fastp_illumina.html"
+                                },
+                                "action_type": "RenameDatasetAction",
+                                "output_name": "report_html"
+                            },
+                            "RenameDatasetActionreport_json": {
+                                "action_arguments": {
+                                    "newname": "fastp_illumina.json"
+                                },
+                                "action_type": "RenameDatasetAction",
+                                "output_name": "report_json"
+                            }
+                        },
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy0",
+                        "tool_shed_repository": {
+                            "changeset_revision": "c59d48774d03",
+                            "name": "fastp",
+                            "owner": "iuc",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"filter_options\": {\"quality_filtering_options\": {\"disable_quality_filtering\": false, \"qualified_quality_phred\": null, \"unqualified_percent_limit\": null, \"n_base_limit\": null}, \"length_filtering_options\": {\"disable_length_filtering\": false, \"length_required\": null, \"length_limit\": null}, \"low_complexity_filter\": {\"enable_low_complexity_filter\": false, \"complexity_threshold\": null}}, \"output_options\": {\"report_html\": true, \"report_json\": true}, \"overrepresented_sequence_analysis\": {\"overrepresentation_analysis\": false, \"overrepresentation_sampling\": null}, \"read_mod_options\": {\"polyg_tail_trimming\": {\"trimming_select\": \"\", \"__current_case__\": 1, \"poly_g_min_len\": null}, \"polyx_tail_trimming\": {\"polyx_trimming_select\": \"\", \"__current_case__\": 1}, \"umi_processing\": {\"umi\": false, \"umi_loc\": \"\", \"umi_len\": null, \"umi_prefix\": \"\"}, \"cutting_by_quality_options\": {\"cut_by_quality5\": false, \"cut_by_quality3\": false, \"cut_window_size\": null, \"cut_mean_quality\": null}, \"base_correction_options\": {\"correction\": false}}, \"single_paired\": {\"single_paired_selector\": \"paired\", \"__current_case__\": 1, \"in1\": {\"__class__\": \"ConnectedValue\"}, \"in2\": {\"__class__\": \"ConnectedValue\"}, \"adapter_trimming_options\": {\"disable_adapter_trimming\": false, \"adapter_sequence1\": \"\", \"adapter_sequence2\": \"\"}, \"global_trimming_options\": {\"trim_front1\": null, \"trim_tail1\": null, \"trim_front2\": null, \"trim_tail2\": null}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "0.23.4+galaxy0",
+                        "type": "tool",
+                        "uuid": "c38e84b3-771c-428e-9d2d-ce84d5e1153c",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": "fastp filtered R2 reads",
+                                "output_name": "out2",
+                                "uuid": "639ed3f7-0e51-4e5d-b6f8-081378962109"
+                            },
+                            {
+                                "label": "fastp report on short reads html",
+                                "output_name": "report_html",
+                                "uuid": "656e4138-41ab-4561-8989-33de9ac9a2f3"
+                            },
+                            {
+                                "label": "fastp filtered R1 reads",
+                                "output_name": "out1",
+                                "uuid": "0d53f347-0368-47cb-953a-2e4dac57e013"
+                            },
+                            {
+                                "label": "fastp report on short reads json",
+                                "output_name": "report_json",
+                                "uuid": "10fbe1e5-400c-4ffe-8794-9b776b0d7322"
+                            }
+                        ]
+                    },
+                    "4": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy0",
+                        "errors": null,
+                        "id": 4,
+                        "input_connections": {
+                            "single_paired|in1": {
+                                "id": 2,
+                                "output_name": "output"
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool fastp",
+                                "name": "single_paired"
+                            }
+                        ],
+                        "label": "fastp on long reads",
+                        "name": "fastp",
+                        "outputs": [
+                            {
+                                "name": "out1",
+                                "type": "input"
+                            },
+                            {
+                                "name": "report_html",
+                                "type": "html"
+                            },
+                            {
+                                "name": "report_json",
+                                "type": "json"
+                            }
+                        ],
+                        "position": {
+                            "left": 804.010509144176,
+                            "top": 22.482646595348
+                        },
+                        "post_job_actions": {
+                            "DeleteIntermediatesActionout1": {
+                                "action_arguments": {},
+                                "action_type": "DeleteIntermediatesAction",
+                                "output_name": "out1"
+                            },
+                            "RenameDatasetActionout1": {
+                                "action_arguments": {
+                                    "newname": "fastp_filtered_long_reads.fastq.gz"
+                                },
+                                "action_type": "RenameDatasetAction",
+                                "output_name": "out1"
+                            },
+                            "RenameDatasetActionreport_html": {
+                                "action_arguments": {
+                                    "newname": "fastp_longreads.html"
+                                },
+                                "action_type": "RenameDatasetAction",
+                                "output_name": "report_html"
+                            },
+                            "RenameDatasetActionreport_json": {
+                                "action_arguments": {
+                                    "newname": "fastp_longreads.json"
+                                },
+                                "action_type": "RenameDatasetAction",
+                                "output_name": "report_json"
+                            }
+                        },
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy0",
+                        "tool_shed_repository": {
+                            "changeset_revision": "c59d48774d03",
+                            "name": "fastp",
+                            "owner": "iuc",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"filter_options\": {\"quality_filtering_options\": {\"disable_quality_filtering\": true, \"qualified_quality_phred\": null, \"unqualified_percent_limit\": null, \"n_base_limit\": null}, \"length_filtering_options\": {\"disable_length_filtering\": true, \"length_required\": null, \"length_limit\": null}, \"low_complexity_filter\": {\"enable_low_complexity_filter\": false, \"complexity_threshold\": null}}, \"output_options\": {\"report_html\": true, \"report_json\": true}, \"overrepresented_sequence_analysis\": {\"overrepresentation_analysis\": false, \"overrepresentation_sampling\": null}, \"read_mod_options\": {\"polyg_tail_trimming\": {\"trimming_select\": \"-G\", \"__current_case__\": 2}, \"polyx_tail_trimming\": {\"polyx_trimming_select\": \"\", \"__current_case__\": 1}, \"umi_processing\": {\"umi\": false, \"umi_loc\": \"\", \"umi_len\": null, \"umi_prefix\": \"\"}, \"cutting_by_quality_options\": {\"cut_by_quality5\": false, \"cut_by_quality3\": false, \"cut_window_size\": null, \"cut_mean_quality\": null}, \"base_correction_options\": {\"correction\": false}}, \"single_paired\": {\"single_paired_selector\": \"single\", \"__current_case__\": 0, \"in1\": {\"__class__\": \"ConnectedValue\"}, \"adapter_trimming_options\": {\"disable_adapter_trimming\": true, \"adapter_sequence1\": \"\"}, \"global_trimming_options\": {\"trim_front1\": null, \"trim_tail1\": null}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "0.23.4+galaxy0",
+                        "type": "tool",
+                        "uuid": "93602736-2d22-43e4-a53a-803326ccab9e",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": "fastp report on long reads html",
+                                "output_name": "report_html",
+                                "uuid": "5e0d2c3d-41a4-4823-ae9c-b1e4d2826541"
+                            },
+                            {
+                                "label": "fastp filtered long reads",
+                                "output_name": "out1",
+                                "uuid": "e6018ad6-86f4-4e78-8cf2-ccc8b97022fe"
+                            },
+                            {
+                                "label": "fastp report on long reads json",
+                                "output_name": "report_json",
+                                "uuid": "69f8383b-a1be-4a74-95f4-3dba35e01426"
+                            }
+                        ]
+                    }
+                },
+                "tags": "",
+                "uuid": "e3f03097-58c0-42b7-aed4-09ff483cacbc"
+            },
+            "tool_id": null,
+            "type": "subworkflow",
+            "uuid": "d336aea3-7161-40ec-8858-4a1cac779720",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "id": 8,
+            "input_connections": {
+                "long reads": {
+                    "id": 7,
+                    "input_subworkflow_step_id": 0,
+                    "output_name": "fastp filtered long reads"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Assembly with Flye - upgraded",
+            "outputs": [],
+            "position": {
+                "left": 939.233235201838,
+                "top": 173.82195017963454
+            },
+            "subworkflow": {
+                "a_galaxy_workflow": "true",
+                "annotation": "",
+                "comments": [],
+                "creator": [
+                    {
+                        "class": "Person",
+                        "identifier": "0000-0002-9906-0673",
+                        "name": "Anna Syme"
+                    }
+                ],
+                "format-version": "0.1",
+                "name": "Assembly with Flye - upgraded",
+                "report": {
+                    "markdown": "# Workflow Report for Assembly with Flye\n\n\n## Workflow steps\n\n```galaxy\nworkflow_display()\n```\n\n## Dataset - fasta stats. \n\n```galaxy\nhistory_dataset_display(output=\"Fasta Statistics on input dataset(s): Fasta summary stats\")\n```\n\n## Contig sizes\n\n```galaxy\nhistory_dataset_as_image(output=\"Bar chart showing contig sizes\")\n```\n\n\n## Bandage image\n\n```galaxy\nhistory_dataset_as_image(output=\"Bandage Image on input dataset(s): Assembly Graph Image\")\n```\n\n## Quast report\n\n\r\n```galaxy\nhistory_dataset_display(output=\"Quast on input dataset(s):  PDF report\")\n```\r\n\n\n\n"
+                },
+                "steps": {
+                    "0": {
+                        "annotation": "",
+                        "content_id": null,
+                        "errors": null,
+                        "id": 0,
+                        "input_connections": {},
+                        "inputs": [
+                            {
+                                "description": "",
+                                "name": "long reads"
+                            }
+                        ],
+                        "label": "long reads",
+                        "name": "Input dataset",
+                        "outputs": [],
+                        "position": {
+                            "left": 0,
+                            "top": 398.40625
+                        },
+                        "tool_id": null,
+                        "tool_state": "{\"optional\": false, \"tag\": null}",
+                        "tool_version": null,
+                        "type": "data_input",
+                        "uuid": "501d7387-3bed-4510-891f-a4571a48d9ab",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "1": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9.3+galaxy0",
+                        "errors": null,
+                        "id": 1,
+                        "input_connections": {
+                            "inputs": {
+                                "id": 0,
+                                "output_name": "output"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Flye: assembly",
+                        "name": "Flye",
+                        "outputs": [
+                            {
+                                "name": "consensus",
+                                "type": "fasta"
+                            },
+                            {
+                                "name": "assembly_graph",
+                                "type": "graph_dot"
+                            },
+                            {
+                                "name": "assembly_gfa",
+                                "type": "txt"
+                            },
+                            {
+                                "name": "assembly_info",
+                                "type": "tabular"
+                            }
+                        ],
+                        "position": {
+                            "left": 260.57143695759436,
+                            "top": 248.74363091133793
+                        },
+                        "post_job_actions": {},
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9.3+galaxy0",
+                        "tool_shed_repository": {
+                            "changeset_revision": "291923e6f276",
+                            "name": "flye",
+                            "owner": "bgruening",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"asm\": {\"asm_select\": \"false\", \"__current_case__\": 1}, \"generate_log\": false, \"i\": \"1\", \"inputs\": {\"__class__\": \"ConnectedValue\"}, \"iterations\": \"1\", \"keep_haplotypes\": false, \"m\": null, \"meta\": false, \"min_overlap\": null, \"mode\": \"--nano-raw\", \"mode_conditional\": {\"mode\": \"--nano-raw\", \"__current_case__\": 0}, \"no_alt_contigs\": false, \"no_trestle\": \"false\", \"plasmids\": \"false\", \"scaffold\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "2.9.3+galaxy0",
+                        "type": "tool",
+                        "uuid": "8bed3591-266a-41f1-91d3-11b3456e8609",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": "Flye assembly on input dataset(s) (consensus)",
+                                "output_name": "consensus",
+                                "uuid": "3960e31d-7a9e-400c-bb21-f6e47b75e649"
+                            },
+                            {
+                                "label": "Flye assembly on input dataset(s) (assembly_graph)",
+                                "output_name": "assembly_graph",
+                                "uuid": "e524f295-a957-4c91-838c-f8e98e809b6c"
+                            },
+                            {
+                                "label": "Flye assembly on input dataset(s) (Graphical Fragment Assembly)",
+                                "output_name": "assembly_gfa",
+                                "uuid": "48b854e2-dd6e-4345-8d05-09abca6659da"
+                            },
+                            {
+                                "label": "Flye assembly on input dataset(s) (assembly_info)",
+                                "output_name": "assembly_info",
+                                "uuid": "8672c172-71a7-432c-9679-a8e37f36cf53"
+                            }
+                        ]
+                    },
+                    "2": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0",
+                        "errors": null,
+                        "id": 2,
+                        "input_connections": {
+                            "fasta": {
+                                "id": 1,
+                                "output_name": "consensus"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Fasta statistics",
+                        "name": "Fasta Statistics",
+                        "outputs": [
+                            {
+                                "name": "stats_output",
+                                "type": "tabular"
+                            }
+                        ],
+                        "position": {
+                            "left": 585.46875,
+                            "top": 0
+                        },
+                        "post_job_actions": {},
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0",
+                        "tool_shed_repository": {
+                            "changeset_revision": "0dbb995c7d35",
+                            "name": "fasta_stats",
+                            "owner": "iuc",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"dataset\": {\"__class__\": \"ConnectedValue\"}, \"fasta\": {\"__class__\": \"ConnectedValue\"}, \"gaps_option\": false, \"genome_size\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "2.0",
+                        "type": "tool",
+                        "uuid": "811b5756-e24e-4de3-a3d6-2ee4bf347c1b",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "3": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1",
+                        "errors": null,
+                        "id": 3,
+                        "input_connections": {
+                            "mode|in|inputs": {
+                                "id": 1,
+                                "output_name": "consensus"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Quast genome report",
+                        "name": "Quast",
+                        "outputs": [
+                            {
+                                "name": "report_html",
+                                "type": "html"
+                            }
+                        ],
+                        "position": {
+                            "left": 697.3759752425051,
+                            "top": 194.46891558901518
+                        },
+                        "post_job_actions": {},
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1",
+                        "tool_shed_repository": {
+                            "changeset_revision": "72472698a2df",
+                            "name": "quast",
+                            "owner": "iuc",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"advanced\": {\"contig_thresholds\": \"0,1000\", \"strict_NA\": false, \"extensive_mis_size\": \"1000\", \"scaffold_gap_max_size\": \"1000\", \"unaligned_part_size\": \"500\", \"skip_unaligned_mis_contigs\": true, \"fragmented_max_indent\": null, \"report_all_metrics\": false, \"x_for_Nx\": \"90\"}, \"al\": {\"ambiguity_score\": \"0.99\", \"ambiguity_usage\": \"one\", \"fragmented\": false, \"fragmented_max_indent\": \"50\", \"min_alignment\": \"65\", \"min_identity\": \"95.0\", \"upper_bound_assembly\": false, \"upper_bound_min_con\": \"2\", \"use_all_alignments\": false}, \"alignments\": {\"use_all_alignments\": false, \"min_alignment\": \"65\", \"ambiguity_usage\": \"one\", \"ambiguity_score\": \"0.99\", \"fragmented\": false, \"upper_bound_assembly\": false, \"upper_bound_min_con\": null, \"local_mis_size\": \"200\"}, \"assembly\": {\"type\": \"genome\", \"__current_case__\": 0, \"ref\": {\"use_ref\": \"false\", \"__current_case__\": 1, \"est_ref_size\": null}, \"orga_type\": \"\", \"min_identity\": \"95.0\"}, \"circos\": \"false\", \"contig_thresholds\": \"0,1000\", \"extensive_mis_size\": \"1000\", \"genes\": {\"gene_finding\": {\"tool\": \"none\", \"__current_case__\": 0}, \"rna_finding\": false, \"conserved_genes_finding\": false}, \"in\": {\"__current_case__\": 1, \"custom\": \"false\", \"inputs\": {\"__class__\": \"RuntimeValue\"}}, \"k_mer\": {\"__current_case__\": 1, \"k_mer_stats\": \"\"}, \"large\": true, \"min_contig\": \"500\", \"mode\": {\"mode\": \"co\", \"__current_case__\": 1, \"in\": {\"custom\": \"false\", \"__current_case__\": 1, \"inputs\": {\"__class__\": \"ConnectedValue\"}}, \"reads\": {\"reads_option\": \"disabled\", \"__current_case__\": 0}}, \"output_files\": \"html\", \"scaffold_gap_max_size\": \"1000\", \"skip_unaligned_mis_contigs\": \"false\", \"split_scaffolds\": false, \"strict_NA\": \"false\", \"unaligned_part_size\": \"500\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "5.2.0+galaxy1",
+                        "type": "tool",
+                        "uuid": "5bc29646-ec4c-4eb3-af01-73d82fc690a2",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": "Quast on input dataset(s):  HTML report",
+                                "output_name": "report_html",
+                                "uuid": "17cdf8e0-8ad4-4570-afae-1861934fc678"
+                            }
+                        ]
+                    },
+                    "4": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4",
+                        "errors": null,
+                        "id": 4,
+                        "input_connections": {
+                            "input_file": {
+                                "id": 1,
+                                "output_name": "assembly_gfa"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Bandage image: Flye assembly",
+                        "name": "Bandage Image",
+                        "outputs": [
+                            {
+                                "name": "outfile",
+                                "type": "jpg"
+                            }
+                        ],
+                        "position": {
+                            "left": 583.546875,
+                            "top": 446.40625
+                        },
+                        "post_job_actions": {},
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4",
+                        "tool_shed_repository": {
+                            "changeset_revision": "ddddce450736",
+                            "name": "bandage",
+                            "owner": "iuc",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"fontsize\": null, \"height\": \"1000\", \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"lengths\": false, \"names\": false, \"nodewidth\": null, \"output_format\": \"jpg\", \"width\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "2022.09+galaxy4",
+                        "type": "tool",
+                        "uuid": "395f2dfe-3fa5-4684-bf97-7dd12e970f78",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": "Bandage Image on input dataset(s): Assembly Graph Image",
+                                "output_name": "outfile",
+                                "uuid": "e66bd129-146f-48dc-95b8-39a2a1ffb68d"
+                            }
+                        ]
+                    },
+                    "5": {
+                        "annotation": "",
+                        "content_id": "barchart_gnuplot",
+                        "errors": null,
+                        "id": 5,
+                        "input_connections": {
+                            "input": {
+                                "id": 1,
+                                "output_name": "assembly_info"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Bar chart: show contig sizes",
+                        "name": "Bar chart",
+                        "outputs": [
+                            {
+                                "name": "out_file1",
+                                "type": "png"
+                            }
+                        ],
+                        "position": {
+                            "left": 595.421875,
+                            "top": 688.984375
+                        },
+                        "post_job_actions": {},
+                        "tool_id": "barchart_gnuplot",
+                        "tool_state": "{\"colList\": \"2\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"pdf_size\": \"800,600\", \"title\": \"Assembly contig sizes\", \"xtic\": {\"userSpecified\": \"No\", \"__current_case__\": 1}, \"ylabel\": \"lengths\", \"ymax\": \"0\", \"ymin\": \"0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "1.0.0",
+                        "type": "tool",
+                        "uuid": "cb9d5059-bf42-4a0e-8150-f5089e0d5b1b",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": "Bar chart showing contig sizes",
+                                "output_name": "out_file1",
+                                "uuid": "6d0a4e23-d631-4e37-8930-3d22fc91369b"
+                            }
+                        ]
+                    }
+                },
+                "tags": "",
+                "uuid": "59773e66-bb62-4bcd-90bc-5b6e15967c6f"
+            },
+            "tool_id": null,
+            "type": "subworkflow",
+            "uuid": "a0c6f920-f15b-4457-83c8-32b233c06f68",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "id": 9,
+            "input_connections": {
+                "Assembly to be polished": {
+                    "id": 8,
+                    "input_subworkflow_step_id": 0,
+                    "output_name": "Flye assembly on input dataset(s) (consensus)"
+                },
+                "Illumina reads R1": {
+                    "id": 7,
+                    "input_subworkflow_step_id": 3,
+                    "output_name": "fastp filtered R1 reads"
+                },
+                "long reads": {
+                    "id": 7,
+                    "input_subworkflow_step_id": 1,
+                    "output_name": "fastp filtered long reads"
+                },
+                "minimap setting (for long reads)": {
+                    "id": 3,
+                    "input_subworkflow_step_id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Assembly polishing - upgraded",
+            "outputs": [],
+            "position": {
+                "left": 1260.7587450660599,
+                "top": 269.3075732043599
+            },
+            "subworkflow": {
+                "a_galaxy_workflow": "true",
+                "annotation": "",
+                "comments": [],
+                "creator": [
+                    {
+                        "class": "Person",
+                        "identifier": "0000-0002-9906-0673",
+                        "name": "Anna Syme"
+                    }
+                ],
+                "format-version": "0.1",
+                "name": "Assembly polishing - upgraded",
+                "report": {
+                    "markdown": "\n# Workflow Report for Assembly Polishing\n\n## Workflow steps\n\n```galaxy\nworkflow_display()\n```\n\n## Fasta statistics after Racon long-read polish\n\n```galaxy\nhistory_dataset_display(output=\"Fasta statistics after Racon long read polish\")\n```\n\n\n## Fasta statistics after Medaka polish\n\n```galaxy\nhistory_dataset_display(output=\"Fasta statistics after Medaka polish\")\n```\n\n## Fasta statistics after Racon short-read polish\n\n```galaxy\nhistory_dataset_display(output=\"Fasta statistics after Racon short read polish\")\n```\n\n\n\n\n"
+                },
+                "steps": {
+                    "0": {
+                        "annotation": "",
+                        "content_id": null,
+                        "errors": null,
+                        "id": 0,
+                        "input_connections": {},
+                        "inputs": [
+                            {
+                                "description": "",
+                                "name": "Assembly to be polished"
+                            }
+                        ],
+                        "label": "Assembly to be polished",
+                        "name": "Input dataset",
+                        "outputs": [],
+                        "position": {
+                            "left": 19.464939294568495,
+                            "top": 0.0
+                        },
+                        "tool_id": null,
+                        "tool_state": "{\"optional\": false, \"tag\": null}",
+                        "tool_version": null,
+                        "type": "data_input",
+                        "uuid": "52bc9ac4-ac3c-48eb-aead-94a0a14417fc",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "1": {
+                        "annotation": "",
+                        "content_id": null,
+                        "errors": null,
+                        "id": 1,
+                        "input_connections": {},
+                        "inputs": [
+                            {
+                                "description": "",
+                                "name": "long reads"
+                            }
+                        ],
+                        "label": "long reads",
+                        "name": "Input dataset",
+                        "outputs": [],
+                        "position": {
+                            "left": 0.0,
+                            "top": 142.48340578478533
+                        },
+                        "tool_id": null,
+                        "tool_state": "{\"optional\": false, \"tag\": null}",
+                        "tool_version": null,
+                        "type": "data_input",
+                        "uuid": "688866c4-de9b-4b78-8df3-b169d28b1617",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "2": {
+                        "annotation": "",
+                        "content_id": null,
+                        "errors": null,
+                        "id": 2,
+                        "input_connections": {},
+                        "inputs": [
+                            {
+                                "description": "",
+                                "name": "minimap setting (for long reads)"
+                            }
+                        ],
+                        "label": "minimap setting (for long reads)",
+                        "name": "Input parameter",
+                        "outputs": [],
+                        "position": {
+                            "left": 13.133522093825794,
+                            "top": 247.1519749531627
+                        },
+                        "tool_id": null,
+                        "tool_state": "{\"default\": \"map-ont\", \"parameter_type\": \"text\", \"optional\": true}",
+                        "tool_version": null,
+                        "type": "parameter_input",
+                        "uuid": "c1f18b5c-e8db-4046-b876-9b28a77cf66e",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": null,
+                                "output_name": "output",
+                                "uuid": "ce393bcf-42e3-43ee-9056-a99e8c077a29"
+                            }
+                        ]
+                    },
+                    "3": {
+                        "annotation": "",
+                        "content_id": null,
+                        "errors": null,
+                        "id": 3,
+                        "input_connections": {},
+                        "inputs": [
+                            {
+                                "description": "",
+                                "name": "Illumina reads R1"
+                            }
+                        ],
+                        "label": "Illumina reads R1",
+                        "name": "Input dataset",
+                        "outputs": [],
+                        "position": {
+                            "left": 617.719019724734,
+                            "top": 600.0866464299372
+                        },
+                        "tool_id": null,
+                        "tool_state": "{\"optional\": false, \"tag\": null}",
+                        "tool_version": null,
+                        "type": "data_input",
+                        "uuid": "ea859a58-c81a-4ef6-9bd2-4ef2f17bb5a9",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "4": {
+                        "annotation": "",
+                        "id": 4,
+                        "input_connections": {
+                            "Assembly to be polished": {
+                                "id": 0,
+                                "input_subworkflow_step_id": 0,
+                                "output_name": "output"
+                            },
+                            "long reads": {
+                                "id": 1,
+                                "input_subworkflow_step_id": 1,
+                                "output_name": "output"
+                            },
+                            "minimap setting (for long reads) ": {
+                                "id": 2,
+                                "input_subworkflow_step_id": 2,
+                                "output_name": "output"
+                            }
+                        },
+                        "inputs": [],
+                        "label": null,
+                        "name": "Racon polish with long reads, x4 - upgraded",
+                        "outputs": [],
+                        "position": {
+                            "left": 299.6429464825318,
+                            "top": 72.0364210406818
+                        },
+                        "subworkflow": {
+                            "a_galaxy_workflow": "true",
+                            "annotation": "",
+                            "comments": [],
+                            "creator": [
+                                {
+                                    "class": "Person",
+                                    "identifier": "0000-0002-9906-0673",
+                                    "name": "Anna Syme"
+                                }
+                            ],
+                            "format-version": "0.1",
+                            "name": "Racon polish with long reads, x4 - upgraded",
+                            "report": {
+                                "markdown": "\n# Workflow Execution Report\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+                            },
+                            "steps": {
+                                "0": {
+                                    "annotation": "",
+                                    "content_id": null,
+                                    "errors": null,
+                                    "id": 0,
+                                    "input_connections": {},
+                                    "inputs": [
+                                        {
+                                            "description": "",
+                                            "name": "Assembly to be polished"
+                                        }
+                                    ],
+                                    "label": "Assembly to be polished",
+                                    "name": "Input dataset",
+                                    "outputs": [],
+                                    "position": {
+                                        "left": 0,
+                                        "top": 216.625
+                                    },
+                                    "tool_id": null,
+                                    "tool_state": "{\"optional\": false, \"tag\": null}",
+                                    "tool_version": null,
+                                    "type": "data_input",
+                                    "uuid": "c7796c36-adf8-49e4-a8e4-66e606d70311",
+                                    "when": null,
+                                    "workflow_outputs": []
+                                },
+                                "1": {
+                                    "annotation": "",
+                                    "content_id": null,
+                                    "errors": null,
+                                    "id": 1,
+                                    "input_connections": {},
+                                    "inputs": [
+                                        {
+                                            "description": "",
+                                            "name": "long reads"
+                                        }
+                                    ],
+                                    "label": "long reads",
+                                    "name": "Input dataset",
+                                    "outputs": [],
+                                    "position": {
+                                        "left": 4.5,
+                                        "top": 360.234375
+                                    },
+                                    "tool_id": null,
+                                    "tool_state": "{\"optional\": false, \"tag\": null}",
+                                    "tool_version": null,
+                                    "type": "data_input",
+                                    "uuid": "e2e4a70b-6e36-4b8b-bdf6-12b97189a6bd",
+                                    "when": null,
+                                    "workflow_outputs": []
+                                },
+                                "2": {
+                                    "annotation": "",
+                                    "content_id": null,
+                                    "errors": null,
+                                    "id": 2,
+                                    "input_connections": {},
+                                    "inputs": [
+                                        {
+                                            "description": "",
+                                            "name": "minimap setting (for long reads) "
+                                        }
+                                    ],
+                                    "label": "minimap setting (for long reads) ",
+                                    "name": "Input parameter",
+                                    "outputs": [],
+                                    "position": {
+                                        "left": 0.578125,
+                                        "top": 495.859375
+                                    },
+                                    "tool_id": null,
+                                    "tool_state": "{\"default\": \"map-ont\", \"parameter_type\": \"text\", \"optional\": true}",
+                                    "tool_version": null,
+                                    "type": "parameter_input",
+                                    "uuid": "fb80c05c-08d4-4ac2-b4bf-81ed906e4d72",
+                                    "when": null,
+                                    "workflow_outputs": [
+                                        {
+                                            "label": null,
+                                            "output_name": "output",
+                                            "uuid": "3983ef22-5f05-4384-8f34-6ac8c4b2cc83"
+                                        }
+                                    ]
+                                },
+                                "3": {
+                                    "annotation": "Map raw reads to assembly; output paf",
+                                    "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.26+galaxy0",
+                                    "errors": null,
+                                    "id": 3,
+                                    "input_connections": {
+                                        "fastq_input|analysis_type_selector": {
+                                            "id": 2,
+                                            "output_name": "output"
+                                        },
+                                        "fastq_input|fastq_input1": {
+                                            "id": 1,
+                                            "output_name": "output"
+                                        },
+                                        "reference_source|ref_file": {
+                                            "id": 0,
+                                            "output_name": "output"
+                                        }
+                                    },
+                                    "inputs": [
+                                        {
+                                            "description": "runtime parameter for tool Map with minimap2",
+                                            "name": "fastq_input"
+                                        },
+                                        {
+                                            "description": "runtime parameter for tool Map with minimap2",
+                                            "name": "fastq_input"
+                                        },
+                                        {
+                                            "description": "runtime parameter for tool Map with minimap2",
+                                            "name": "reference_source"
+                                        }
+                                    ],
+                                    "label": "Minimap2: map long reads to assembly",
+                                    "name": "Map with minimap2",
+                                    "outputs": [
+                                        {
+                                            "name": "alignment_output",
+                                            "type": "bam"
+                                        }
+                                    ],
+                                    "position": {
+                                        "left": 377.640625,
+                                        "top": 0
+                                    },
+                                    "post_job_actions": {
+                                        "HideDatasetActionalignment_output": {
+                                            "action_arguments": {},
+                                            "action_type": "HideDatasetAction",
+                                            "output_name": "alignment_output"
+                                        }
+                                    },
+                                    "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.26+galaxy0",
+                                    "tool_shed_repository": {
+                                        "changeset_revision": "be1d967337e4",
+                                        "name": "minimap2",
+                                        "owner": "iuc",
+                                        "tool_shed": "toolshed.g2.bx.psu.edu"
+                                    },
+                                    "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": true}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"analysis_type_selector\": {\"__class__\": \"ConnectedValue\"}}, \"indexing_options\": {\"H\": false, \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"paf\", \"Q\": false, \"L\": false, \"K\": null, \"cs\": null, \"c\": false, \"eqx\": false, \"Y\": false}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"q_occ_frac\": \"0.01\", \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": false, \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                                    "tool_version": "2.26+galaxy0",
+                                    "type": "tool",
+                                    "uuid": "0c06144f-d1ac-4b45-9669-1ddf11fcb06b",
+                                    "when": null,
+                                    "workflow_outputs": []
+                                },
+                                "4": {
+                                    "annotation": "",
+                                    "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.5.0+galaxy1",
+                                    "errors": null,
+                                    "id": 4,
+                                    "input_connections": {
+                                        "corrected_reads": {
+                                            "id": 0,
+                                            "output_name": "output"
+                                        },
+                                        "overlaps": {
+                                            "id": 3,
+                                            "output_name": "alignment_output"
+                                        },
+                                        "reads": {
+                                            "id": 1,
+                                            "output_name": "output"
+                                        }
+                                    },
+                                    "inputs": [],
+                                    "label": "Racon: polish 1",
+                                    "name": "Racon",
+                                    "outputs": [
+                                        {
+                                            "name": "consensus",
+                                            "type": "fasta"
+                                        }
+                                    ],
+                                    "position": {
+                                        "left": 458.640625,
+                                        "top": 518.875
+                                    },
+                                    "post_job_actions": {
+                                        "HideDatasetActionconsensus": {
+                                            "action_arguments": {},
+                                            "action_type": "HideDatasetAction",
+                                            "output_name": "consensus"
+                                        }
+                                    },
+                                    "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.5.0+galaxy1",
+                                    "tool_shed_repository": {
+                                        "changeset_revision": "78c533842eeb",
+                                        "name": "racon",
+                                        "owner": "bgruening",
+                                        "tool_shed": "toolshed.g2.bx.psu.edu"
+                                    },
+                                    "tool_state": "{\"corrected_reads\": {\"__class__\": \"ConnectedValue\"}, \"e\": \"0.3\", \"error_threshold\": \"0.3\", \"f\": \"false\", \"fragment_correction\": false, \"g\": \"-8\", \"gap\": \"-4\", \"include_unpolished\": false, \"m\": \"5\", \"match\": \"3\", \"mismatch\": \"-5\", \"no_trimming\": false, \"overlaps\": {\"__class__\": \"ConnectedValue\"}, \"q\": \"10.0\", \"quality_threshold\": \"10.0\", \"reads\": {\"__class__\": \"ConnectedValue\"}, \"u\": \"true\", \"w\": \"500\", \"window_length\": \"500\", \"x\": \"-4\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                                    "tool_version": "1.5.0+galaxy1",
+                                    "type": "tool",
+                                    "uuid": "6c144354-91f2-49dd-a1f5-7c4119859730",
+                                    "when": null,
+                                    "workflow_outputs": []
+                                },
+                                "5": {
+                                    "annotation": "Map raw reads to assembly; output paf",
+                                    "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.26+galaxy0",
+                                    "errors": null,
+                                    "id": 5,
+                                    "input_connections": {
+                                        "fastq_input|analysis_type_selector": {
+                                            "id": 2,
+                                            "output_name": "output"
+                                        },
+                                        "fastq_input|fastq_input1": {
+                                            "id": 1,
+                                            "output_name": "output"
+                                        },
+                                        "reference_source|ref_file": {
+                                            "id": 4,
+                                            "output_name": "consensus"
+                                        }
+                                    },
+                                    "inputs": [
+                                        {
+                                            "description": "runtime parameter for tool Map with minimap2",
+                                            "name": "fastq_input"
+                                        },
+                                        {
+                                            "description": "runtime parameter for tool Map with minimap2",
+                                            "name": "fastq_input"
+                                        },
+                                        {
+                                            "description": "runtime parameter for tool Map with minimap2",
+                                            "name": "reference_source"
+                                        }
+                                    ],
+                                    "label": "Minimap2: map long reads to polished assembly 1",
+                                    "name": "Map with minimap2",
+                                    "outputs": [
+                                        {
+                                            "name": "alignment_output",
+                                            "type": "bam"
+                                        }
+                                    ],
+                                    "position": {
+                                        "left": 698.859375,
+                                        "top": 13.390625
+                                    },
+                                    "post_job_actions": {
+                                        "HideDatasetActionalignment_output": {
+                                            "action_arguments": {},
+                                            "action_type": "HideDatasetAction",
+                                            "output_name": "alignment_output"
+                                        }
+                                    },
+                                    "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.26+galaxy0",
+                                    "tool_shed_repository": {
+                                        "changeset_revision": "be1d967337e4",
+                                        "name": "minimap2",
+                                        "owner": "iuc",
+                                        "tool_shed": "toolshed.g2.bx.psu.edu"
+                                    },
+                                    "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": true}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"analysis_type_selector\": {\"__class__\": \"ConnectedValue\"}}, \"indexing_options\": {\"H\": false, \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"paf\", \"Q\": false, \"L\": false, \"K\": null, \"cs\": null, \"c\": false, \"eqx\": false, \"Y\": false}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"q_occ_frac\": \"0.01\", \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": false, \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                                    "tool_version": "2.26+galaxy0",
+                                    "type": "tool",
+                                    "uuid": "c1b83dad-a8ed-42cb-951f-73f59f2dfa92",
+                                    "when": null,
+                                    "workflow_outputs": []
+                                },
+                                "6": {
+                                    "annotation": "",
+                                    "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.5.0+galaxy1",
+                                    "errors": null,
+                                    "id": 6,
+                                    "input_connections": {
+                                        "corrected_reads": {
+                                            "id": 4,
+                                            "output_name": "consensus"
+                                        },
+                                        "overlaps": {
+                                            "id": 5,
+                                            "output_name": "alignment_output"
+                                        },
+                                        "reads": {
+                                            "id": 1,
+                                            "output_name": "output"
+                                        }
+                                    },
+                                    "inputs": [],
+                                    "label": "Racon: polish 2",
+                                    "name": "Racon",
+                                    "outputs": [
+                                        {
+                                            "name": "consensus",
+                                            "type": "fasta"
+                                        }
+                                    ],
+                                    "position": {
+                                        "left": 759.9375,
+                                        "top": 485.71875
+                                    },
+                                    "post_job_actions": {
+                                        "HideDatasetActionconsensus": {
+                                            "action_arguments": {},
+                                            "action_type": "HideDatasetAction",
+                                            "output_name": "consensus"
+                                        }
+                                    },
+                                    "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.5.0+galaxy1",
+                                    "tool_shed_repository": {
+                                        "changeset_revision": "78c533842eeb",
+                                        "name": "racon",
+                                        "owner": "bgruening",
+                                        "tool_shed": "toolshed.g2.bx.psu.edu"
+                                    },
+                                    "tool_state": "{\"corrected_reads\": {\"__class__\": \"ConnectedValue\"}, \"e\": \"0.3\", \"error_threshold\": \"0.3\", \"f\": \"false\", \"fragment_correction\": false, \"g\": \"-8\", \"gap\": \"-4\", \"include_unpolished\": false, \"m\": \"5\", \"match\": \"3\", \"mismatch\": \"-5\", \"no_trimming\": false, \"overlaps\": {\"__class__\": \"ConnectedValue\"}, \"q\": \"10.0\", \"quality_threshold\": \"10.0\", \"reads\": {\"__class__\": \"ConnectedValue\"}, \"u\": \"true\", \"w\": \"500\", \"window_length\": \"500\", \"x\": \"-4\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                                    "tool_version": "1.5.0+galaxy1",
+                                    "type": "tool",
+                                    "uuid": "3208491e-b831-4238-957e-5b7388d7ff8d",
+                                    "when": null,
+                                    "workflow_outputs": []
+                                },
+                                "7": {
+                                    "annotation": "Map raw reads to assembly; output paf",
+                                    "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.26+galaxy0",
+                                    "errors": null,
+                                    "id": 7,
+                                    "input_connections": {
+                                        "fastq_input|analysis_type_selector": {
+                                            "id": 2,
+                                            "output_name": "output"
+                                        },
+                                        "fastq_input|fastq_input1": {
+                                            "id": 1,
+                                            "output_name": "output"
+                                        },
+                                        "reference_source|ref_file": {
+                                            "id": 6,
+                                            "output_name": "consensus"
+                                        }
+                                    },
+                                    "inputs": [
+                                        {
+                                            "description": "runtime parameter for tool Map with minimap2",
+                                            "name": "fastq_input"
+                                        },
+                                        {
+                                            "description": "runtime parameter for tool Map with minimap2",
+                                            "name": "fastq_input"
+                                        },
+                                        {
+                                            "description": "runtime parameter for tool Map with minimap2",
+                                            "name": "reference_source"
+                                        }
+                                    ],
+                                    "label": "Minimap2: map long reads to polished assembly 2",
+                                    "name": "Map with minimap2",
+                                    "outputs": [
+                                        {
+                                            "name": "alignment_output",
+                                            "type": "bam"
+                                        }
+                                    ],
+                                    "position": {
+                                        "left": 998.75,
+                                        "top": 27.9375
+                                    },
+                                    "post_job_actions": {
+                                        "HideDatasetActionalignment_output": {
+                                            "action_arguments": {},
+                                            "action_type": "HideDatasetAction",
+                                            "output_name": "alignment_output"
+                                        }
+                                    },
+                                    "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.26+galaxy0",
+                                    "tool_shed_repository": {
+                                        "changeset_revision": "be1d967337e4",
+                                        "name": "minimap2",
+                                        "owner": "iuc",
+                                        "tool_shed": "toolshed.g2.bx.psu.edu"
+                                    },
+                                    "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": true}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"analysis_type_selector\": {\"__class__\": \"ConnectedValue\"}}, \"indexing_options\": {\"H\": false, \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"paf\", \"Q\": false, \"L\": false, \"K\": null, \"cs\": null, \"c\": false, \"eqx\": false, \"Y\": false}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"q_occ_frac\": \"0.01\", \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": false, \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                                    "tool_version": "2.26+galaxy0",
+                                    "type": "tool",
+                                    "uuid": "42af524b-7f74-4c75-8d78-f6888078dd2e",
+                                    "when": null,
+                                    "workflow_outputs": []
+                                },
+                                "8": {
+                                    "annotation": "",
+                                    "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.5.0+galaxy1",
+                                    "errors": null,
+                                    "id": 8,
+                                    "input_connections": {
+                                        "corrected_reads": {
+                                            "id": 6,
+                                            "output_name": "consensus"
+                                        },
+                                        "overlaps": {
+                                            "id": 7,
+                                            "output_name": "alignment_output"
+                                        },
+                                        "reads": {
+                                            "id": 1,
+                                            "output_name": "output"
+                                        }
+                                    },
+                                    "inputs": [],
+                                    "label": "Racon: polish 3",
+                                    "name": "Racon",
+                                    "outputs": [
+                                        {
+                                            "name": "consensus",
+                                            "type": "fasta"
+                                        }
+                                    ],
+                                    "position": {
+                                        "left": 1089.71875,
+                                        "top": 455.53125
+                                    },
+                                    "post_job_actions": {
+                                        "HideDatasetActionconsensus": {
+                                            "action_arguments": {},
+                                            "action_type": "HideDatasetAction",
+                                            "output_name": "consensus"
+                                        }
+                                    },
+                                    "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.5.0+galaxy1",
+                                    "tool_shed_repository": {
+                                        "changeset_revision": "78c533842eeb",
+                                        "name": "racon",
+                                        "owner": "bgruening",
+                                        "tool_shed": "toolshed.g2.bx.psu.edu"
+                                    },
+                                    "tool_state": "{\"corrected_reads\": {\"__class__\": \"ConnectedValue\"}, \"e\": \"0.3\", \"error_threshold\": \"0.3\", \"f\": \"false\", \"fragment_correction\": false, \"g\": \"-8\", \"gap\": \"-4\", \"include_unpolished\": false, \"m\": \"5\", \"match\": \"3\", \"mismatch\": \"-5\", \"no_trimming\": false, \"overlaps\": {\"__class__\": \"ConnectedValue\"}, \"q\": \"10.0\", \"quality_threshold\": \"10.0\", \"reads\": {\"__class__\": \"ConnectedValue\"}, \"u\": \"true\", \"w\": \"500\", \"window_length\": \"500\", \"x\": \"-4\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                                    "tool_version": "1.5.0+galaxy1",
+                                    "type": "tool",
+                                    "uuid": "21f339bd-ebc1-4c73-a976-5d0b9ab2127a",
+                                    "when": null,
+                                    "workflow_outputs": []
+                                },
+                                "9": {
+                                    "annotation": "Map raw reads to assembly; output paf",
+                                    "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.26+galaxy0",
+                                    "errors": null,
+                                    "id": 9,
+                                    "input_connections": {
+                                        "fastq_input|analysis_type_selector": {
+                                            "id": 2,
+                                            "output_name": "output"
+                                        },
+                                        "fastq_input|fastq_input1": {
+                                            "id": 1,
+                                            "output_name": "output"
+                                        },
+                                        "reference_source|ref_file": {
+                                            "id": 8,
+                                            "output_name": "consensus"
+                                        }
+                                    },
+                                    "inputs": [
+                                        {
+                                            "description": "runtime parameter for tool Map with minimap2",
+                                            "name": "fastq_input"
+                                        },
+                                        {
+                                            "description": "runtime parameter for tool Map with minimap2",
+                                            "name": "fastq_input"
+                                        },
+                                        {
+                                            "description": "runtime parameter for tool Map with minimap2",
+                                            "name": "reference_source"
+                                        }
+                                    ],
+                                    "label": "Minimap2: map long reads to polished assembly 3",
+                                    "name": "Map with minimap2",
+                                    "outputs": [
+                                        {
+                                            "name": "alignment_output",
+                                            "type": "bam"
+                                        }
+                                    ],
+                                    "position": {
+                                        "left": 1316.53125,
+                                        "top": 38.046875
+                                    },
+                                    "post_job_actions": {
+                                        "HideDatasetActionalignment_output": {
+                                            "action_arguments": {},
+                                            "action_type": "HideDatasetAction",
+                                            "output_name": "alignment_output"
+                                        }
+                                    },
+                                    "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.26+galaxy0",
+                                    "tool_shed_repository": {
+                                        "changeset_revision": "be1d967337e4",
+                                        "name": "minimap2",
+                                        "owner": "iuc",
+                                        "tool_shed": "toolshed.g2.bx.psu.edu"
+                                    },
+                                    "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": true}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"analysis_type_selector\": {\"__class__\": \"ConnectedValue\"}}, \"indexing_options\": {\"H\": false, \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"paf\", \"Q\": false, \"L\": false, \"K\": null, \"cs\": null, \"c\": false, \"eqx\": false, \"Y\": false}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"q_occ_frac\": \"0.01\", \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": false, \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                                    "tool_version": "2.26+galaxy0",
+                                    "type": "tool",
+                                    "uuid": "7d36291e-aa76-4312-9943-b5e56d0e90c5",
+                                    "when": null,
+                                    "workflow_outputs": []
+                                },
+                                "10": {
+                                    "annotation": "",
+                                    "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.5.0+galaxy1",
+                                    "errors": null,
+                                    "id": 10,
+                                    "input_connections": {
+                                        "corrected_reads": {
+                                            "id": 8,
+                                            "output_name": "consensus"
+                                        },
+                                        "overlaps": {
+                                            "id": 9,
+                                            "output_name": "alignment_output"
+                                        },
+                                        "reads": {
+                                            "id": 1,
+                                            "output_name": "output"
+                                        }
+                                    },
+                                    "inputs": [],
+                                    "label": "Racon: polish 4",
+                                    "name": "Racon",
+                                    "outputs": [
+                                        {
+                                            "name": "consensus",
+                                            "type": "fasta"
+                                        }
+                                    ],
+                                    "position": {
+                                        "left": 1496.078125,
+                                        "top": 431.1875
+                                    },
+                                    "post_job_actions": {
+                                        "RenameDatasetActionconsensus": {
+                                            "action_arguments": {
+                                                "newname": "Racon_long_reads_polished_assembly.fasta"
+                                            },
+                                            "action_type": "RenameDatasetAction",
+                                            "output_name": "consensus"
+                                        }
+                                    },
+                                    "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.5.0+galaxy1",
+                                    "tool_shed_repository": {
+                                        "changeset_revision": "78c533842eeb",
+                                        "name": "racon",
+                                        "owner": "bgruening",
+                                        "tool_shed": "toolshed.g2.bx.psu.edu"
+                                    },
+                                    "tool_state": "{\"corrected_reads\": {\"__class__\": \"ConnectedValue\"}, \"e\": \"0.3\", \"error_threshold\": \"0.3\", \"f\": \"false\", \"fragment_correction\": false, \"g\": \"-8\", \"gap\": \"-4\", \"include_unpolished\": false, \"m\": \"5\", \"match\": \"3\", \"mismatch\": \"-5\", \"no_trimming\": false, \"overlaps\": {\"__class__\": \"ConnectedValue\"}, \"q\": \"10.0\", \"quality_threshold\": \"10.0\", \"reads\": {\"__class__\": \"ConnectedValue\"}, \"u\": \"true\", \"w\": \"500\", \"window_length\": \"500\", \"x\": \"-4\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                                    "tool_version": "1.5.0+galaxy1",
+                                    "type": "tool",
+                                    "uuid": "53f4572e-3a4a-4585-89ab-9459f8a61720",
+                                    "when": null,
+                                    "workflow_outputs": [
+                                        {
+                                            "label": "Assembly polished by long reads using Racon",
+                                            "output_name": "consensus",
+                                            "uuid": "bcf0f03c-5951-46a7-aa38-545aed9bc183"
+                                        }
+                                    ]
+                                }
+                            },
+                            "tags": "",
+                            "uuid": "c57efd37-4cf6-4cc7-abf4-2bab22a2e9a0"
+                        },
+                        "tool_id": null,
+                        "type": "subworkflow",
+                        "uuid": "58c99e4b-fd6a-401d-b9c7-cdf7e6d1757d",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": null,
+                                "output_name": "2:output",
+                                "uuid": "50fa1032-8037-454e-8192-b95405bcd5d4"
+                            }
+                        ]
+                    },
+                    "5": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/medaka_consensus_pipeline/medaka_consensus_pipeline/1.7.2+galaxy1",
+                        "errors": null,
+                        "id": 5,
+                        "input_connections": {
+                            "d": {
+                                "id": 4,
+                                "output_name": "Assembly polished by long reads using Racon"
+                            },
+                            "i": {
+                                "id": 1,
+                                "output_name": "output"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Medaka polish",
+                        "name": "medaka consensus pipeline",
+                        "outputs": [
+                            {
+                                "name": "out_consensus",
+                                "type": "fasta"
+                            }
+                        ],
+                        "position": {
+                            "left": 515.5164024294684,
+                            "top": 305.08460859328346
+                        },
+                        "post_job_actions": {
+                            "RenameDatasetActionout_consensus": {
+                                "action_arguments": {
+                                    "newname": "Medaka_long_reads_polished_assembly.fasta"
+                                },
+                                "action_type": "RenameDatasetAction",
+                                "output_name": "out_consensus"
+                            }
+                        },
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/medaka_consensus_pipeline/medaka_consensus_pipeline/1.7.2+galaxy1",
+                        "tool_shed_repository": {
+                            "changeset_revision": "fc8804320156",
+                            "name": "medaka_consensus_pipeline",
+                            "owner": "iuc",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"b\": \"100\", \"d\": {\"__class__\": \"ConnectedValue\"}, \"g\": false, \"i\": {\"__class__\": \"ConnectedValue\"}, \"m\": \"r941_min_high_g360\", \"out\": [\"consensus\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "1.7.2+galaxy1",
+                        "type": "tool",
+                        "uuid": "14c5ce9c-df92-4e20-85da-7a161eaa759d",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": "Assembly polished by long reads using Medaka",
+                                "output_name": "out_consensus",
+                                "uuid": "e3136060-bce7-4af3-87c4-9dcbb0d1f531"
+                            }
+                        ]
+                    },
+                    "6": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0",
+                        "errors": null,
+                        "id": 6,
+                        "input_connections": {
+                            "fasta": {
+                                "id": 4,
+                                "output_name": "Assembly polished by long reads using Racon"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Fasta statistics after Racon long read polish",
+                        "name": "Fasta Statistics",
+                        "outputs": [
+                            {
+                                "name": "stats_output",
+                                "type": "tabular"
+                            }
+                        ],
+                        "position": {
+                            "left": 611.8186129984722,
+                            "top": 131.47863560473016
+                        },
+                        "post_job_actions": {},
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0",
+                        "tool_shed_repository": {
+                            "changeset_revision": "0dbb995c7d35",
+                            "name": "fasta_stats",
+                            "owner": "iuc",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"dataset\": {\"__class__\": \"ConnectedValue\"}, \"fasta\": {\"__class__\": \"ConnectedValue\"}, \"gaps_option\": false, \"genome_size\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "2.0",
+                        "type": "tool",
+                        "uuid": "e78db141-a6d2-42b1-b2b6-aee5e900d3f4",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "7": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0",
+                        "errors": null,
+                        "id": 7,
+                        "input_connections": {
+                            "fasta": {
+                                "id": 5,
+                                "output_name": "out_consensus"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Fasta statistics after Medaka polish",
+                        "name": "Fasta Statistics",
+                        "outputs": [
+                            {
+                                "name": "stats_output",
+                                "type": "tabular"
+                            }
+                        ],
+                        "position": {
+                            "left": 816.9504695700908,
+                            "top": 343.05724959525315
+                        },
+                        "post_job_actions": {},
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0",
+                        "tool_shed_repository": {
+                            "changeset_revision": "0dbb995c7d35",
+                            "name": "fasta_stats",
+                            "owner": "iuc",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"dataset\": {\"__class__\": \"ConnectedValue\"}, \"fasta\": {\"__class__\": \"ConnectedValue\"}, \"gaps_option\": false, \"genome_size\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "2.0",
+                        "type": "tool",
+                        "uuid": "96f313ee-4a6a-4ba9-86f8-3dedc1d5d30d",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "8": {
+                        "annotation": "",
+                        "id": 8,
+                        "input_connections": {
+                            "Assembly to be polished": {
+                                "id": 5,
+                                "input_subworkflow_step_id": 0,
+                                "output_name": "out_consensus"
+                            },
+                            "Illumina reads, R1, in fastq.gz format": {
+                                "id": 3,
+                                "input_subworkflow_step_id": 1,
+                                "output_name": "output"
+                            }
+                        },
+                        "inputs": [],
+                        "label": null,
+                        "name": "Racon polish with Illumina reads (R1 only), x2 - upgraded",
+                        "outputs": [],
+                        "position": {
+                            "left": 915.3758175639219,
+                            "top": 512.306732089216
+                        },
+                        "subworkflow": {
+                            "a_galaxy_workflow": "true",
+                            "annotation": "",
+                            "comments": [],
+                            "creator": [
+                                {
+                                    "class": "Person",
+                                    "identifier": "0000-0002-9906-0673",
+                                    "name": "Anna Syme"
+                                }
+                            ],
+                            "format-version": "0.1",
+                            "name": "Racon polish with Illumina reads (R1 only), x2 - upgraded",
+                            "steps": {
+                                "0": {
+                                    "annotation": "",
+                                    "content_id": null,
+                                    "errors": null,
+                                    "id": 0,
+                                    "input_connections": {},
+                                    "inputs": [
+                                        {
+                                            "description": "",
+                                            "name": "Assembly to be polished"
+                                        }
+                                    ],
+                                    "label": "Assembly to be polished",
+                                    "name": "Input dataset",
+                                    "outputs": [],
+                                    "position": {
+                                        "left": 0,
+                                        "top": 72.5176329833982
+                                    },
+                                    "tool_id": null,
+                                    "tool_state": "{\"optional\": false, \"tag\": null}",
+                                    "tool_version": null,
+                                    "type": "data_input",
+                                    "uuid": "28669894-74e2-4ba1-9d49-6e3209b5a1de",
+                                    "when": null,
+                                    "workflow_outputs": []
+                                },
+                                "1": {
+                                    "annotation": "",
+                                    "content_id": null,
+                                    "errors": null,
+                                    "id": 1,
+                                    "input_connections": {},
+                                    "inputs": [
+                                        {
+                                            "description": "",
+                                            "name": "Illumina reads, R1, in fastq.gz format"
+                                        }
+                                    ],
+                                    "label": "Illumina reads, R1, in fastq.gz format",
+                                    "name": "Input dataset",
+                                    "outputs": [],
+                                    "position": {
+                                        "left": 8.5,
+                                        "top": 341.2832579833982
+                                    },
+                                    "tool_id": null,
+                                    "tool_state": "{\"optional\": false, \"tag\": null}",
+                                    "tool_version": null,
+                                    "type": "data_input",
+                                    "uuid": "bc936fdc-22a9-4507-aa47-4a70a3f93923",
+                                    "when": null,
+                                    "workflow_outputs": []
+                                },
+                                "2": {
+                                    "annotation": "",
+                                    "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.26+galaxy0",
+                                    "errors": null,
+                                    "id": 2,
+                                    "input_connections": {
+                                        "fastq_input|fastq_input1": {
+                                            "id": 1,
+                                            "output_name": "output"
+                                        },
+                                        "reference_source|ref_file": {
+                                            "id": 0,
+                                            "output_name": "output"
+                                        }
+                                    },
+                                    "inputs": [
+                                        {
+                                            "description": "runtime parameter for tool Map with minimap2",
+                                            "name": "fastq_input"
+                                        },
+                                        {
+                                            "description": "runtime parameter for tool Map with minimap2",
+                                            "name": "reference_source"
+                                        }
+                                    ],
+                                    "label": "Minimap2 round 1: map reads to assembly",
+                                    "name": "Map with minimap2",
+                                    "outputs": [
+                                        {
+                                            "name": "alignment_output",
+                                            "type": "bam"
+                                        }
+                                    ],
+                                    "position": {
+                                        "left": 399.936279296875,
+                                        "top": 0
+                                    },
+                                    "post_job_actions": {
+                                        "HideDatasetActionalignment_output": {
+                                            "action_arguments": {},
+                                            "action_type": "HideDatasetAction",
+                                            "output_name": "alignment_output"
+                                        }
+                                    },
+                                    "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.26+galaxy0",
+                                    "tool_shed_repository": {
+                                        "changeset_revision": "be1d967337e4",
+                                        "name": "minimap2",
+                                        "owner": "iuc",
+                                        "tool_shed": "toolshed.g2.bx.psu.edu"
+                                    },
+                                    "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": true}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"analysis_type_selector\": \"sr\"}, \"indexing_options\": {\"H\": false, \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"paf\", \"Q\": false, \"L\": false, \"K\": null, \"cs\": null, \"c\": false, \"eqx\": false, \"Y\": false}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"q_occ_frac\": \"0.01\", \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": false, \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                                    "tool_version": "2.26+galaxy0",
+                                    "type": "tool",
+                                    "uuid": "b01b8c3d-c33b-47b2-9a83-297c19d63ab7",
+                                    "when": null,
+                                    "workflow_outputs": []
+                                },
+                                "3": {
+                                    "annotation": "",
+                                    "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.5.0+galaxy1",
+                                    "errors": null,
+                                    "id": 3,
+                                    "input_connections": {
+                                        "corrected_reads": {
+                                            "id": 0,
+                                            "output_name": "output"
+                                        },
+                                        "overlaps": {
+                                            "id": 2,
+                                            "output_name": "alignment_output"
+                                        },
+                                        "reads": {
+                                            "id": 1,
+                                            "output_name": "output"
+                                        }
+                                    },
+                                    "inputs": [],
+                                    "label": "Racon round 1: polish assembly",
+                                    "name": "Racon",
+                                    "outputs": [
+                                        {
+                                            "name": "consensus",
+                                            "type": "fasta"
+                                        }
+                                    ],
+                                    "position": {
+                                        "left": 635.5625200274146,
+                                        "top": 432.13610641498093
+                                    },
+                                    "post_job_actions": {
+                                        "HideDatasetActionconsensus": {
+                                            "action_arguments": {},
+                                            "action_type": "HideDatasetAction",
+                                            "output_name": "consensus"
+                                        }
+                                    },
+                                    "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.5.0+galaxy1",
+                                    "tool_shed_repository": {
+                                        "changeset_revision": "78c533842eeb",
+                                        "name": "racon",
+                                        "owner": "bgruening",
+                                        "tool_shed": "toolshed.g2.bx.psu.edu"
+                                    },
+                                    "tool_state": "{\"corrected_reads\": {\"__class__\": \"ConnectedValue\"}, \"error_threshold\": \"0.3\", \"fragment_correction\": false, \"gap\": \"-4\", \"include_unpolished\": false, \"match\": \"3\", \"mismatch\": \"-5\", \"no_trimming\": false, \"overlaps\": {\"__class__\": \"ConnectedValue\"}, \"quality_threshold\": \"10.0\", \"reads\": {\"__class__\": \"ConnectedValue\"}, \"window_length\": \"500\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                                    "tool_version": "1.5.0+galaxy1",
+                                    "type": "tool",
+                                    "uuid": "fe32d046-4ff2-485e-84e8-191b04803afc",
+                                    "when": null,
+                                    "workflow_outputs": []
+                                },
+                                "4": {
+                                    "annotation": "",
+                                    "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.26+galaxy0",
+                                    "errors": null,
+                                    "id": 4,
+                                    "input_connections": {
+                                        "fastq_input|fastq_input1": {
+                                            "id": 1,
+                                            "output_name": "output"
+                                        },
+                                        "reference_source|ref_file": {
+                                            "id": 3,
+                                            "output_name": "consensus"
+                                        }
+                                    },
+                                    "inputs": [
+                                        {
+                                            "description": "runtime parameter for tool Map with minimap2",
+                                            "name": "fastq_input"
+                                        },
+                                        {
+                                            "description": "runtime parameter for tool Map with minimap2",
+                                            "name": "reference_source"
+                                        }
+                                    ],
+                                    "label": "Minimap2 round 2: map reads to assembly",
+                                    "name": "Map with minimap2",
+                                    "outputs": [
+                                        {
+                                            "name": "alignment_output",
+                                            "type": "bam"
+                                        }
+                                    ],
+                                    "position": {
+                                        "left": 859.5,
+                                        "top": 23.955132983398205
+                                    },
+                                    "post_job_actions": {
+                                        "HideDatasetActionalignment_output": {
+                                            "action_arguments": {},
+                                            "action_type": "HideDatasetAction",
+                                            "output_name": "alignment_output"
+                                        }
+                                    },
+                                    "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.26+galaxy0",
+                                    "tool_shed_repository": {
+                                        "changeset_revision": "be1d967337e4",
+                                        "name": "minimap2",
+                                        "owner": "iuc",
+                                        "tool_shed": "toolshed.g2.bx.psu.edu"
+                                    },
+                                    "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": true}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}, \"analysis_type_selector\": \"sr\"}, \"indexing_options\": {\"H\": false, \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"paf\", \"Q\": false, \"L\": false, \"K\": null, \"cs\": null, \"c\": false, \"eqx\": false, \"Y\": false}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"q_occ_frac\": \"0.01\", \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": false, \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                                    "tool_version": "2.26+galaxy0",
+                                    "type": "tool",
+                                    "uuid": "ee834cad-027a-4a84-963b-141b22eaa70a",
+                                    "when": null,
+                                    "workflow_outputs": []
+                                },
+                                "5": {
+                                    "annotation": "",
+                                    "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.5.0+galaxy1",
+                                    "errors": null,
+                                    "id": 5,
+                                    "input_connections": {
+                                        "corrected_reads": {
+                                            "id": 3,
+                                            "output_name": "consensus"
+                                        },
+                                        "overlaps": {
+                                            "id": 4,
+                                            "output_name": "alignment_output"
+                                        },
+                                        "reads": {
+                                            "id": 1,
+                                            "output_name": "output"
+                                        }
+                                    },
+                                    "inputs": [],
+                                    "label": "Racon round 2: polish assembly",
+                                    "name": "Racon",
+                                    "outputs": [
+                                        {
+                                            "name": "consensus",
+                                            "type": "fasta"
+                                        }
+                                    ],
+                                    "position": {
+                                        "left": 1198.765625,
+                                        "top": 332.4707579833982
+                                    },
+                                    "post_job_actions": {
+                                        "RenameDatasetActionconsensus": {
+                                            "action_arguments": {
+                                                "newname": "Racon_short_reads_polished_assembly.fasta"
+                                            },
+                                            "action_type": "RenameDatasetAction",
+                                            "output_name": "consensus"
+                                        }
+                                    },
+                                    "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.5.0+galaxy1",
+                                    "tool_shed_repository": {
+                                        "changeset_revision": "78c533842eeb",
+                                        "name": "racon",
+                                        "owner": "bgruening",
+                                        "tool_shed": "toolshed.g2.bx.psu.edu"
+                                    },
+                                    "tool_state": "{\"corrected_reads\": {\"__class__\": \"ConnectedValue\"}, \"e\": \"0.3\", \"error_threshold\": \"0.3\", \"f\": \"false\", \"fragment_correction\": false, \"g\": \"-8\", \"gap\": \"-4\", \"include_unpolished\": false, \"m\": \"5\", \"match\": \"3\", \"mismatch\": \"-5\", \"no_trimming\": false, \"overlaps\": {\"__class__\": \"ConnectedValue\"}, \"q\": \"10.0\", \"quality_threshold\": \"10.0\", \"reads\": {\"__class__\": \"ConnectedValue\"}, \"u\": \"true\", \"w\": \"500\", \"window_length\": \"500\", \"x\": \"-4\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                                    "tool_version": "1.5.0+galaxy1",
+                                    "type": "tool",
+                                    "uuid": "b3c89c40-3ad0-454c-a4d4-dfa34fb09f24",
+                                    "when": null,
+                                    "workflow_outputs": [
+                                        {
+                                            "label": "Assembly polished by short reads using Racon",
+                                            "output_name": "consensus",
+                                            "uuid": "594819c3-668e-4575-b9a6-4459ffacf952"
+                                        }
+                                    ]
+                                }
+                            },
+                            "tags": "",
+                            "uuid": "1b96b1cf-dbd4-46b1-8a59-aebfe80135c2"
+                        },
+                        "tool_id": null,
+                        "type": "subworkflow",
+                        "uuid": "46288abb-a2bc-43d5-822a-a93af0d346cf",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "9": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0",
+                        "errors": null,
+                        "id": 9,
+                        "input_connections": {
+                            "fasta": {
+                                "id": 8,
+                                "output_name": "Assembly polished by short reads using Racon"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Fasta statistics after Racon short read polish",
+                        "name": "Fasta Statistics",
+                        "outputs": [
+                            {
+                                "name": "stats_output",
+                                "type": "tabular"
+                            }
+                        ],
+                        "position": {
+                            "left": 1179.1223817823236,
+                            "top": 547.060000097866
+                        },
+                        "post_job_actions": {},
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0",
+                        "tool_shed_repository": {
+                            "changeset_revision": "0dbb995c7d35",
+                            "name": "fasta_stats",
+                            "owner": "iuc",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"dataset\": {\"__class__\": \"ConnectedValue\"}, \"fasta\": {\"__class__\": \"ConnectedValue\"}, \"gaps_option\": false, \"genome_size\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "2.0",
+                        "type": "tool",
+                        "uuid": "3c06b177-02b5-4068-8056-56b653d95379",
+                        "when": null,
+                        "workflow_outputs": []
+                    }
+                },
+                "tags": "",
+                "uuid": "af8b99cb-cfc5-4f96-ba6c-6a178826ca98"
+            },
+            "tool_id": null,
+            "type": "subworkflow",
+            "uuid": "6b6668c9-25b7-4135-ac9b-140a6d1593b0",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "2:output",
+                    "uuid": "f740de36-9921-4f0c-924e-3902bc2083b7"
+                },
+                {
+                    "label": null,
+                    "output_name": "4:2:output",
+                    "uuid": "2b5d309e-c47e-4a79-a69c-4d4fd6a93d8b"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "id": 10,
+            "input_connections": {
+                "Polished assembly": {
+                    "id": 9,
+                    "input_subworkflow_step_id": 0,
+                    "output_name": "Assembly polished by long reads using Medaka"
+                },
+                "Reference genome": {
+                    "id": 4,
+                    "input_subworkflow_step_id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Assess genome quality - upgraded",
+            "outputs": [],
+            "position": {
+                "left": 1568.4120984610158,
+                "top": 197.4894726181099
+            },
+            "subworkflow": {
+                "a_galaxy_workflow": "true",
+                "annotation": "",
+                "comments": [],
+                "creator": [
+                    {
+                        "class": "Person",
+                        "identifier": "0000-0002-9906-0673",
+                        "name": "Anna Syme"
+                    }
+                ],
+                "format-version": "0.1",
+                "name": "Assess genome quality - upgraded",
+                "report": {
+                    "markdown": "\n# Workflow Execution Report\n\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n\n## Busco results\n\n```galaxy\nhistory_dataset_as_image(output=\"Busco short summary\")\n```\n\n\n```galaxy\nhistory_dataset_as_image(output=\"Busco summary image\")\n```\n\n## Quast results\n\n\n```galaxy\nhistory_dataset_display(output=\"Quast on input dataset(s): tabular report\")\n```\n\n\n"
+                },
+                "steps": {
+                    "0": {
+                        "annotation": "",
+                        "content_id": null,
+                        "errors": null,
+                        "id": 0,
+                        "input_connections": {},
+                        "inputs": [
+                            {
+                                "description": "",
+                                "name": "Polished assembly"
+                            }
+                        ],
+                        "label": "Polished assembly",
+                        "name": "Input dataset",
+                        "outputs": [],
+                        "position": {
+                            "left": 0,
+                            "top": 101.09375
+                        },
+                        "tool_id": null,
+                        "tool_state": "{\"optional\": false, \"tag\": null}",
+                        "tool_version": null,
+                        "type": "data_input",
+                        "uuid": "2ed19084-9eaf-4efb-acdc-b81536e7c024",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "1": {
+                        "annotation": "",
+                        "content_id": null,
+                        "errors": null,
+                        "id": 1,
+                        "input_connections": {},
+                        "inputs": [
+                            {
+                                "description": "",
+                                "name": "Reference genome"
+                            }
+                        ],
+                        "label": "Reference genome",
+                        "name": "Input dataset",
+                        "outputs": [],
+                        "position": {
+                            "left": 246.765625,
+                            "top": 0.0
+                        },
+                        "tool_id": null,
+                        "tool_state": "{\"optional\": false, \"tag\": null}",
+                        "tool_version": null,
+                        "type": "data_input",
+                        "uuid": "5b12a6af-13c3-4520-a549-280de6a3df17",
+                        "when": null,
+                        "workflow_outputs": []
+                    },
+                    "2": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0",
+                        "errors": null,
+                        "id": 2,
+                        "input_connections": {
+                            "input": {
+                                "id": 0,
+                                "output_name": "output"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Busco: assess assembly",
+                        "name": "Busco",
+                        "outputs": [
+                            {
+                                "name": "busco_sum",
+                                "type": "txt"
+                            },
+                            {
+                                "name": "busco_table",
+                                "type": "tabular"
+                            }
+                        ],
+                        "position": {
+                            "left": 294.42303466796875,
+                            "top": 200.68505859375
+                        },
+                        "post_job_actions": {},
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0",
+                        "tool_shed_repository": {
+                            "changeset_revision": "ea8146ee148f",
+                            "name": "busco",
+                            "owner": "iuc",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\", \"contig_break\": \"10\"}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"miniprot\": false, \"use_augustus\": {\"use_augustus_selector\": \"no\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"lineage\": {\"lineage_mode\": \"auto_detect\", \"__current_case__\": 0, \"auto_lineage\": \"--auto-lineage\"}, \"lineage_conditional\": {\"selector\": \"download\", \"__current_case__\": 1}, \"lineage_dataset\": \"eukaryota_odb10\", \"outputs\": \"short_summary\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "5.5.0+galaxy0",
+                        "type": "tool",
+                        "uuid": "8f5f17de-a21e-49f4-b55c-6eff5f4fa213",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": null,
+                                "output_name": "busco_table",
+                                "uuid": "fc06df63-3453-4303-80d1-c76823ba384a"
+                            },
+                            {
+                                "label": "Busco short summary",
+                                "output_name": "busco_sum",
+                                "uuid": "219e4952-36e0-4b01-a407-e774b5b02dca"
+                            }
+                        ]
+                    },
+                    "3": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1",
+                        "errors": null,
+                        "id": 3,
+                        "input_connections": {
+                            "assembly|ref|r": {
+                                "id": 1,
+                                "output_name": "output"
+                            },
+                            "mode|in|inputs": {
+                                "id": 0,
+                                "output_name": "output"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Quast: assess assembly",
+                        "name": "Quast",
+                        "outputs": [
+                            {
+                                "name": "report_html",
+                                "type": "html"
+                            }
+                        ],
+                        "position": {
+                            "left": 564.8660278320312,
+                            "top": 56.71406029052495
+                        },
+                        "post_job_actions": {},
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1",
+                        "tool_shed_repository": {
+                            "changeset_revision": "72472698a2df",
+                            "name": "quast",
+                            "owner": "iuc",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"advanced\": {\"contig_thresholds\": \"0,1000\", \"strict_NA\": false, \"extensive_mis_size\": \"1000\", \"scaffold_gap_max_size\": \"1000\", \"unaligned_part_size\": \"500\", \"skip_unaligned_mis_contigs\": true, \"fragmented_max_indent\": null, \"report_all_metrics\": false, \"x_for_Nx\": \"90\"}, \"alignments\": {\"use_all_alignments\": false, \"min_alignment\": \"65\", \"ambiguity_usage\": \"one\", \"ambiguity_score\": \"0.99\", \"fragmented\": false, \"upper_bound_assembly\": false, \"upper_bound_min_con\": null, \"local_mis_size\": \"200\"}, \"assembly\": {\"type\": \"genome\", \"__current_case__\": 0, \"ref\": {\"use_ref\": \"true\", \"__current_case__\": 0, \"r\": {\"__class__\": \"RuntimeValue\"}, \"features\": {\"__class__\": \"RuntimeValue\"}, \"operons\": {\"__class__\": \"RuntimeValue\"}, \"k_mer\": {\"k_mer_stats\": \"\", \"__current_case__\": 1}, \"circos\": false}, \"orga_type\": \"\", \"min_identity\": \"95.0\"}, \"genes\": {\"gene_finding\": {\"tool\": \"none\", \"__current_case__\": 0}, \"rna_finding\": false, \"conserved_genes_finding\": false}, \"large\": true, \"min_contig\": \"0\", \"mode\": {\"mode\": \"individual\", \"__current_case__\": 0, \"in\": {\"custom\": \"false\", \"__current_case__\": 1, \"inputs\": {\"__class__\": \"RuntimeValue\"}}, \"reads\": {\"reads_option\": \"disabled\", \"__current_case__\": 0}}, \"output_files\": \"html\", \"split_scaffolds\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "5.2.0+galaxy1",
+                        "type": "tool",
+                        "uuid": "6caef18b-b257-472d-b8d0-fac523a72d37",
+                        "when": null,
+                        "workflow_outputs": [
+                            {
+                                "label": "Quast on input dataset(s):  HTML report",
+                                "output_name": "report_html",
+                                "uuid": "77ab0186-4cfd-460f-b71e-39a923414ef4"
+                            }
+                        ]
+                    }
+                },
+                "tags": "",
+                "uuid": "a1040ed6-8dce-4d01-bca7-124e8c8a3c8a"
+            },
+            "tool_id": null,
+            "type": "subworkflow",
+            "uuid": "f2f8b915-d3fb-4b4b-bfb2-e948f79ce52d",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [
+        "LG-WF",
+        "GTN"
+    ],
+    "uuid": "d53d156d-02ad-4748-98b2-b9025577645d",
+    "version": 29
+}

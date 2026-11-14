@@ -1,0 +1,23 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nblockclust_input"]
+  1[label="Samtools sort"]
+  0 -> 1 [label="output"]
+  2[label="BlockClust"]
+  1 -> 2 [label="output1"]
+  k39f8722a844442f88104f81201804c9c[color=lightseagreen,label="Output\ntags_bed"]
+  2 -> k39f8722a844442f88104f81201804c9c
+  3[label="Sort"]
+  2 -> 3 [label="tags_bed"]
+  4[label="blockbuster"]
+  3 -> 4 [label="outfile"]
+  k95c21ce9e98844b9978e10a27b74d18e[color=lightseagreen,label="Output\nblockbuster_out"]
+  4 -> k95c21ce9e98844b9978e10a27b74d18e
+  5[label="BlockClust"]
+  4 -> 5 [label="output"]
+  k241feec19ffd4d289b65e58850198c6d[color=lightseagreen,label="Output\nmodel_based_pred_bed"]
+  5 -> k241feec19ffd4d289b65e58850198c6d
+  k287b4bae55a14f38b1c362ae60b4d950[color=lightseagreen,label="Output\nclusters_bed"]
+  5 -> k287b4bae55a14f38b1c362ae60b4d950
+}

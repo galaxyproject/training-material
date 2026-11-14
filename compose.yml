@@ -1,0 +1,44 @@
+# This compose file is for development use ONLY!
+
+# In order to preserve file ownership and permissions,
+# create a '.env' file containing GTN_UID and GTN_GID.
+
+# You may set a custom ruby tag using
+# GTN_RUBY_TAG in your '.env' file
+
+# In order to use this composition from multiple locations
+# on one host, you also need to specify 'COMPOSE_PROJECT_NAME'
+# in your '.env' file, so multiple compositions will not interfere.
+
+# If you would like to use multiple compositions in parallel,
+# you also need to set the GTN_PORT and GTN_RELOAD_PORT
+# in your '.env' file, so that ports do not collide.
+
+# In order to use this composition with rootless container platform
+# installations, e.g. podman or docker rootless, please review
+# user namespace settings of your installation.
+# If you have set it to 'host', you need to set GTN_UID and GTN_GID
+# to 0 in order to preserve correct file ownership.
+
+name: '${COMPOSE_PROJECT_NAME:-gtn-dev}'
+
+services:
+  jekyll-server:
+    image: 'ruby:${GTN_RUBY_TAG:-3-bookworm}'
+    volumes:
+      - './:/src/gtn:rw'
+      - '/dev/null:/src/gtn/Gemfile.lock:rw'
+    ports:
+      - '127.0.0.1:${GTN_PORT:-4000}:${GTN_PORT:-4000}'
+      - '127.0.0.1:${GTN_RELOAD_PORT:-4001}:${GTN_RELOAD_PORT:-4001}'
+    user: '${GTN_UID:-1000}:${GTN_GID:-1000}'
+    environment:
+      HOME: '/src/gtn'
+    working_dir: '/src/gtn'
+    command: 'bash -c "bundle install --path .bundle && bundle exec jekyll serve --strict_front_matter -d _site/training-material --incremental -P ${GTN_PORT:-4000} -H 0.0.0.0 -l --livereload-port ${GTN_RELOAD_PORT:-4001}"'
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:${GTN_PORT:-4000}/training-material/']
+      interval: 30s
+      timeout: 1s
+      start_period: 2m
+      start_interval: 5s

@@ -1,0 +1,18 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nInput the test data"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nInput a BiaPy YAML configuration file"]
+  2[color=lightblue,label="ℹ️ Input Collection\nInput the image ground truth"]
+  3[label="Build a workflow with BiaPy"]
+  1 -> 3 [label="output"]
+  2 -> 3 [label="output"]
+  0 -> 3 [label="output"]
+  k40a9aa7785414b1291e6a6e98af013ea[color=lightseagreen,label="Output\npredictions_post_proc"]
+  3 -> k40a9aa7785414b1291e6a6e98af013ea
+  4[label="Render 3-D image data"]
+  0 -> 4 [label="output"]
+  3 -> 4 [label="predictions_post_proc"]
+  k070114706b7a44608e2b728b08c1e77d[color=lightseagreen,label="Output\nhtml"]
+  4 -> k070114706b7a44608e2b728b08c1e77d
+}

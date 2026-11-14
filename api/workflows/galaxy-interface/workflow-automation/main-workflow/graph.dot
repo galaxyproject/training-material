@@ -1,0 +1,27 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nVariant calls"]
+  1[color=lightgreen,label="ℹ️ Input Parameter\nmin-AF for consensus variant"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nReference genome"]
+  3[label="Compose text parameter value"]
+  1 -> 3 [label="output"]
+  4[label="SnpSift Filter"]
+  3 -> 4 [label="out1"]
+  0 -> 4 [label="output"]
+  kee67c5edff7c404bad2019259edbc671[color=lightseagreen,label="Output\nconsensus_variants"]
+  4 -> kee67c5edff7c404bad2019259edbc671
+  5[label="bcftools consensus"]
+  4 -> 5 [label="output"]
+  2 -> 5 [label="output"]
+  k9028f80e411240d89a49f671677d304f[color=lightseagreen,label="Output\nconsensus"]
+  5 -> k9028f80e411240d89a49f671677d304f
+  6[label="Collapse Collection"]
+  5 -> 6 [label="output_file"]
+  k1dd7978eb90742d68fc4f6fadeefcad1[color=lightseagreen,label="Output\nmultisample_consensus_fasta"]
+  6 -> k1dd7978eb90742d68fc4f6fadeefcad1
+  7[label="Pangolin"]
+  6 -> 7 [label="output"]
+  ke02d2cfb98424069957c6cf4ec197056[color=lightseagreen,label="Output\npangolin_results"]
+  7 -> ke02d2cfb98424069957c6cf4ec197056
+}

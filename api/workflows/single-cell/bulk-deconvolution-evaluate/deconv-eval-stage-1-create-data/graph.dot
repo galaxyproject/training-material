@@ -1,0 +1,28 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightgreen,label="ℹ️ Input Parameter\nAwk- actual header A"]
+  1[color=lightgreen,label="ℹ️ Input Parameter\nAwk - infer header A"]
+  2[color=lightblue,label="ℹ️ Input Collection\nMetadata"]
+  3[color=lightblue,label="ℹ️ Input Collection\nExpression Data"]
+  4[color=lightgreen,label="ℹ️ Input Parameter\nAwk - actual header B"]
+  5[color=lightgreen,label="ℹ️ Input Parameter\nAwk - infer header B"]
+  6[color=lightcoral,label="🛠️ Subworkflow\nCollections Test Create pseudobulk and actual proportions child"]
+  0 -> 6 [label="output"]
+  3 -> 6 [label="output"]
+  1 -> 6 [label="output"]
+  2 -> 6 [label="output"]
+  k6eb76b30ea3d4368b2748f436779290a[color=lightseagreen,label="Output\nPseudobulk (A)"]
+  6 -> k6eb76b30ea3d4368b2748f436779290a
+  ke3d5d9a591b64359a57a79c15de58a8e[color=lightseagreen,label="Output\nActual cell proportions (A)"]
+  6 -> ke3d5d9a591b64359a57a79c15de58a8e
+  7[color=lightcoral,label="🛠️ Subworkflow\nCollections Test Create pseudobulk and actual proportions child"]
+  4 -> 7 [label="output"]
+  3 -> 7 [label="output"]
+  5 -> 7 [label="output"]
+  2 -> 7 [label="output"]
+  kb2b26617c89442c79b6671b0d9d74b9d[color=lightseagreen,label="Output\nActual cell proportions (B)"]
+  7 -> kb2b26617c89442c79b6671b0d9d74b9d
+  kf781b721c9da4bcf96f621c5ad3e4536[color=lightseagreen,label="Output\nPseudobulk (B)"]
+  7 -> kf781b721c9da4bcf96f621c5ad3e4536
+}

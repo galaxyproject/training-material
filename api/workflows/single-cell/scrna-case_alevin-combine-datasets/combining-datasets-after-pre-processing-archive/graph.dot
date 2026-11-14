@@ -1,0 +1,57 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nN701"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nN702"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nN703"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nN704"]
+  4[color=lightblue,label="ℹ️ Input Dataset\nN705"]
+  5[color=lightblue,label="ℹ️ Input Dataset\nN706"]
+  6[color=lightblue,label="ℹ️ Input Dataset\nN707"]
+  7[label="Concatenating Datasets"]
+  0 -> 7 [label="output"]
+  1 -> 7 [label="output"]
+  2 -> 7 [label="output"]
+  3 -> 7 [label="output"]
+  4 -> 7 [label="output"]
+  5 -> 7 [label="output"]
+  6 -> 7 [label="output"]
+  k168d4710570a43b1998a2164154eebc5[color=lightseagreen,label="Output\nCombined Object"]
+  7 -> k168d4710570a43b1998a2164154eebc5
+  8[label="Inspect AnnData"]
+  7 -> 8 [label="anndata"]
+  9[label="Inspect AnnData"]
+  7 -> 9 [label="anndata"]
+  10[label="Inspect AnnData"]
+  7 -> 10 [label="anndata"]
+  11[label="Replace Text"]
+  9 -> 11 [label="obs"]
+  12[label="Replace Text"]
+  9 -> 12 [label="obs"]
+  13[label="Cut"]
+  11 -> 13 [label="outfile"]
+  k8b026c35f9db4bcd8cf554b7d6fb5aea[color=lightseagreen,label="Output\nSex metadata"]
+  13 -> k8b026c35f9db4bcd8cf554b7d6fb5aea
+  14[label="Cut"]
+  12 -> 14 [label="outfile"]
+  k6f55548b5ded42b8b2f7c7f1a327a068[color=lightseagreen,label="Output\nGenotype metadata"]
+  14 -> k6f55548b5ded42b8b2f7c7f1a327a068
+  15[label="Paste"]
+  14 -> 15 [label="out_file1"]
+  13 -> 15 [label="out_file1"]
+  k2f0ea0f3f2f744b2b8f005d8cbb364a6[color=lightseagreen,label="Output\nCell metadata"]
+  15 -> k2f0ea0f3f2f744b2b8f005d8cbb364a6
+  16[label="Adding in cell metadata"]
+  7 -> 16 [label="anndata"]
+  15 -> 16 [label="out_file1"]
+  k2720386c727349d6abb09bd14f6cb68c[color=lightseagreen,label="Output\nAnnData with Cell Metadata"]
+  16 -> k2720386c727349d6abb09bd14f6cb68c
+  17[label="Batching Cell Metadata"]
+  16 -> 17 [label="anndata"]
+  kb950c8dbabe14cb0af58d291d3b74a83[color=lightseagreen,label="Output\nBatched Object"]
+  17 -> kb950c8dbabe14cb0af58d291d3b74a83
+  18[label="Calculating mitochondrial "]
+  17 -> 18 [label="anndata"]
+  k2417284d825243ff84bf6f15ef11cd05[color=lightseagreen,label="Output\nAnnotated AnnData"]
+  18 -> k2417284d825243ff84bf6f15ef11cd05
+}

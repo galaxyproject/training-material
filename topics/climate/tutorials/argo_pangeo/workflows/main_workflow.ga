@@ -1,0 +1,224 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Process argo data with the Pangeo Ecosystem and visualise them with Ocean Data View (ODV)",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0009-0008-0622-604X",
+            "name": "Marie Joss\u00e9",
+            "url": "https://github.com/Marie59"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "Analyse Argo data ",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/argo_getdata/argo_getdata/0.1.15+galaxy0",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Argo data access",
+            "outputs": [
+                {
+                    "name": "output_argo",
+                    "type": "netcdf"
+                }
+            ],
+            "position": {
+                "left": 0,
+                "top": 54.980682128906295
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/argo_getdata/argo_getdata/0.1.15+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "055a934a380f",
+                "name": "argo_getdata",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"dataset\": {\"data_dataset\": \"phy\", \"__current_case__\": 0}, \"selection\": {\"data_selection\": \"space_time\", \"__current_case__\": 0, \"cardinal_1\": \"-75.0\", \"cardinal_2\": \"-45.0\", \"cardinal_3\": \"20.0\", \"cardinal_4\": \"30.0\", \"pressure_1\": \"0.0\", \"pressure_2\": \"10.0\", \"date_1\": \"2021-04\", \"date_2\": \"2021-06\"}, \"user\": \"expert\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.15+galaxy0",
+            "type": "tool",
+            "uuid": "6e71455c-12ce-45f8-92bb-6256311203d7",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/2022.3.0+galaxy0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output_argo"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray Coordinate Info",
+            "outputs": [
+                {
+                    "name": "output_dir",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 324,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/2022.3.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "663e6f115a76",
+                "name": "xarray_coords_info",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2022.3.0+galaxy0",
+            "type": "tool",
+            "uuid": "00cdb789-2e2b-4e17-bd8c-a6d60486de79",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/2022.3.0+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output_argo"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF xarray Metadata Info",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "info",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 324,
+                "top": 144.63333129882812
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/2022.3.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "00de53d18b99",
+                "name": "xarray_metadata_info",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2022.3.0+galaxy0",
+            "type": "tool",
+            "uuid": "3b31d6ac-8f88-41d4-bf7c-069f3bcc5523",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/timeseries_extraction/timeseries_extraction/2022.3.0+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output_argo"
+                },
+                "var_tab": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NetCDF timeseries Extractor",
+            "outputs": [
+                {
+                    "name": "timeseries_tabular",
+                    "type": "tabular"
+                },
+                {
+                    "name": "timeseries_plot",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 626,
+                "top": 52.98333740234375
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/timeseries_extraction/timeseries_extraction/2022.3.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "810820a0d45c",
+                "name": "timeseries_extraction",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adv\": {\"plot_title\": \"Temperature\", \"xlabel\": \"Time\", \"ylabel\": \"Temperature\", \"format_date\": \"\"}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"condi_datetime\": {\"datetime\": \"no\", \"__current_case__\": 0}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"lat_name\": null, \"lat_value\": null, \"lon_name\": null, \"lon_value\": null, \"var\": \"TEMP\", \"var_tab\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2022.3.0+galaxy0",
+            "type": "tool",
+            "uuid": "27d4b2e9-d4be-4b2a-a5ba-dac7ba612688",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "interactive_tool_odv",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "method|infiles": {
+                    "id": 3,
+                    "output_name": "timeseries_tabular"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ODV",
+            "outputs": [
+                {
+                    "name": "outputs_netcdf",
+                    "type": "input"
+                },
+                {
+                    "name": "outputs_all",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 933,
+                "top": 74.98333740234375
+            },
+            "post_job_actions": {},
+            "tool_id": "interactive_tool_odv",
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"type\": \"own_data\", \"__current_case__\": 0, \"infiles\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.6.5.1",
+            "type": "tool",
+            "uuid": "8a270a89-447e-4ace-b3fb-cc28108ccf07",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [
+        "Ocean",
+        "Pangeo",
+        "earth-system"
+    ],
+    "uuid": "623f64bf-51b2-4a7e-8985-a61e1250be1b",
+    "version": 5
+}

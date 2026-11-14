@@ -1,0 +1,75 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nExpression matrix input"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nCell annotations input"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nGene annotations input"]
+  3[label="Monocle3 create"]
+  1 -> 3 [label="output"]
+  0 -> 3 [label="output"]
+  2 -> 3 [label="output"]
+  k30db218df9e5426dac9b7823743ab5fb[color=lightseagreen,label="Output\nMonocle3 create on input dataset(s): cds3"]
+  3 -> k30db218df9e5426dac9b7823743ab5fb
+  4[label="Monocle3 preprocess"]
+  3 -> 4 [label="output_rds"]
+  k38996ee00c004a01ad18f2e505eaf780[color=lightseagreen,label="Output\nMonocle3 preprocess on input dataset(s): cds3"]
+  4 -> k38996ee00c004a01ad18f2e505eaf780
+  5[label="Monocle3 reduceDim"]
+  4 -> 5 [label="output_rds"]
+  k21edf68f72df457daad7c5fc5afa2b6b[color=lightseagreen,label="Output\nMonocle3 reduceDim on input dataset(s): cds3"]
+  5 -> k21edf68f72df457daad7c5fc5afa2b6b
+  6[label="Monocle3 partition"]
+  5 -> 6 [label="output_rds"]
+  kfdb0e52027c443a08f27a25832a0816d[color=lightseagreen,label="Output\nMonocle3 partition on input dataset(s): cds3"]
+  6 -> kfdb0e52027c443a08f27a25832a0816d
+  7[label="Plot cell type"]
+  5 -> 7 [label="output_rds"]
+  k5e309658e20f4da18841818f16fa8f01[color=lightseagreen,label="Output\nCell type plot"]
+  7 -> k5e309658e20f4da18841818f16fa8f01
+  8[label="Plot genotype"]
+  5 -> 8 [label="output_rds"]
+  kaca3b2c02d3b4a4e8732cf6ddc7844a4[color=lightseagreen,label="Output\nGenotype plot"]
+  8 -> kaca3b2c02d3b4a4e8732cf6ddc7844a4
+  9[label="Plot batch"]
+  5 -> 9 [label="output_rds"]
+  kc8eec2e41a6447bb812b4002968c57c8[color=lightseagreen,label="Output\nBatch plot"]
+  9 -> kc8eec2e41a6447bb812b4002968c57c8
+  10[label="Plot sex"]
+  5 -> 10 [label="output_rds"]
+  kc75954dd34d54a20bcf3e5cd92d74885[color=lightseagreen,label="Output\nSex plot"]
+  10 -> kc75954dd34d54a20bcf3e5cd92d74885
+  11[label="Monocle3 top markers"]
+  6 -> 11 [label="output_rds"]
+  12[label="Plot genes"]
+  6 -> 12 [label="output_rds"]
+  kf91c22a38c6d432a92c5cb010115fa86[color=lightseagreen,label="Output\nGene expression plot"]
+  12 -> kf91c22a38c6d432a92c5cb010115fa86
+  13[label="Plot partition"]
+  6 -> 13 [label="output_rds"]
+  kf4c5f89bedd7489cb4a2a7a3e7d6a89d[color=lightseagreen,label="Output\nPartition plot"]
+  13 -> kf4c5f89bedd7489cb4a2a7a3e7d6a89d
+  14[label="Plot cluster"]
+  6 -> 14 [label="output_rds"]
+  ka2c1a628d79d4e37ad33de92033021a8[color=lightseagreen,label="Output\nCluster plot"]
+  14 -> ka2c1a628d79d4e37ad33de92033021a8
+  15[label="Monocle3 learnGraph"]
+  6 -> 15 [label="output_rds"]
+  ked2003aa4680409f8d79e79b878a786c[color=lightseagreen,label="Output\nMonocle3 learnGraph on input dataset(s): cds3"]
+  15 -> ked2003aa4680409f8d79e79b878a786c
+  16[label="Plot learned trajectory"]
+  15 -> 16 [label="output_rds"]
+  k6fa555f1b4f24e5dbce1ed462d8e056d[color=lightseagreen,label="Output\nCell types & learned trajectory path plot"]
+  16 -> k6fa555f1b4f24e5dbce1ed462d8e056d
+  17[label="Monocle3 orderCells"]
+  15 -> 17 [label="output_rds"]
+  k96d104123d7f4970b5416f4367fa3f37[color=lightseagreen,label="Output\nMonocle3 orderCells on input dataset(s): cds3"]
+  17 -> k96d104123d7f4970b5416f4367fa3f37
+  18[label="Monocle3 diffExp"]
+  17 -> 18 [label="output_rds"]
+  kdb1dc4572d6e47ccb7ced0a4d23e9498[color=lightseagreen,label="Output\nDifferential expression of genes - table"]
+  18 -> kdb1dc4572d6e47ccb7ced0a4d23e9498
+  19[label="Plot pseudotime"]
+  17 -> 19 [label="output_rds"]
+  kd1b3efd20a814dad8652589c2678fbaa[color=lightseagreen,label="Output\nPseudotime plot"]
+  19 -> kd1b3efd20a814dad8652589c2678fbaa
+}

@@ -1,0 +1,124 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nAnnData to extract genes & cells annotations"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nAnnData before processing to extract clean expression matrix"]
+  2[label="Extract cell annotations"]
+  0 -> 2 [label="output"]
+  k0646798d3a5d420aa7cfcde6cec722d5[color=lightseagreen,label="Output\nExtracted cell annotations (obs)"]
+  2 -> k0646798d3a5d420aa7cfcde6cec722d5
+  3[label="Extract gene annotations"]
+  0 -> 3 [label="output"]
+  k8416274568b041a5b06ea285440ba095[color=lightseagreen,label="Output\nExtracted gene annotations (var)"]
+  3 -> k8416274568b041a5b06ea285440ba095
+  4[label="Extract clean expression matrix"]
+  1 -> 4 [label="output"]
+  k3f03af0cac414450b5ba639a79ea543b[color=lightseagreen,label="Output\nUnprocessed expression matrix"]
+  4 -> k3f03af0cac414450b5ba639a79ea543b
+  5[label="Filter out macrophages"]
+  2 -> 5 [label="obs"]
+  kfb81e9a10603419a83f50c9f94939b16[color=lightseagreen,label="Output\nCells without macrophages"]
+  5 -> kfb81e9a10603419a83f50c9f94939b16
+  6[label="gene_short_name annotation"]
+  3 -> 6 [label="var"]
+  k94a60e6ccdf748e58b55d221cef22688[color=lightseagreen,label="Output\nGenes table with gene_short_name colname"]
+  6 -> k94a60e6ccdf748e58b55d221cef22688
+  7[label="Cut cells IDs"]
+  5 -> 7 [label="out_file1"]
+  k34146c302666481f8d49a849d5d3aa91[color=lightseagreen,label="Output\nFiltered cells IDs "]
+  7 -> k34146c302666481f8d49a849d5d3aa91
+  8[label="Cut genes IDs"]
+  6 -> 8 [label="out_file1"]
+  k8f38fb93cb304fbc90c57f6bd023feea[color=lightseagreen,label="Output\nGenes IDs"]
+  8 -> k8f38fb93cb304fbc90c57f6bd023feea
+  9[label="Filter matrix by cells"]
+  7 -> 9 [label="out_file1"]
+  4 -> 9 [label="X"]
+  kf654c0455fea43f996d6492c810593d2[color=lightseagreen,label="Output\nPre-filtered matrix (by cells)"]
+  9 -> kf654c0455fea43f996d6492c810593d2
+  10[label="Remove duplicate column cells IDs"]
+  9 -> 10 [label="out_file1"]
+  kf633c125a4d04fa7ab87022349f4ac70[color=lightseagreen,label="Output\nFiltered matrix (by cells) "]
+  10 -> kf633c125a4d04fa7ab87022349f4ac70
+  11[label="Transpose matrix"]
+  10 -> 11 [label="output"]
+  k3202091e1afc4f5089221f9e50c490fc[color=lightseagreen,label="Output\nfiltered matrix (by cells) transposed"]
+  11 -> k3202091e1afc4f5089221f9e50c490fc
+  12[label="Filter matrix by genes"]
+  8 -> 12 [label="out_file1"]
+  11 -> 12 [label="out_file"]
+  k6c23cbd5a1b5428e8ff9ebac4893ad88[color=lightseagreen,label="Output\nPre-filtered matrix (by cells & genes)"]
+  12 -> k6c23cbd5a1b5428e8ff9ebac4893ad88
+  13[label="Remove duplicate column genes IDs"]
+  12 -> 13 [label="out_file1"]
+  k258393260b5d4e7491ec24e22c08f7c5[color=lightseagreen,label="Output\nFiltered matrix (by cells & genes)"]
+  13 -> k258393260b5d4e7491ec24e22c08f7c5
+  14[label="Monocle3 create"]
+  5 -> 14 [label="out_file1"]
+  13 -> 14 [label="output"]
+  6 -> 14 [label="out_file1"]
+  kf8c5589ca70d416ea9deebc987f61fc3[color=lightseagreen,label="Output\nMonocle3 create on input dataset(s): cds3"]
+  14 -> kf8c5589ca70d416ea9deebc987f61fc3
+  15[label="Monocle3 preprocess"]
+  14 -> 15 [label="output_rds"]
+  kc134942f60e74cd08c32da4a303b879d[color=lightseagreen,label="Output\nMonocle3 preprocess on input dataset(s): cds3"]
+  15 -> kc134942f60e74cd08c32da4a303b879d
+  16[label="Monocle3 reduceDim"]
+  15 -> 16 [label="output_rds"]
+  k2c9fb1082a1c41dfa8d881a18b66d2a1[color=lightseagreen,label="Output\nMonocle3 reduceDim on input dataset(s): cds3"]
+  16 -> k2c9fb1082a1c41dfa8d881a18b66d2a1
+  17[label="Monocle3 partition"]
+  16 -> 17 [label="output_rds"]
+  k93371c10658347fc830f9a90dc980766[color=lightseagreen,label="Output\nMonocle3 partition on input dataset(s): cds3"]
+  17 -> k93371c10658347fc830f9a90dc980766
+  18[label="Plot cell type"]
+  16 -> 18 [label="output_rds"]
+  kf096d06082e848479e8fb22c9288f565[color=lightseagreen,label="Output\nCell type plot"]
+  18 -> kf096d06082e848479e8fb22c9288f565
+  19[label="Plot genotype"]
+  16 -> 19 [label="output_rds"]
+  kaab28bb1e2e74b7d9b2b1cab64bea287[color=lightseagreen,label="Output\nGenotype plot"]
+  19 -> kaab28bb1e2e74b7d9b2b1cab64bea287
+  20[label="Plot batch"]
+  16 -> 20 [label="output_rds"]
+  k9b362eee923847c5a4c285f3995430f4[color=lightseagreen,label="Output\nBatch plot"]
+  20 -> k9b362eee923847c5a4c285f3995430f4
+  21[label="Plot sex"]
+  16 -> 21 [label="output_rds"]
+  kc2a1e104ef2d4b66ac2bbf0251714434[color=lightseagreen,label="Output\nSex plot"]
+  21 -> kc2a1e104ef2d4b66ac2bbf0251714434
+  22[label="Monocle3 top markers"]
+  17 -> 22 [label="output_rds"]
+  23[label="Plot genes"]
+  17 -> 23 [label="output_rds"]
+  ke886737982c64c32a2d30b24670269ae[color=lightseagreen,label="Output\nGene expression plot"]
+  23 -> ke886737982c64c32a2d30b24670269ae
+  24[label="Plot partition"]
+  17 -> 24 [label="output_rds"]
+  k3f7b0a7c85d6430b8385fa9a76385c0e[color=lightseagreen,label="Output\nPartition plot"]
+  24 -> k3f7b0a7c85d6430b8385fa9a76385c0e
+  25[label="Plot cluster"]
+  17 -> 25 [label="output_rds"]
+  k40b65826f73e4054a56db241985d6996[color=lightseagreen,label="Output\nCluster plot"]
+  25 -> k40b65826f73e4054a56db241985d6996
+  26[label="Monocle3 learnGraph"]
+  17 -> 26 [label="output_rds"]
+  k294b1a49cec649d0bcd43a954da67bec[color=lightseagreen,label="Output\nMonocle3 learnGraph on input dataset(s): cds3"]
+  26 -> k294b1a49cec649d0bcd43a954da67bec
+  27[label="Plot learned trajectory"]
+  26 -> 27 [label="output_rds"]
+  kc85ddefe8eaf4d2193edca0859286bf0[color=lightseagreen,label="Output\nCell types & learned trajectory path plot"]
+  27 -> kc85ddefe8eaf4d2193edca0859286bf0
+  28[label="Monocle3 orderCells"]
+  26 -> 28 [label="output_rds"]
+  k5aea5752b7674fc887411f4d1c659a41[color=lightseagreen,label="Output\nMonocle3 orderCells on input dataset(s): cds3"]
+  28 -> k5aea5752b7674fc887411f4d1c659a41
+  29[label="Monocle3 diffExp"]
+  28 -> 29 [label="output_rds"]
+  k3c2986249f064e52b2a8fb834b87c296[color=lightseagreen,label="Output\nDifferential expression of genes - table"]
+  29 -> k3c2986249f064e52b2a8fb834b87c296
+  30[label="Plot pseudotime"]
+  28 -> 30 [label="output_rds"]
+  k813d15bb07714aed92264874c1ddba59[color=lightseagreen,label="Output\nPseudotime plot"]
+  30 -> k813d15bb07714aed92264874c1ddba59
+}

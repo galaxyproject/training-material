@@ -1,0 +1,594 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "DIA library Training HEK Ecoli data",
+    "format-version": "0.1",
+    "name": "DIA_lib_OSW",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "HEK_Ecoli_exp_design.txt"
+                }
+            ],
+            "label": "HEK_Ecoli_exp_design.txt",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 253.1999969482422,
+                "height": 82.19999694824219,
+                "left": -302.5,
+                "right": -102.5,
+                "top": 171,
+                "width": 200,
+                "x": -302.5,
+                "y": 171
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "b7a2d992-bc43-4699-8914-4315558acf72",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "be397353-5730-4e2d-a975-5342da357935"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "iRTassays.tsv"
+                }
+            ],
+            "label": "iRTassays.tsv",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 369.1999969482422,
+                "height": 82.19999694824219,
+                "left": -347.5,
+                "right": -147.5,
+                "top": 287,
+                "width": 200,
+                "x": -347.5,
+                "y": 287
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "2020e579-6339-4c24-baf0-556c6e07d94e",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "facf90b8-ddac-410e-a894-c966b56f21a2"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "FASTA collection"
+                }
+            ],
+            "label": "FASTA collection",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 478.1999969482422,
+                "height": 82.19999694824219,
+                "left": -337.5,
+                "right": -137.5,
+                "top": 396,
+                "width": 200,
+                "x": -337.5,
+                "y": 396
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "b990e20a-52da-44de-9a00-22ae2e400e5e",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "7867b0df-a52a-4c04-a488-c03e1db17631"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "DDA_data collection"
+                }
+            ],
+            "label": "DDA_data collection",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 608.1999969482422,
+                "height": 82.19999694824219,
+                "left": -344.5,
+                "right": -144.5,
+                "top": 526,
+                "width": 200,
+                "x": -344.5,
+                "y": 526
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "2a32fc5d-36c4-46ee-a2cd-b80be12da5e3",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "14a26fc5-5e3e-4bca-84fc-057c6f828155"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input_opts|fasta_files": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "paramGroups_0|files": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "search_opts|template": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MaxQuant",
+            "outputs": [
+                {
+                    "name": "proteinGroups",
+                    "type": "tabular"
+                },
+                {
+                    "name": "mqpar",
+                    "type": "xml"
+                },
+                {
+                    "name": "peptides",
+                    "type": "tabular"
+                },
+                {
+                    "name": "evidence",
+                    "type": "tabular"
+                },
+                {
+                    "name": "msms",
+                    "type": "tabular"
+                },
+                {
+                    "name": "ptxqc_report",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 681,
+                "height": 510,
+                "left": -82.5,
+                "right": 117.5,
+                "top": 171,
+                "width": 200,
+                "x": -82.5,
+                "y": 171
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "ea0a1d50c83f",
+                "name": "maxquant",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"fasta\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_opts\": {\"ftype\": \".thermo.raw\", \"fasta_files\": {\"__class__\": \"ConnectedValue\"}, \"identifier_parse_rule\": \">([^ ]*)\", \"description_parse_rule\": \"^>.*\\\\|.*\\\\|[^ ]+ (.*) OS.*$\"}, \"output_opts\": {\"dry_run\": \"false\", \"output\": [\"proteinGroups\", \"mqpar\", \"peptides\", \"evidence\", \"msms\"]}, \"paramGroups\": [{\"__index__\": 0, \"files\": {\"__class__\": \"ConnectedValue\"}, \"maxMissedCleavages\": \"1\", \"fixedModifications\": [\"Carbamidomethyl (C)\"], \"variableModifications\": [\"Oxidation (M)\"], \"enzymes\": [\"Trypsin/P\"], \"digestion_mode\": \"0\", \"quant_method\": {\"select_quant_method\": \"\", \"__current_case__\": 0}}], \"protein_quant\": {\"peptides_for_quantification\": \"1\", \"only_unmod_prot\": {\"unmod_prot\": \"False\", \"__current_case__\": 1}, \"lfq_opts\": {\"separateLfq\": \"false\", \"lfqStabilizeLargeRatios\": \"true\", \"lfqRequireMsms\": \"true\", \"do_ibaq\": {\"ibaq\": \"False\", \"__current_case__\": 1}, \"advancedSiteIntensities\": \"true\"}}, \"qc\": {\"do_it\": \"true\", \"__current_case__\": 0, \"parameters\": \"true\", \"summary\": \"true\", \"proteingroups\": \"true\", \"evidence\": \"true\", \"msms\": \"true\", \"msmsscans\": \"true\"}, \"search_opts\": {\"template\": {\"__class__\": \"ConnectedValue\"}, \"min_peptide_len\": \"7\", \"max_peptide_mass\": \"4600\", \"min_unique_pep\": \"1\", \"calc_peak_properties\": \"false\", \"match_between_runs\": \"true\", \"incl_contaminants\": \"true\", \"decoy_mode\": \"revert\", \"psm_fdr\": \"0.01\", \"protein_fdr\": \"0.01\", \"min_pep_length\": \"8\", \"max_pep_length\": \"25\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.6.10.43+galaxy3",
+            "type": "tool",
+            "uuid": "0ee17766-fdba-4ff9-b274-5a3c6a7f1e3d",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "proteinGroups",
+                    "uuid": "59c88bb8-68af-43df-991b-0a012cc639be"
+                },
+                {
+                    "label": null,
+                    "output_name": "msms",
+                    "uuid": "e1310278-385d-404f-b9ba-68d2fbd2dd25"
+                },
+                {
+                    "label": null,
+                    "output_name": "evidence",
+                    "uuid": "a9bef4a5-cdb4-4b74-a46e-fe7249f1e771"
+                },
+                {
+                    "label": null,
+                    "output_name": "peptides",
+                    "uuid": "c1a3b7df-3441-458c-9fef-8fdab2f19576"
+                },
+                {
+                    "label": null,
+                    "output_name": "mqpar",
+                    "uuid": "65605a07-5a17-4d31-b92b-afaf5dcb8837"
+                },
+                {
+                    "label": null,
+                    "output_name": "ptxqc_report",
+                    "uuid": "0b1667be-be49-4ea7-a3b2-48d099a44103"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "evidence"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 264.1999969482422,
+                "height": 93.19999694824219,
+                "left": 137.5,
+                "right": 337.5,
+                "top": 171,
+                "width": 200,
+                "x": 137.5,
+                "y": 171
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"cond\": \"len(c9.split(';')) < 2\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "22368d26-e6a2-41f8-99d2-321bddd04840",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "44b9a121-c925-41a9-945f-52c7c8aeceb9"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "msms"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 384.1999969482422,
+                "height": 93.19999694824219,
+                "left": 137.5,
+                "right": 337.5,
+                "top": 291,
+                "width": 200,
+                "x": 137.5,
+                "y": 291
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"cond\": \"len(c12.split(';')) < 2\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "eb4fa570-9fdd-40a3-a980-f494cde96317",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "95eda6f0-e8b5-4cdc-8cf6-d6ed53933077"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/diapysef/diapysef/0.3.5.0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input_evidence": {
+                    "id": 5,
+                    "output_name": "out_file1"
+                },
+                "input_irtassays": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "input_msms": {
+                    "id": 6,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "diapysef library generation",
+            "outputs": [
+                {
+                    "name": "output_tabular",
+                    "type": "tabular"
+                },
+                {
+                    "name": "output_pdf",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 559.3999938964844,
+                "height": 388.3999938964844,
+                "left": 357.5,
+                "right": 557.5,
+                "top": 171,
+                "width": 200,
+                "x": 357.5,
+                "y": 171
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/diapysef/diapysef/0.3.5.0",
+            "tool_shed_repository": {
+                "changeset_revision": "8eed818f5d48",
+                "name": "diapysef",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"alignment\": \"linear\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_evidence\": {\"__class__\": \"ConnectedValue\"}, \"input_irtassays\": {\"__class__\": \"ConnectedValue\"}, \"input_msms\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.5.0",
+            "type": "tool",
+            "uuid": "50c157a3-ceb5-4d34-aadf-a635f2d9c62c",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_pdf",
+                    "uuid": "3dde2b97-a71d-40e6-bfd5-a818577596c7"
+                },
+                {
+                    "label": null,
+                    "output_name": "output_tabular",
+                    "uuid": "9db078b5-7289-4de8-80e0-3af5466d5f4b"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathassaygenerator/OpenSwathAssayGenerator/2.5+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "in": {
+                    "id": 7,
+                    "output_name": "output_tabular"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool OpenSwathAssayGenerator",
+                    "name": "in"
+                },
+                {
+                    "description": "runtime parameter for tool OpenSwathAssayGenerator",
+                    "name": "swath_windows_file"
+                },
+                {
+                    "description": "runtime parameter for tool OpenSwathAssayGenerator",
+                    "name": "unimod_file"
+                }
+            ],
+            "label": null,
+            "name": "OpenSwathAssayGenerator",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "bottom": 590.2000122070312,
+                "height": 419.20001220703125,
+                "left": 577.5,
+                "right": 777.5,
+                "top": 171,
+                "width": 200,
+                "x": 577.5,
+                "y": 171
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathassaygenerator/OpenSwathAssayGenerator/2.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2a9ff56cb279",
+                "name": "openms_openswathassaygenerator",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": null, \"adv_opts_cond\": {\"adv_opts_selector\": \"advanced\", \"__current_case__\": 1, \"max_num_alternative_localizations\": \"10000\", \"disable_identification_ms2_precursors\": \"false\", \"disable_identification_specific_losses\": \"false\", \"enable_identification_unspecific_losses\": \"false\", \"enable_swath_specifity\": \"false\", \"force\": \"false\", \"test\": \"False\"}, \"allowed_fragment_charges\": \"1,2,3,4\", \"allowed_fragment_types\": \"b,y\", \"enable_detection_specific_losses\": \"false\", \"enable_detection_unspecific_losses\": \"false\", \"enable_ipf\": \"false\", \"in\": {\"__class__\": \"RuntimeValue\"}, \"max_transitions\": \"6\", \"min_transitions\": \"6\", \"out_type\": \"tsv\", \"precursor_lower_mz_limit\": \"400.0\", \"precursor_mz_threshold\": \"0.015\", \"precursor_upper_mz_limit\": \"1000.0\", \"product_lower_mz_limit\": \"350.0\", \"product_mz_threshold\": \"0.015\", \"product_upper_mz_limit\": \"2000.0\", \"swath_windows_file\": {\"__class__\": \"RuntimeValue\"}, \"unimod_file\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "ed923bff-cb4e-4d69-9b95-90c85e709fa2",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "b759b71c-1b1a-4240-9ee5-8294990dc07d"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathdecoygenerator/OpenSwathDecoyGenerator/2.5+galaxy0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "in": {
+                    "id": 8,
+                    "output_name": "out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool OpenSwathDecoyGenerator",
+                    "name": "in"
+                }
+            ],
+            "label": null,
+            "name": "OpenSwathDecoyGenerator",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "bottom": 345.8000030517578,
+                "height": 174.8000030517578,
+                "left": 797.5,
+                "right": 997.5,
+                "top": 171,
+                "width": 200,
+                "x": 797.5,
+                "y": 171
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathdecoygenerator/OpenSwathDecoyGenerator/2.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "f861ec9fbe59",
+                "name": "openms_openswathdecoygenerator",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": null, \"adv_opts_cond\": {\"adv_opts_selector\": \"advanced\", \"__current_case__\": 1, \"min_decoy_fraction\": \"0.8\", \"aim_decoy_fraction\": \"1.0\", \"shuffle_max_attempts\": \"30\", \"shuffle_sequence_identity_threshold\": \"0.5\", \"shift_precursor_mz_shift\": \"0.0\", \"shift_product_mz_shift\": \"20.0\", \"product_mz_threshold\": \"0.015\", \"allowed_fragment_types\": \"b,y\", \"allowed_fragment_charges\": \"1,2,3,4\", \"enable_detection_specific_losses\": \"false\", \"enable_detection_unspecific_losses\": \"false\", \"separate\": \"false\", \"force\": \"false\", \"test\": \"False\"}, \"decoy_tag\": \"DECOY_\", \"in\": {\"__class__\": \"RuntimeValue\"}, \"method\": \"shuffle\", \"out_type\": \"tsv\", \"switchKR\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "fb0b6f0e-4a95-4fa0-80d3-8a6dfa0edf25",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "c068a0cc-c6e9-44ac-bc64-9714b89841f7"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_targetedfileconverter/TargetedFileConverter/2.5+galaxy0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "in": {
+                    "id": 9,
+                    "output_name": "out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool TargetedFileConverter",
+                    "name": "in"
+                }
+            ],
+            "label": null,
+            "name": "TargetedFileConverter",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "bottom": 325.3999938964844,
+                "height": 154.39999389648438,
+                "left": 1017.5,
+                "right": 1217.5,
+                "top": 171,
+                "width": 200,
+                "x": 1017.5,
+                "y": 171
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_targetedfileconverter/TargetedFileConverter/2.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "dd71e020e2aa",
+                "name": "openms_targetedfileconverter",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": null, \"adv_opts_cond\": {\"adv_opts_selector\": \"advanced\", \"__current_case__\": 1, \"legacy_traml_id\": \"false\", \"force\": \"false\", \"test\": \"False\"}, \"algorithm\": {\"retentionTimeInterpretation\": \"iRT\", \"override_group_label_check\": \"false\", \"force_invalid_mods\": \"false\"}, \"in\": {\"__class__\": \"RuntimeValue\"}, \"out_type\": \"pqp\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "c91c0e6d-282a-46ae-bb47-1425f1b0f1f3",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "5721be8a-32ce-4d4d-8d50-6deeae3b61d2"
+                }
+            ]
+        }
+    },
+    "tags": ["proteomics"],
+    "uuid": "4a77574e-f445-4b8a-9fc9-29e16864705a",
+    "version": 3
+}
