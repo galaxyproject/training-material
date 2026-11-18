@@ -11,7 +11,7 @@ tags:
 - QC
 - cyoa
 level: Introductory
-zenodo_link: https://zenodo.org/record/6457007
+zenodo_link: 'https://zenodo.org/record/6457007'
 questions:
 - ¿Cuáles son los pasos para procesar datos de RNA-Seq?
 - ¿Cómo identificar genes diferencialmente expresados en múltiples condiciones experimentales?

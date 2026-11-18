@@ -29,12 +29,13 @@ key_points:
 - Deciding what part of your code should, or should not be, a function is something that will come with practice.
 
 subtopic: python-modular
-contributors:
-  - carpentries
-  - hexylena
-  - dirowa
-  - bazante1
-
+contributions:
+  authorship:
+    - carpentries
+  editing:
+    - hexylena
+    - dirowa
+    - bazante1
 priority: 2
 notebook:
   language: python

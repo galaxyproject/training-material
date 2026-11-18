@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "Mapping and molecular identification of phenotype-causing mutations"
 subtopic: model-organisms
-zenodo_link: "https://doi.org/10.5281/zenodo.1098033"
+zenodo_link: 'https://zenodo.org/record/1098034'
 questions:
   - "What is mapping-by-sequencing?"
   - "How can it help you identify the causative mutation in phenotypic mutants isolated from genetic screens?"
@@ -15,8 +15,9 @@ time_estimation: "2h"
 key_points:
   - "Mapping-by-sequencing is a powerful method for the molecular identification of mutations"
   - "The MiModD suite of tools bundles most of the functionality required to perform mapping-by-sequencing analyses with Galaxy"
-contributors:
-  - wm75
+contributions:
+  authorship:
+    - wm75
 ---
 
 
@@ -447,7 +448,7 @@ with predicted functional effects.
 >    > database schemes) of **SnpEff Download** {% icon tool %} in this and of
 >    > **SnpEff Variant effect and annotation** {% icon tool %} in the next
 >    > step.
->    > 
+>    >
 >    > Please also note that before SnpEff version 4.3 the TAIR10 version of
 >    > the *A. thaliana* genome database was named `athalianaTair10`.
 >    > If your Galaxy server offers only older versions of the SnpEff tools,

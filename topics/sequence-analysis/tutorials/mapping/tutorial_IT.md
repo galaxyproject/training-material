@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Mappatura
-zenodo_link: https://doi.org/10.5281/zenodo.1324070
+zenodo_link: 'https://zenodo.org/record/1324070'
 questions:
   - Che cos’è la mappatura?
   - Quali due elementi sono cruciali per una mappatura corretta?

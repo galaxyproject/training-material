@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Identifing Survival Markers of Brain tumor with Flexynesis
-zenodo_link: https://zenodo.org/records/16287482
+zenodo_link: 'https://zenodo.org/record/16287482'
 questions:
 - How can multi-modal genomic data be integrated to identify survival markers in brain tumors?
 - How can deep learning approaches improve survival prediction in cancer patients?
@@ -17,9 +17,11 @@ time_estimation: 2H
 key_points:
 - Multi-modal data integration improves survival prediction accuracy compared to single data types
 - Deep learning approaches can effectively handle high-dimensional genomic data for survival analysis
-contributors:
-- Nilchia
-- bgruening
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - Nilchia
+    - bgruening
 subtopic: flexynesis
 answer_histories:
     - label: "usegalaxy.eu"

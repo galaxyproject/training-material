@@ -17,9 +17,11 @@ tags:
  - ncbi
  - covid19
 subtopic: upload
-contributors:
-  - jontrow
-  - RareSeas
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - jontrow
+    - RareSeas
 requirements:
   -
     type: "internal"

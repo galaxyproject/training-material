@@ -26,12 +26,13 @@ key_points:
 - "Variables only change value when something is assigned to them."
 
 subtopic: python-modular
-contributors:
-  - carpentries
-  - hexylena
-  - dirowa
-  - bazante1
-
+contributions:
+  authorship:
+    - carpentries
+  editing:
+    - hexylena
+    - dirowa
+    - bazante1
 priority: 3
 notebook:
   language: python

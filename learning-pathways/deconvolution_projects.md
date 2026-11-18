@@ -4,6 +4,8 @@ tags: [advanced, single-cell]
 cover-image: assets/images/wab-lp-deconvolution.png
 cover-image-alt: "XY plot of actual versus inferred proportions, with coloured dots representing clusters and largely falling in a 1-1 slope"
 type: use
+topics:
+  - single-cell
 
 editorial_board:
 - nomadscientist

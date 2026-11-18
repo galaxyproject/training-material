@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 redirect_from:
 - "/topics/galaxy-ui/tutorials/galaxy-intro-jupyter/tutorial"
 title: Use Jupyter notebooks in Galaxy
-zenodo_link: https://zenodo.org/record/15263830
+zenodo_link: 'https://zenodo.org/record/15263830'
 questions:
 - How to open a Jupyter Notebook in Galaxy?
 - How to update dependencies in a Jupyter Interactive Environment?

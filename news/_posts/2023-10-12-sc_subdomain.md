@@ -5,7 +5,7 @@ contributions:
   - nomadscientist
   - pavanvidem
   infrastructure:
-  - kysrpex
+  - domgz
   funding:
     - elixir-europe
     - deNBI

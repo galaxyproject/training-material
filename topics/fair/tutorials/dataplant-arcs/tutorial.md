@@ -7,7 +7,7 @@ abbreviations:
   DMP: Data Management Plan
   PID: Persistent Identifier
 
-zenodo_link: 'https://zenodo.org/records/13970369'
+zenodo_link: 'https://zenodo.org/record/13970369'
 questions:
 - What are ARCs?
 - Why should I create ARCs?

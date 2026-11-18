@@ -2,6 +2,12 @@
 layout: learning-pathway
 tags: [beginner, galaxy-interface, microbiome, visualisation, data-science, variant-analysis ]
 type: use
+topics:
+  - data-science
+  - microbiome
+  - galaxy-interface
+  - variant-analysis
+
 
 editorial_board:
 - shiltemann
@@ -10,7 +16,7 @@ editorial_board:
 funding:
 - gallantries
 
-title: Gallantries Grant - Intellectual Output 2 - Large-scale data analysis, and introduction to visualisation and data modelling
+title: Large-scale data analysis, and introduction to visualisation and data modelling
 
 
 description: |

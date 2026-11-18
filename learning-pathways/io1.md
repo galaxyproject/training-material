@@ -2,6 +2,9 @@
 layout: learning-pathway
 tags: [beginner, data-science, contributing, sequence-analysis, transcriptomics]
 type: use
+topics:
+  - data-science
+  - sequence-analysis
 
 editorial_board:
 - fpsom
@@ -10,7 +13,7 @@ editorial_board:
 funding:
 - gallantries
 
-title: Gallantries Grant - Intellectual Output 1 - Introduction to data analysis and -management, statistics, and coding
+title: Introduction to data analysis and -management, statistics, and coding
 
 description: |
   This Learning Pathway collects the results of Intellectual Output 1 in the Gallantries Project

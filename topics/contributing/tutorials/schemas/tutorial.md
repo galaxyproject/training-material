@@ -6,8 +6,9 @@ objectives:
 - Know where to find all of the available metadata, so you can reference it later.
 title: "GTN Metadata"
 time_estimation: "10m"
-contributors:
-  - hexylena
+contributions:
+  authorship:
+    - hexylena
 ---
 
 ## Training Materials

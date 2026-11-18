@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Comparative gene analysis in unannotated genomes
-zenodo_link: https://zenodo.org/record/7034885
+zenodo_link: 'https://zenodo.org/record/7034885'
 questions:
 - I have several genomes assemblies that are not annotated (or I do not trust annotations)
 - I am interested to compare structure of a particular gene across these genome assemblies
@@ -11,8 +11,9 @@ objectives:
 time_estimation: 30M
 key_points:
 - You can locate gene of interest in unannotated genomes and compare its structure across multiple species
-contributors:
-- nekrut
+contributions:
+  authorship:
+    - nekrut
 tags:
 - evolution
 - annotation

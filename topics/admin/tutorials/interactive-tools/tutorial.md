@@ -25,7 +25,7 @@ contributions:
     - slugger70
     - hexylena
     - abretaud
-    - kysrpex
+    - domgz
   funding:
     - eurosciencegateway
     - unimelb
@@ -269,7 +269,7 @@ The GxIT Proxy is written in [Node.js][nodejs]. A straightforward method to set 
 >          port: 4002
 >          sessions: "{{ gxit_proxy_sessions_path }}"
 >        # ... other settings ... #
->      # ... other settings ... # 
+>      # ... other settings ... #
 >    # ... other settings ... #
 >    gxit_proxy_sessions_path: "{{ galaxy_mutable_data_dir }}/interactivetools_map.sqlite"
 >    ```
@@ -922,13 +922,13 @@ In a _high availability_ setup, multiple redundant copies of Galaxy run simultan
 
 As explained in [one of the previous sections](#enabling-the-interactive-tools-proxy), the Galaxy Interactive Tools Proxy redirects requests to each Interactive Tool's host and port. By default, the mapping of GxIT invocations to their corresponding host/port is kept in a SQLite database known as the _Interactive Tools Session Map_.
 
-By design, [SQLite is the wrong choice for high availability setups][sqlite_situations_where_a_client_server_rdbms_may_work_better], the showstopper being that the SQLite database file would have to be shared over a network filesystem, which are usually associated with too high latencies for RDBMS use. For this reason, Galaxy and the Interactive Tools Proxy can also store the **Session Map in a PostgreSQL database**. 
+By design, [SQLite is the wrong choice for high availability setups][sqlite_situations_where_a_client_server_rdbms_may_work_better], the showstopper being that the SQLite database file would have to be shared over a network filesystem, which are usually associated with too high latencies for RDBMS use. For this reason, Galaxy and the Interactive Tools Proxy can also store the **Session Map in a PostgreSQL database**.
 
 [sqlite_situations_where_a_client_server_rdbms_may_work_better]: https://www.sqlite.org/whentouse.html#situations_where_a_client_server_rdbms_may_work_better
 
 > <hands-on-title>Preparing the database</hands-on-title>
-> 
-> First, you need to create a database for the Interactive Tools Proxy. 
+>
+> First, you need to create a database for the Interactive Tools Proxy.
 >
 > > <warning-title></warning-title>
 > > Do **not** use the Galaxy database for this purpose. The main Galaxy database is reserved for Galaxy's core functionality, and Interactive Tools have not yet reached this stage. Since Galaxy does not expect to find the Interactive Tools Session Map in this database, storing it there can lead to errors.
@@ -937,7 +937,7 @@ By design, [SQLite is the wrong choice for high availability setups][sqlite_situ
 > <br>
 >
 > 1. **On your database server**, access PostgresSQL and create a `gxitproxy` database to store the Interactive Tools Session Map. For simplicity, the same user that operates on the Galaxy main database, typically named `galaxy`, is also going to operate on this one and will own the new database.
-> 
+>
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > # one-liner that connects to Postgres, creates the database and assigns ownership

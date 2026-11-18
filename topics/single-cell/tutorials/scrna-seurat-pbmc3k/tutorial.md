@@ -4,7 +4,7 @@ title: Clustering 3K PBMCs with Seurat
 level: Introductory
 subtopic: firstsc
 priority: 3
-zenodo_link: https://zenodo.org/record/3581213
+zenodo_link: 'https://zenodo.org/record/3581213'
 answer_histories:
 - label: UseGalaxy.org - Using Separate Preprocessing Tools
   history: https://usegalaxy.org/u/videmp/h/gtn-clustering-3k-pbmcs-with-seurat-separate-preprocessing-may-2025

@@ -24,8 +24,9 @@ requirements:
     tutorials:
       - ansible
       - terraform
-contributors:
-  - hexylena
+contributions:
+  authorship:
+    - hexylena
 ---
 
 Setting up and running a Galaxy Admin Training is not a very complicated process thanks to a significant amount of work that has been put into making it easy and quick.

@@ -49,6 +49,17 @@ We should ONLY be using new_material (if at all possible.)
 
 <article class="tutorial topic-{{ page.topic_name }}">
     <h1 data-toc-skip>{{ page.title }}</h1>
+
+    {% if page.hands_on == "external" %}
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">External Tutorial</h4>
+        <p>Oops! The this is not the tutorial you are looking for, please go to the <a href="{{page.hands_on_url}}">external tutorial</a> to find it.</p>
+
+        <p> If you reached this page there was likely a bug somewhere on the GTN, please consider reporting it on <a href="https://github.com/galaxyproject/training-material/issues">GitHub</a> or <a href="https://matrix.to/#/#Galaxy-Training-Network_Lobby:gitter.im">Matrix chat</a></p>
+    </div>
+    {% endif %}
+
+
     {% if page.draft %}
     <div class="alert alert-warning" role="alert">
         <h4 class="alert-heading">Under Development!</h4>
@@ -175,6 +186,8 @@ We should ONLY be using new_material (if at all possible.)
             {% endif %}
             {{ locale['license-framework'] | default: "The GTN Framework is licensed under" }} <a rel="license" href="{{ site.github_repository }}/blob/main/LICENSE.md">MIT</a>
         </div>
+
+        <div><strong>{% icon robot aria=false %} {{ locale['ai-policy'] | default: "AI Policy" }}:</strong> {{ locale['ai-policy-text-before'] | default: "All GTN tutorials are human authored in accordance with our" }} <a href="{% link AI-policy.md %}">{{ locale['ai-policy'] | default: "AI Policy" }} </a> {{ locale['ai-policy-text-after'] | default: "." }} </div>
         {% if page.short_id %}
         <div><strong>{% icon purl %} <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a> </div>
         {% endif %}
@@ -188,7 +201,7 @@ We should ONLY be using new_material (if at all possible.)
 	{% if feedback_count > 0 %}
 	<div><strong>{% icon rating %} Rating:</strong> <a href="#feedback-responses">{{ site | get_rating_recent:own_material_id }}</a> ({{ site | get_feedback_count_recent: own_material_id }} recent ratings, {{ feedback_count }} all time)</div>
 	{% endif %}
-	<div><strong>{% icon version %} {{ locale['revision'] | default: "Revision" }}:</strong> {{ page | get_version_number }} </div>
+	<div><strong>{% icon version %} {{ locale['revision'] | default: "Revision" }}:</strong> <a href="{{ site.github_repository }}/commits/{{ site.github_repository_branch }}/{{ page.path }}">{{ page | get_version_number }}</a></div>
 
     </blockquote>
     </section>

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 level: Intermediate
 title: GLEAM Image Learner - Validating Skin Lesion Classification on HAM10000
-zenodo_link: https://zenodo.org/records/17114688
+zenodo_link: 'https://zenodo.org/record/17114688'
 questions:
 - How do we validate GLEAM's Image Learner against a published benchmark on HAM10000?
 - How do we set up a balanced train/validation/test split for multi-class image classification?
@@ -22,12 +22,14 @@ key_points:
   class imbalance.
 - Confirm the robustness of the model by evaluating its performance metrics including
   accuracy, ROC-AUC, and F1-score.
-contributors:
-- khaivandangusf2210
-- paulocilasjr
-- qchiujunhao
-- afpybus
-- jgoecks
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - khaivandangusf2210
+    - paulocilasjr
+    - qchiujunhao
+    - afpybus
+    - jgoecks
 tags:
 - HAM10000 Dataset
 - Image Classification

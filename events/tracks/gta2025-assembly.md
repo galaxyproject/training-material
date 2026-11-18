@@ -45,7 +45,7 @@ program:
       - name: vgp_workflow_training
         topic: assembly
       - name: metagenomics-assembly
-        topic: assembly
+        topic: microbiome
 
   - section: "Assembly decontamination"
     description: |

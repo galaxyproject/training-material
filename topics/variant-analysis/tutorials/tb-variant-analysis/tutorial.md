@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "M. tuberculosis Variant Analysis"
 subtopic: one-health
-zenodo_link: https://doi.org/10.5281/zenodo.3496437
+zenodo_link: 'https://zenodo.org/record/3496437'
 questions:
   - "How do we detect differences between a set of reads from _M. tuberculosis_ (Mtb) and the Mtb reference genome"
 objectives:

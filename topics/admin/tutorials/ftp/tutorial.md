@@ -13,8 +13,9 @@ time_estimation: "1h"
 key_points:
   - FTP is easy to deploy thanks to the role
   - Users can be authenticated with their Galaxy credentials simplifying the user management process significantly
-contributors:
-  - lldelisle
+contributions:
+  authorship:
+    - lldelisle
 subtopic: features
 requirements:
   - type: "internal"

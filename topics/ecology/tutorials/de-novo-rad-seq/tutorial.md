@@ -4,7 +4,7 @@ redirect_from:
   - /topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial
 
 title: "RAD-Seq de-novo data analysis"
-zenodo_link: "https://doi.org/10.5281/zenodo.1134547"
+zenodo_link: 'https://zenodo.org/record/1134547'
 questions:
   - "How to analyze RAD sequencing data without a reference genome for a population genomics study?"
 objectives:

@@ -28,11 +28,11 @@ time_estimation:  1H30M
 key_points: []
 
 subtopic: python-modular
-contributors:
-  - hexylena
-  - dirowa
-  - bazante1
-
+contributions:
+  authorship:
+    - hexylena
+    - dirowa
+    - bazante1
 priority: 9
 notebook:
   language: python

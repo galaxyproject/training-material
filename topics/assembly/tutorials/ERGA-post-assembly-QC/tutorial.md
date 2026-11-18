@@ -1,6 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: ERGA post-assembly QC
+subtopic: assembly-quality
 questions:
 - "What combination of tools can assess the quality of a genome assembly?"
 - "What metrics can help to analyse the quality of an assembly?"
@@ -15,11 +16,13 @@ key_points:
 - 'The ERGA post-assembly pipeline consists of three main steps: Genome assembly decontamination
   and overview with BlobToolKit, providing analysis information and statistics, and
   Hi-C scaffolding.'
-contributors:
-- GitFab93
-- gallardoalba
-- tbrown91
-- delphine-l
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - GitFab93
+    - gallardoalba
+    - tbrown91
+    - delphine-l
 tags:
 - plants
 - animals

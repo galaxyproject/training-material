@@ -12,8 +12,9 @@ key_points:
   - "Learn to rebase now, if you haven't yet"
   - "git am is not fun"
   - "If you have issues, ping me."
-contributors:
-  - hexylena
+contributions:
+  authorship:
+    - hexylena
 ---
 
 # Updating Diffs

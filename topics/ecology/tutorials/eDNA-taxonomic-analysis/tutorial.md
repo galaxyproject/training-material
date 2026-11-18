@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Taxonomic Analysis of eDNA'
-zenodo_link: 'https://zenodo.org/records/15367390'
+zenodo_link: 'https://zenodo.org/record/15367390'
 questions:
 - Can we assign taxonomic information to unknown DNA sequences from environmental samples?
 - What are the key bioinformatics techniques used in the taxonomic analysis of eDNA sequences?

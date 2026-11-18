@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 title: Identification and Evolutionary Analysis of Transcription-Associated Proteins
   in Streptophyte algae and Land plants
-zenodo_link: https://zenodo.org/records/15056031/
+zenodo_link: 'https://zenodo.org/record/15056031'
 questions:
 - What are transcription-associated proteins (TAPs)?
 - How can we identify TAPs from a given proteome dataset?

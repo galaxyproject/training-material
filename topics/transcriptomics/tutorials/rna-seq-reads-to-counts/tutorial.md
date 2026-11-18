@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 title: "1: RNA-Seq reads to counts"
 subtopic: end-to-end
-zenodo_link: "https://zenodo.org/record/4249555"
+zenodo_link: 'https://zenodo.org/record/4249555'
 tags:
   - collections
   - mouse

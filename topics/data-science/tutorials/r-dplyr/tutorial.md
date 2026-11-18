@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: dplyr & tidyverse for data processing
 level: Advanced
-zenodo_link:
 requirements:
 - type: "internal"
   topic_name: data-science

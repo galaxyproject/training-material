@@ -5,12 +5,11 @@ title: "Phylogenetics - Back to Basics - Multiple Sequence Alignment"
 zenodo_link: ""
 subtopic: phylogenetics
 priority: 3
-contributors:
-  - mcharleston  
+contributions:
+  authorship:
+    - mcharleston
 
---- 
-
-
+---
 # Motivation
 <br>
 <br>
@@ -30,7 +29,7 @@ We use sequence alignment to:
 <br>
 <br>
 .left[One of the best understood and best solved bioinformatics problem is *how to align two sequences*.]
-<br>      
+<br>
 .left[In order to do this we need to know:]
 <br>
 1.  what an "alignment" really means;
@@ -41,21 +40,21 @@ We use sequence alignment to:
 ---
 
 # What is an alignment?
-<br> 
+<br>
 Given two sequences like **GGGCTGAA** and **GGGACTG** "an alignment" is a _mapping_ of their positions (a.k.a. "sites") to a common ordering, by inserting gaps in one sequence or another:
-<br> 
-<br> 
+<br>
+<br>
 ![Alignment of two DNA sequences GGGACTG and GGCTGAA. In the alignment gaps, indicated by -, are added to the sequences to form GGGACTG-- and -GG-CTGAA so that homologous sites are aligned at positions 2, 3, 5, 6, 7. ](images/03-msa-01-what-is-an-alignment.pdf-1.png)</p>
 ---
 # Alignments represent homology
 <br>
 <br>
-     
+
 <p>Our goal with sequence alignment is to identify which regions, down to individual positions in a molecular sequence, are homologous: that is, their shared evolutionary history is the same as that of the taxa of interest.</p>
-<br> 
+<br>
 
 <p>It's like tracing the origin of a set of transcribed documents through all their copies back to the original, where each was only copied (with maybe some mistakes) from one predecessor.</p>
-<br> 
+<br>
 <p>Once we have identified homologous sites then we can analyse their differences and similarities under an evolutionary model - a crucial centrepiece of phylogenetic analysis, and in fact of all comparative analysis of molecular sequences.</p>
 ---
 
@@ -129,7 +128,7 @@ This alignment reflects truth
 # Although...
 <br>
 <br>
-         
+
 But this alignment also looks "good" (?)
 <br>
 <br>
@@ -140,7 +139,7 @@ But this alignment also looks "good" (?)
 # Although...
 <br>
 <br>
-        
+
 And so does this
 <br>
 <br>
@@ -183,7 +182,7 @@ At 2 the gaps don't line up, but they *could*.
 <br>
 ![A possible alignment of six DNA sequences arranged vertically drawing attention to a position 1 where gaps have been removed to improve alignment at position 2.](images/03-msa-04-b-fixingerrors-well.pdf-1.png)
 
-        
+
 This fixes both problems.
 
 ---
@@ -352,9 +351,9 @@ In terms of sequence alignment, this comes down to basing alignment of two seque
 1. Array two sequences along the top and left sides of a cost matrix.
 2. Fill in the cells of the matrix from top-left to bottom right.
     At each stage find the minimum cost sub-alignment and add to it:
-   <p>2.1 Find the maximum score from the previous cells including gap costs;</p> 
-   <p>2.2 Put the result into this new cell;</p> 
-   <p>2.3 Note which cell we chose with a pointer or reference.</p> 
+   <p>2.1 Find the maximum score from the previous cells including gap costs;</p>
+   <p>2.2 Put the result into this new cell;</p>
+   <p>2.3 Note which cell we chose with a pointer or reference.</p>
 <br>
 
 .image-25[ ![Schematic of the dynamic programming alignment described on the slide](images/03-DPcell.png) ]
@@ -507,7 +506,7 @@ These *heuristic* methods are used in Clustal, GCG and others.
 # MAFFT
 <br>
 <br>
-     
+
 "MAFFT offers various multiple alignment strategies. They are classified into three types, (a) the progressive method, (b) the iterative refinement method with the WSP score, and (c) the iterative refinement method using both the WSP and consistency scores. In general, there is a tradeoff between speed and accuracy. The order of speed is a > b > c, whereas the order of accuracy is a < b < c. The results of benchmarks can be seen here. The following are the detailed procedures for the major options of MAFFT."
 <br>
 <br>

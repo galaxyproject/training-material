@@ -15,13 +15,15 @@ key_points:
 - "GTEx v11 gene TPM profiles can be represented as fixed-size grayscale images, one image per sample."
 - "`SMTSD` from the GTEx sample attributes file is used as the tissue label."
 - "This tutorial can be run on any Galaxy instance where Image Learner is available or installable."
-contributors:
-- paulocilasjr
-- allissadillman
-- nakucher
-- afpybus
-- qchiujunhao
-- jgoecks
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - paulocilasjr
+    - allissadillman
+    - nakucher
+    - afpybus
+    - qchiujunhao
+    - jgoecks
 tags:
 - GTEx
 - Tissue Classification

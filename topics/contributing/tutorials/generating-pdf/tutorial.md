@@ -9,8 +9,9 @@ objectives:
 time_estimation: "10m"
 key_points:
   - "PDFs can be easily generated for the different tutorials to share with learnees or to keep a fixed version of a tutorial"
-contributors:
-  - bebatut
+contributions:
+  authorship:
+    - bebatut
 ---
 
 The website with the training material can be run locally. Sometimes, it is also interesting to freeze the tutorials or to get PDFs of the tutorials.

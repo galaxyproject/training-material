@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Analyses of metagenomics data - The global picture"
-zenodo_link: "https://doi.org/10.5281/zenodo.815875"
+zenodo_link: 'https://zenodo.org/record/815875'
 questions:
   - "How to analyze metagenomics data?"
   - "What information can be extracted of metagenomics data?"
@@ -18,9 +18,11 @@ key_points:
   - "With shotgun data, we can extract information about the studied community structure and also the functions realised by the community"
   - "The tools used to analyze amplicon and shotgun data are different, except for the visualisation"
   - "Metagenomics data analyses are complex and time-consuming"
-contributors:
-  - shiltemann
-  - bebatut
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - shiltemann
+    - bebatut
 subtopic: intro
 tags:
   - microgalaxy

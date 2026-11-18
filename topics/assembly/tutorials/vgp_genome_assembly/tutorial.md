@@ -1,6 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: "Vertebrate genome assembly using HiFi, Bionano and Hi-C data - Step by Step"
+subtopic: pacbio-assembly
 zenodo_link: 'https://zenodo.org/record/5887339'
 level: Intermediate
 tags:
