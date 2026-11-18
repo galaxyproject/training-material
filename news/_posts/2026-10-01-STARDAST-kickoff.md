@@ -11,7 +11,7 @@ contributions:
   funding:
     - stardast
 
-cover: "shared/images/STARDAST_ColourPos.png"
+cover: "shared/images/logos/STARDAST_ColourPos.png"
 coveralt: "STARDAST project logo"
 
 ---
