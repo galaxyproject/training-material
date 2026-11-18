@@ -38,7 +38,7 @@ contributions:
   infrastructure:
     - MattiHoch
     - mira-miracoli
-    - kysrpex
+    - domgz
     - sanjaysrikakulam
     - bgruening
   funding:
