@@ -14,9 +14,11 @@ time_estimation: 1H
 key_points:
 - MaxQuant offers a single tool solution for protein identification and quantification.
 - Label-free quantitation reveals the most abundant proteins in serum samples.
-contributors:
-- foellmelanie
-- matthias313
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - foellmelanie
+    - matthias313
 subtopic: id-quant
 tags: [DDA, label-free]
 ---

@@ -26,12 +26,13 @@ key_points:
 - "Indexing beyond the end of the collection is an error."
 
 subtopic: python-modular
-contributors:
-  - carpentries
-  - hexylena
-  - dirowa
-  - bazante1
-
+contributions:
+  authorship:
+    - carpentries
+  editing:
+    - hexylena
+    - dirowa
+    - bazante1
 priority: 4
 notebook:
   language: python

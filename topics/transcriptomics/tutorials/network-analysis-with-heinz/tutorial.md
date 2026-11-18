@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Network analysis with Heinz"
-zenodo_link: "https://doi.org/10.5281/zenodo.1344105"
+zenodo_link: 'https://zenodo.org/record/1344105'
 tags:
   - metatranscriptomics
   - network analysis
@@ -17,7 +17,8 @@ key_points:
     - "Visualizing the pinpointed subnetwork helps us understand the result better"
     - "Heinz helps narrow down the scope to find the key pathways"
     - "Multiple CPUs will accelerate the computation especially for the complex datasets"
-contributors:
+contributions:
+  authorship:
     - ChaoZhang123
 ---
 

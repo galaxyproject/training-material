@@ -3,6 +3,8 @@ layout: tutorial_hands_on
 
 title: Data Manipulation Olympics
 zenodo_link: 'https://zenodo.org/record/6803028'
+redirect_from:
+  - /topics/data-science/tutorials/data-manipulation-olympics/tutorial
 tags:
 - cyoa
 - galaxy-intro

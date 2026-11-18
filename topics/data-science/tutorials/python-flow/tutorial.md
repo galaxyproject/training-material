@@ -27,12 +27,13 @@ key_points:
 - "`not` can be used to invert the condition"
 
 subtopic: python-modular
-contributors:
-  - carpentries
-  - hexylena
-  - dirowa
-  - bazante1
-
+contributions:
+  authorship:
+    - carpentries
+  editing:
+    - hexylena
+    - dirowa
+    - bazante1
 priority: 5
 notebook:
   language: python

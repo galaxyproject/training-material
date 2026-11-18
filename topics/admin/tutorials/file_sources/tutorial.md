@@ -14,9 +14,9 @@ tags:
   - "earth-system"
   - "ocean"
   - "data"
-contributors:
-  - Marie59
-
+contributions:
+  authorship:
+    - Marie59
 ---
 
 

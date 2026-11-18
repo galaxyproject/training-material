@@ -29,9 +29,9 @@ requirements:
       - collections
 tags:
   - covid19
-contributors:
-  - wm75
-
+contributions:
+  authorship:
+    - wm75
 ---
 
 

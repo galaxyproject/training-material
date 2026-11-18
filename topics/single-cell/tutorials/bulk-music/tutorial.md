@@ -5,7 +5,7 @@ subtopic: deconvo
 redirect_from:
 - /topics/transcriptomics/tutorials/bulk-music/tutorial
 priority: 1
-zenodo_link: https://zenodo.org/record/5719228
+zenodo_link: 'https://zenodo.org/record/5719228'
 tags:
   - transcriptomics
   - deconvolution

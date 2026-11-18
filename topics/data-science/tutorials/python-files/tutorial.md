@@ -24,11 +24,11 @@ key_points:
 - Use a `with` block to open a file.
 
 subtopic: python-modular
-contributors:
-  - hexylena
-  - dirowa
-  - bazante1
-
+contributions:
+  authorship:
+    - hexylena
+    - dirowa
+    - bazante1
 priority: 7
 notebook:
   language: python

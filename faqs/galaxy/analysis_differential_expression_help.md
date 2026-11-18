@@ -7,7 +7,7 @@ layout: faq
 contributors: [jennaj, Melkeb]
 ---
 
-The error and usage help in this FAQ applies to most if not all Bioconductor tools.
+The error and usage help in this FAQ applies to most RNA-seq quantification and differential expression tools.
 
 - DEseq2
 - Limma
@@ -15,10 +15,10 @@ The error and usage help in this FAQ applies to most if not all Bioconductor too
 - goseq
 - Diffbind
 - StringTie
-- Featurecounts
+- featureCounts
 - HTSeq-count
-- HTseq-clip
-- Kalisto
+- htseq-clip
+- Kallisto
 - Salmon
 - Sailfish
 - DEXSeq
@@ -36,7 +36,7 @@ General
     * These all may mean the same thing to a person but not to a computer or tool: chr1, Chr1, 1, chr1.1
 - Differential expression tools all require sample count replicates. [Rationale from two of the DEseq tool authors](https://www.seqanswers.com/forum/bioinformatics/bioinformatics-aa/26388-deseq2-without-biol-replicates).
     * At least two factor levels/groups/conditions with two samples each.
-    * All must all contain unique content for valid scientific results.
+    * All must contain unique content for valid scientific results.
 - Factor/Factor level names should only contain alphanumeric characters and optionally underscores.
     * Avoid starting these with a number and do not include spaces.
     * Galaxy *may* be able to normalize these values for you, but if you are getting an error: standardize the format yourself.
@@ -48,7 +48,7 @@ General
     * If you are summarizing by **exon**, your annotation should contain exon features (3rd column)
 - Sometimes these tools do not understand `transcript_id.N` and `gene_id.N` notation (where N is a version number).
     * This notation could be in fasta or tabular inputs.
-    * Try [removing `.N` from all inputs]({% link search2.html %}?query=olympics), and check for the accidental creation of new duplicates!
+    * Try [removing `.N` from all inputs]({% link topics/introduction/tutorials/data-manipulation-olympics/tutorial.md %}), and check for the accidental creation of new duplicates!
 - Errors? [Understanding the job log messages]({% link faqs/galaxy/analysis_troubleshooting.md %}) can be confusing! But are accessible and worth reviewing.
     * The good news is that usage in Galaxy produces the same error messages as direct usage.
     * This means that a search at the [Bioconductor Support](https://support.bioconductor.org/) website can provide useful clues! Come back to the [Galaxy Help](https://help.galaxyproject.org/) forum with any remaining questions.
@@ -59,7 +59,7 @@ Reference genome (fasta)
 
 - Can be a server reference genome (hosted index in the pull down menu) or a custom reference genome (fasta from the history).
 - Custom reference genomes must be [formatted correctly]({% link faqs/galaxy/reference_genomes_custom_genomes.md %}).
-- If you are using **Salmon** or **Kalisto**, you probably don't need a reference genome but a reference transcriptome instead!
+- If you are using **Salmon** or **Kallisto**, you probably don't need a reference genome but a reference transcriptome instead!
 - More about understanding and [working with large fasta datasets]({% link faqs/galaxy/datasets_working_with_fasta.md %}).
 
 Reference transcriptome (fasta)
@@ -72,7 +72,7 @@ Reference annotation (tabular, GTF, GFF3)
 
 - Reference annotation [in GTF format]({% link faqs/galaxy/datasets_working_with_reference_annotation.md %}) works best.
 - If a GTF dataset is not available for your genome, a two-column tabular dataset containing `transcript <tab> gene` can be used instead with most of these tools. 
-- **HTseq-count** requires GTF attributes. Featurecounts is an alternative tool choice.
+- **HTseq-count** requires GTF attributes. featureCounts is an alternative tool choice.
 - Sometimes the tool **gffread** is used to transform GFF3 data to GTF. 
 - DO use UCSC's reference annotation (GTF) and reference transcriptome (fasta) data from their [Downloads](https://hgdownload.soe.ucsc.edu/downloads.html) area.
     * These are a match for the UCSC genomes indexed at public Galaxy servers.

@@ -1,0 +1,154 @@
+---
+type: map
+required: yes
+mapping:
+  destination:
+    type: map
+    required: yes
+    mapping:
+      type:
+        type: str
+        required: yes
+        enum:
+          - library
+      name:
+        type: str
+        required: yes
+        enum:
+          - "GTN - Material"
+      description:
+        type: str
+      synopsis:
+        type: str
+        enum:
+          - "Galaxy Training Network Material. See https://training.galaxyproject.org"
+  items: # topic folder
+    type: seq
+    required: yes
+    sequence:
+      - type: map
+        required: yes
+        mapping:
+          topic_id:
+            type: str
+            required: yes
+            enum: # todo: auto-detect all our topic names and check
+              - admin
+              - ai4life
+              - assembly
+              - climate
+              - community
+              - computational-chemistry
+              - contributing
+              - data-science
+              - dev
+              - digital-humanities
+              - ecology
+              - epigenetics
+              - evolution
+              - fair
+              - galaxy-interface
+              - genome-annotation
+              - imaging
+              - introduction
+              - materials-science
+              - metabolomics
+              - microbiome
+              - phage-galaxy
+              - proteomics
+              - sequence-analysis
+              - single-cell
+              - statistics
+              - synthetic-biology
+              - teaching
+              - transcriptomics
+              - variant-analysis
+              - visualisation
+          name:
+            type: str
+            required: yes
+            enum: # todo: auto-detect all our topic names and check
+              - Galaxy Server Administration
+              - Image Analysis using Deep Learning
+              - Assembly
+              - Earth Data Science
+              - Galaxy Community Building
+              - Computational Chemistry
+              - Contributing to the Galaxy Training Material
+              - Foundations of Data Science
+              - Development in Galaxy
+              - Digital Humanities
+              - Ecology
+              - Epigenetics
+              - Evolution
+              - FAIR Data, Workflows, and Research
+              - Using Galaxy and Managing your Data
+              - Genome Annotation
+              - Imaging
+              - Introduction to Galaxy Analyses
+              - Materials Science
+              - Metabolomics
+              - Microbiome
+              - Proteomics
+              - Sequence Analysis
+              - Single Cell
+              - Statistics and Machine Learning
+              - Synthetic Biology
+              - Teaching and Hosting Galaxy Training
+              - Transcriptomics
+              - Variant Analysis
+              - Visualisation
+          description:
+            type: str
+          topic_readme:
+            type: str
+          items: # tutorial folder
+            type: seq
+            required: yes
+            sequence:
+            - type: map
+              required: yes
+              mapping:
+                name:
+                  type: str
+                description:
+                  type: str
+                tutorial_id: # todo: validate it is an existing tutorial folder name
+                  type: str
+                tutorial_readme:
+                  type: str
+                items:  # Zenodo version folder
+                  type: seq
+                  required: yes
+                  sequence:
+                  - type: map
+                    required: yes
+                    mapping:
+                      name:
+                        type: str
+                      description:
+                        type: str
+                      items:  # files in the zenodo record
+                        type: seq
+                        required: yes
+                        sequence:
+                        - type: map
+                          required: yes
+                          mapping:
+                            url:
+                              type: str
+                            src:
+                              type: str
+                              enum:
+                                - url
+                            ext:
+                              type: str
+                            info:
+                              type: str
+                            md5sum:
+                              type: str
+                              required: true
+                              pattern: /^[0-9a-f]{32}$/
+
+
+

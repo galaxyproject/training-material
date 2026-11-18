@@ -99,7 +99,7 @@ Your "History" is on the panel on the right. It is a record of the actions you h
 > 1. Go to the **History** panel (on the right)
 > 2. Click {% icon galaxy-pencil %} (**Edit**) next to the history name (which by default is "Unnamed history")
 >
->    ![Screenshot of the galaxy interface with the history name being edited, it currently reads "Unnamed history", the default value. An input box is below it.]({% link shared/images/rename_history.png %}){:width="250px"}
+>    ![Screenshot of the galaxy interface with the history name being edited; it currently reads "Unnamed history", the default value. An input box is below it.]({% link shared/images/rename_history.png %}){:width="250px"}
 >
 >    > <comment-title></comment-title>
 >    >
@@ -133,7 +133,7 @@ For this tutorial, we suggest you use a scientific article of your choice. Make 
 >    ![the Galaxy upload dialogue, the 'regular' tab is active with a large textarea to paste subsequent URL]({% link topics/introduction/images/upload-box.png %})
 >
 > 3. Click **Paste/Fetch data**
-> 4. Paste in the address of the files you want to upload here.
+> 4. Paste the file addresses you want to upload here.
 > 5. Click **Start**
 > 6. Click **Close**
 {: .hands_on}
@@ -144,11 +144,18 @@ When the file has been uploaded to Galaxy, it will turn green.
 
 > <comment-title></comment-title>
 > After this, you will see your first history item (called a "dataset") in Galaxy's right panel. It will go through
-> the grey (preparing/queued) and yellow (running) states to become green (success).
+> the grey (preparing/queued) and yellow (running) states to become green (success). If the queue is very long, it might take some time to get green.
 >
 {: .comment}
 
+Once your dataset is green, we can continue. 
+
+Your dataset has a different colour? Find out what it means here:
+
+{% snippet faqs/galaxy/histories_dataset_colors.md %}
+
 The contents of the file will be displayed in the central Galaxy panel. If the dataset is large, you will see a warning message which explains that only the first megabyte is shown.
+Let's take a look.
 
 > <hands-on-title>View the text files content</hands-on-title>
 > 1. Click the {% icon galaxy-eye %} (eye) icon next to the dataset name to look at the file content.

@@ -9,7 +9,7 @@ tags:
     - taxonomy
     - taxonomic abundance
 level: Introductory
-zenodo_link: "https://zenodo.org/records/13710235"
+zenodo_link: 'https://zenodo.org/record/13710235'
 questions:
     - What are the different subworkflows of the MGnify amplicon pipeline, and what is the function of each in the overall analysis?
     - How are the various subworkflows of the MGnify amplicon pipeline executed on Galaxy using ENA data?

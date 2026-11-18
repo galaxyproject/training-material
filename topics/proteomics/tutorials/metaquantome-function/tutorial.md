@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "metaQuantome 2: Function"
-zenodo_link: "https://doi.org/10.5281/zenodo.4110725"
+zenodo_link: 'https://zenodo.org/record/4110725'
 level: Intermediate
 questions:
  - "How do I look at differentially expressed proteins?"
@@ -15,13 +15,15 @@ key_points:
   - "All the inputs should have one column in common i.e. peptides."
   - "Functional annotation can be performed using GO terms and EC numbers"
   - "Having basic knowledge regarding tools that can perform functional annotation can come in handy"
-contributors:
-  - subinamehta
-  - timothygriffin
-  - pratikdjagtap
-  - emmaleith
-  - mariecrane
-  - pravs3683
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - subinamehta
+    - timothygriffin
+    - pratikdjagtap
+    - emmaleith
+    - mariecrane
+    - pravs3683
 follow_up_training:
   - type: "internal"
     topic_name: proteomics

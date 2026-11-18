@@ -9,10 +9,12 @@ objectives:
 time_estimation: "2H"
 key_points:
 subtopic: next-steps
-contributors:
-  - nekrut
-  - joachimwolff
-  - pajanne
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - nekrut
+    - joachimwolff
+    - pajanne
 ---
 
 # Using the Integrative Genomics Viewer

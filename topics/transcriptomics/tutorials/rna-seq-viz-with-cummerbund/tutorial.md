@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "Visualization of RNA-Seq results with CummeRbund"
 subtopic: visualisation
-zenodo_link: "https://zenodo.org/record/1001880"
+zenodo_link: 'https://zenodo.org/record/1001880'
 questions:
   - "How are RNA-Seq results stored?"
   - "Why are visualization techniques needed?"
@@ -17,8 +17,9 @@ key_points:
   - "Extract information from a SQLite CuffDiff database"
   - "Filter and sort results to highlight differential expressed genes of interest"
   - "Generate publication-ready visualizations of RNA-Seq analysis results"
-contributors:
-  - bagnacan
+contributions:
+  authorship:
+    - bagnacan
 ---
 
 

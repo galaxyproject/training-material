@@ -8,7 +8,7 @@ tags:
   - transcriptomics
   - proteomics
   - metabolomics
-zenodo_link: 'https://zenodo.org/records/14216972'
+zenodo_link: 'https://zenodo.org/record/14216972'
 questions:
 - How to use MultiGSEA for GSEA-based pathway enrichment for multiple omics layers?
 objectives:

@@ -1,5 +1,5 @@
 ---
-layout: base
+layout: doc
 title: GTN Top Cited Papers
 ---
 

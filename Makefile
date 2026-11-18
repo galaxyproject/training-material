@@ -88,6 +88,32 @@ serve-quick: ## run a local server (faster, some plugins disabled for speed)
 		${JEKYLL} serve --strict_front_matter -d _site/training-material --incremental --config _config.yml,_config-dev.yml -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve-quick
 
+GTN_PORT ?= 4000
+
+docker-up: ## run the GTN website locally in Docker (compose.yml)
+	@command -v docker >/dev/null 2>&1 || { \
+		echo "ERROR: docker is not installed or not in your PATH."; \
+		echo "       Install Docker first: https://docs.docker.com/engine/install/"; exit 1; }
+	@docker compose version >/dev/null 2>&1 || { \
+		echo "ERROR: the Docker Compose v2 plugin is missing."; \
+		echo "       Install it e.g. with 'sudo apt install docker-compose-v2'"; exit 1; }
+	@test -f _layouts/base.html && test -f _plugins/snippet.rb && test -d shared || { \
+		echo "ERROR: site infrastructure is missing from your git checkout. Do you have a sparse checkout?."; \
+		echo "       Run 'git sparse-checkout disable' to materialize the full repository, then retry."; exit 1; }
+	@if [ -n "$$(find shared -xtype l -print -quit 2>/dev/null)" ]; then \
+		echo "ERROR: shared/ contains broken symlinks - parts of the repository are not checked out."; \
+		echo "       Run 'git sparse-checkout disable' to materialize the full repository, then retry."; exit 1; fi
+	docker compose up -d --wait
+	@GTN_PORT_FILE=$$(grep -E '^GTN_PORT=' .env 2>/dev/null | cut -d= -f2); \
+	PORT=$${GTN_PORT_FILE:-$(GTN_PORT)}; \
+	echo "GTN website is running at http://127.0.0.1:$${PORT}/training-material/"; \
+	echo "Stop it again with 'make docker-down'."
+.PHONY: docker-up
+
+docker-down: ## stop the Docker-based local GTN website
+	docker compose down
+.PHONY: docker-down
+
 preview: serve-codespaces
 .PHONY: serve-codespaces
 

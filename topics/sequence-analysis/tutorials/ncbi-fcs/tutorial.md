@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Screening assembled genomes for contamination using NCBI FCS
-zenodo_link: 'https://zenodo.org/records/10932013'
+zenodo_link: 'https://zenodo.org/record/10932013'
 questions:
 - Are the sequences in a genome assembly contaminant-free?
 objectives:

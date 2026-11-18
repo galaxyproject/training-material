@@ -20,9 +20,11 @@ requirements:
     topic_name: proteomics
     tutorials:
       - DIA_lib_OSW
-contributors:
-- matthias313
-- foellmelanie
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - matthias313
+    - foellmelanie
 subtopic: id-quant
 tags: [DIA]
 

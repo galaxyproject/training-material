@@ -107,6 +107,10 @@ mapping:
         required: true
         description: |
             A brief description of the event.
+    google_form_id:
+        type: int
+        description: |
+            An internal ID tracking which form response generated this in the GTN Google Forms. Please do not add this manually.
     redirect_from:
         type: seq
         sequence:
@@ -188,7 +192,6 @@ mapping:
     cost:
         type: str
         required: true
-        pattern: /(free|\d+ [A-Z]{3})/
         description: |
             Price of the event. If the event is free, use the word `free`. If there is a cost, use the currency and amount.
         _examples:

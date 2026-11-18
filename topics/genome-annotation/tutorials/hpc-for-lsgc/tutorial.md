@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "From small to large-scale genome comparison"
 
-zenodo_link: "https://doi.org/10.5281/zenodo.4485547"
+zenodo_link: 'https://zenodo.org/record/4485547'
 
 questions:
 - How can we run pairwise genome comparisons using Galaxy?
@@ -25,9 +25,9 @@ requirements:
     tutorials:
       - galaxy-intro-101
 
-contributors:
-- estebanpw
-
+contributions:
+  authorship:
+    - estebanpw
 tags:
   - plants
   - prokaryote

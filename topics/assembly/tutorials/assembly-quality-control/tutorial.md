@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Genome Assembly Quality Control'
+subtopic: assembly-quality
 zenodo_link: 'https://zenodo.org/record/6947782'
 tags:
   - assembly
@@ -16,13 +17,14 @@ level: Intermediate
 key_points:
 - Quast, BUSCO and Merqury make it easy to assess the quality of an assembly
 - Post-processing can be necessary (purging, scaffolding) before annotation
-contributors:
-- abretaud
-- alexcorm
-- r1corre
-- lleroi
-- stephanierobin
-
+#TODO: please check contribution roles roles below and remove this line if done
+contributions:
+  authorship:
+    - abretaud
+    - alexcorm
+    - r1corre
+    - lleroi
+    - stephanierobin
 follow_up_training:
  - type: internal
    topic_name: genome-annotation

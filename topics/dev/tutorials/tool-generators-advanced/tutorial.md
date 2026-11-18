@@ -35,10 +35,9 @@ requirements:
       - interactive-environments
       - tool-generators
 
-contributors:
-  - fubar2
-
-
+contributions:
+  authorship:
+    - fubar2
 recordings:
 - captioners:
   - fubar2

@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Genome assembly using PacBio data'
+subtopic: pacbio-assembly
 zenodo_link: ''
 tags:
   - assembly

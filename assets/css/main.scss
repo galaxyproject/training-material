@@ -11,7 +11,14 @@ $tutorial-box-spacing: 1rem;
 	--color-background: #fff;
 	--text-color: #292b2c;
 	--text-color-muted: #555; // AA :(
-        --text-color-inverted: #eee;
+	--text-color-inverted: #eee;
+
+	--text-color-inline-code: #c90c15;// bootstrap default bd4147
+	--background-color-inline-code: #e8e8e8; //bootstrap default f8f9fa
+
+
+
+
 	 // Allow overriding this separately, should generally default to same
 	 // as textcolour because box titles are still light in every theme.
 	--text-color-boxtitle: var(--text-color);
@@ -95,6 +102,9 @@ body[data-brightness="dark"] {
 
 	--secondary-color: #222;
 	--secondary-color-text: var(--text-color);
+
+	--text-color-inline-code: #ccc;
+	--background-color-inline-code: #222;
 
 }
 
@@ -246,10 +256,13 @@ body {
     // The new replacement
     & > h3:not(.nobox),
     > .box-title {
+        position: absolute;
+        display: inline-block;
+        transform: translateY(-100%) translateY(-$tutorial-box-spacing + 0.4rem);
+
         font-size: $font-size + 3;
         margin-inline-start: -$tutorial-box-spacing;
         margin-inline-end: -$tutorial-box-spacing;
-        margin-top: -3.30rem;
         padding-top: calc($tutorial-box-spacing / 2);
         padding-bottom: calc($tutorial-box-spacing / 2);
         padding-inline-start: $tutorial-box-spacing;
@@ -437,10 +450,8 @@ figure {
 }
 
 :not(pre) > code {
-    color: var(--code-foreground);
-    background: var(--code-background);
-    border: 1px solid var(--text-color-muted);
-    border-radius: 0.25rem;
+  color: var(--text-color-inline-code);
+  background: var(--background-color-inline-code);
 }
 
 pre.highlight {

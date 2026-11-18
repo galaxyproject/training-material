@@ -2,6 +2,8 @@
 layout: learning-pathway
 tags: [introduction, contributing, cofest]
 type: instructors
+topics:
+  - contributing
 
 priority: 1
 

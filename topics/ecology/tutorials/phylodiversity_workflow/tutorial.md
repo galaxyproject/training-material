@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Phylodiversity analysis quick tutorial
-zenodo_link: https://zenodo.org/records/15601932
+zenodo_link: 'https://zenodo.org/record/15601932'
 questions:
 - How to use the phylodiversity workflow?
 - How to construct phyloregions from occurrences species data, phylogenic data and geograpics data?

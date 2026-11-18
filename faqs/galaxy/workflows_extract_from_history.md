@@ -18,9 +18,10 @@ contributors: [shiltemann,hexylena,nsoranzo]
 
    The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.
 
-3. Replace the **Workflow name** to something more descriptive.
+3. Replace the **Workflow name** to something more descriptive. {% if include.workflow-name %}For example `{{include.workflow-name}}`. {% endif %}
 
 4. **Rename** each workflow input in the boxes at the top of the second column.
+   {% if include.rename-inputs %}- {{include.rename-inputs }}{% endif %}
 
 5. If there are any steps that shouldn't be included in the workflow, you can **uncheck** them in the first column of boxes.
 

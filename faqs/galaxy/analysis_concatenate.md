@@ -25,6 +25,8 @@ The two tools have nearly identical interfaces, but behave differently in certai
 
   This tool allows you to specify an arbitrary number of {% icon param-file %} single datasets, but if you also want to use {% icon param-files %} multiple datasets or {% icon param-collection %} a collection for some of the Dataset parameters, then all of these need to be of the same type (multiple datasets *or* collections) and have the same number of inputs.
 
+  To provide a collection, first switch the parameter to {% icon param-collection %} **Dataset collection** ([how]({% link faqs/galaxy/tools_select_collection.md %})); collections aren't offered while it is in single dataset mode.
+
   Now depending on the inputs, one of the following behaviors will occur:
   - If all the different inputs are {% icon param-file %} single datasets, the tool will concatenate them all and produce a single output dataset.
   - If all the different inputs are specified *either* as {% icon param-files %} multiple datasets *or* as {% icon param-collection %}, and all have the same number of datasets, then the tool will concatenate the first datasets of each input parameter, the second datasets of each input parameter, the third, etc., and produce an output collection with as many elements as there are inputs per Dataset parameter.

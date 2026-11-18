@@ -27,8 +27,9 @@ requirements:
     tutorials:
       - mass-spectrometry-imaging-loading-exploring-data
 
-contributors:
-- foellmelanie
+contributions:
+  authorship:
+    - foellmelanie
 tags:
   - metabolomics
   - mass spectrometry imaging

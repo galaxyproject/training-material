@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Evaluating Reference Data for Bulk RNA Deconvolution
 subtopic: deconvo
 priority: 3
-zenodo_link: 'https://zenodo.org/records/5719228'
+zenodo_link: 'https://zenodo.org/record/5719228'
 
 questions:
 - How do I evaluate my reference data?

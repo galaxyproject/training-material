@@ -7,6 +7,7 @@
 {%- endif -%}
 {% for id in zz_contributors %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
 {%- if include.newcontributors -%}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id='newcontributors' %}{% endif %}{% endif %}
+{%- if include.humansonly -%}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id='humansonly' %}{% endif %}{% endif %}
 {%- endcapture -%}
 {%- endif -%}
 {{- people | remove_first: include.sep -}}
