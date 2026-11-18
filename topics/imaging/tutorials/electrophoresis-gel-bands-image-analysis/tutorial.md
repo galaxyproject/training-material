@@ -75,6 +75,10 @@ This image is from {% cite Ohgane2019 %}.
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>
 > 3. Rename {% icon galaxy-pencil %} the dataset to `Electrophoresis-Gel.jpg`.
 >
 {: .hands_on}
