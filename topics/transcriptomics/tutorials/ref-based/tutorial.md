@@ -1157,7 +1157,7 @@ We will reformat the output of **STAR** to be similar to the output of **feature
 > 2. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
 >    - *"Cut columns"*: `c1,c2`
 >    - *"Delimited by"*: `Tab`
->    - {% icon param-collection %} *"From"*: `Select last on collection N` (output of the **Select last** {% icon tool %})
+>    - {% icon param-collection %} *"From"*: `Remove beginning on collection N` (output of the **Remove beginning** {% icon tool %})
 >
 > 3. Rename the collection `FeatureCount-like files`
 {: .hands_on}
