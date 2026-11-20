@@ -32,63 +32,29 @@
             "inputs": [
                 {
                     "description": "",
-                    "name": "Electropheresis-Gel.jpg"
+                    "name": "Gel or blot image"
                 }
             ],
-            "label": "Electropheresis-Gel.jpg",
+            "label": "Gel or blot image",
             "name": "Input dataset",
             "outputs": [],
             "position": {
                 "left": 0,
-                "top": 4
+                "top": 0
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
-            "uuid": "762736d8-97eb-44eb-8c3c-1ba5c0f986ff",
+            "uuid": "41dce695-65c5-4d8a-b044-7bea904f8e7f",
             "when": null,
             "workflow_outputs": []
         },
         "1": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/points2labelimage/ip_points_to_label/0.4.1+galaxy1",
-            "errors": null,
-            "id": 1,
-            "input_connections": {},
-            "inputs": [],
-            "label": null,
-            "name": "Convert coordinates to label map",
-            "outputs": [
-                {
-                    "name": "output",
-                    "type": "tiff"
-                }
-            ],
-            "position": {
-                "left": 881,
-                "top": 274
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/points2labelimage/ip_points_to_label/0.4.1+galaxy1",
-            "tool_shed_repository": {
-                "changeset_revision": "4a49f74a3c14",
-                "name": "points2labelimage",
-                "owner": "imgteam",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"__input_ext\": \"input\", \"binary\": false, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"has_header\": true, \"input\": null, \"shapex\": \"1278\", \"shapey\": \"250\", \"swap_xy\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.4.1+galaxy1",
-            "type": "tool",
-            "uuid": "79debe36-5f0a-409f-ab67-7e7754ff55a6",
-            "when": null,
-            "workflow_outputs": []
-        },
-        "2": {
-            "annotation": "",
             "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_convert/graphicsmagick_image_convert/1.3.45+galaxy0",
             "errors": null,
-            "id": 2,
+            "id": 1,
             "input_connections": {
                 "input": {
                     "id": 0,
@@ -105,8 +71,8 @@
                 }
             ],
             "position": {
-                "left": 220,
-                "top": 4
+                "left": 0,
+                "top": 110
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_convert/graphicsmagick_image_convert/1.3.45+galaxy0",
@@ -117,137 +83,21 @@
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"output_format\": \"tiff\", \"palette\": {\"palette_select\": \"no\", \"__current_case__\": 2}, \"resize\": \"100.0\", \"transformations\": null, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
             "tool_version": "1.3.45+galaxy0",
             "type": "tool",
-            "uuid": "fcd7ffd0-274d-4f34-ab53-2569d5017f09",
+            "uuid": "2237a044-09a8-4587-a547-df465e72958a",
             "when": null,
             "workflow_outputs": []
         },
-        "3": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0",
-            "errors": null,
-            "id": 3,
-            "input_connections": {
-                "input_label": {
-                    "id": 1,
-                    "output_name": "output"
-                }
-            },
-            "inputs": [],
-            "label": null,
-            "name": "Extract image features",
-            "outputs": [
-                {
-                    "name": "output",
-                    "type": "tabular"
-                }
-            ],
-            "position": {
-                "left": 1125,
-                "top": 279
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0",
-            "tool_shed_repository": {
-                "changeset_revision": "5bc8cdc17fd0",
-                "name": "2d_feature_extraction",
-                "owner": "imgteam",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"feature_options\": {\"features\": \"select\", \"__current_case__\": 1, \"selected_features\": [\"--label\", \"--mean_intensity\"]}, \"input_label\": {\"__class__\": \"ConnectedValue\"}, \"use_raw_option\": {\"use_raw\": \"raw_image\", \"__current_case__\": 1, \"input_raw\": null}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.18.1+galaxy0",
-            "type": "tool",
-            "uuid": "71f86213-c2e1-4304-83ec-1135eda43e4f",
-            "when": null,
-            "workflow_outputs": []
-        },
-        "4": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/5.7.1+galaxy1",
-            "errors": null,
-            "id": 4,
-            "input_connections": {
-                "input_file": {
-                    "id": 2,
-                    "output_name": "output"
-                }
-            },
-            "inputs": [],
-            "label": null,
-            "name": "Show image info",
-            "outputs": [
-                {
-                    "name": "output",
-                    "type": "txt"
-                }
-            ],
-            "position": {
-                "left": 568,
-                "top": 0
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/5.7.1+galaxy1",
-            "tool_shed_repository": {
-                "changeset_revision": "f8b4eada923c",
-                "name": "image_info",
-                "owner": "imgteam",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "5.7.1+galaxy1",
-            "type": "tool",
-            "uuid": "4f994c4d-233a-4b3c-af4a-40d4703284ef",
-            "when": null,
-            "workflow_outputs": []
-        },
-        "5": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.2.3+galaxy1",
-            "errors": null,
-            "id": 5,
-            "input_connections": {
-                "input": {
-                    "id": 2,
-                    "output_name": "output"
-                }
-            },
-            "inputs": [],
-            "label": null,
-            "name": "Split image along axes",
-            "outputs": [
-                {
-                    "name": "output",
-                    "type": "input"
-                }
-            ],
-            "position": {
-                "left": 574,
-                "top": 128
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.2.3+galaxy1",
-            "tool_shed_repository": {
-                "changeset_revision": "73d7a4ffc03d",
-                "name": "split_image",
-                "owner": "imgteam",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"__input_ext\": \"input\", \"axis\": \"C\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"squeeze\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "2.2.3+galaxy1",
-            "type": "tool",
-            "uuid": "81ef2ee7-4696-4471-8bd4-0c1ca2444859",
-            "when": null,
-            "workflow_outputs": []
-        },
-        "6": {
+        "2": {
             "annotation": "",
             "content_id": "interactive_tool_qupath",
             "errors": null,
-            "id": 6,
+            "id": 2,
             "input_connections": {
                 "infile": {
-                    "id": 2,
+                    "id": 1,
                     "output_name": "output"
                 }
             },
@@ -265,21 +115,159 @@
                 }
             ],
             "position": {
-                "left": 599,
-                "top": 272
+                "left": 0,
+                "top": 280
             },
             "post_job_actions": {},
             "tool_id": "interactive_tool_qupath",
             "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
             "tool_version": "0.5.1.1",
             "type": "tool",
-            "uuid": "f6b03167-d205-4ff7-b613-fd9ad294ea45",
+            "uuid": "b6956376-f67e-4d1f-b127-1709062945f8",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": "outputs",
                     "output_name": "outputs",
-                    "uuid": "ecf5b534-95d3-40d0-af1d-28480b447188"
+                    "uuid": "a1094be7-4ddc-4a46-8bee-8c4f0b7cc08b"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "outputs"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 0,
+                "top": 440
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "geojson"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"first\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "9e087748-17e6-4db9-934f-b615968413d9",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/points2labelimage/ip_points_to_label/0.4.1+galaxy1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Convert coordinates to label map",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 0,
+                "top": 570
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/points2labelimage/ip_points_to_label/0.4.1+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "4a49f74a3c14",
+                "name": "points2labelimage",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"binary\": false, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"has_header\": true, \"input\": {\"__class__\": \"ConnectedValue\"}, \"shapex\": \"1278\", \"shapey\": \"250\", \"swap_xy\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.4.1+galaxy1",
+            "type": "tool",
+            "uuid": "e42c2cf5-9872-4405-9bc0-16dfb44d8e13",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input_label": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "use_raw_option|input_raw": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Extract image features",
+                    "name": "use_raw_option"
+                }
+            ],
+            "label": null,
+            "name": "Extract image features",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 320,
+                "top": 500
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "6a2b26c297a4",
+                "name": "2d_feature_extraction",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"feature_options\": {\"features\": \"select\", \"__current_case__\": 1, \"selected_features\": [\"--label\", \"--mean_intensity\"]}, \"input_label\": {\"__class__\": \"ConnectedValue\"}, \"use_raw_option\": {\"use_raw\": \"raw_image\", \"__current_case__\": 1, \"input_raw\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.18.1+galaxy0",
+            "type": "tool",
+            "uuid": "46925e5f-d2bb-4a8d-a01e-8ddb25e44d8f",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "output",
+                    "output_name": "output",
+                    "uuid": "e64e4e36-ba86-4162-8fd1-bb016efee0c5"
                 }
             ]
         }
@@ -291,6 +279,6 @@
         "ROI",
         "Electrophoresis_Gel"
     ],
-    "uuid": "68344973-8538-45eb-b270-56a9a5317969",
-    "version": 2
+    "uuid": "c6d763cc-d336-456c-b465-ab81e27d2adb",
+    "version": 3
 }

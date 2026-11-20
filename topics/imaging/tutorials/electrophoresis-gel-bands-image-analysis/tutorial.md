@@ -58,7 +58,7 @@ Recent advances such as **GelGenie** ({% cite Aquilina2025 %}) further highlight
 
 # Data preparation
 
-The example dataset can be downloaded from here [Electrophoresis gel dataset](https://github.com/galaxyproject/training-material/tree/main/topics/imaging/images/electrophoresis-gel-bands-image-analysis/Image.jpg).
+The example dataset can be downloaded from here [Electrophoresis gel dataset](https://github.com/galaxyproject/training-material/raw/main/topics/imaging/images/electrophoresis-gel-bands-image-analysis/Image.jpg).
 
 ![Electrophoresis Gel](../../images/electrophoresis-gel-bands-image-analysis/Image.jpg)
 
@@ -67,8 +67,11 @@ This image is from {% cite Ohgane2019 %}.
 > <hands-on-title>Download and upload the image</hands-on-title>
 >
 > 1. Create a new history in Galaxy.  
-> 2. Download the test image using the link above.  
-> 3. Click the **{% icon galaxy-upload %} Upload** to add the image file into your galaxy history.  
+> 2. Import the test image into your history from the following URL:
+>
+>    ```
+>    https://github.com/galaxyproject/training-material/raw/main/topics/imaging/images/electrophoresis-gel-bands-image-analysis/Image.jpg
+>    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -76,7 +79,7 @@ This image is from {% cite Ohgane2019 %}.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 4. Rename {% icon galaxy-pencil %} the dataset to `Electrophoresis-Gel.jpg`.
+> 3. Rename {% icon galaxy-pencil %} the dataset to `Electrophoresis-Gel.jpg`.
 >
 {: .hands_on}
 
@@ -238,7 +241,7 @@ In this step, you will open the image in QuPath, annotate the ROIs using rectang
 > 9. Repeat steps 6–8 for all bands you want to annotate.
 >
 > 10. Set a unique label for each annotation:  
->     - Right-click each rectangle, choose **Set parameters**, and enter a label (e.g., `"1"`, `"2"`)  
+>     - Right-click each rectangle, choose **Set properties**, and enter a label (e.g., `"1"`, `"2"`)  
 >     ![Name first annotation](../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-10.png)
 >     ![Name first annotation](../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-11.png)
 >     ![Name first annotation](../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-12.png)
@@ -260,7 +263,7 @@ In this step, you will open the image in QuPath, annotate the ROIs using rectang
 >
 > 14. Exit QuPath:  
 >     - Click **File → Quit**  
->     - Save changes if prompted  
+>     - **Do not** save changes if prompted (choose `No`/`Don't save`). Saving produces an output file in a format that Galaxy does not support, which makes the workflow execution fail.  
 >     ![Quit QuPath](../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-19.png)  
 >     ![Quit QuPath](../../images/electrophoresis-gel-bands-image-analysis/QuPath-protocol-20.png)
 >
