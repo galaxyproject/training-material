@@ -515,12 +515,12 @@ The BAM file contains information for all our reads, making it difficult to insp
 
 > <hands-on-title>Inspection of mapping results with JBrowse2</hands-on-title>
 >
-> 1. {% tool [JBrowse2](toolshed.g2.bx.psu.edu/repos/fubar/jbrowse2/jbrowse2/3.6.5+galaxy1) %} with the following parameters:
+> 1. {% tool [JBrowse2](toolshed.g2.bx.psu.edu/repos/fubar/jbrowse2/jbrowse2/3.7.0+galaxy2) %} with the following parameters:
 >    - *"Action"*: `New JBrowse Instance`
 >    - In *"Genome Assembly"*:
 >        - {% icon param-repeat %} *"Insert Genome Assembly"*
 >            - *"Reference genome to display"*: `Use a built-in genome`
->                - *"Select a reference genome"*: `Fly (Drosophila melanogaster): dm6 Full`
+>                - *"Select a reference genome"*: `Fly (Drosophila melanogaster): dm6 Full (alias for dm6)`
 >            - *"Default region to display"*: `chr4:540000..560000`
 >            - In *"Track Category"*:
 >                - {% icon param-repeat %} *"Insert Track Category"*
