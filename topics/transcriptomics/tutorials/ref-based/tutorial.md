@@ -1257,7 +1257,7 @@ Here we counted reads mapped to genes for two samples. It is really interesting 
 > {{ page.zenodo_link }}/files/GSM461182.fastqsanger
 > ```
 >
-> For the single-end data, there is no need to flatten the collection before the **Falco** step. The parameters of all tools are the same except **STAR** for which you can set `Length of the genomic sequence around annotated junctions` to 74 as one dataset has reads of 75bp (others are 44bp and 45bp) and **FeatureCount** were your data are not paired any more.
+> For the single-end data, there is no need to flatten the collection before the **Falco** step. The parameters of all tools are the same except **STAR** for which you can set `Length of the genomic sequence around annotated junctions` to 74 as one dataset has reads of 75bp (others are 44bp and 45bp) and **FeatureCount** where your data are not paired any more.
 {: .hands_on}
 
 # Analysis of the differential gene expression
