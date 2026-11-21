@@ -1,0 +1,23 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nQuantitation_Database-For-MaxQuant"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nExperimental-Design Discovery MaxQuant"]
+  2[color=lightblue,label="ℹ️ Input Collection\nInput Raw-files"]
+  3[label="MaxQuant"]
+  0 -> 3 [label="output"]
+  2 -> 3 [label="output"]
+  1 -> 3 [label="output"]
+  4[label="Select"]
+  3 -> 4 [label="proteinGroups"]
+  5[label="Select"]
+  3 -> 5 [label="peptides"]
+  6[label="Cut"]
+  4 -> 6 [label="out_file1"]
+  7[label="Cut"]
+  5 -> 7 [label="out_file1"]
+  8[label="Group"]
+  6 -> 8 [label="out_file1"]
+  9[label="Group"]
+  7 -> 9 [label="out_file1"]
+}

@@ -1,0 +1,57 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nR01C02_Red.idat"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nR02C02_Red.idat"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nR05C02_Red.idat"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nR06C02_Red.idat"]
+  4[color=lightblue,label="ℹ️ Input Dataset\nR01C02_Green.idat"]
+  5[color=lightblue,label="ℹ️ Input Dataset\nR02C02_Green.idat"]
+  6[color=lightblue,label="ℹ️ Input Dataset\nR05C02_Green.idat"]
+  7[color=lightblue,label="ℹ️ Input Dataset\nR06C02_Green.idat"]
+  8[color=lightblue,label="ℹ️ Input Dataset\nphenotype Table txt file"]
+  9[color=lightblue,label="ℹ️ Input Dataset\nUCSC Main on Human"]
+  10[label="Infinium Human Methylation BeadChip"]
+  4 -> 10 [label="output"]
+  5 -> 10 [label="output"]
+  6 -> 10 [label="output"]
+  7 -> 10 [label="output"]
+  0 -> 10 [label="output"]
+  1 -> 10 [label="output"]
+  2 -> 10 [label="output"]
+  3 -> 10 [label="output"]
+  8 -> 10 [label="output"]
+  9 -> 10 [label="output"]
+  k2ac7dd5ded744d58b1cbbe7dcca9154a[color=lightseagreen,label="Output\nSNPInfo Table"]
+  10 -> k2ac7dd5ded744d58b1cbbe7dcca9154a
+  kd1732a9818614612bdaaf68861c22f56[color=lightseagreen,label="Output\nDifferentially Methylated Regions"]
+  10 -> kd1732a9818614612bdaaf68861c22f56
+  k9aa8b4a9611e4a39864f400f17866a9e[color=lightseagreen,label="Output\nDifferentially Methylated Positions"]
+  10 -> k9aa8b4a9611e4a39864f400f17866a9e
+  k14ddb6f7637e4193bfb580aeae4fab64[color=lightseagreen,label="Output\nQuality Control Report"]
+  10 -> k14ddb6f7637e4193bfb580aeae4fab64
+  kc8c37ff8716d4c23a84f7cebcb4b6c9d[color=lightseagreen,label="Output\nQuality Control Plot"]
+  10 -> kc8c37ff8716d4c23a84f7cebcb4b6c9d
+  11[label="ChIPpeakAnno annoPeaks"]
+  10 -> 11 [label="dmp"]
+  kbedf4346da4d4e1abf3ca7d20f3ec3c5[color=lightseagreen,label="Output\nTable of Annotated Peaks"]
+  11 -> kbedf4346da4d4e1abf3ca7d20f3ec3c5
+  12[label="Cut"]
+  11 -> 12 [label="tab"]
+  k0b54dfe5f84a4288b631ae4dc2384a17[color=lightseagreen,label="Output\nCut on Table of Annotated Peaks"]
+  12 -> k0b54dfe5f84a4288b631ae4dc2384a17
+  13[label="Remove beginning"]
+  12 -> 13 [label="out_file1"]
+  k8f65cf8274274273ba0ba6673ee1ff2d[color=lightseagreen,label="Output\nRemove beginning on the cut output"]
+  13 -> k8f65cf8274274273ba0ba6673ee1ff2d
+  14[label="Cluster Profiler Bitr"]
+  13 -> 14 [label="out_file1"]
+  k7989f80a3e794d2fbbe4e4d641eebd6a[color=lightseagreen,label="Output\nTable of Translated Gene ID's"]
+  14 -> k7989f80a3e794d2fbbe4e4d641eebd6a
+  15[label="Cluster Profiler GO"]
+  14 -> 15 [label="translation"]
+  kff6c7018b8214ade9931fa99aeb0a86c[color=lightseagreen,label="Output\nGO Enrichment Analysis of a Gene Set"]
+  15 -> kff6c7018b8214ade9931fa99aeb0a86c
+  k03b88399095b4bd59693528c60338407[color=lightseagreen,label="Output\nGO Enrichment Analysis Visualization"]
+  15 -> k03b88399095b4bd59693528c60338407
+}

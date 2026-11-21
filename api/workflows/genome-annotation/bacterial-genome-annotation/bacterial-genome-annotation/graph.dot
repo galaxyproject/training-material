@@ -1,0 +1,36 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\ncontigs"]
+  1[label="ISEScan"]
+  0 -> 1 [label="output"]
+  k2bb672cb453646b08a228590a0ca36c7[color=lightseagreen,label="Output\nisescan_results"]
+  1 -> k2bb672cb453646b08a228590a0ca36c7
+  2[label="PlasmidFinder"]
+  0 -> 2 [label="output"]
+  k614064e64b0f4e38b04ee3f61ba41b46[color=lightseagreen,label="Output\nplasmidfinder_results"]
+  2 -> k614064e64b0f4e38b04ee3f61ba41b46
+  3[label="Integron Finder"]
+  0 -> 3 [label="output"]
+  kd26788cf24414f29ac39b6be96f192eb[color=lightseagreen,label="Output\nintegronfinder_summary"]
+  3 -> kd26788cf24414f29ac39b6be96f192eb
+  4[label="Bakta"]
+  0 -> 4 [label="output"]
+  kd3a40a8b1bd142b6a91e756379b86d94[color=lightseagreen,label="Output\nbakta_summary"]
+  4 -> kd3a40a8b1bd142b6a91e756379b86d94
+  5[label="Group"]
+  1 -> 5 [label="all_results"]
+  6[label="Group"]
+  1 -> 6 [label="all_results"]
+  7[label="Replace Text"]
+  2 -> 7 [label="result_file"]
+  8[label="Select last"]
+  7 -> 8 [label="outfile"]
+  9[label="Table to GFF3"]
+  8 -> 9 [label="outfile"]
+  10[label="JBrowse"]
+  0 -> 10 [label="output"]
+  4 -> 10 [label="annotation_gff3"]
+  9 -> 10 [label="output"]
+  1 -> 10 [label="annotation"]
+}

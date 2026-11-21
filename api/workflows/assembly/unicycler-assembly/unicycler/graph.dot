@@ -1,0 +1,28 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nForward reads"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nReverse Reads"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nLong Reads"]
+  3[label="FastQC"]
+  0 -> 3 [label="output"]
+  4[label="FastQC"]
+  1 -> 4 [label="output"]
+  5[label="Create assemblies with Unicycler"]
+  2 -> 5 [label="output"]
+  0 -> 5 [label="output"]
+  1 -> 5 [label="output"]
+  6[label="MultiQC"]
+  3 -> 6 [label="text_file"]
+  4 -> 6 [label="text_file"]
+  7[label="Quast"]
+  5 -> 7 [label="assembly"]
+  8[label="Prokka"]
+  5 -> 8 [label="assembly"]
+  k0d6b33c9b10549979045b86e52f00156[color=lightseagreen,label="Output\ntbl"]
+  8 -> k0d6b33c9b10549979045b86e52f00156
+  k8e08b54d87e142699b968ebf1a9bb4ab[color=lightseagreen,label="Output\ngbk"]
+  8 -> k8e08b54d87e142699b968ebf1a9bb4ab
+  k65e4ddf9f5bc40788b4e37b332e12ece[color=lightseagreen,label="Output\nffn"]
+  8 -> k65e4ddf9f5bc40788b4e37b332e12ece
+}

@@ -1,0 +1,58 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nncm_pdcs_subset.h5ad"]
+  1[label="Inspect AnnData Object"]
+  0 -> 1 [label="output"]
+  ke76ac98330894a4fbe1649de8d491ba4[color=lightseagreen,label="Output\nGeneral AnnData Information"]
+  1 -> ke76ac98330894a4fbe1649de8d491ba4
+  2[label="Filter Cell-Type"]
+  0 -> 2 [label="output"]
+  k41908539a944457bb02fcf3464971b8e[color=lightseagreen,label="Output\nanndata_out"]
+  2 -> k41908539a944457bb02fcf3464971b8e
+  3[label="Pseudobulk with decoupler"]
+  0 -> 3 [label="output"]
+  k90c6807101bf471a958a9f391556debd[color=lightseagreen,label="Output\ngenes_metadata"]
+  3 -> k90c6807101bf471a958a9f391556debd
+  k0de9d1156e5a446babc115c11dcaefb1[color=lightseagreen,label="Output\nsamples_metadata"]
+  3 -> k0de9d1156e5a446babc115c11dcaefb1
+  k7ff680d1cd9243fea9cf9eb53a76996a[color=lightseagreen,label="Output\ncount_matrix"]
+  3 -> k7ff680d1cd9243fea9cf9eb53a76996a
+  kc23b46c6de2f4c4d886d2f83ad61017a[color=lightseagreen,label="Output\nplot_output"]
+  3 -> kc23b46c6de2f4c4d886d2f83ad61017a
+  k6f8d0a60352e49bd82e268f4c64d529f[color=lightseagreen,label="Output\nfilter_by_expr_plot"]
+  3 -> k6f8d0a60352e49bd82e268f4c64d529f
+  4[label="Replace Text"]
+  3 -> 4 [label="samples_metadata"]
+  5[label="Replace Text"]
+  3 -> 5 [label="count_matrix"]
+  6[label="Remove columns"]
+  3 -> 6 [label="genes_metadata"]
+  7[label="Replace Text"]
+  4 -> 7 [label="outfile"]
+  k06fde552a874427281e7b9ca26987826[color=lightseagreen,label="Output\nSamples Metadata"]
+  7 -> k06fde552a874427281e7b9ca26987826
+  8[label="Generating Contrast File"]
+  7 -> 8 [label="outfile"]
+  kabbea49261064370a968e5e1a3142033[color=lightseagreen,label="Output\nContrast File"]
+  8 -> kabbea49261064370a968e5e1a3142033
+  9[label="edgeR"]
+  6 -> 9 [label="output_tabular"]
+  8 -> 9 [label="outfile"]
+  5 -> 9 [label="outfile"]
+  7 -> 9 [label="outfile"]
+  k14e63c6b511c468d954ecb115be9ac95[color=lightseagreen,label="Output\noutTables"]
+  9 -> k14e63c6b511c468d954ecb115be9ac95
+  10[label="Extract dataset"]
+  9 -> 10 [label="outTables"]
+  k2f1d41da719c42269de0856c6a086091[color=lightseagreen,label="Output\noutput"]
+  10 -> k2f1d41da719c42269de0856c6a086091
+  11[label="Remove columns"]
+  10 -> 11 [label="output"]
+  k352ef7269dff4fb881af006dd9c7126d[color=lightseagreen,label="Output\nDEG Table"]
+  11 -> k352ef7269dff4fb881af006dd9c7126d
+  12[label="Volcano Plot"]
+  11 -> 12 [label="output_tabular"]
+  k5e9faae58b4f4a6c809869937c9e5b80[color=lightseagreen,label="Output\nVolcano Plot DEG"]
+  12 -> k5e9faae58b4f4a6c809869937c9e5b80
+}

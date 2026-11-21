@@ -1,0 +1,410 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "The present workflow allows to perform 2D spots/blobs detection on specific channel and stack of an image.\nImages will be directly fetched from IDR by including the IDs. A pre-processing steps with histogram normalization is performed before the blobs detection.",
+    "comments": [
+        {
+            "child_steps": [
+                1,
+                2,
+                0
+            ],
+            "color": "yellow",
+            "data": {
+                "title": "User Input"
+            },
+            "id": 0,
+            "position": [
+                0,
+                0
+            ],
+            "size": [
+                310.1,
+                417.7
+            ],
+            "type": "frame"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Person",
+            "familyName": "Massei",
+            "identifier": "0000-0003-2104-9519",
+            "name": "Riccardo"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "2025_2D_spot_detection",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "A list of images IDs from IDR",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "A list of images IDs from IDR",
+                    "name": "IDR IDs"
+                }
+            ],
+            "label": "IDR IDs",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 53.76381037084618,
+                "top": 55.60114058346258
+            },
+            "tool_id": null,
+            "tool_state": "{\"multiple\": false, \"validators\": [], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "e1fc05e4-883a-4324-94cb-d5047fd3cfed",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Name of the image channel to analyze",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Name of the image channel to analyze",
+                    "name": "Channel to analyze"
+                }
+            ],
+            "label": "Channel to analyze",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 55.37039836436024,
+                "top": 161.63594815539108
+            },
+            "tool_id": null,
+            "tool_state": "{\"multiple\": false, \"validators\": [], \"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "cefe00bc-acb8-434f-9a1f-b61e236820ac",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Select a z-stack to analyze",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Select a z-stack to analyze",
+                    "name": "z-stack"
+                }
+            ],
+            "label": "z-stack",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 55.36287656866711,
+                "top": 283.74708322847056
+            },
+            "tool_id": null,
+            "tool_state": "{\"validators\": [{\"min\": 0, \"max\": null, \"negate\": false, \"type\": \"in_range\"}], \"parameter_type\": \"integer\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "09e5eaff-ddd5-428a-a4b3-414aae1d5437",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/idr_download_by_ids/idr_download_by_ids/0.45",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "image_ids|id_spec": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "image_region|channel": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "image_region|z_section": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Download IDR/OMERO",
+                    "name": "image_ids"
+                },
+                {
+                    "description": "runtime parameter for tool Download IDR/OMERO",
+                    "name": "image_region"
+                },
+                {
+                    "description": "runtime parameter for tool Download IDR/OMERO",
+                    "name": "image_region"
+                }
+            ],
+            "label": null,
+            "name": "Download IDR/OMERO",
+            "outputs": [
+                {
+                    "name": "out_log",
+                    "type": "txt"
+                },
+                {
+                    "name": "output_tar",
+                    "type": "tar"
+                }
+            ],
+            "position": {
+                "left": 356.67300130094213,
+                "top": 116.65122617745307
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/idr_download_by_ids/idr_download_by_ids/0.45",
+            "tool_shed_repository": {
+                "changeset_revision": "f92941d1a85e",
+                "name": "idr_download_by_ids",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"download_tar\": true, \"image_ids\": {\"source\": \"link\", \"__current_case__\": 0, \"id_spec\": {\"__class__\": \"ConnectedValue\"}}, \"image_region\": {\"original\": \"TIFF\", \"__current_case__\": 2, \"channel\": {\"__class__\": \"ConnectedValue\"}, \"z_section\": {\"__class__\": \"ConnectedValue\"}, \"frame\": \"0\", \"clip_image\": {\"select\": \"\", \"__current_case__\": 0}}, \"omero_instance_type\": {\"omero_instance\": \"idr\", \"__current_case__\": 1}, \"skip_failed\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.45",
+            "type": "tool",
+            "uuid": "cc146175-2e5a-462c-b1e6-afdbda513811",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input_file": {
+                    "id": 3,
+                    "output_name": "output_tar"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Unzip",
+            "outputs": [
+                {
+                    "name": "unzipped",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 609.6730013009421,
+                "top": 288.65122617745305
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "57f0914ddb7b",
+                "name": "unzip",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"extract_options\": {\"extract_all\": \"True\", \"__current_case__\": 0}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "6.0+galaxy0",
+            "type": "tool",
+            "uuid": "84de9847-2a05-4f40-83e3-e31ea18a6806",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "List of images from IDR to analyzed",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.18.1+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "unzipped"
+                }
+            },
+            "inputs": [],
+            "label": "IDR Image IDs",
+            "name": "Perform histogram equalization",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 873.6730013009421,
+                "top": 303.65122617745305
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.18.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "b1c2c210813c",
+                "name": "2d_histogram_equalization",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"h_type\": \"clahe\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.1+galaxy0",
+            "type": "tool",
+            "uuid": "e58f2028-5cb1-4db7-878e-1614e65574d9",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/spot_detection_2d/ip_spot_detection_2d/0.1+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "fn_in": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Perform 2-D spot detection",
+            "outputs": [
+                {
+                    "name": "fn_out",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 920.6730013009421,
+                "top": 483.65122617745305
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/spot_detection_2d/ip_spot_detection_2d/0.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "e8c9e104e109",
+                "name": "spot_detection_2d",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"abs_threshold\": \"0.05\", \"boundary\": \"5\", \"filter_type\": \"LoG\", \"fn_in\": {\"__class__\": \"ConnectedValue\"}, \"frame_1st\": \"1\", \"frame_end\": \"0\", \"max_scale\": \"2.0\", \"min_scale\": \"1.0\", \"rel_threshold\": \"0.0\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1+galaxy0",
+            "type": "tool",
+            "uuid": "e9d3c96d-580c-472c-81c1-bb62ee981c1a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/points2labelimage/ip_points_to_label/0.4+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "fn_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Convert point coordinates to label map",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 1185.2616689619274,
+                "top": 588.6036590077183
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/points2labelimage/ip_points_to_label/0.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "de611b3b5ae8",
+                "name": "points2labelimage",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"binary\": false, \"has_header\": true, \"input\": {\"__class__\": \"ConnectedValue\"}, \"shapex\": \"2048\", \"shapey\": \"2048\", \"swap_xy\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.4+galaxy0",
+            "type": "tool",
+            "uuid": "4f40ffe5-ce51-4f1b-a61a-d45089bb4113",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.4+galaxy4",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "method_option|im1": {
+                    "id": 5,
+                    "output_name": "output"
+                },
+                "method_option|im2": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Overlay images",
+                    "name": "method_option"
+                },
+                {
+                    "description": "runtime parameter for tool Overlay images",
+                    "name": "method_option"
+                }
+            ],
+            "label": null,
+            "name": "Overlay images",
+            "outputs": [
+                {
+                    "name": "out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 1306.3715749085434,
+                "top": 336.8780707417292
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.4+galaxy4",
+            "tool_shed_repository": {
+                "changeset_revision": "ca362a9bfa20",
+                "name": "overlay_images",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"method_option\": {\"method\": \"seg_contour\", \"__current_case__\": 2, \"im1\": {\"__class__\": \"ConnectedValue\"}, \"im2\": {\"__class__\": \"ConnectedValue\"}, \"thickness\": \"2\", \"color\": \"#ff0000\", \"show_label\": false, \"label_color\": \"#ffff00\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.4+galaxy4",
+            "type": "tool",
+            "uuid": "eea6029a-bb59-49b0-a27e-ae2a642bcc8b",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "out_png",
+                    "output_name": "out_png",
+                    "uuid": "f3538bf0-0dc6-4237-a2ad-bdf539b01c70"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "Segmentation",
+        "bioimaging",
+        "smFISH",
+        "IDR"
+    ],
+    "uuid": "6b3bc75e-ef2a-4211-9f6b-8696bdd6f530",
+    "version": 2
+}

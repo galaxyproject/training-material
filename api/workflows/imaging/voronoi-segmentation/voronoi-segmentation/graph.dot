@@ -1,0 +1,54 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nImage"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nSeeds"]
+  2[label="Convert image format"]
+  0 -> 2 [label="output"]
+  k09e98f2a17b3429b877d93de63ca7e1a[color=lightseagreen,label="Output\nSingle channel image"]
+  2 -> k09e98f2a17b3429b877d93de63ca7e1a
+  3[label="Convert binary image to label map"]
+  1 -> 3 [label="output"]
+  k4d2a861c37464c249b8196d8f7a710d4[color=lightseagreen,label="Output\nlabel map"]
+  3 -> k4d2a861c37464c249b8196d8f7a710d4
+  4[label="Convert single-channel to multi-channel image"]
+  2 -> 4 [label="output"]
+  k66990d3d7b1943f6ac5aecd5557bff35[color=lightseagreen,label="Output\nmulti-channel image"]
+  4 -> k66990d3d7b1943f6ac5aecd5557bff35
+  5[label="Filter 2-D image"]
+  2 -> 5 [label="output"]
+  ke030c6445cb44c1e82878fc6d2950490[color=lightseagreen,label="Output\nSmoothed image"]
+  5 -> ke030c6445cb44c1e82878fc6d2950490
+  6[label="Compute Voronoi tessellation"]
+  3 -> 6 [label="output"]
+  kaf96320e5fa749d2831bbb438f8b2d73[color=lightseagreen,label="Output\ntesselation"]
+  6 -> kaf96320e5fa749d2831bbb438f8b2d73
+  7[label="Threshold image"]
+  5 -> 7 [label="output"]
+  k633e495bca86451b836cbfceeb8d25ee[color=lightseagreen,label="Output\nmask"]
+  7 -> k633e495bca86451b836cbfceeb8d25ee
+  8[label="Count objects in label map"]
+  6 -> 8 [label="result"]
+  kb977eb0ce874439fb42b756d6a864112[color=lightseagreen,label="Output\nobject count"]
+  8 -> kb977eb0ce874439fb42b756d6a864112
+  9[label="Extract image features"]
+  6 -> 9 [label="result"]
+  2 -> 9 [label="output"]
+  k5a94a42590004083aae7232ea01ae215[color=lightseagreen,label="Output\nimage features"]
+  9 -> k5a94a42590004083aae7232ea01ae215
+  10[label="Process images using arithmetic expressions"]
+  6 -> 10 [label="result"]
+  1 -> 10 [label="output"]
+  7 -> 10 [label="output"]
+  k45f919dd298f4e94a390e73537b5fedb[color=lightseagreen,label="Output\nsegmentation"]
+  10 -> k45f919dd298f4e94a390e73537b5fedb
+  11[label="Colorize label map"]
+  10 -> 11 [label="result"]
+  k6903fd1b304a4e4aa5298f3643bcd445[color=lightseagreen,label="Output\ncolorized label map"]
+  11 -> k6903fd1b304a4e4aa5298f3643bcd445
+  12[label="Overlay images"]
+  4 -> 12 [label="output"]
+  11 -> 12 [label="output"]
+  k2adb0afd923f4641bafb10eaca09a4e0[color=lightseagreen,label="Output\nsegmented image"]
+  12 -> k2adb0afd923f4641bafb10eaca09a4e0
+}

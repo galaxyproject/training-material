@@ -1,0 +1,606 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Download data from cBioPortal and prepare it for Flexynesis",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0003-1329-3044",
+            "name": "Amirhossein Naghsh Nilchi"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Flexynesis - get data from Cbioportal",
+    "readme": "This workflow downloads data from cBioPortal and prepares it for Flexynesis integration.",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_cbioportal_import/flexynesis_cbioportal_import/0.2.20+galaxy1",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Flexynesis cBioPortal import",
+            "outputs": [
+                {
+                    "name": "data",
+                    "type": "input"
+                },
+                {
+                    "name": "meta",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 0,
+                "top": 200.90928712064067
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_cbioportal_import/flexynesis_cbioportal_import/0.2.20+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "e9a7cb5a3c63",
+                "name": "flexynesis_cbioportal_import",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"non_commercial_use\": true, \"study_id\": \"brca_metabric\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.20+galaxy1",
+            "type": "tool",
+            "uuid": "57312d00-0c02-4ec5-b6ed-ab4c8ce7c5f0",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "data"
+                }
+            },
+            "inputs": [],
+            "label": "extract expression data",
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 301.11923006133463,
+                "top": 1.5115201616075846
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "data_clinical_patient"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                },
+                "TagDatasetActionoutput": {
+                    "action_arguments": {
+                        "tags": "name:gex"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"by_identifier\", \"__current_case__\": 1, \"identifier\": \"data_mrna_illumina_microarray\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "53130a1c-f8fa-4176-b2a0-c5462e466938",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "data"
+                }
+            },
+            "inputs": [],
+            "label": "extract mutation data 2",
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 300.0405297076686,
+                "top": 202.14978594349216
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "data_clinical_patient"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                },
+                "TagDatasetActionoutput": {
+                    "action_arguments": {
+                        "tags": "name:mut"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"by_identifier\", \"__current_case__\": 1, \"identifier\": \"data_mutations\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "80d6d13f-3a5d-41c3-8f42-dcb996f27ced",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "data"
+                }
+            },
+            "inputs": [],
+            "label": "extract clinical data",
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 301.11923006133463,
+                "top": 401.70935137171074
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                },
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "data_clinical_patient"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                },
+                "TagDatasetActionoutput": {
+                    "action_arguments": {
+                        "tags": "name:clin"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"by_identifier\", \"__current_case__\": 1, \"identifier\": \"data_clinical_patient\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "c68fd0e9-2d51-49e8-a421-9da6c776685b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "infile": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "remove duplicate genes from expression data",
+            "name": "Sort",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 600.1566399964436,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/9.5+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c41d78ae5fee",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"header\": \"1\", \"ignore_case\": false, \"infile\": {\"__class__\": \"ConnectedValue\"}, \"sortkeys\": [{\"__index__\": 0, \"column\": \"1\", \"order\": \"\", \"style\": \"\"}], \"unique\": true, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.5+galaxy2",
+            "type": "tool",
+            "uuid": "38b41875-d713-4c22-a8de-933f408c095f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy2",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "singtabop|input": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Table Compute",
+                    "name": "singtabop"
+                }
+            ],
+            "label": "remove comment lines from mutation data",
+            "name": "Table Compute",
+            "outputs": [
+                {
+                    "name": "table",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 602.678947700702,
+                "top": 202.23466046772327
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "cd36d6e45e29",
+                "name": "table_compute",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"out_opts\": [\"output_headers_row\", \"output_headers_col\", \"ignore_nas\"], \"precision\": \"6\", \"singtabop\": {\"use_type\": \"single\", \"__current_case__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"col_row_names\": null, \"adv\": {\"header\": \"1\", \"nrows\": null, \"skipfooter\": null, \"skip_blank_lines\": true}, \"user\": {\"mode\": \"precision\", \"__current_case__\": 0}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.4+galaxy2",
+            "type": "tool",
+            "uuid": "2aefdf67-d2b7-4d34-b78a-d5507467b28a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy2",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "singtabop|input": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Table Compute",
+                    "name": "singtabop"
+                }
+            ],
+            "label": "remove comment lines from clinical data",
+            "name": "Table Compute",
+            "outputs": [
+                {
+                    "name": "table",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 596.586556377852,
+                "top": 399.65742816787764
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "cd36d6e45e29",
+                "name": "table_compute",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"out_opts\": [\"output_headers_row\", \"output_headers_col\", \"ignore_nas\"], \"precision\": \"6\", \"singtabop\": {\"use_type\": \"single\", \"__current_case__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"col_row_names\": null, \"adv\": {\"header\": \"4\", \"nrows\": null, \"skipfooter\": null, \"skip_blank_lines\": true}, \"user\": {\"mode\": \"precision\", \"__current_case__\": 0}}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.4+galaxy2",
+            "type": "tool",
+            "uuid": "f6e855b5-cdcd-4729-ad9e-49bf58179ed3",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "remove ENTREZ gene ids from expression data",
+            "name": "Advanced Cut",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 901.0542070921123,
+                "top": 0.814928927267465
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c41d78ae5fee",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"complement\": \"--complement\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"delimiter\": \"\", \"colnames_option\": {\"header\": \"Y\", \"__current_case__\": 0, \"list\": [\"2\"]}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.5+galaxy2",
+            "type": "tool",
+            "uuid": "2fc00c7d-1e65-4acf-acd6-87e80e896ad6",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "table"
+                }
+            },
+            "inputs": [],
+            "label": "remove index column from mutation data",
+            "name": "Advanced Cut",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 899.9602584595917,
+                "top": 200.25001140427432
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c41d78ae5fee",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"complement\": \"--complement\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"delimiter\": \"\", \"colnames_option\": {\"header\": \"Y\", \"__current_case__\": 0, \"list\": [\"1\"]}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.5+galaxy2",
+            "type": "tool",
+            "uuid": "2fe98a47-9ffc-4663-9f9e-1b6579f6111f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "table"
+                }
+            },
+            "inputs": [],
+            "label": "remove index column from clinical data",
+            "name": "Advanced Cut",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 901.0573109828694,
+                "top": 401.57266943921366
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.5+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c41d78ae5fee",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"complement\": \"--complement\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"delimiter\": \"\", \"colnames_option\": {\"header\": \"Y\", \"__current_case__\": 0, \"list\": [\"1\"]}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.5+galaxy2",
+            "type": "tool",
+            "uuid": "f388ca59-48a2-47f1-ad7a-a96aa0483cfc",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_utils/flexynesis_utils/0.2.20+galaxy3",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "utils_conditional|mutation": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Flexynesis utils",
+                    "name": "utils_conditional"
+                }
+            ],
+            "label": "Binarize mutation data",
+            "name": "Flexynesis utils",
+            "outputs": [
+                {
+                    "name": "util_out",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1198.8747775348118,
+                "top": 201.38920774103423
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_utils/flexynesis_utils/0.2.20+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "f73ce81f7795",
+                "name": "flexynesis_utils",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"non_commercial_use\": true, \"utils_conditional\": {\"util\": \"binarize\", \"__current_case__\": 5, \"mutation\": {\"__class__\": \"ConnectedValue\"}, \"gene_idx\": \"1\", \"sample_idx\": \"17\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.20+galaxy3",
+            "type": "tool",
+            "uuid": "22aef430-037b-4598-882c-76903df5601f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_utils/flexynesis_utils/0.2.20+galaxy2",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "utils_conditional|clin": {
+                    "id": 9,
+                    "output_name": "output"
+                },
+                "utils_conditional|omics": [
+                    {
+                        "id": 7,
+                        "output_name": "output"
+                    },
+                    {
+                        "id": 10,
+                        "output_name": "util_out"
+                    }
+                ]
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Flexynesis utils",
+                    "name": "utils_conditional"
+                },
+                {
+                    "description": "runtime parameter for tool Flexynesis utils",
+                    "name": "utils_conditional"
+                }
+            ],
+            "label": null,
+            "name": "Flexynesis utils",
+            "outputs": [
+                {
+                    "name": "train_out",
+                    "type": "input"
+                },
+                {
+                    "name": "test_out",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1501.7342047750744,
+                "top": 199.34285712763165
+            },
+            "post_job_actions": {
+                "TagDatasetActiontest_out": {
+                    "action_arguments": {
+                        "tags": "name:test"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "test_out"
+                },
+                "TagDatasetActiontrain_out": {
+                    "action_arguments": {
+                        "tags": "name:train"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "train_out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flexynesis_utils/flexynesis_utils/0.2.20+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "35f41ee7ca20",
+                "name": "flexynesis_utils",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"non_commercial_use\": true, \"utils_conditional\": {\"util\": \"split_data\", \"__current_case__\": 4, \"clin\": {\"__class__\": \"ConnectedValue\"}, \"omics\": {\"__class__\": \"ConnectedValue\"}, \"split\": \"0.7\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.20+galaxy2",
+            "type": "tool",
+            "uuid": "c526dfd3-5bb7-464f-af05-f039ee2aaf88",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "test data",
+                    "output_name": "test_out",
+                    "uuid": "a34a9c32-55d0-4ea7-b52c-c7446ba56439"
+                },
+                {
+                    "label": "train data",
+                    "output_name": "train_out",
+                    "uuid": "6a451d6f-6920-40da-b77f-e1926514a498"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "flexynesis",
+        "machine_learning"
+    ],
+    "uuid": "1f51182f-f32b-4962-8a01-68f8ed6ed640",
+    "version": 10
+}

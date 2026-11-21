@@ -1,0 +1,62 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nmarkers.csv"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nPhenotypeWorkflow"]
+  2[color=lightblue,label="ℹ️ Input Collection\nRaw cycle images"]
+  3[label="Illumination correction with Basic"]
+  2 -> 3 [label="output"]
+  k8a05fb699e2b4fa4ab8c77d3241f7a86[color=lightseagreen,label="Output\nDFP images"]
+  3 -> k8a05fb699e2b4fa4ab8c77d3241f7a86
+  ka5432ed5980f4f0483a2b5514019b11b[color=lightseagreen,label="Output\nFFP images"]
+  3 -> ka5432ed5980f4f0483a2b5514019b11b
+  4[label="Stitching and registration with Ashlar"]
+  3 -> 4 [label="output_dfp"]
+  3 -> 4 [label="output_ffp"]
+  2 -> 4 [label="output"]
+  0 -> 4 [label="output"]
+  k81f2c552cd844d48af14eb252550f35a[color=lightseagreen,label="Output\nRegistered image"]
+  4 -> k81f2c552cd844d48af14eb252550f35a
+  5[label="TMA dearray with UNetCoreograph"]
+  4 -> 5 [label="output"]
+  kd79b4449f87942a99c790e0a6df0fa79[color=lightseagreen,label="Output\nDearray images"]
+  5 -> kd79b4449f87942a99c790e0a6df0fa79
+  kc3ae2005725a487ca77a437636f3a296[color=lightseagreen,label="Output\nTMA dearray map"]
+  5 -> kc3ae2005725a487ca77a437636f3a296
+  k0ed3e92042ce457d9ebef0cd0baa1dea[color=lightseagreen,label="Output\nDearray masks"]
+  5 -> k0ed3e92042ce457d9ebef0cd0baa1dea
+  6[label="Nuclear segmentation"]
+  5 -> 6 [label="tma_sections"]
+  k65c32086b193440fb1a1e5731bda0820[color=lightseagreen,label="Output\nNuclear mask"]
+  6 -> k65c32086b193440fb1a1e5731bda0820
+  7[label="Convert dearray images to OME-TIFF"]
+  5 -> 7 [label="tma_sections"]
+  kd1c85ec41aea48ce88c3ede346d9b34f[color=lightseagreen,label="Output\nConverted image"]
+  7 -> kd1c85ec41aea48ce88c3ede346d9b34f
+  8[label="Cell feature quantification with MC-Quant"]
+  0 -> 8 [label="output"]
+  5 -> 8 [label="tma_sections"]
+  6 -> 8 [label="mask"]
+  ka277be13b5af4591b86ba8679f561677[color=lightseagreen,label="Output\nPrimary Mask Quantification"]
+  8 -> ka277be13b5af4591b86ba8679f561677
+  9[label="Rename OME-TIFF channels"]
+  0 -> 9 [label="output"]
+  7 -> 9 [label="output"]
+  k0867cba20ac1413db6d0aba8b2dcbe0c[color=lightseagreen,label="Output\nRenamed image"]
+  9 -> k0867cba20ac1413db6d0aba8b2dcbe0c
+  10[label="Convert to Anndata"]
+  8 -> 10 [label="cellmask"]
+  ka10efe575e3646258ac8a4bd27b3ce7e[color=lightseagreen,label="Output\nAnndata feature table"]
+  10 -> ka10efe575e3646258ac8a4bd27b3ce7e
+  11[label="Scimap phenotyping"]
+  10 -> 11 [label="outfile"]
+  1 -> 11 [label="output"]
+  k1711b39d79db401280b6abfae28439ae[color=lightseagreen,label="Output\nPhenotyped feature table"]
+  11 -> k1711b39d79db401280b6abfae28439ae
+  12[label="Create a Vitessce dashboard"]
+  11 -> 12 [label="output"]
+  9 -> 12 [label="renamed_image"]
+  6 -> 12 [label="mask"]
+  k9093603f8ee1424b8520c5f5d3e9dc3d[color=lightseagreen,label="Output\nVitessce dashboard"]
+  12 -> k9093603f8ee1424b8520c5f5d3e9dc3d
+}

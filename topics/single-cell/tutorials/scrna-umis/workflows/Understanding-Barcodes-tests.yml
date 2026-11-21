@@ -1,0 +1,53 @@
+- doc: Test outline for Understanding-Barcodes
+  job:
+    Reads filter list:
+      class: File
+      path: test-data/Reads_filter_list.tabular
+      filetype: tabular
+    FastQ data:
+      class: Collection
+      collection_type: list:paired
+      elements:
+      - class: Collection
+        type: paired
+        identifier: test_barcodes_celseq2.fastq
+        elements:
+        - class: File
+          identifier: forward
+          path: https://zenodo.org/records/2573177/files/test_barcodes_celseq2_R1.fastq.gz
+        - class: File
+          identifier: reverse
+          path: https://zenodo.org/records/2573177/files/test_barcodes_celseq2_R2.fastq.gz
+  outputs:
+    text_file:
+      element_tests:
+        test_barcodes_celseq2.fastq:
+          elements:
+            forward:
+              path: test-data/text_file_forward.txt
+            reverse:
+              path: test-data/text_file_reverse.txt
+    html_file:
+      element_tests:
+        test_barcodes_celseq2.fastq:
+          elements:
+            forward:
+              path: test-data/html_file_forward.html
+            reverse:
+              path: test-data/html_file_reverse.html
+    out_paired_collection:
+      element_tests:
+        test_barcodes_celseq2.fastq:
+          elements:
+            forward:
+              path: test-data/out_paired_collection_forward.fastqsanger
+            reverse:
+              path: test-data/out_paired_collection_reverse.fastqsanger
+    output_pos:
+      element_tests:
+        test_barcodes_celseq2.fastq:
+          elements:
+            forward:
+              path: test-data/output_pos_forward.fastqsanger
+            reverse:
+              path: test-data/output_pos_reverse.fastqsanger

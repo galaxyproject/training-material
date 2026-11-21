@@ -1,0 +1,17 @@
+- doc: Test outline for main_workflow
+  job:
+    Video or Audio File:
+      class: File
+      path: https://zenodo.org/records/17949386/files/1960_kennedy-nixon_1.mp4
+      filetype: mp4
+  outputs:
+    Nixon-transcribed-cleaned:
+      asserts:
+        has_text:
+          - "The things that Senator Kennedy has said, many of us can agree with."
+          - "Not at all."
+    Kennedy-transcribed-cleaned:
+      asserts:
+        has_text:
+          - "If we fail, then freedom fails."
+          - "I think we can do better."

@@ -1,0 +1,503 @@
+---
+id: dunovo
+name: Calling very rare variants
+description: >-
+  In this tutorial we are going to perform discovery of low frequency variants
+  from duplex sequencing data. As an example we use the ABL1 dataset published
+  by <a href="https://www.ncbi.nlm.nih.gov/pubmed/25849638">Schmitt and
+  colleagues</a> (SRA accession <a
+  href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR1799908">SRR1799908</a>).
+title_default: dunovo
+steps:
+  - title: Finding rare variants
+    content: >-
+      Most popular variant callers focus on the common case of sequencing a
+      diploid individual to find heterozygous and homozygous variants. This is a
+      well-studied problem with its own challenges, but at least you can expect
+      your variants to be present in either 100%, 50%, or 0% of your sample DNA.
+      If you observe a variant present in 99%, 56%, or 2% of the reads at a
+      site, you can probably assume the allele is actually present at 100%, 50%,
+      or 0%, respectively, in your sample.<br><br>But in this tutorial, we’re
+      looking for <b>rare variants</b>. So our true frequency might actually be
+      13%, 1%, or even 0.4%. The challenge then becomes distinguishing these
+      situations from sequencing errors. Next-generation sequencers produce
+      noise at this level, making it challenging to make this distinction in
+      data produced with standard resequencing methods.
+    backdrop: true
+  - title: Duplex sequencing
+    content: >-
+      <a href="http://www.pnas.org/content/109/36/14508.short">Duplex
+      sequencing</a> is a method that addresses the problem of distinguishing
+      sequencing signal from noise. It can increase sequencing accuracy by over
+      four orders of magnitude. Duplex sequencing uses randomly generated
+      oligomers to uniquely tag each fragment in a sample after random shearing.
+      The tagged fragments are then PCR amplified prior to sequencing, so that
+      many reads can be obtained from each original molecule. The tags in each
+      read can then be used to identify which original fragment the read came
+      from. Identifying multiple reads from each fragment allows building a
+      consensus of the original sequence of the fragment, eliminating errors.
+      <br><br>The key to duplex sequencing, as opposed to other types of
+      consensus-based methods (<a
+      href="https://www.nature.com/articles/nrg.2017.117">review here</a>), is
+      that both ends of the original fragment are tagged such that its strands
+      can be distinguished. Knowing which strand each read comes from allows us
+      to recognize errors even in the first round of PCR.
+    backdrop: true
+  - title: Duplex sequencing
+    content: >-
+      Processing the raw reads into consensus sequences consists of four main
+      steps: <ul>
+        <li>Group reads by their tags.</li>
+        <li>Align reads in the same tag group.</li>
+        <li>Build single-strand consensus sequences (<b>SSCS</b>) of reads coming from the same original strand.</li>
+        <li>Build duplex consensus sequences (<b>DCS</b>) from pairs of SSCS.</li>
+      </ul> Du Novo is a tool which can carry out these steps. Unlike most other
+      such tools, it can do so without the use of a reference sequence, and it
+      can correct for errors in the tags which can contribute to data loss.
+    backdrop: true
+  - title: The value of single-strand consensus sequences
+    content: >-
+      The DCSs have the ultimate accuracy, yet the SSCSs can also be very useful
+      when ampliconic DNA is used as an input to a duplex experiment. Let us
+      illustrate the utility of SSCSs with the following example. Suppose one is
+      interested in quantifying variants in a virus that has a very low titer in
+      body fluids. Since the duplex procedure requires a substantial amount of
+      starting DNA (<a
+      href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4271547/">between 0.2
+      and 3 micrograms</a>) the virus needs to be enriched. This can be done,
+      for example, with a PCR designed to amplify the entire genome of the
+      virus. Yet the problem is that during the amplification heterologous
+      strands will almost certainly realign to some extent forming heteroduplex
+      molecule.
+    backdrop: true
+  - title: Generating consensus sequences
+    content: >-
+      The starting point of the analysis is sequencing reads (in <a
+      href="https://en.wikipedia.org/wiki/FASTQ_format">FASTQ</a> format)
+      produced from a duplex sequencing library.
+    backdrop: true
+  - title: Getting data in and assessing quality
+    content: >-
+      We uploaded the <a
+      href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/">Schmitt et
+      al. 2015<a/> data directly from SRA as shown in this <a
+      href="https://vimeo.com/121187220">screencast</a>.
+    backdrop: true
+  - title: Importing the raw data
+    element: '#history-options-button'
+    content: >-
+      In order to import the data from another history click on the gear icon at
+      the top. Click on “Import from File” at the bottom of the menu and insert
+      this link in the box under <b>Archived History URL</b>:
+      https://usegalaxy.org/history/export_archive?id=7ac09d1db287dbba
+    placement: left
+  - title: Getting data in and assessing quality
+    element: '#history-options-button'
+    content: >-
+      This created two datasets in our galaxy history: one for forward reads and
+      one for reverse.
+    placement: left
+  - title: Getting data in and assessing quality
+    content: >-
+      We then need to evaluate the quality of the data by running FastQC on both
+      datasets (forward and reverse). You can read about using tool FastQC <a
+      href="http://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html#quality-check">here</a>.
+    backdrop: true
+  - title: Assessing quality
+    element: '#tool-search-query'
+    content: Search for 'FastQC' tool.
+    placement: right
+    textinsert: FastQC
+  - title: Assessing quality
+    element: '#tool-search'
+    content: Click on the 'FastQC' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.72"]
+        .tool-old-link
+  - title: Assessing quality
+    element: '#tool-search'
+    content: Run the tool with the default parameters.
+    position: right
+  - title: Assessing quality
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      One can see that these data are of excellent quality and no additional
+      processing is required before we can start the actual analysis.
+    position: left
+  - title: Processing reads into duplex consensus sequences with Du Novo
+    content: >-
+      Now we are ready to collapse the raw reads into duplex consensus
+      sequences.
+    backdrop: true
+  - title: Sorting reads into families
+    content: >-
+      The <b>Du Novo: Make families</b> tool will separate the 12bp tags from
+      each read pair and concatenate them into a 24bp barcode. Then it will use
+      the barcodes to sort the reads into families that all descend from the
+      same original fragment.
+    backdrop: true
+  - title: Sorting reads into families
+    element: '#tool-search-query'
+    content: Search for 'Du Novo Make families' tool.
+    placement: right
+    textinsert: Du Novo Make families
+  - title: Sorting reads into families
+    element: '#tool-search'
+    content: Click on the 'Du Novo Make families' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fnick%2Fdunovo%2Fmake_families%2F2.15"]
+        .tool-old-link
+  - title: Sorting reads into families
+    element: '#tool-search'
+    content: |-
+      Run the tool with the following parameters:<ul>
+        <li>"Sequencing reads, mate 1" to '1: SRR1799908_forward'</li>
+        <li>"Sequencing reads, mate 2" to '2: SRR1799908_reverse'</li>
+        <li>"Tag length" to '12'</li>
+      </ul>
+    position: right
+  - title: Correcting barcodes
+    content: >-
+      The grouping reads based on barcode relies on exact barcode matches. Any
+      PCR or sequencing error in the barcode sequence will prevent the affected
+      reads from being joined with their other family members. <br>Du Novo
+      includes a tool which can correct most of these errors and recover the
+      affected reads. This can increase the final yield of duplex consensus
+      reads by up to 11%<a href="">fix link</a>
+    backdrop: true
+  - title: Correcting barcodes
+    element: '#tool-search-query'
+    content: Search for 'Du Novo Correct barcodes' tool.
+    placement: right
+    textinsert: Du Novo Correct barcodes
+  - title: Correcting barcodes
+    element: '#tool-search'
+    content: Click on the 'Du Novo Correct barcodes' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fnick%2Fdunovo%2Fcorrect_barcodes%2F2.15"]
+        .tool-old-link
+  - title: Correcting barcodes
+    element: '#tool-search'
+    content: |-
+      Run the tool with the following parameters:<ul>
+        <li>"Input reads" to the output from Du Novo: Make families</li>
+        <li>"Maximum differences" to '3'</li>
+      </ul>
+    position: right
+  - title: Aligning families
+    content: >-
+      After grouping reads that came from the same original fragment, we need to
+      align them with each other. This next tool will perform a multiple
+      sequence alignment on each family.
+    backdrop: true
+  - title: Aligning families
+    element: '#tool-search-query'
+    content: Search for 'Du Novo Align families' tool.
+    placement: right
+    textinsert: Du Novo Align families
+  - title: Aligning families
+    element: '#tool-search'
+    content: Click on the 'Du Novo Align families' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fnick%2Fdunovo%2Falign_families%2F2.15"]
+        .tool-old-link
+  - title: Aligning families
+    element: '#tool-search'
+    content: |-
+      Run the tool with the following parameters:<ul>
+        <li>"Input reads" to the output from Du Novo: Correct barcodes</li>
+        <li>"Multiple sequence aligner" to 'Kalign2'</li>
+      </ul>
+    position: right
+  - title: Making consensus sequences
+    content: >-
+      Now, we need to collapse the aligned reads into consensus sequences. This
+      next tool will process each group of aligned reads that came from the same
+      single-stranded family into a consensus. Then it will align the consensus
+      sequences from the two strands of each original molecule, and call a
+      consensus between them. <br><br>Normally, the tool only produces the final
+      double-stranded consensus sequences. But we will make use of the
+      single-stranded consensus sequences later, so we’ll tell it to keep those
+      as well.
+    backdrop: true
+  - title: Making consensus sequences
+    element: '#tool-search-query'
+    content: Search for 'Du Novo Make consensus reads' tool.
+    placement: right
+    textinsert: Du Novo Make consensus reads
+  - title: Making consensus sequences
+    element: '#tool-search'
+    content: Click on the 'Du Novo Make consensus reads' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fnick%2Fdunovo%2Fdunovo%2F2.15"]
+        .tool-old-link
+  - title: Making consensus sequences
+    element: '#tool-search'
+    content: |-
+      Run the tool with the following parameters:<ul>
+        <li>"Aligned input reads" to the output from Du Novo: Align families</li>
+        <li>"Minimum reads for a consensus sequence" to '3'</li>
+        <li>"Consensus % threshold" to '0.7'</li>
+        <li>"Output format" to 'FASTQ'</li>
+        <li>"Output single-strand consensus sequences as well" to 'Yes'</li>
+      </ul>
+    position: right
+  - title: Filtering consensuses
+    content: >-
+      You may have realized that when calling a “consensus” between two
+      sequences, if the two disagree on a base, there’s no way to know which is
+      correct. So in these situations, Du Novo uses the <a
+      href="https://en.wikipedia.org/wiki/Nucleic_acid_notation">IUPAC ambiguity
+      letter</a> for the two different bases (e.g. <i>W</i> = <i>A</i> or
+      <i>T</i>). Also, when calling single-stranded consensus sequences, if
+      there aren’t enough high-quality bases to call a position (during the
+      previous steps we set this threshold to 70%), it gives an <i>N</i>
+      <br>This information could be useful for some analyses, but not for our
+      variant calling. The tool <b>Sequence Content Trimmer</b> will help with
+      filtering these out. With the settings below, it will move along the read,
+      tracking the frequency of ambiguous (non-ACGT) bases in a 10bp window. If
+      it sees more than 2 ambiguous bases in a window, it will remove the rest
+      of the read, starting with the first offending base in the window. We’ll
+      also tell it to remove entirely any read pair containing a read that got
+      trimmed to less than 50bp.
+    backdrop: true
+  - title: Filtering the consensus sequences
+    element: '#tool-search-query'
+    content: Search for 'Sequence Content Trimmer' tool.
+    placement: right
+    textinsert: Sequence Content Trimmer
+  - title: Filtering the consensus sequences
+    element: '#tool-search'
+    content: Click on the 'Sequence Content Trimmer' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fnick%2Fsequence_content_trimmer%2Fsequence_content_trimmer%2F0.1"]
+        .tool-old-link
+  - title: Filtering the consensus sequences
+    element: '#tool-search'
+    content: |-
+      Run the tool with the following parameters:<ul>
+        <li>"Paired reads?" to 'Paired'</li>
+        <li>"Input reads (mate 1)" to the output from Du Novo: Make consensus (mate 1)</li>
+        <li>"Input reads (mate 2)" to the output from Du Novo: Make consensus (mate 2)</li>
+        <li>"Bases to filter on" to 'ACGT'</li>
+        <li>"Frequency threshold" to '0.2'</li>
+        <li>"Size of the window" to '10'</li>
+        <li>"Invert filter bases" to 'Yes'</li>
+        <li>"Set a minimum read length" to 'Yes'</li>
+        <li>"Minimum read length" to '50'</li>
+      </ul>
+    position: right
+  - title: Calling variants with duplex consensus sequences
+    content: >-
+      At this point we have trimmed DCSs. We can now proceed to call variants.
+      This involves aligning the variants against the reference genome, then
+      counting variants. <br>We’re not specifically interested in the reference
+      sequence, since all we care about is sequence content of the consensus
+      reads. But we’ll be using the reference sequence to figure out where all
+      the reads come from. This lets us stack them on top of each other, with
+      equivalent bases lined up in columns. Then we can step through each
+      column, count how many times we see each base, and and compile a list of
+      variants.
+    backdrop: true
+  - title: Align against the genome with BWA-MEM
+    element: '#tool-search-query'
+    content: Search for 'Map with BWA-MEM' tool.
+    placement: right
+    textinsert: Map with BWA-MEM
+  - title: Align against the genome with BWA-MEM
+    element: '#tool-search'
+    content: Click on the 'Map with BWA-MEM' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbwa%2Fbwa_mem%2F0.7.17.1"]
+        .tool-old-link
+  - title: Align against the genome with BWA-MEM
+    element: '#tool-search'
+    content: |-
+      Run the tool with the following parameters:<ul>
+        <li>"Using reference genome?" to 'Human (Homo sapiens) (b38): hg38'</li>
+        <li>"Select first set of reads" to the output from Sequence Content Trimmer (mate 1)</li>
+        <li>"Select second set of reads" to the output from Sequence Content Trimmer (mate 2)</li>
+      </ul>
+    position: right
+  - title: Left Aligning indels
+    content: >-
+      To normalize the positional distribution of indels we use the tool
+      <b>BamLeftAlign</b> utility from the <a
+      href="https://github.com/ekg/freebayes#indels">FreeBayes</a> package.
+      <br>This is necessary to avoid erroneous polymorphisms flanking regions
+      with indels (e.g., in low complexity loci)
+    backdrop: true
+  - title: Left-align indels
+    element: '#tool-search-query'
+    content: Search for 'BamLeftAlign' tool.
+    placement: right
+    textinsert: BamLeftAlign
+  - title: Left-align indels
+    element: '#tool-search'
+    content: Click on the 'BamLeftAlign' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffreebayes%2Fbamleftalign%2F1.1.0.46-0"]
+        .tool-old-link
+  - title: Left-align indels
+    element: '#tool-search'
+    content: |-
+      Run the tool with the following parameters:<ul>
+        <li>"Select alignment file in BAM format" to 'Human (Homo sapiens) (b38): hg38'</li>
+        <li>"Using reference genome" to 'Human (Homo sapiens): hg38'</li>
+      </ul>
+    position: right
+  - title: Calling the variants
+    content: >-
+      Now we’ll use our aligned consensus reads to find variants.<br>Normally,
+      in a diploid resequencing experiment, you would call variants relative to
+      the reference. So, you’d report sites which are different from the
+      reference (and whether they’re hetero- or homozygous). In our case, we’re
+      interested in rare variants. So what we’ll report is the sites where there
+      is more than one allele, and what the frequency is of the less-common
+      allele (the <b>minor allele</b>). This has the potential to include every
+      small sequencing error (even though we’re using duplex, there still are
+      errors). So to reduce the noise, we’ll set a lower threshold at 1% minor
+      allele frequency (<b>MAF</b>).
+    backdrop: true
+  - title: Finding variants in the alignment
+    content: >-
+      To identify sites containing variants we use the tool <b>Naive Variant
+      Caller (NVC)</b> tool. This reads the alignment and counts the number of
+      bases of each type at each site.
+    backdrop: true
+  - title: Count the variants
+    element: '#tool-search-query'
+    content: Search for 'Naive Variant Caller (NVC)' tool.
+    placement: right
+    textinsert: Naive Variant Caller (NVC)
+  - title: Count the variants
+    element: '#tool-search'
+    content: Click on the 'Naive Variant Caller (NVC)' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fblankenberg%2Fnaive_variant_caller%2Fnaive_variant_caller%2F0.0.4"]
+        .tool-old-link
+  - title: Count the variants
+    element: '#tool-search'
+    content: |-
+      Run the tool with the following parameters:<ul>
+        <li>"BAM file" to the BamLeftAlign output</li>
+        <li>"Using reference genome" to 'hg38'</li>
+        <li>Click on "Insert Restrict to regions"<ul>
+          <li>"Chromosome" to 'chr9'</li></ul></li>
+        <li>"Minimum base quality" to '0'</li>
+        <li>"Minimum mapping quality" to '20'</li>
+        <li>"Ploidy" to '1'</li>
+      </ul>
+    position: right
+  - title: Count the variants
+    element: '#history-options-button'
+    content: >-
+      The tool <b>Naive Variant Caller (NVC)</b> generates a <a
+      href="https://en.wikipedia.org/wiki/Variant_Call_Format">VCF<a/> file that
+      can be viewed at genome browsers such as <a
+      href="https://www.broadinstitute.org/igv/">IGV</a>. Yet one rarely finds
+      variants by looking at genome browsers. We’ll want to use tools to search
+      for variants that fit our criteria.
+    placement: left
+  - title: Finding minor alleles
+    content: >-
+      Now we’ll want to parse the VCF produced by the NVC, determine what the
+      major and minor allele is at each site, and calculate their frequencies.
+      The <b>Variant Annotator</b> from the <b>NGS: Variant Analysis</b> section
+      can do this.
+    backdrop: true
+  - title: Read the variants file
+    element: '#tool-search-query'
+    content: Search for 'Variant Annotator' tool.
+    placement: right
+    textinsert: Variant Annotator
+  - title: Read the variants file
+    element: '#tool-search'
+    content: Click on the 'Variant Annotator' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fnick%2Fallele_counts%2Fallele_counts_1%2F1.2"]
+        .tool-old-link
+  - title: Read the variants file
+    element: '#tool-search'
+    content: |-
+      Run the tool with the following parameters:<ul>
+        <li>"Input variants from Naive Variants Detector" to the NVC output</li>
+        <li>"Minor allele frequency threshold" to '0'</li>
+        <li>"Coverage threshold" to '10'</li>
+        <li>"Output stranded base counts" to 'Yes'</li>
+      </ul>
+    position: right
+  - title: Filtering out the noise
+    content: >-
+      Now we have a file containing the base counts for every site covered by at
+      least 10 reads. We’d like to filter through this data to find sites with a
+      reasonable chance of being a real variant, not sequencing error.<br> The
+      tool <b>Variant Annotator</b> produces a simple tab-delimited file, with
+      one site per line. We can use the tool <b>Filter</b> tool to process this
+      kind of file. We’ll use the filter <i>c16 >= 0.01</i> to remove lines
+      where the value in column 16 is less than 0.01. Column 16 contains the
+      minor allele frequency, so this will remove all sites with a MAF less than
+      1%.
+    backdrop: true
+  - title: Filter the raw variants list
+    element: '#tool-search-query'
+    content: Search for 'Filter' tool.
+    placement: right
+    textinsert: Filter
+  - title: Filter the raw variants list
+    element: '#tool-search'
+    content: Click on the 'Filter' tool to open it.
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Filter1"] .tool-old-link'
+  - title: Filter the raw variants list
+    element: '#tool-search'
+    content: |-
+      Run the tool with the following parameters:<ul>
+        <li>"Filter" to the <b>Variant Annotator</b> output</li>
+        <li>"With following condition" to 'c16 >= 0.01'</li>
+        <li>"Number of header lines to skip" to '1'</li>
+      </ul>
+    position: right
+  - title: Filter the raw variants list
+    element: '#history-options-button'
+    content: >-
+      The polymorphism we are interested in (and the one reported by <a
+      href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/">Schmitt et
+      al. 2015</a>) is at the position 130,872,141 and has a frequency of 1.3%.
+      The other site (position 130,880,141) is a known common variant <a
+      href="https://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?type=rs&rs=rs2227985">rs2227985</a>,
+      which is heterozygous in this sample.
+    placement: left
+  - title: Conclusion
+    content: >-
+      You should now understand duplex sequencing, rare variants, and be able to
+      process the former to find the latter.
+    backdrop: true
+  - title: Key points
+    content: >-
+      <ul><li>Diploid variant calling relies on assumptions that rare variant
+      calling cannot make</li> <li>Duplex consensus sequences are usually most
+      accurate, but sometimes you must rely on single-strand consensus sequences
+      instead.</li></ul>
+    backdrop: true

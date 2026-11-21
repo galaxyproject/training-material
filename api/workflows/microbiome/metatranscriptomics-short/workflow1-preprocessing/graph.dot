@@ -1,0 +1,34 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nReverse raw reads"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nForward raw reads"]
+  2[label="FastQC"]
+  0 -> 2 [label="output"]
+  k676cd11f047947c4a23bc6c8ed5a7790[color=lightseagreen,label="Output\nfastqc_reverse_html_file"]
+  2 -> k676cd11f047947c4a23bc6c8ed5a7790
+  3[label="FastQC"]
+  1 -> 3 [label="output"]
+  k1fb52b78c90543c7a295d628c996d35a[color=lightseagreen,label="Output\nfastqc_forward_html_file"]
+  3 -> k1fb52b78c90543c7a295d628c996d35a
+  4[label="Cutadapt"]
+  1 -> 4 [label="output"]
+  0 -> 4 [label="output"]
+  k0e7406ed9eca486eb19a4cbbf04b5138[color=lightseagreen,label="Output\ncutadapt_report"]
+  4 -> k0e7406ed9eca486eb19a4cbbf04b5138
+  5[label="MultiQC"]
+  3 -> 5 [label="text_file"]
+  2 -> 5 [label="text_file"]
+  kd9f371ddaa6c4540b62b0e34c0b71afa[color=lightseagreen,label="Output\nmultiqc_html_report"]
+  5 -> kd9f371ddaa6c4540b62b0e34c0b71afa
+  6[label="Filter with SortMeRNA"]
+  4 -> 6 [label="out1"]
+  4 -> 6 [label="out2"]
+  k3092eb62d7fc4d66bf574c6cf491d0e3[color=lightseagreen,label="Output\nsortmerna_unaligned_reverse"]
+  6 -> k3092eb62d7fc4d66bf574c6cf491d0e3
+  kdb3bb8ee8af74528be4bf3ea6d381856[color=lightseagreen,label="Output\nsortmerna_unaligned_forward"]
+  6 -> kdb3bb8ee8af74528be4bf3ea6d381856
+  7[label="FASTQ interlacer"]
+  6 -> 7 [label="unaligned_forward"]
+  6 -> 7 [label="unaligned_reverse"]
+}

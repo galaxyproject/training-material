@@ -1,0 +1,432 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "workflow-automation",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-9464-6640",
+            "name": "Wolfgang Maier"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "vcf2lineage",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Variant calls"
+                }
+            ],
+            "label": "Variant calls",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 425.43333435058594,
+                "height": 61.80000305175781,
+                "left": 297,
+                "right": 497,
+                "top": 363.6333312988281,
+                "width": 200,
+                "x": 297,
+                "y": 363.6333312988281
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "fca4e710-87a7-4cb6-9ff1-f9a8dc84ca37",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "min-AF for consensus variant"
+                }
+            ],
+            "label": "min-AF for consensus variant",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "bottom": 619.1000061035156,
+                "height": 102.60000610351562,
+                "left": 295.45001220703125,
+                "right": 495.45001220703125,
+                "top": 516.5,
+                "width": 200,
+                "x": 295.45001220703125,
+                "y": 516.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"default\": 0.7, \"parameter_type\": \"float\", \"optional\": true}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "52664bd7-b500-40a1-935b-8ac6df7003e5",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "5db03aa3-a62d-4a39-8712-d48911abf2bb"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Reference genome"
+                }
+            ],
+            "label": "Reference genome",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 734.8500366210938,
+                "height": 82.20001220703125,
+                "left": 749.816650390625,
+                "right": 949.816650390625,
+                "top": 652.6500244140625,
+                "width": 200,
+                "x": 749.816650390625,
+                "y": 652.6500244140625
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "4a2c6df2-fb1e-42d8-96d5-6765ca85c214",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "components_1|param_type|component_value": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Compose text parameter value",
+            "outputs": [
+                {
+                    "name": "out1",
+                    "type": "expression.json"
+                }
+            ],
+            "position": {
+                "bottom": 622.25,
+                "height": 154.39999389648438,
+                "left": 521.7999877929688,
+                "right": 721.7999877929688,
+                "top": 467.8500061035156,
+                "width": 200,
+                "x": 521.7999877929688,
+                "y": 467.8500061035156
+            },
+            "post_job_actions": {
+                "HideDatasetActionout1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/compose_text_param/compose_text_param/0.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "e188c9826e0f",
+                "name": "compose_text_param",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"components\": [{\"__index__\": 0, \"param_type\": {\"select_param_type\": \"text\", \"__current_case__\": 0, \"component_value\": \"((FILTER = 'PASS') | ( na FILTER )) & (AF >= \"}}, {\"__index__\": 1, \"param_type\": {\"select_param_type\": \"float\", \"__current_case__\": 2, \"component_value\": {\"__class__\": \"ConnectedValue\"}}}, {\"__index__\": 2, \"param_type\": {\"select_param_type\": \"text\", \"__current_case__\": 0, \"component_value\": \")\"}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.1",
+            "type": "tool",
+            "uuid": "8ec54933-36d6-404c-b0a6-5a14b04eb30e",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_filter/4.3+t.galaxy1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "filter_expression|expr": {
+                    "id": 3,
+                    "output_name": "out1"
+                },
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "SnpSift Filter",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "bottom": 506.5,
+                "height": 144,
+                "left": 750.2833251953125,
+                "right": 950.2833251953125,
+                "top": 362.5,
+                "width": 200,
+                "x": 750.2833251953125,
+                "y": 362.5
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Consensus variants"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_filter/4.3+t.galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "2e497a770bca",
+                "name": "snpsift",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filter_expression\": {\"type\": \"simple\", \"__current_case__\": 0, \"expr\": {\"__class__\": \"ConnectedValue\"}}, \"filtering\": {\"mode\": \"entries\", \"__current_case__\": 0}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"inverse\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.3+t.galaxy1",
+            "type": "tool",
+            "uuid": "3673b687-1ba0-42f2-ba13-fa3130462079",
+            "workflow_outputs": [
+                {
+                    "label": "consensus_variants",
+                    "output_name": "output",
+                    "uuid": "ee67c5ed-ff7c-404b-ad20-19259edbc671"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.10",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input_file": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "reference_source|fasta_ref": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool bcftools consensus",
+                    "name": "input_file"
+                },
+                {
+                    "description": "runtime parameter for tool bcftools consensus",
+                    "name": "reference_source"
+                },
+                {
+                    "description": "runtime parameter for tool bcftools consensus",
+                    "name": "sec_default"
+                }
+            ],
+            "label": null,
+            "name": "bcftools consensus",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "bottom": 535.5666809082031,
+                "height": 174.39999389648438,
+                "left": 993.8333129882812,
+                "right": 1193.8333129882812,
+                "top": 361.16668701171875,
+                "width": 200,
+                "x": 993.8333129882812,
+                "y": 361.16668701171875
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_file": {
+                    "action_arguments": {
+                        "newname": "Consensus sequences"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.10",
+            "tool_shed_repository": {
+                "changeset_revision": "e522022137f6",
+                "name": "bcftools_consensus",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chain\": \"false\", \"input_file\": {\"__class__\": \"RuntimeValue\"}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"fasta_ref\": {\"__class__\": \"RuntimeValue\"}}, \"rename\": \"true\", \"sec_default\": {\"mask\": {\"__class__\": \"RuntimeValue\"}, \"iupac_codes\": \"false\", \"sample\": \"\", \"select_haplotype\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.10",
+            "type": "tool",
+            "uuid": "5d2e8bea-3e75-4453-9494-b5fd52b2f528",
+            "workflow_outputs": [
+                {
+                    "label": "consensus",
+                    "output_name": "output_file",
+                    "uuid": "9028f80e-4112-40d8-9a49-f671677d304f"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input_list": {
+                    "id": 5,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Collapse Collection",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 537.8000030517578,
+                "height": 174.8000030517578,
+                "left": 1223.5,
+                "right": 1423.5,
+                "top": 363,
+                "width": 200,
+                "x": 1223.5,
+                "y": 363
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Multisample consensus FASTA"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2",
+            "tool_shed_repository": {
+                "changeset_revision": "830961c48e42",
+                "name": "collapse_collections",
+                "owner": "nml",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filename\": {\"add_name\": \"false\", \"__current_case__\": 1}, \"input_list\": {\"__class__\": \"ConnectedValue\"}, \"one_header\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.2",
+            "type": "tool",
+            "uuid": "acae0f3e-448b-483e-a44a-3e09ce9b3e77",
+            "workflow_outputs": [
+                {
+                    "label": "multisample_consensus_fasta",
+                    "output_name": "output",
+                    "uuid": "1dd7978e-b907-42d6-8fc4-f6fadeefcad1"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/2.3.8",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input1": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Pangolin",
+                    "name": "input1"
+                }
+            ],
+            "label": null,
+            "name": "Pangolin",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 512.1999969482422,
+                "height": 93.19999694824219,
+                "left": 1451,
+                "right": 1651,
+                "top": 419,
+                "width": 200,
+                "x": 1451,
+                "y": 419
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput1": {
+                    "action_arguments": {
+                        "newname": "Pangolin lineage assignments"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/2.3.8",
+            "tool_shed_repository": {
+                "changeset_revision": "b6abccb1f25b",
+                "name": "pangolin",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"alignment\": \"false\", \"db\": {\"source\": \"builtin\", \"__current_case__\": 1, \"db_release\": \"2021-05-11\"}, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"max_ambig\": \"0.5\", \"min_length\": \"10000\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.3.8",
+            "type": "tool",
+            "uuid": "bf8893e0-d08c-46c9-b384-a8ad0fc88185",
+            "workflow_outputs": [
+                {
+                    "label": "pangolin_results",
+                    "output_name": "output1",
+                    "uuid": "e02d2cfb-9842-4069-957c-6cf4ec197056"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "variant-analysis",
+        "galaxy-interface"
+    ],
+    "uuid": "47929aa8-9569-41c5-a463-fd74d6060068",
+    "version": 2
+}

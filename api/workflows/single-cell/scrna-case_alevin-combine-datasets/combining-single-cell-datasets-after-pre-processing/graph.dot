@@ -1,0 +1,67 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nSample 1"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nSample 2"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nSample 3"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nSample 4"]
+  4[color=lightblue,label="ℹ️ Input Dataset\nSample 5"]
+  5[color=lightblue,label="ℹ️ Input Dataset\nSample 6"]
+  6[color=lightblue,label="ℹ️ Input Dataset\nSample 7"]
+  7[label="Combined_Object"]
+  0 -> 7 [label="output"]
+  1 -> 7 [label="output"]
+  2 -> 7 [label="output"]
+  3 -> 7 [label="output"]
+  4 -> 7 [label="output"]
+  5 -> 7 [label="output"]
+  6 -> 7 [label="output"]
+  k85f64e2de52041d6939dbb5409e096cc[color=lightseagreen,label="Output\nCombined_Object"]
+  7 -> k85f64e2de52041d6939dbb5409e096cc
+  8[label="Inspect AnnData"]
+  7 -> 8 [label="anndata"]
+  k165749abbbbd478086559083bb6fe693[color=lightseagreen,label="Output\nvar"]
+  8 -> k165749abbbbd478086559083bb6fe693
+  9[label="Inspect AnnData"]
+  7 -> 9 [label="anndata"]
+  kb5fed97e12114fecbde4ae383c2fbb90[color=lightseagreen,label="Output\ngeneral"]
+  9 -> kb5fed97e12114fecbde4ae383c2fbb90
+  10[label="Inspect AnnData"]
+  7 -> 10 [label="anndata"]
+  k6011a026812242d2a7a7da13ebb068c8[color=lightseagreen,label="Output\nobs"]
+  10 -> k6011a026812242d2a7a7da13ebb068c8
+  11[label="Generating sex metadata"]
+  10 -> 11 [label="obs"]
+  k71a9338561e64cb5a9915f0adbb94c14[color=lightseagreen,label="Output\noutfile"]
+  11 -> k71a9338561e64cb5a9915f0adbb94c14
+  12[label="Generating genotype metadata"]
+  10 -> 12 [label="obs"]
+  k9bf48ec0faa14c89a9617900133ea063[color=lightseagreen,label="Output\noutfile-genotype"]
+  12 -> k9bf48ec0faa14c89a9617900133ea063
+  13[label="Sex_Metadata"]
+  11 -> 13 [label="outfile"]
+  kefe2a20d550b492d8319226863f44eae[color=lightseagreen,label="Output\nSex_Metadata"]
+  13 -> kefe2a20d550b492d8319226863f44eae
+  14[label="Genotype_metadata"]
+  12 -> 14 [label="outfile"]
+  k4ed2135826a547b5b3818bbb6864ad37[color=lightseagreen,label="Output\nGenotype_metadata"]
+  14 -> k4ed2135826a547b5b3818bbb6864ad37
+  15[label="Cell_Metadata"]
+  13 -> 15 [label="out_file1"]
+  14 -> 15 [label="out_file1"]
+  k0a01a175e059493bb55c42ffe2500d27[color=lightseagreen,label="Output\nCell_Metadata"]
+  15 -> k0a01a175e059493bb55c42ffe2500d27
+  16[label="Manipulate AnnData"]
+  7 -> 16 [label="anndata"]
+  15 -> 16 [label="out_file1"]
+  k074a18d5f11241059b00bb35dca04df7[color=lightseagreen,label="Output\nanndata"]
+  16 -> k074a18d5f11241059b00bb35dca04df7
+  17[label="Batched_Object"]
+  16 -> 17 [label="anndata"]
+  k9b3a5fd20bb8441f8c1ff7a2164ffe0a[color=lightseagreen,label="Output\nBatched_Object"]
+  17 -> k9b3a5fd20bb8441f8c1ff7a2164ffe0a
+  18[label="Inspect AnnData"]
+  17 -> 18 [label="anndata"]
+  k70b56d09986f4fa7837a54ebabc48117[color=lightseagreen,label="Output\nobs-final"]
+  18 -> k70b56d09986f4fa7837a54ebabc48117
+}

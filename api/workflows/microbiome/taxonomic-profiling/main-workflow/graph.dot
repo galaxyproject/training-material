@@ -1,0 +1,32 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nraw-reads"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nmetadata"]
+  2[label="Unzip collection"]
+  0 -> 2 [label="output"]
+  3[label="Kraken2"]
+  0 -> 3 [label="output"]
+  4[label="MetaPhlAn"]
+  2 -> 4 [label="forward"]
+  2 -> 4 [label="reverse"]
+  k9affde3bb159486ebb38c628ac72e7fc[color=lightseagreen,label="Output\nmetaphlan_output"]
+  4 -> k9affde3bb159486ebb38c628ac72e7fc
+  5[label="Krakentools: Convert kraken report file"]
+  3 -> 5 [label="report_output"]
+  kb14415d566e24f7989d6ae0bcd837796[color=lightseagreen,label="Output\nkrakentool_report"]
+  5 -> kb14415d566e24f7989d6ae0bcd837796
+  6[label="Kraken-biom"]
+  3 -> 6 [label="report_output"]
+  1 -> 6 [label="output"]
+  7[label="Pavian"]
+  3 -> 7 [label="report_output"]
+  8[label="Bracken"]
+  3 -> 8 [label="report_output"]
+  9[label="Krona pie chart"]
+  4 -> 9 [label="krona_output_file"]
+  10[label="Krona pie chart"]
+  5 -> 10 [label="output"]
+  11[label="Phinch Visualisation"]
+  6 -> 11 [label="biomOutput"]
+}

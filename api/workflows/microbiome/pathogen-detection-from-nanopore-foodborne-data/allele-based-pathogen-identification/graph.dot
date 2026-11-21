@@ -1,0 +1,83 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\ncollection_of_preprocessed_samples"]
+  1[color=lightgreen,label="ℹ️ Input Parameter\nsamples_profile"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nreference_genome_of_tested_strain"]
+  3[label="Convert compressed file to uncompressed."]
+  2 -> 3 [label="output"]
+  k9d6bde4a718040979ffd6992111a617c[color=lightseagreen,label="Output\ndecompressed_rg_file"]
+  3 -> k9d6bde4a718040979ffd6992111a617c
+  4[label="Map with minimap2"]
+  1 -> 4 [label="output"]
+  0 -> 4 [label="output"]
+  3 -> 4 [label="output1"]
+  k31779c234f26418e94182551e883dbe7[color=lightseagreen,label="Output\nmap_with_minimap2"]
+  4 -> k31779c234f26418e94182551e883dbe7
+  5[label="Clair3"]
+  4 -> 5 [label="alignment_output"]
+  3 -> 5 [label="output1"]
+  k1cf1ee6c4cb745e39c7b88a1b678dd53[color=lightseagreen,label="Output\nclair3_pileup_vcf"]
+  5 -> k1cf1ee6c4cb745e39c7b88a1b678dd53
+  k987f914583ab44f1801ab0d527ecbce8[color=lightseagreen,label="Output\nclair3_full_alignment_vcf"]
+  5 -> k987f914583ab44f1801ab0d527ecbce8
+  kfab82215f59a43b192d737629a1fdb65[color=lightseagreen,label="Output\nclair3_merged_output"]
+  5 -> kfab82215f59a43b192d737629a1fdb65
+  6[label="Samtools depth"]
+  4 -> 6 [label="alignment_output"]
+  7[label="Samtools coverage"]
+  4 -> 7 [label="alignment_output"]
+  8[label="bcftools norm"]
+  5 -> 8 [label="merge_output"]
+  3 -> 8 [label="output1"]
+  k22553aa1f5db4d3787c41164dbb3d2d5[color=lightseagreen,label="Output\nnormalized_vcf_output"]
+  8 -> k22553aa1f5db4d3787c41164dbb3d2d5
+  9[label="Advanced Cut"]
+  6 -> 9 [label="output"]
+  10[label="Remove beginning"]
+  7 -> 10 [label="output"]
+  11[label="SnpSift Filter"]
+  8 -> 11 [label="output_file"]
+  k3e7981ec2205457193eb10c0dd14b288[color=lightseagreen,label="Output\nquality_filtered_vcf_output"]
+  11 -> k3e7981ec2205457193eb10c0dd14b288
+  12[label="Table Compute"]
+  9 -> 12 [label="output"]
+  13[label="Cut"]
+  10 -> 13 [label="out_file1"]
+  14[label="SnpSift Extract Fields"]
+  11 -> 14 [label="output"]
+  k1b0f4f2c471745beb580fe10cba78c35[color=lightseagreen,label="Output\nextracted_fields_from_the_vcf_output"]
+  14 -> k1b0f4f2c471745beb580fe10cba78c35
+  15[label="bcftools consensus"]
+  11 -> 15 [label="output"]
+  3 -> 15 [label="output1"]
+  k49497f3c93324924bcfdcb71788ad2c2[color=lightseagreen,label="Output\nbcftools_consensus"]
+  15 -> k49497f3c93324924bcfdcb71788ad2c2
+  16[label="Select first"]
+  13 -> 16 [label="out_file1"]
+  17[label="Remove beginning"]
+  14 -> 17 [label="output"]
+  18[label="Collapse Collection"]
+  16 -> 18 [label="outfile"]
+  k5ee1c1581a8545ca9abdb30632b3092c[color=lightseagreen,label="Output\nmapping_coverage_percentage_per_sample"]
+  18 -> k5ee1c1581a8545ca9abdb30632b3092c
+  19[label="Count"]
+  17 -> 19 [label="out_file1"]
+  20[label="Advanced Cut"]
+  18 -> 20 [label="output"]
+  21[label="Cut"]
+  19 -> 21 [label="out_file1"]
+  22[label="Paste"]
+  20 -> 22 [label="output"]
+  12 -> 22 [label="table"]
+  k25b7b87b5ef1487f90cc81351a2f81ce[color=lightseagreen,label="Output\nmapping_mean_depth_per_sample"]
+  22 -> k25b7b87b5ef1487f90cc81351a2f81ce
+  23[label="Select first"]
+  21 -> 23 [label="out_file1"]
+  24[label="Collapse Collection"]
+  23 -> 24 [label="outfile"]
+  25[label="Column Regex Find And Replace"]
+  24 -> 25 [label="output"]
+  k2852c4ee24ea4df7b59e54eb6e2f470b[color=lightseagreen,label="Output\nnumber_of_variants_per_sample"]
+  25 -> k2852c4ee24ea4df7b59e54eb6e2f470b
+}

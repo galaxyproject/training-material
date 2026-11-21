@@ -1,0 +1,20 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nExons"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nFeatures"]
+  2[label="bedtools Intersect intervals"]
+  0 -> 2 [label="output"]
+  1 -> 2 [label="output"]
+  3[label="Datamash"]
+  2 -> 3 [label="output"]
+  4[label="Sort"]
+  3 -> 4 [label="out_file"]
+  5[label="Select first"]
+  4 -> 5 [label="outfile"]
+  6[label="Compare two Datasets"]
+  0 -> 6 [label="output"]
+  5 -> 6 [label="outfile"]
+  k565e3d7602304a5e87c19c36ce0b7df8[color=lightseagreen,label="Output\ntop_5_exons"]
+  6 -> k565e3d7602304a5e87c19c36ce0b7df8
+}

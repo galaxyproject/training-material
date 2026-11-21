@@ -1,0 +1,17 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nTrimmed reads mate 1"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nTrimmed reads mate 2"]
+  2[label="Map with BWA-MEM"]
+  0 -> 2 [label="output"]
+  1 -> 2 [label="output"]
+  3[label="BamLeftAlign"]
+  2 -> 3 [label="bam_output"]
+  4[label="Naive Variant Caller NVC"]
+  3 -> 4 [label="output_bam"]
+  5[label="Variant Annotator"]
+  4 -> 5 [label="output_vcf"]
+  6[label="Filter"]
+  5 -> 6 [label="output"]
+}

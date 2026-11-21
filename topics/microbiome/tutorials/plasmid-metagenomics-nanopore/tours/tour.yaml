@@ -1,0 +1,432 @@
+﻿---
+id: nanopore
+name: Nanopore Tour
+description: >-
+  In this tour we will perform an assembly of nanopore data and show some of
+  the possible analysis tools.
+title_default: nanopore
+steps:
+  - title: Nanopore Sequence Analysis
+    content: >-
+      In this tour we will perform an assembly of nanopore data and show some
+      of the possible analysis tools.
+    backdrop: true
+  - title: Nanopore Sequence Analysis
+    content: >-
+      In this tutorial we use metagenomic nanopore data, but similar pipelines
+      can be used for Illumina data.<br><br>
+      Nanopore sequencing has serveral properties that make it more suited for
+      our purposes: <ol>
+        <li>Long-read sequencing technology offers simplified and less
+        ambiguous genome assembly</li>
+        <li>Long-read sequencing gives the ability to span repetitive genomic
+        regions</li>
+        <li>Long-read sequencing makes it possible to identify large
+        structural variation</li>
+      </ol>
+    backdrop: true
+  - title: Understanding our input data
+    content: >-
+      As training data we use a sing plasmid from a dataset
+      (,created by Li, Ruichao et al.) used for evaluation of the efficiency of
+      MDR plasmid sequencing by MinION platform. In the experiment 12 MDR
+      plasmid-bearing strains were selected for plasmid extraction, including
+      E. coli, S. typhimurium, V. parahaemolyticus, and K. pneumoniae.
+      Overnight cultures (100 mL) were harvested and subjected to plasmid
+      extraction using the QIAGEN Plasmid Midi Kit. The extracted plasmids
+      were dissolved in ultrapure distilled water, and concentrations were
+      measured by Qubit 3.0 Fluorometer with a dsDNA BR Assay Kit. The
+      plasmids were stored in –20°C until library preparation.<br><br>
+      Library preparation was performed using the Rapid Barcoding Sequencing
+      Kit (SQK-RBK001) according to the standard protocol provided by the
+      manufacturer (Oxford Nanopore). Briefly, 7.5-μL plasmid templates were
+      combined with a 2.5-μL Fragmentation Mix Barcode (1 barcode for each
+      sample). The mixtures were incubated at 30C for 1 minute and at 75C for
+      1 minute. The barcoded libraries were pooled together with designated
+      ratios in 10 μL; 1 μL of RAD (Rapid 1D Adapter) was added to the pooled
+      library and mixed gently; 0.2 μL of Blunt/TA Ligase Master Mix was added
+      and incubated for 5 minutes at room temperature. The constructed library
+      was loaded into the Flow Cell R9.4 (FLO-MIN106) on a MinION device and
+      run with the SQK-RBK001_plus_Basecaller script of MinKNOW1.5.12 software.
+      The run was stopped after 8 hours, and the flow cell was washed by a Wash
+      Kit (EXP-WSH002) and stored in 4°C for later use.<br><br>
+      To obtain high-quality short read data, paired-end (2 × 150 bp) libraries
+      were prepared by the focused acoustic shearing method with the NEBNext
+      Ultra DNA Library Prep Kit and the Multiplex Oligos Kit for Illumina
+      (NEB). The libraries were quantified by employing quantitative PCR with
+      P5-P7 primers, and they were pooled together and sequenced on the NextSeq
+      500 platform according to the manufacturer’s protocol (Illumina).<br><br>
+      Although a local basecaller script was used during the run, there was
+      still a small amount of reads that were not basecalled due to the
+      generation of raw data in a rapid mode. Albacore basecalling software
+      (v1.0.3) was used to generate fast5 files harboring the 1D DNA sequence
+      from fast5 files with only raw data in the tmp folder. Also, the
+      read_fast5_basecaller.py script in Albacore was used to de-multiplex the
+      12 samples from basecalled fast5 files (except the files in fail folder)
+      based on the 12 barcodes in SQK-RBK001. The Poretools toolkit was
+      utilized to extract all the DNA sequences from fast5 to fasta format
+      among the 12 samples, respectively (Poretools, RRID:SCR_015879).
+    backdrop: true
+  - title: Dataset details
+    content: >-
+      Because of the large size of the original datasets (1.15 GB) you are
+      given 1 of the 12 plasmids files.<br><br>
+      This sequence file is 51 MB of nanopore sequences. The 10026 reads
+      found in this file contain 49190798 nucleotides. As mentioned before
+      nanopore sequences are long reads and this is confirmed by a mean read
+      length of 4906.3. Download the .fasta file from
+      <a href="https://zenodo.org/record/1443246#.W9GTBhCxW-E">zenodo</a>
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this
+      button and then "Create New". Give it a name.
+    placement: left
+    backdrop: false
+  - title: Import sample data
+    element: >-
+      #current-history-panel .empty-message.infomessagesmall
+      a[href$="javascript:void(0)"]
+    content: ''
+    placement: left
+  - title: Import Sample Data
+    element: '#regular .upload-view-default .upload-box input'
+    content: >-
+      The data for this course may be available from a shared library in Galaxy
+      (ask your instructor). If this is not the case, you can upload it
+      yourself.
+    placement: right
+  - title: Import Sample Data
+    element: '#btn-local'
+    content: ''
+    placement: right
+  - title: Import Sample Data
+    element: '#btn-start'
+    content: ''
+    placement: left
+  - title: Import Sample Data
+    element: '#btn-close'
+    content: ''
+    placement: left
+  - title: NanoPlot to explore data
+    content: >-
+      The first thing we want to do is to understand the input data we use.
+      This is done using the <b>NanoPlot<b> command, which requires the
+      Nanopore sequences as input. This command will create several plots,
+      statisical report and a HTML report page.
+    backdrop: true
+  - title: NanoPlot to explore data
+    element: '#tool-search-query'
+    content: Search for NanoPlot tool
+    placement: right
+    textinsert: nanoplot
+  - title: NanoPlot to explore data
+    element: '#tool-search'
+    content: Click on the "NanoPlot" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/galaxy/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fnanoplot%2Fnanoplot%2F1.13.0"]
+        .tool-old-link
+  - title: NanoPlot to explore data
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“Type of the file(s) to work on” to "fasta"</li>
+        <li>“files” to the "RB01.fasta" you just uploaded</li>
+        <li>Leave all other parameters to the default settings</li>
+      </ul>
+    position: left
+  - title: NanoPlot to explore data
+    element: >-
+      #dataset-a22a75f0ac628260 .primary-actions
+      a[href$="/galaxy/datasets/a22a75f0ac628260/display/?preview=True"]
+      .fa.fa-eye
+    content: >-
+      The Histogram Read Length gives an overview of the read distribution of
+      the input file.
+    placement: left
+  - title: Pairwise alignment using Minimap2
+    content: >-
+      In this experiment we used Nanopore sequencing, this means sequencing
+      results in long reads with overlap. To find this overlaps Minimap2 is
+      used. Minimap2 is a versatile sequence alignment program that aligns DNA
+      or mRNA sequences against a large reference database. Typical use cases
+      include: (1) mapping PacBio or Oxford Nanopore genomic reads to the human
+      genome; (2) finding overlaps between long reads with error rate up to
+      ~15%; (3) splice-aware alignment of PacBio Iso-Seq or Nanopore cDNA or
+      Direct RNA reads against a reference genome; (4) aligning Illumina
+      single- or paired-end reads; (5) assembly-to-assembly alignment; (6)
+      full-genome alignment between two closely related species with divergence
+      below ~15%.<br><br>
+      For ~10kb noisy reads sequences, minimap2 is tens of times faster than
+      mainstream long-read mappers such as BLASR, BWA-MEM, NGMLR and GMAP. It
+      is more accurate on simulated long reads and produces biologically
+      meaningful alignment ready for downstream analyses. For >100bp Illumina
+      short reads, minimap2 is three times as fast as BWA-MEM and Bowtie2, and
+      as accurate on simulated data. Detailed evaluations are available from
+      the minimap2 paper or the preprint.
+    backdrop: true
+  - title: Pairwise alignment using Minimap2
+    element: '#tool-search-query'
+    content: Search for the Minimap2 tool
+    placement: right
+    textinsert: minimap2
+  - title: Pairwise alignment using Minimap2
+    element: '#tool-search'
+    content: Click on the "Minimap2" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/galaxy/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fminimap2%2Fminimap2%2F2.12"]
+        .tool-old-link
+  - title: Pairwise alignment using Minimap2
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“Will you select a reference genome from your history or use a
+        built-in index?” to "Use a genome from history and build index"</li>
+        <li>“Use the following dataset as the reference sequence” to the
+        "RB01.fasta" you just uploaded</li>
+        <li>“Select analysis mode (sets default)” to "Oxford Nanopore
+        all-vs--all overlap mapping"</li>
+        <li>“Select an output format” to "paf"</li>
+        <li>Leave all other parameters to the default settings</li>
+      </ul>
+    position: left
+  - title: Pairwise alignment using Minimap2
+    content: >-
+      This step maps the Nanopore sequence reads against itself to find
+      overlaps. The result is a paf file. PAF is a text format describing
+      the approximate mapping positions between two set of sequences.
+    backdrop: true
+  - title: Ultrafast de novo assembly using Miniasm
+    content: >-
+      The mapped reads are ready to be assembled with Miniasm. Miniasm is a
+      very fast OLC-based de novo assembler for noisy long reads. It takes
+      all-vs-all read self-mappings (typically by minimap) as input and outputs
+      an assembly graph in the GFA format. Different from mainstream
+      assemblers, miniasm does not have a consensus step. It simply
+      concatenates pieces of read sequences to generate the final unitig
+      sequences. Thus the per-base error rate is similar to the raw input
+      reads.
+    backdrop: true
+  - title: Ultrafast de novo assembly using Miniasm
+    element: '#tool-search-query'
+    content: Search for the Miniasm tool
+    placement: right
+    textinsert: miniasm
+  - title: Ultrafast de novo assembly using Miniasm
+    element: '#tool-search'
+    content: Click on the "miniasm" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/galaxy/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Ferasmus-medical-center%2Fminiasm%2Fminiasm%2F0.2.0"]
+        .tool-old-link
+  - title: Ultrafast de novo assembly using Miniasm
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“Sequence Reads” parameter to the "RB01.fasta" you uploaded</li>
+        <li>“PAF file” to the "PAF file" created by the Minimap2 tool</li>
+        <li>Leave all other parameters to the default settings</li>
+      </ul>
+    position: left
+  - title: Remapping using Minimap2
+    content: >-
+      The Assembly graph created can be used for mapping again with minimap2,
+      but first the graph should be transformed to FASTA format
+    backdrop: true
+  - title: Remapping using Minimap2
+    element: '#tool-search-query'
+    content: Search for the GFA to Fasta tool
+    placement: right
+    textinsert: gfa
+  - title: GFA to Fasta
+    element: '#tool-search'
+    content: Click on the "GFA to fa" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/galaxy/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Ferasmus-medical-center%2Fgfa_to_fa%2Fgfa_to_fa%2F0.1.0"]
+        .tool-old-link
+  - title: Remapping using Minimap2
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“Input GFA file” to the "Assembly Graph" created by the
+        Miniasm tool</li>
+      </ul>
+    position: left
+  - title: Remapping using Minimap2
+    element: '#tool-search-query'
+    content: Search for the Minimap2 tool
+    placement: right
+    textinsert: minimap2
+  - title: Remapping using Minimap2
+    element: '#tool-search'
+    content: Click on the "Minimap2" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/galaxy/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fminimap2%2Fminimap2%2F2.12"]
+        .tool-old-link
+  - title: Remapping using Minimap2
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“Will you select a reference genome from your history or use a
+        built-in index?” to "Use a genome from history and build index"</li>
+        <li>“Use the following dataset as the reference sequence” to the
+        "FASTA file" created by the GFA to Fasta tool</li>
+        <li>“Select fastq dataset” parameter to the "RB01.fasta" you
+        uploaded</li>
+        <li>“Select an output format” to "paf"</li>
+        <li>Leave all other parameters to the default settings</li>
+      </ul>
+    position: left
+  - title: Ultrafast consensus module using racon
+    content: >-
+      The mapped reads can be improved even more using Racon to find a
+      consensus sequence. Racon is intended as a standalone consensus module to
+      correct raw contigs generated by rapid assembly methods which do not
+      include a consensus step. The goal of Racon is to generate genomic
+      consensus which is of similar or better quality compared to the output
+      generated by assembly methods which employ both error correction and
+      consensus steps, while providing a speedup of several times compared
+      to those methods. It supports data produced by both Pacific Biosciences
+      and Oxford Nanopore Technologies.
+    backdrop: true
+  - title: Ultrafast consensus module using racon
+    element: '#tool-search-query'
+    content: Search for the Racon tool
+    placement: right
+    textinsert: racon
+  - title: Ultrafast consensus module using racon
+    element: '#tool-search'
+    content: Click on the "Racon" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/galaxy/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fracon%2Fracon%2F1.3.1.1"]
+        .tool-old-link
+  - title: Ultrafast consensus module using racon
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“Sequences” parameter to the "RB01.fasta" you uploaded</li>
+        <li>“Overlaps” to the latest "PAF file" created by the Minimap2
+        tool</li>
+        <li>Leave all other parameters to the default settings</li>
+      </ul>
+    position: left
+  - title: Prediction of plasmid sequences and classes using PlasFlow
+    content: >-
+      To determine whether the contigs are chomosomal or plasmid DNA PlasFlow
+      can be used. Furthermore, it assigns the contigs to a bacterial class.
+      PlasFlow is a set of scripts used for prediction of plasmid sequences in
+      metagenomic contigs. It relies on the neural network models trained on
+      full genome and plasmid sequences and is able to differentiate between
+      plasmids and chromosomes with accuracy reaching 96%. It outperforms other
+      available solutions for plasmids recovery from metagenomes and
+      incorporates the thresholding which allows for exclusion of incertain
+      predictions.
+    backdrop: true
+  - title: Prediction of plasmid sequences and classes using PlasFlow
+    element: '#tool-search-query'
+    content: Search for the PlasFlow tool
+    placement: right
+    textinsert: plasflow
+  - title: Prediction of plasmid sequences and classes using PlasFlow
+    element: '#tool-search'
+    content: Click on the "PlasFlow" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/galaxy/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fplasflow%2FPlasFlow%2F1.0"]
+        .tool-old-link
+  - title: Prediction of plasmid sequences and classes using PlasFlow
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“Sequence Reads” to the "contig file" created by the Racon tool</li>
+        <li>Leave all other parameters to the default settings</li>
+      </ul>
+    position: left
+  - title: Visualising de novo assembly graphs using Bandage
+    content: >-
+      To determine whether the contigs are chomosomal or plasmid DNA Bandage
+      can give a clear view of the assembly.
+      Bandage (a Bioinformatics Application for Navigating De novo Assembly
+      Graphs Easily), is a program that creates visualisations of assembly
+      graphs. Sequence assembler programs (such as Miniasm, Velvet, SPAdes,
+      Trinity and MEGAHIT) carry out assembly by building a graph, from which
+      contigs are generated. By granting easy access to these assembly graphs,
+      Bandage allows users to better understand, troubleshoot and improve
+      their assemblies.
+    backdrop: true
+  - title: Visualising de novo assembly graphs using Bandage
+    element: '#tool-search-query'
+    content: Search for the Bandage Image tool
+    placement: right
+    textinsert: bandage image
+  - title: Visualising de novo assembly graphs using Bandage
+    element: '#tool-search'
+    content: Click on the "Bandage" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/galaxy/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbandage%2Fbandage_image%2F0.8.1%2Bgalaxy0"]
+        .tool-old-link
+  - title: Visualising de novo assembly graphs using Bandage
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“Graphical Fragment Assembly” to the "Assembly graph" created
+        by the Miniasm tool</li>
+        <li>Leave all other parameters to the default settings</li>
+      </ul>
+    position: left
+  - title: Scans genome contigs for antimicrobial resistance genes
+    content: >-
+      To determine whether the contigs contain antimirocbial resistance genes
+      (AMR) staramr can be used. Staramr (*AMR) scans bacterial genome contigs
+      against both the ResFinder and PointFinder databases (used by the
+      ResFinder webservice) and compiles a summary report of detected
+      antimicrobial resistance genes.
+    backdrop: true
+  - title: Scans genome contigs for antimicrobial resistance genes
+    element: '#tool-search-query'
+    content: Search for the Staramr tool
+    placement: right
+    textinsert: staramr
+  - title: Scans genome contigs for antimicrobial resistance genes
+    element: '#tool-search'
+    content: Click on the "Staramr" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/galaxy/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fnml%2Fstaramr%2Fstaramr_search%2F0.2.2"]
+        .tool-old-link
+  - title: Scans genome contigs for antimicrobial resistance genes
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>“genomes” to the "contig file" created by the Racon tool</li>
+        <li>Leave all other parameters to the default settings</li>
+      </ul>
+    position: left
+  - title: Conclusion
+    content: >-
+      You have now seen how to perform an assembly on Nanopore sequencing data,
+      with some extra analysis tools.
+      <br><b>Key points:</b><ul>
+        <li>Minimap2, Miniasm and Racon can be used for creating a fast
+        assembly of Nanopore sequences</li>
+        <li>Nanopore sequencing is useful for reconstruction of genomes</li>
+        <li>Antimicriobal resistance genes are detectable after fast
+        assembly</li>
+      </ul>
+backdrop: true

@@ -1,0 +1,234 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Visualization of RNA-Seq results with Volcano Plot",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0003-4847-8436",
+            "name": "Maria Doyle"
+        },
+        {
+            "class": "Person",
+            "identifier": "0000-0001-7649-2388",
+            "name": "Armin Dadras"
+        },
+        {
+            "class": "Person",
+            "identifier": "0000-0001-9760-8992",
+            "name": "Helena Rasche"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "Visualization Of RNA-Seq Results With Volcano Plot",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Differentially expressed results file (genes in rows, and 4 required columns: raw P values, adjusted P values (FDR), log fold change and gene labels)",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Differentially expressed results file (genes in rows, and 4 required columns: raw P values, adjusted P values (FDR), log fold change and gene labels)",
+                    "name": "DE results"
+                }
+            ],
+            "label": "DE results",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 195.42857551574707
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "3adb32da-3a59-4e01-bbf1-f8501e8f4af4",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Genes of interest file (list of genes to be plotted in volcano)",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Genes of interest file (list of genes to be plotted in volcano)",
+                    "name": "Volcano genes"
+                }
+            ],
+            "label": "Volcano genes",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 3.1428451538085938,
+                "top": 352
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "f49407c4-5995-446c-b28f-c39bbee8c6d9",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.7",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Volcano plot highlighting significant",
+            "name": "Volcano Plot",
+            "outputs": [
+                {
+                    "name": "plot",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 273.1428451538086,
+                "top": 0
+            },
+            "post_job_actions": {
+                "HideDatasetActionplot": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "plot"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.7",
+            "tool_shed_repository": {
+                "changeset_revision": "5e08a1e22dbc",
+                "name": "volcanoplot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"fdr_col\": \"8\", \"header\": \"auto\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"label_col\": \"2\", \"labels\": {\"label_select\": \"none\", \"__current_case__\": 2}, \"lfc_col\": \"4\", \"lfc_thresh\": \"0.58\", \"out_options\": {\"rscript_out\": false}, \"plot_options\": {\"boxes\": false, \"title\": \"\", \"xlab\": \"\", \"ylab\": \"\", \"xmin\": null, \"xmax\": null, \"ymax\": null, \"legend\": \"\", \"legend_labs\": \"Down,Not Sig,Up\"}, \"pval_col\": \"7\", \"shape_col\": null, \"shape_or_facet\": null, \"signif_thresh\": \"0.01\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.7",
+            "type": "tool",
+            "uuid": "c8ac133c-ed9b-42a1-82a2-ad1dbe6633ef",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.7",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Volcano plot labelling top 10",
+            "name": "Volcano Plot",
+            "outputs": [
+                {
+                    "name": "plot",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 273.1428451538086,
+                "top": 170
+            },
+            "post_job_actions": {
+                "HideDatasetActionplot": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "plot"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.7",
+            "tool_shed_repository": {
+                "changeset_revision": "5e08a1e22dbc",
+                "name": "volcanoplot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"fdr_col\": \"8\", \"header\": \"auto\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"label_col\": \"2\", \"labels\": {\"label_select\": \"signif\", \"__current_case__\": 0, \"top_num\": \"10\"}, \"lfc_col\": \"4\", \"lfc_thresh\": \"0.58\", \"out_options\": {\"rscript_out\": false}, \"plot_options\": {\"boxes\": false, \"title\": \"\", \"xlab\": \"\", \"ylab\": \"\", \"xmin\": null, \"xmax\": null, \"ymax\": null, \"legend\": \"\", \"legend_labs\": \"Down,Not Sig,Up\"}, \"pval_col\": \"7\", \"shape_col\": null, \"shape_or_facet\": null, \"signif_thresh\": \"0.01\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.7",
+            "type": "tool",
+            "uuid": "843e6b04-6960-4382-992f-dc467bf254eb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.7",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "labels|label_file": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Volcano Plot",
+                    "name": "labels"
+                }
+            ],
+            "label": "Volcano plot labelling genes of interest",
+            "name": "Volcano Plot",
+            "outputs": [
+                {
+                    "name": "plot",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 278.1428451538086,
+                "top": 317
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.7",
+            "tool_shed_repository": {
+                "changeset_revision": "5e08a1e22dbc",
+                "name": "volcanoplot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"fdr_col\": \"8\", \"header\": \"auto\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"label_col\": \"2\", \"labels\": {\"label_select\": \"file\", \"__current_case__\": 1, \"label_file\": {\"__class__\": \"ConnectedValue\"}}, \"lfc_col\": \"4\", \"lfc_thresh\": \"0.58\", \"out_options\": {\"rscript_out\": false}, \"plot_options\": {\"boxes\": true, \"title\": \"\", \"xlab\": \"\", \"ylab\": \"\", \"xmin\": null, \"xmax\": null, \"ymax\": null, \"legend\": \"\", \"legend_labs\": \"Down,Not Sig,Up\"}, \"pval_col\": \"7\", \"shape_col\": null, \"shape_or_facet\": null, \"signif_thresh\": \"0.01\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.7",
+            "type": "tool",
+            "uuid": "01bf8268-3e8a-4f99-b03c-05c5656ac96e",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "volcano_pdf",
+                    "output_name": "plot",
+                    "uuid": "16aef53e-11fd-4def-a7fb-6cf9a98f0902"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "transcriptomics",
+        "visualization"
+    ],
+    "uuid": "c1ad9815-7312-4a68-9f9e-c911e9e89251",
+    "version": 11
+}

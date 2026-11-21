@@ -1,0 +1,25 @@
+- doc: Test heatmap2 workflow
+  job:
+    DE results:
+      class: File
+      location: https://zenodo.org/record/2529926/files/limma-voom_luminalpregnant-luminallactate
+      filetype: tabular
+    normalized counts:
+      class: File
+      location: https://zenodo.org/record/2528905/files/limma-voom_normalised_counts
+      filetype: tabular
+    heatmap genes:
+      class: File
+      location: https://zenodo.org/record/2528905/files/heatmap_genes
+      filetype: tabular
+  outputs:
+    heatmap custom genes:
+      asserts:
+        has_size:
+          value: 21428
+          delta: 2000
+    heatmap top 20 genes:
+      asserts:
+        has_size:
+          value: 20295
+          delta: 2000

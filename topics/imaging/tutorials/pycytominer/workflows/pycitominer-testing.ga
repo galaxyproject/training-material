@@ -1,0 +1,289 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Workflow to process a table readouts trough the main five pycitominer steps",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0003-2104-9519",
+            "name": "Riccardo Massei"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "pycitominer-training",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Input the table with the readouts to process",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Input the table with the readouts to process",
+                    "name": "Input table readouts"
+                }
+            ],
+            "label": "Input table readouts",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 0
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "e81b8690-8dda-48af-bf0b-01bc37683de6",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Add a file with the plate metadata\n",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Add a file with the plate metadata\n",
+                    "name": "Input plate metadata"
+                }
+            ],
+            "label": "Input plate metadata",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 300,
+                "top": 170
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "5ce9e918-a03f-40d8-bb83-4564904b359d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/pycytominer_aggregate/pycytominer_aggregate/1.6.1+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "profiles": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Aggregate readouts",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 300,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/pycytominer_aggregate/pycytominer_aggregate/1.6.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "4c98cf453fd1",
+                "name": "pycytominer_aggregate",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"operation\": \"mean\", \"profiles\": {\"__class__\": \"ConnectedValue\"}, \"strata\": [\"1\", \"2\"], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.6.1+galaxy0",
+            "type": "tool",
+            "uuid": "c4fe41e6-f4e9-41a9-8086-f8a51e6b1d3e",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/pycytominer_annotate/pycytominer_annotate/1.6.1+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "platemap": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "profiles": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Annotate readouts with metadata",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 600,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/pycytominer_annotate/pycytominer_annotate/1.6.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2403cfc019eb",
+                "name": "pycytominer_annotate",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"platemap\": {\"__class__\": \"ConnectedValue\"}, \"platemap_joiner\": \"1\", \"profiles\": {\"__class__\": \"ConnectedValue\"}, \"profiles_joiner\": \"2\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.6.1+galaxy0",
+            "type": "tool",
+            "uuid": "b6ecc904-8904-46df-99fe-c115f3b11328",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/pycytominer_normalize/pycytominer_normalize/1.6.1+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "profiles": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Normalize readouts",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 900,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/pycytominer_normalize/pycytominer_normalize/1.6.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "f42a3b502790",
+                "name": "pycytominer_normalize",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"column\": \"1\", \"method\": \"standardize\", \"profiles\": {\"__class__\": \"ConnectedValue\"}, \"treatment\": \"DMSO\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.6.1+galaxy0",
+            "type": "tool",
+            "uuid": "6dd18419-0ad1-4f2a-9a5d-5bf0036592c2",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/pycytominer_feature_select/pycytominer_feature_select/1.6.1+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "profiles": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Select informative features",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1200,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/pycytominer_feature_select/pycytominer_feature_select/1.6.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "a2c40ccbfe6c",
+                "name": "pycytominer_feature_select",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"operation\": [\"variance_threshold\", \"blocklist\"], \"profiles\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.6.1+galaxy0",
+            "type": "tool",
+            "uuid": "b8ae7710-4fa8-41ee-af2e-e5907fba12f1",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/pycytominer_consensus/pycytominer_consensus/1.6.1+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "profiles": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Compute consensus profiles",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1500,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/pycytominer_consensus/pycytominer_consensus/1.6.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "139977ffa202",
+                "name": "pycytominer_consensus",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"operation\": \"mean\", \"profiles\": {\"__class__\": \"ConnectedValue\"}, \"replicate_columns\": [\"2\", \"1\", \"3\"], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.6.1+galaxy0",
+            "type": "tool",
+            "uuid": "10eb7579-d198-4ea2-929b-6a7b7283e4c1",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "output",
+                    "output_name": "output",
+                    "uuid": "e3a16189-772b-40c3-8399-de397861347a"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "imaging"
+    ],
+    "uuid": "b4659556-7f07-4533-8bb4-03a0bed43f68",
+    "version": 2
+}

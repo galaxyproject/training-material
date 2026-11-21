@@ -1,0 +1,27 @@
+- doc: Test the Multimodal Learner workflow for HANCOCK recurrence prediction
+  job:
+    hancock_train:
+      location: https://zenodo.org/records/18603388/files/HANCOCK_train_split.csv
+      class: File
+      filetype: csv
+    hancock_test:
+      location: https://zenodo.org/records/18603388/files/HANCOCK_test_split.csv
+      class: File
+      filetype: csv
+    cd3_cd8_images:
+      location: https://zenodo.org/records/18603388/files/CD3_CD8_images.zip
+      class: File
+      filetype: zip
+  outputs:
+    analysis_report:
+      asserts:
+        has_text:
+          text: "Multimodal Learner"
+    metrics_json:
+      asserts:
+        has_text:
+          text: "\"roc_auc\""
+    training_config:
+      asserts:
+        has_text:
+          text: "target"

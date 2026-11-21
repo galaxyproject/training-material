@@ -1,0 +1,468 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "This Workflow transcribes a video or audio with multiple speakers. After transcription, it allocates the names of the speakers and groups and cleans passages from the two main speakers for further analysis.",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0001-9536-5587",
+            "name": "Daniela Schneider"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "Transcription Speech to Text (imported from uploaded file)",
+    "readme": "# General\n\nThis Workflow transcribes a video or audio with multiple speakers. After transcription, it allocates the names of the speakers and groups and cleans passages from the teo main speakers for further analysis.\n\n# Upload\nThis workflow uses a video or audio with multiple speakers as an input.\n\n# Transcription\nWhiser with speaker diarization transcribes the audio or video into machine-readable text. The diarization allows to attribute passages to different speakers. The numbering seems random and not according to first appearance. The model used here is the second largest (medium) but outputs may vary with different audio qualities and languages.\n\n# Allocation of Speakers\nThis step uses the tool `Replace parts of text` to identify the automatically allocated speakers for clear identification. This step happens four times, for all four distinguised speakers.\n\n# Text passages only from selected speakers\n`Search in textfiles` allows selecting only passages from the two main speakers, Kennedy and Nixon.\n\n# Clean Text passages from main speakers\nTo continue working with the texts from the two main speakers, it is no longer necessary to have the prefix, who spoke the words, as the file name indicates this already. Hence, `Replace parts of text` allows replacing the name with no content, effectively deleting the now unnecessary speaker attribution for both texts. The result are two cleaned texts, one containing all lines allocated to Nixon and the other with those passages allocated to Kennedy but without having each line begin with their names. those cleaned text are the main workflow outputs.\n\n# Word cloud\nFor a quick glance, at what speech focuses on what, you can visualise both files in a wordcloud. An additional file, an English stopword list, deletes filler words in the word cloud, leaving only meaningful content. You can adapt this to your needs.\n",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Upload the video or audio file you want to transcribe.",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Upload the video or audio file you want to transcribe.",
+                    "name": "Video or Audio File"
+                }
+            ],
+            "label": "Video or Audio File",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 0.0
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "8c853f0f-013f-42f8-9687-c4eaf8340b86",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Transcribe your file to create text from the video or audio that you can continue analysing.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/whisperx/whisperx/3.4.2+galaxy1",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "infile": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Speech to Text with Diarization",
+            "outputs": [
+                {
+                    "name": "output_txt",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 220,
+                "top": 0.0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/whisperx/whisperx/3.4.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "01b0fcc50e74",
+                "name": "whisperx",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"language\": \"en\", \"model\": \"medium\", \"output_format\": \"txt\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "3.4.2+galaxy1",
+            "type": "tool",
+            "uuid": "7a60caff-e0be-4ae5-84c3-8a2c38773f66",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Rename the auto-given name SPEAKER_03 to Moderator.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy2",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "infile": {
+                    "id": 1,
+                    "output_name": "output_txt"
+                }
+            },
+            "inputs": [],
+            "label": "Allocate Moderator",
+            "name": "Replace",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 440,
+                "top": 0.0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c41d78ae5fee",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \"SPEAKER_03\", \"replace_pattern\": \"Moderator\", \"is_regex\": false, \"global\": false, \"caseinsensitive\": false, \"wholewords\": false, \"skip_first_line\": false, \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy2",
+            "type": "tool",
+            "uuid": "a959c4ac-94cd-4025-b5d3-746b7b3f64db",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "Rename the auto-given name SPEAKER_00 to Kennedy.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy2",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "infile": {
+                    "id": 2,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Allocate Kennedy",
+            "name": "Replace",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 660,
+                "top": 0.0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c41d78ae5fee",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \"SPEAKER_00\", \"replace_pattern\": \"Kennedy\", \"is_regex\": false, \"global\": false, \"caseinsensitive\": false, \"wholewords\": false, \"skip_first_line\": false, \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy2",
+            "type": "tool",
+            "uuid": "5af7bc18-1c8e-480e-b7f4-9266107143bc",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "Rename the auto-given name SPEAKER_01 to Nixon.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy2",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "infile": {
+                    "id": 3,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Allocate Nixon",
+            "name": "Replace",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 880,
+                "top": 0.0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c41d78ae5fee",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \"SPEAKER_01\", \"replace_pattern\": \"Nixon\", \"is_regex\": false, \"global\": false, \"caseinsensitive\": false, \"wholewords\": false, \"skip_first_line\": false, \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy2",
+            "type": "tool",
+            "uuid": "ab5eb512-780e-4408-b46b-147ce4fee186",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "Rename the auto-given name SPEAKER_02 to Fleming, the name of the journalist.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy2",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "infile": {
+                    "id": 4,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Allocate Journalist",
+            "name": "Replace",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1100,
+                "top": 0.0
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "Transcribed Allocated"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c41d78ae5fee",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \"SPEAKER_02\", \"replace_pattern\": \"Fleming\", \"is_regex\": false, \"global\": false, \"caseinsensitive\": false, \"wholewords\": false, \"skip_first_line\": false, \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy2",
+            "type": "tool",
+            "uuid": "4177cecc-4d36-4040-b730-1c2f7ad4789c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "This step selects only those lines spoken by Nixon.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy2",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "infile": {
+                    "id": 5,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Extract Passages spoken by Nixon",
+            "name": "Search in textfiles",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1320,
+                "top": 0.0
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Selecting_Nixon"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c41d78ae5fee",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"case_sensitive\": \"-i\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"color\": \"NOCOLOR\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"\", \"lines_after\": \"0\", \"lines_before\": \"0\", \"regex_type\": \"-P\", \"url_paste\": \"\\\\[Nixon\\\\]\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy2",
+            "type": "tool",
+            "uuid": "52a5f673-b09d-46d0-8483-2f75a2629f34",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "This step selects only those lines spoken by Kennedy.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy2",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "infile": {
+                    "id": 5,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Extract Passages spoken by Kennedy",
+            "name": "Search in textfiles",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1322.5796950526978,
+                "top": 154.50765481280482
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Selecting Kennedy"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.5+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c41d78ae5fee",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"case_sensitive\": \"-i\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"color\": \"NOCOLOR\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"\", \"lines_after\": \"0\", \"lines_before\": \"0\", \"regex_type\": \"-P\", \"url_paste\": \"\\\\[Kennedy\\\\]\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy2",
+            "type": "tool",
+            "uuid": "3d4d47af-319e-4b83-8af0-eb048953b9d2",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "This step deletes the speaker information to generate a cleaned corpus for further analysis.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy2",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "infile": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Delete Speaker Name for Nixon",
+            "name": "Replace",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1540,
+                "top": 0.0
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "Nixon-transcribed-cleaned"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c41d78ae5fee",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \"[Nixon]: \", \"replace_pattern\": null, \"is_regex\": false, \"global\": false, \"caseinsensitive\": false, \"wholewords\": false, \"skip_first_line\": false, \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy2",
+            "type": "tool",
+            "uuid": "2f84463b-7e15-4288-b130-d37fb645fc36",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Nixon-transcribed-cleaned",
+                    "output_name": "outfile",
+                    "uuid": "7c0ead7c-a704-4bc8-babf-b3213bbb3273"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "This step deletes the speaker information to generate a cleaned corpus for further analysis.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy2",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "infile": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Delete Speaker Name for Kennedy",
+            "name": "Replace",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1544.3099833142364,
+                "top": 193.3183312060311
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "Kennedy-transcribed-cleaned"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.5+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "c41d78ae5fee",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \"[Kennedy]: \", \"replace_pattern\": null, \"is_regex\": false, \"global\": false, \"caseinsensitive\": false, \"wholewords\": false, \"skip_first_line\": false, \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "9.5+galaxy2",
+            "type": "tool",
+            "uuid": "634aaa81-8779-4f0b-95f5-99152aef4e8b",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Kennedy-transcribed-cleaned",
+                    "output_name": "outfile",
+                    "uuid": "5f9b4108-c084-4099-967a-c00e6ccfbf5c"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "whisper",
+        "transcription",
+        "audio",
+        "video"
+    ],
+    "uuid": "5d015eda-b1df-45a2-a30d-e2e04be1d1ba",
+    "version": 0
+}

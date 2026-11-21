@@ -1,0 +1,939 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "Clustering in Machine Learning",
+  "tags":[
+    "statistics",
+    "clustering",
+    "ml"
+  ],
+  "format-version": "0.1",
+  "name": "Clustering in Machine Learning",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "iris"
+        }
+      ],
+      "label": "iris",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 200
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"iris\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "8ea6762f-5566-4e0d-85f2-f6ff2db47c1b",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "circles"
+        }
+      ],
+      "label": "circles",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 320
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"circles\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "3eb71a88-7eab-4f3c-9956-9a1cf50c4dff",
+      "workflow_outputs": []
+    },
+    "10": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_numeric_clustering/sklearn_numeric_clustering/1.0.8.1",
+      "errors": null,
+      "id": 10,
+      "input_connections": {
+        "input_types|infile": {
+          "id": 2,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Numeric Clustering",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 420,
+        "top": 1040
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_numeric_clustering/sklearn_numeric_clustering/1.0.8.1",
+      "tool_shed_repository": {
+        "changeset_revision": "1dd433d2c92c",
+        "name": "sklearn_numeric_clustering",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"input_types\": \"{\\\"__current_case__\\\": 1, \\\"algorithm_options\\\": {\\\"__current_case__\\\": 1, \\\"options\\\": {\\\"algorithm\\\": \\\"auto\\\", \\\"eps\\\": \\\"0.3\\\", \\\"leaf_size\\\": \\\"30\\\", \\\"metric\\\": \\\"euclidean\\\", \\\"min_samples\\\": \\\"4\\\"}, \\\"selected_algorithm\\\": \\\"DBSCAN\\\"}, \\\"column_selector_options\\\": {\\\"__current_case__\\\": 4, \\\"selected_column_selector_option\\\": \\\"all_columns\\\"}, \\\"header\\\": \\\"true\\\", \\\"infile\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"selected_input_type\\\": \\\"tabular\\\"}\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": null}",
+      "tool_version": "1.0.8.1",
+      "type": "tool",
+      "uuid": "fbaf39ad-cf3a-40a0-ad65-5eda71381360",
+      "workflow_outputs": []
+    },
+    "11": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_numeric_clustering/sklearn_numeric_clustering/1.0.8.1",
+      "errors": null,
+      "id": 11,
+      "input_connections": {
+        "input_types|infile": {
+          "id": 2,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Numeric Clustering",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 420,
+        "top": 1160
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_numeric_clustering/sklearn_numeric_clustering/1.0.8.1",
+      "tool_shed_repository": {
+        "changeset_revision": "1dd433d2c92c",
+        "name": "sklearn_numeric_clustering",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"input_types\": \"{\\\"__current_case__\\\": 1, \\\"algorithm_options\\\": {\\\"__current_case__\\\": 0, \\\"options\\\": {\\\"algorithm\\\": \\\"auto\\\", \\\"copy_x\\\": \\\"true\\\", \\\"init\\\": \\\"k-means++\\\", \\\"max_iter\\\": \\\"300\\\", \\\"n_clusters\\\": \\\"2\\\", \\\"n_init\\\": \\\"10\\\", \\\"random_state\\\": \\\"\\\", \\\"tol\\\": \\\"0.0001\\\"}, \\\"selected_algorithm\\\": \\\"KMeans\\\"}, \\\"column_selector_options\\\": {\\\"__current_case__\\\": 4, \\\"selected_column_selector_option\\\": \\\"all_columns\\\"}, \\\"header\\\": \\\"true\\\", \\\"infile\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"selected_input_type\\\": \\\"tabular\\\"}\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": null}",
+      "tool_version": "1.0.8.1",
+      "type": "tool",
+      "uuid": "20d7b0cf-c234-441d-9b16-1f640e57acab",
+      "workflow_outputs": []
+    },
+    "12": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_numeric_clustering/sklearn_numeric_clustering/1.0.8.1",
+      "errors": null,
+      "id": 12,
+      "input_connections": {
+        "input_types|infile": {
+          "id": 3,
+          "output_name": "tabular"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Numeric Clustering",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 640,
+        "top": 200
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_numeric_clustering/sklearn_numeric_clustering/1.0.8.1",
+      "tool_shed_repository": {
+        "changeset_revision": "1dd433d2c92c",
+        "name": "sklearn_numeric_clustering",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"input_types\": \"{\\\"__current_case__\\\": 1, \\\"algorithm_options\\\": {\\\"__current_case__\\\": 7, \\\"options\\\": {\\\"affinity\\\": \\\"euclidean\\\", \\\"linkage\\\": \\\"ward\\\", \\\"n_clusters\\\": \\\"2\\\"}, \\\"selected_algorithm\\\": \\\"AgglomerativeClustering\\\"}, \\\"column_selector_options\\\": {\\\"__current_case__\\\": 3, \\\"col\\\": \\\"Species\\\", \\\"selected_column_selector_option\\\": \\\"all_but_by_header_name\\\"}, \\\"header\\\": \\\"true\\\", \\\"infile\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"selected_input_type\\\": \\\"tabular\\\"}\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": null}",
+      "tool_version": "1.0.8.1",
+      "type": "tool",
+      "uuid": "b25334f4-01d0-433a-8a20-7f6f96a407af",
+      "workflow_outputs": []
+    },
+    "13": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_numeric_clustering/sklearn_numeric_clustering/1.0.8.1",
+      "errors": null,
+      "id": 13,
+      "input_connections": {
+        "input_types|infile": {
+          "id": 3,
+          "output_name": "tabular"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Numeric Clustering",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 640,
+        "top": 320
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_numeric_clustering/sklearn_numeric_clustering/1.0.8.1",
+      "tool_shed_repository": {
+        "changeset_revision": "1dd433d2c92c",
+        "name": "sklearn_numeric_clustering",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"input_types\": \"{\\\"__current_case__\\\": 1, \\\"algorithm_options\\\": {\\\"__current_case__\\\": 0, \\\"options\\\": {\\\"algorithm\\\": \\\"auto\\\", \\\"copy_x\\\": \\\"true\\\", \\\"init\\\": \\\"k-means++\\\", \\\"max_iter\\\": \\\"300\\\", \\\"n_clusters\\\": \\\"2\\\", \\\"n_init\\\": \\\"10\\\", \\\"random_state\\\": \\\"\\\", \\\"tol\\\": \\\"0.0001\\\"}, \\\"selected_algorithm\\\": \\\"KMeans\\\"}, \\\"column_selector_options\\\": {\\\"__current_case__\\\": 3, \\\"col\\\": \\\"Species\\\", \\\"selected_column_selector_option\\\": \\\"all_but_by_header_name\\\"}, \\\"header\\\": \\\"true\\\", \\\"infile\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"selected_input_type\\\": \\\"tabular\\\"}\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": null}",
+      "tool_version": "1.0.8.1",
+      "type": "tool",
+      "uuid": "0a23c938-2d2b-4edf-93d2-5ca0fee61ea4",
+      "workflow_outputs": []
+    },
+    "14": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_numeric_clustering/sklearn_numeric_clustering/1.0.8.1",
+      "errors": null,
+      "id": 14,
+      "input_connections": {
+        "input_types|infile": {
+          "id": 3,
+          "output_name": "tabular"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Numeric Clustering",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 640,
+        "top": 440
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_numeric_clustering/sklearn_numeric_clustering/1.0.8.1",
+      "tool_shed_repository": {
+        "changeset_revision": "1dd433d2c92c",
+        "name": "sklearn_numeric_clustering",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"input_types\": \"{\\\"__current_case__\\\": 1, \\\"algorithm_options\\\": {\\\"__current_case__\\\": 1, \\\"options\\\": {\\\"algorithm\\\": \\\"auto\\\", \\\"eps\\\": \\\"0.5\\\", \\\"leaf_size\\\": \\\"30\\\", \\\"metric\\\": \\\"euclidean\\\", \\\"min_samples\\\": \\\"5\\\"}, \\\"selected_algorithm\\\": \\\"DBSCAN\\\"}, \\\"column_selector_options\\\": {\\\"__current_case__\\\": 3, \\\"col\\\": \\\"Species\\\", \\\"selected_column_selector_option\\\": \\\"all_but_by_header_name\\\"}, \\\"header\\\": \\\"true\\\", \\\"infile\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"selected_input_type\\\": \\\"tabular\\\"}\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": null}",
+      "tool_version": "1.0.8.1",
+      "type": "tool",
+      "uuid": "9b17d7ba-7d03-44aa-a6b1-8105f55a4b0f",
+      "workflow_outputs": []
+    },
+    "15": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "errors": null,
+      "id": 15,
+      "input_connections": {
+        "input1": {
+          "id": 5,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Scatterplot with ggplot2",
+      "outputs": [
+        {
+          "name": "output1",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 640,
+        "top": 680
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "tool_shed_repository": {
+        "changeset_revision": "87908c76ca8d",
+        "name": "ggplot2_point",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"adv\": \"{\\\"axis_text_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"axis_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"factor\\\": {\\\"__current_case__\\\": 1, \\\"colororder\\\": \\\"1\\\", \\\"colors\\\": \\\"Set2\\\", \\\"factorcol\\\": \\\"3\\\", \\\"factoring\\\": \\\"Single\\\"}, \\\"gridlinecust\\\": \\\"default\\\", \\\"legend\\\": \\\"yes\\\", \\\"plot_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"points\\\": {\\\"__current_case__\\\": 1, \\\"alpha\\\": \\\"1.0\\\", \\\"pointcolor\\\": \\\"black\\\", \\\"pointoptions\\\": \\\"defined\\\", \\\"size\\\": \\\"2.0\\\"}, \\\"scaling\\\": {\\\"__current_case__\\\": 0, \\\"plot_scaling\\\": \\\"Automatic\\\"}, \\\"theme\\\": \\\"bw\\\", \\\"transform\\\": \\\"none\\\", \\\"type\\\": \\\"points\\\"}\", \"xlab\": \"\\\"X\\\"\", \"input1\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"title\": \"\\\"Hierarchical Clustering on Circles Data\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"xplot\": \"\\\"1\\\"\", \"yplot\": \"\\\"2\\\"\", \"ylab\": \"\\\"Y\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"out\": \"{\\\"additional_output_format\\\": \\\"none\\\", \\\"dpi_output_dim\\\": \\\"300.0\\\", \\\"height_output_dim\\\": \\\"7.0\\\", \\\"unit_output_dim\\\": \\\"in\\\", \\\"width_output_dim\\\": \\\"7.0\\\"}\"}",
+      "tool_version": "2.2.1+galaxy2",
+      "type": "tool",
+      "uuid": "86da9f0e-b190-4def-b4a5-6e62fb2b6fd3",
+      "workflow_outputs": [
+        {
+          "label": "heirarchical_clustering_circles",
+          "output_name": "output1",
+          "uuid": "275528af-4af3-4dc6-a958-737f4d2f89bd"
+        }
+      ]
+    },
+    "16": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "errors": null,
+      "id": 16,
+      "input_connections": {
+        "input1": {
+          "id": 6,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Scatterplot with ggplot2",
+      "outputs": [
+        {
+          "name": "output1",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 640,
+        "top": 800
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "tool_shed_repository": {
+        "changeset_revision": "87908c76ca8d",
+        "name": "ggplot2_point",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"adv\": \"{\\\"axis_text_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"axis_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"factor\\\": {\\\"__current_case__\\\": 1, \\\"colororder\\\": \\\"1\\\", \\\"colors\\\": \\\"Set2\\\", \\\"factorcol\\\": \\\"3\\\", \\\"factoring\\\": \\\"Single\\\"}, \\\"gridlinecust\\\": \\\"default\\\", \\\"legend\\\": \\\"yes\\\", \\\"plot_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"points\\\": {\\\"__current_case__\\\": 1, \\\"alpha\\\": \\\"1.0\\\", \\\"pointcolor\\\": \\\"black\\\", \\\"pointoptions\\\": \\\"defined\\\", \\\"size\\\": \\\"2.0\\\"}, \\\"scaling\\\": {\\\"__current_case__\\\": 0, \\\"plot_scaling\\\": \\\"Automatic\\\"}, \\\"theme\\\": \\\"bw\\\", \\\"transform\\\": \\\"none\\\", \\\"type\\\": \\\"points\\\"}\", \"xlab\": \"\\\"X\\\"\", \"input1\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"title\": \"\\\"K-means Clustering on Circles Data\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"xplot\": \"\\\"1\\\"\", \"yplot\": \"\\\"2\\\"\", \"ylab\": \"\\\"Y\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"out\": \"{\\\"additional_output_format\\\": \\\"none\\\", \\\"dpi_output_dim\\\": \\\"300.0\\\", \\\"height_output_dim\\\": \\\"7.0\\\", \\\"unit_output_dim\\\": \\\"in\\\", \\\"width_output_dim\\\": \\\"7.0\\\"}\"}",
+      "tool_version": "2.2.1+galaxy2",
+      "type": "tool",
+      "uuid": "0df119aa-bdfb-4fd3-9062-98faae31ed04",
+      "workflow_outputs": [
+        {
+          "label": "kmeans_clustering_circles",
+          "output_name": "output1",
+          "uuid": "870b03ca-6b2c-42ab-bbcc-6c4bbecf8ea9"
+        }
+      ]
+    },
+    "17": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "errors": null,
+      "id": 17,
+      "input_connections": {
+        "input1": {
+          "id": 7,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Scatterplot with ggplot2",
+      "outputs": [
+        {
+          "name": "output1",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 640,
+        "top": 1040
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "tool_shed_repository": {
+        "changeset_revision": "87908c76ca8d",
+        "name": "ggplot2_point",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"adv\": \"{\\\"axis_text_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"axis_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"factor\\\": {\\\"__current_case__\\\": 1, \\\"colororder\\\": \\\"1\\\", \\\"colors\\\": \\\"Set2\\\", \\\"factorcol\\\": \\\"3\\\", \\\"factoring\\\": \\\"Single\\\"}, \\\"gridlinecust\\\": \\\"default\\\", \\\"legend\\\": \\\"yes\\\", \\\"plot_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"points\\\": {\\\"__current_case__\\\": 1, \\\"alpha\\\": \\\"1.0\\\", \\\"pointcolor\\\": \\\"black\\\", \\\"pointoptions\\\": \\\"defined\\\", \\\"size\\\": \\\"2.0\\\"}, \\\"scaling\\\": {\\\"__current_case__\\\": 0, \\\"plot_scaling\\\": \\\"Automatic\\\"}, \\\"theme\\\": \\\"bw\\\", \\\"transform\\\": \\\"none\\\", \\\"type\\\": \\\"points\\\"}\", \"xlab\": \"\\\"X\\\"\", \"input1\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"title\": \"\\\"DBSCAN Clustering on Circles Data\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"xplot\": \"\\\"1\\\"\", \"yplot\": \"\\\"2\\\"\", \"ylab\": \"\\\"Y\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"out\": \"{\\\"additional_output_format\\\": \\\"none\\\", \\\"dpi_output_dim\\\": \\\"300.0\\\", \\\"height_output_dim\\\": \\\"7.0\\\", \\\"unit_output_dim\\\": \\\"in\\\", \\\"width_output_dim\\\": \\\"7.0\\\"}\"}",
+      "tool_version": "2.2.1+galaxy2",
+      "type": "tool",
+      "uuid": "16c3f360-fccf-4638-884a-307f91c7c7bb",
+      "workflow_outputs": [
+        {
+          "label": "dbscan_clustering_circles",
+          "output_name": "output1",
+          "uuid": "9664ba05-4664-4ceb-8f93-0974b20bf9e1"
+        }
+      ]
+    },
+    "18": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "errors": null,
+      "id": 18,
+      "input_connections": {
+        "input1": {
+          "id": 9,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Scatterplot with ggplot2",
+      "outputs": [
+        {
+          "name": "output1",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 640,
+        "top": 560
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "tool_shed_repository": {
+        "changeset_revision": "87908c76ca8d",
+        "name": "ggplot2_point",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"adv\": \"{\\\"axis_text_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"axis_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"factor\\\": {\\\"__current_case__\\\": 1, \\\"colororder\\\": \\\"1\\\", \\\"colors\\\": \\\"Set2\\\", \\\"factorcol\\\": \\\"3\\\", \\\"factoring\\\": \\\"Single\\\"}, \\\"gridlinecust\\\": \\\"default\\\", \\\"legend\\\": \\\"yes\\\", \\\"plot_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"points\\\": {\\\"__current_case__\\\": 1, \\\"alpha\\\": \\\"1.0\\\", \\\"pointcolor\\\": \\\"black\\\", \\\"pointoptions\\\": \\\"defined\\\", \\\"size\\\": \\\"2.0\\\"}, \\\"scaling\\\": {\\\"__current_case__\\\": 0, \\\"plot_scaling\\\": \\\"Automatic\\\"}, \\\"theme\\\": \\\"bw\\\", \\\"transform\\\": \\\"none\\\", \\\"type\\\": \\\"points\\\"}\", \"xlab\": \"\\\"X\\\"\", \"input1\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"title\": \"\\\"Hierarchical Clustering on Moon Data\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"xplot\": \"\\\"1\\\"\", \"yplot\": \"\\\"2\\\"\", \"ylab\": \"\\\"Y\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"out\": \"{\\\"additional_output_format\\\": \\\"none\\\", \\\"dpi_output_dim\\\": \\\"300.0\\\", \\\"height_output_dim\\\": \\\"7.0\\\", \\\"unit_output_dim\\\": \\\"in\\\", \\\"width_output_dim\\\": \\\"7.0\\\"}\"}",
+      "tool_version": "2.2.1+galaxy2",
+      "type": "tool",
+      "uuid": "70b1ca6c-19ba-41c8-8707-fe25a0f83f5f",
+      "workflow_outputs": [
+        {
+          "label": "heirarchical_clustering_moon",
+          "output_name": "output1",
+          "uuid": "d82a4483-7f38-4614-96b4-2a9b3316c808"
+        }
+      ]
+    },
+    "19": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "errors": null,
+      "id": 19,
+      "input_connections": {
+        "input1": {
+          "id": 10,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Scatterplot with ggplot2",
+      "outputs": [
+        {
+          "name": "output1",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 640,
+        "top": 1160
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "tool_shed_repository": {
+        "changeset_revision": "87908c76ca8d",
+        "name": "ggplot2_point",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"adv\": \"{\\\"axis_text_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"axis_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"factor\\\": {\\\"__current_case__\\\": 1, \\\"colororder\\\": \\\"1\\\", \\\"colors\\\": \\\"Set2\\\", \\\"factorcol\\\": \\\"3\\\", \\\"factoring\\\": \\\"Single\\\"}, \\\"gridlinecust\\\": \\\"default\\\", \\\"legend\\\": \\\"yes\\\", \\\"plot_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"points\\\": {\\\"__current_case__\\\": 1, \\\"alpha\\\": \\\"1.0\\\", \\\"pointcolor\\\": \\\"black\\\", \\\"pointoptions\\\": \\\"defined\\\", \\\"size\\\": \\\"2.0\\\"}, \\\"scaling\\\": {\\\"__current_case__\\\": 0, \\\"plot_scaling\\\": \\\"Automatic\\\"}, \\\"theme\\\": \\\"bw\\\", \\\"transform\\\": \\\"none\\\", \\\"type\\\": \\\"points\\\"}\", \"xlab\": \"\\\"X\\\"\", \"input1\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"title\": \"\\\"DBSCAN Clustering on Moon Data\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"xplot\": \"\\\"1\\\"\", \"yplot\": \"\\\"2\\\"\", \"ylab\": \"\\\"Y\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"out\": \"{\\\"additional_output_format\\\": \\\"none\\\", \\\"dpi_output_dim\\\": \\\"300.0\\\", \\\"height_output_dim\\\": \\\"7.0\\\", \\\"unit_output_dim\\\": \\\"in\\\", \\\"width_output_dim\\\": \\\"7.0\\\"}\"}",
+      "tool_version": "2.2.1+galaxy2",
+      "type": "tool",
+      "uuid": "06c68d29-3008-4c83-b8db-5076dc67da11",
+      "workflow_outputs": [
+        {
+          "label": "dbscan_clustering_moon",
+          "output_name": "output1",
+          "uuid": "00c0ca58-4ee5-4606-8c1b-c172431e5dbd"
+        }
+      ]
+    },
+    "2": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 2,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "moon"
+        }
+      ],
+      "label": "moon",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 440
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"moon\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "84e54369-42be-439e-993c-c211e27c1b80",
+      "workflow_outputs": []
+    },
+    "20": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "errors": null,
+      "id": 20,
+      "input_connections": {
+        "input1": {
+          "id": 11,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Scatterplot with ggplot2",
+      "outputs": [
+        {
+          "name": "output1",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 640,
+        "top": 920
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "tool_shed_repository": {
+        "changeset_revision": "87908c76ca8d",
+        "name": "ggplot2_point",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"adv\": \"{\\\"axis_text_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"axis_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"factor\\\": {\\\"__current_case__\\\": 1, \\\"colororder\\\": \\\"1\\\", \\\"colors\\\": \\\"Set2\\\", \\\"factorcol\\\": \\\"3\\\", \\\"factoring\\\": \\\"Single\\\"}, \\\"gridlinecust\\\": \\\"default\\\", \\\"legend\\\": \\\"yes\\\", \\\"plot_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"points\\\": {\\\"__current_case__\\\": 1, \\\"alpha\\\": \\\"1.0\\\", \\\"pointcolor\\\": \\\"black\\\", \\\"pointoptions\\\": \\\"defined\\\", \\\"size\\\": \\\"2.0\\\"}, \\\"scaling\\\": {\\\"__current_case__\\\": 0, \\\"plot_scaling\\\": \\\"Automatic\\\"}, \\\"theme\\\": \\\"bw\\\", \\\"transform\\\": \\\"none\\\", \\\"type\\\": \\\"points\\\"}\", \"xlab\": \"\\\"X\\\"\", \"input1\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"title\": \"\\\"K-means Clustering on Moon Data\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"xplot\": \"\\\"1\\\"\", \"yplot\": \"\\\"2\\\"\", \"ylab\": \"\\\"Y\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"out\": \"{\\\"additional_output_format\\\": \\\"none\\\", \\\"dpi_output_dim\\\": \\\"300.0\\\", \\\"height_output_dim\\\": \\\"7.0\\\", \\\"unit_output_dim\\\": \\\"in\\\", \\\"width_output_dim\\\": \\\"7.0\\\"}\"}",
+      "tool_version": "2.2.1+galaxy2",
+      "type": "tool",
+      "uuid": "d62fb208-c3ba-472e-af50-d757cde6a837",
+      "workflow_outputs": [
+        {
+          "label": "kmeans_clustering_moon",
+          "output_name": "output1",
+          "uuid": "5717bf22-83e3-46a2-8f6d-12a1fa41439b"
+        }
+      ]
+    },
+    "21": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "errors": null,
+      "id": 21,
+      "input_connections": {
+        "input1": {
+          "id": 12,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Scatterplot with ggplot2",
+      "outputs": [
+        {
+          "name": "output1",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 860,
+        "top": 200
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "tool_shed_repository": {
+        "changeset_revision": "87908c76ca8d",
+        "name": "ggplot2_point",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"adv\": \"{\\\"axis_text_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"axis_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"factor\\\": {\\\"__current_case__\\\": 1, \\\"colororder\\\": \\\"1\\\", \\\"colors\\\": \\\"Set2\\\", \\\"factorcol\\\": \\\"6\\\", \\\"factoring\\\": \\\"Single\\\"}, \\\"gridlinecust\\\": \\\"default\\\", \\\"legend\\\": \\\"yes\\\", \\\"plot_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"points\\\": {\\\"__current_case__\\\": 1, \\\"alpha\\\": \\\"1.0\\\", \\\"pointcolor\\\": \\\"black\\\", \\\"pointoptions\\\": \\\"defined\\\", \\\"size\\\": \\\"2.0\\\"}, \\\"scaling\\\": {\\\"__current_case__\\\": 0, \\\"plot_scaling\\\": \\\"Automatic\\\"}, \\\"theme\\\": \\\"bw\\\", \\\"transform\\\": \\\"none\\\", \\\"type\\\": \\\"points\\\"}\", \"xlab\": \"\\\"Sepal length\\\"\", \"input1\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"title\": \"\\\"Hierarchical Clustering in Iris data\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"xplot\": \"\\\"1\\\"\", \"yplot\": \"\\\"2\\\"\", \"ylab\": \"\\\"Sepal width\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"out\": \"{\\\"additional_output_format\\\": \\\"none\\\", \\\"dpi_output_dim\\\": \\\"300.0\\\", \\\"height_output_dim\\\": \\\"7.0\\\", \\\"unit_output_dim\\\": \\\"in\\\", \\\"width_output_dim\\\": \\\"7.0\\\"}\"}",
+      "tool_version": "2.2.1+galaxy2",
+      "type": "tool",
+      "uuid": "fa31d028-44bc-4ebf-9123-1fdb5bddb477",
+      "workflow_outputs": [
+        {
+          "label": "heirarchical_clustering_iris",
+          "output_name": "output1",
+          "uuid": "0ace8714-ff3a-4efd-a649-70924b1e6230"
+        }
+      ]
+    },
+    "22": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "errors": null,
+      "id": 22,
+      "input_connections": {
+        "input1": {
+          "id": 13,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Scatterplot with ggplot2",
+      "outputs": [
+        {
+          "name": "output1",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 860,
+        "top": 320
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "tool_shed_repository": {
+        "changeset_revision": "87908c76ca8d",
+        "name": "ggplot2_point",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"adv\": \"{\\\"axis_text_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"axis_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"factor\\\": {\\\"__current_case__\\\": 1, \\\"colororder\\\": \\\"1\\\", \\\"colors\\\": \\\"Set2\\\", \\\"factorcol\\\": \\\"6\\\", \\\"factoring\\\": \\\"Single\\\"}, \\\"gridlinecust\\\": \\\"default\\\", \\\"legend\\\": \\\"yes\\\", \\\"plot_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"points\\\": {\\\"__current_case__\\\": 1, \\\"alpha\\\": \\\"1.0\\\", \\\"pointcolor\\\": \\\"black\\\", \\\"pointoptions\\\": \\\"defined\\\", \\\"size\\\": \\\"2.0\\\"}, \\\"scaling\\\": {\\\"__current_case__\\\": 0, \\\"plot_scaling\\\": \\\"Automatic\\\"}, \\\"theme\\\": \\\"bw\\\", \\\"transform\\\": \\\"none\\\", \\\"type\\\": \\\"points\\\"}\", \"xlab\": \"\\\"Sepal length\\\"\", \"input1\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"title\": \"\\\"K-means Clustering in Iris data\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"xplot\": \"\\\"1\\\"\", \"yplot\": \"\\\"2\\\"\", \"ylab\": \"\\\"Sepal width\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"out\": \"{\\\"additional_output_format\\\": \\\"none\\\", \\\"dpi_output_dim\\\": \\\"300.0\\\", \\\"height_output_dim\\\": \\\"7.0\\\", \\\"unit_output_dim\\\": \\\"in\\\", \\\"width_output_dim\\\": \\\"7.0\\\"}\"}",
+      "tool_version": "2.2.1+galaxy2",
+      "type": "tool",
+      "uuid": "497d818f-d5a8-43fd-b8ee-163497561918",
+      "workflow_outputs": [
+        {
+          "label": "kmeans_clustering_iris",
+          "output_name": "output1",
+          "uuid": "e6f69d7d-c9e3-4023-8daf-87f6b0afc3fd"
+        }
+      ]
+    },
+    "23": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "errors": null,
+      "id": 23,
+      "input_connections": {
+        "input1": {
+          "id": 14,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Scatterplot with ggplot2",
+      "outputs": [
+        {
+          "name": "output1",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 860,
+        "top": 440
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "tool_shed_repository": {
+        "changeset_revision": "87908c76ca8d",
+        "name": "ggplot2_point",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"adv\": \"{\\\"axis_text_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"axis_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"factor\\\": {\\\"__current_case__\\\": 1, \\\"colororder\\\": \\\"1\\\", \\\"colors\\\": \\\"Set2\\\", \\\"factorcol\\\": \\\"6\\\", \\\"factoring\\\": \\\"Single\\\"}, \\\"gridlinecust\\\": \\\"default\\\", \\\"legend\\\": \\\"yes\\\", \\\"plot_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"points\\\": {\\\"__current_case__\\\": 1, \\\"alpha\\\": \\\"1.0\\\", \\\"pointcolor\\\": \\\"black\\\", \\\"pointoptions\\\": \\\"defined\\\", \\\"size\\\": \\\"2.0\\\"}, \\\"scaling\\\": {\\\"__current_case__\\\": 0, \\\"plot_scaling\\\": \\\"Automatic\\\"}, \\\"theme\\\": \\\"bw\\\", \\\"transform\\\": \\\"none\\\", \\\"type\\\": \\\"points\\\"}\", \"xlab\": \"\\\"Sepal length\\\"\", \"input1\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"title\": \"\\\"DBSCAN Clustering in Iris data\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"xplot\": \"\\\"1\\\"\", \"yplot\": \"\\\"2\\\"\", \"ylab\": \"\\\"Sepal width\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"out\": \"{\\\"additional_output_format\\\": \\\"none\\\", \\\"dpi_output_dim\\\": \\\"300.0\\\", \\\"height_output_dim\\\": \\\"7.0\\\", \\\"unit_output_dim\\\": \\\"in\\\", \\\"width_output_dim\\\": \\\"7.0\\\"}\"}",
+      "tool_version": "2.2.1+galaxy2",
+      "type": "tool",
+      "uuid": "27049b9b-3f88-4bc0-95e1-42e6866bd593",
+      "workflow_outputs": [
+        {
+          "label": "dbscan_clustering_iris",
+          "output_name": "output1",
+          "uuid": "119d1cde-567a-47f0-99de-00d3557c38a2"
+        }
+      ]
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "csv_to_tabular",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "csv": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Convert CSV to tabular",
+      "outputs": [
+        {
+          "name": "tabular",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 420,
+        "top": 200
+      },
+      "post_job_actions": {},
+      "tool_id": "csv_to_tabular",
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"csv\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.0.0",
+      "type": "tool",
+      "uuid": "9ade0904-a651-424a-b058-2bebf4cf7a6d",
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "input1": {
+          "id": 1,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Scatterplot with ggplot2",
+      "outputs": [
+        {
+          "name": "output1",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 420,
+        "top": 320
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "tool_shed_repository": {
+        "changeset_revision": "87908c76ca8d",
+        "name": "ggplot2_point",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"adv\": \"{\\\"axis_text_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"axis_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"factor\\\": {\\\"__current_case__\\\": 0, \\\"factoring\\\": \\\"Default\\\"}, \\\"gridlinecust\\\": \\\"default\\\", \\\"legend\\\": \\\"yes\\\", \\\"plot_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"points\\\": {\\\"__current_case__\\\": 0, \\\"pointoptions\\\": \\\"default\\\"}, \\\"scaling\\\": {\\\"__current_case__\\\": 0, \\\"plot_scaling\\\": \\\"Automatic\\\"}, \\\"theme\\\": \\\"bw\\\", \\\"transform\\\": \\\"none\\\", \\\"type\\\": \\\"points\\\"}\", \"xlab\": \"\\\"X\\\"\", \"input1\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"title\": \"\\\"Scatter Plot\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"xplot\": \"\\\"1\\\"\", \"yplot\": \"\\\"2\\\"\", \"ylab\": \"\\\"Y\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"out\": \"{\\\"additional_output_format\\\": \\\"none\\\", \\\"dpi_output_dim\\\": \\\"300.0\\\", \\\"height_output_dim\\\": \\\"7.0\\\", \\\"unit_output_dim\\\": \\\"in\\\", \\\"width_output_dim\\\": \\\"7.0\\\"}\"}",
+      "tool_version": "2.2.1+galaxy2",
+      "type": "tool",
+      "uuid": "1e1131ee-189a-4913-9844-cecf1e5b8cae",
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_numeric_clustering/sklearn_numeric_clustering/1.0.8.1",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "input_types|infile": {
+          "id": 1,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Numeric Clustering",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 420,
+        "top": 560
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_numeric_clustering/sklearn_numeric_clustering/1.0.8.1",
+      "tool_shed_repository": {
+        "changeset_revision": "1dd433d2c92c",
+        "name": "sklearn_numeric_clustering",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"input_types\": \"{\\\"__current_case__\\\": 1, \\\"algorithm_options\\\": {\\\"__current_case__\\\": 7, \\\"options\\\": {\\\"affinity\\\": \\\"euclidean\\\", \\\"linkage\\\": \\\"ward\\\", \\\"n_clusters\\\": \\\"2\\\"}, \\\"selected_algorithm\\\": \\\"AgglomerativeClustering\\\"}, \\\"column_selector_options\\\": {\\\"__current_case__\\\": 4, \\\"selected_column_selector_option\\\": \\\"all_columns\\\"}, \\\"header\\\": \\\"true\\\", \\\"infile\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"selected_input_type\\\": \\\"tabular\\\"}\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": null}",
+      "tool_version": "1.0.8.1",
+      "type": "tool",
+      "uuid": "24e6e79d-e4e5-4ba7-8e9b-cb7177b096ba",
+      "workflow_outputs": []
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_numeric_clustering/sklearn_numeric_clustering/1.0.8.1",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "input_types|infile": {
+          "id": 1,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Numeric Clustering",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 420,
+        "top": 800
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_numeric_clustering/sklearn_numeric_clustering/1.0.8.1",
+      "tool_shed_repository": {
+        "changeset_revision": "1dd433d2c92c",
+        "name": "sklearn_numeric_clustering",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"input_types\": \"{\\\"__current_case__\\\": 1, \\\"algorithm_options\\\": {\\\"__current_case__\\\": 0, \\\"options\\\": {\\\"algorithm\\\": \\\"auto\\\", \\\"copy_x\\\": \\\"true\\\", \\\"init\\\": \\\"k-means++\\\", \\\"max_iter\\\": \\\"300\\\", \\\"n_clusters\\\": \\\"2\\\", \\\"n_init\\\": \\\"10\\\", \\\"random_state\\\": \\\"\\\", \\\"tol\\\": \\\"0.0001\\\"}, \\\"selected_algorithm\\\": \\\"KMeans\\\"}, \\\"column_selector_options\\\": {\\\"__current_case__\\\": 4, \\\"selected_column_selector_option\\\": \\\"all_columns\\\"}, \\\"header\\\": \\\"true\\\", \\\"infile\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"selected_input_type\\\": \\\"tabular\\\"}\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": null}",
+      "tool_version": "1.0.8.1",
+      "type": "tool",
+      "uuid": "c186cbdf-7e09-4e0e-9df1-25c84117af04",
+      "workflow_outputs": []
+    },
+    "7": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_numeric_clustering/sklearn_numeric_clustering/1.0.8.1",
+      "errors": null,
+      "id": 7,
+      "input_connections": {
+        "input_types|infile": {
+          "id": 1,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Numeric Clustering",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 420,
+        "top": 920
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_numeric_clustering/sklearn_numeric_clustering/1.0.8.1",
+      "tool_shed_repository": {
+        "changeset_revision": "1dd433d2c92c",
+        "name": "sklearn_numeric_clustering",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"input_types\": \"{\\\"__current_case__\\\": 1, \\\"algorithm_options\\\": {\\\"__current_case__\\\": 1, \\\"options\\\": {\\\"algorithm\\\": \\\"auto\\\", \\\"eps\\\": \\\"0.2\\\", \\\"leaf_size\\\": \\\"30\\\", \\\"metric\\\": \\\"euclidean\\\", \\\"min_samples\\\": \\\"5\\\"}, \\\"selected_algorithm\\\": \\\"DBSCAN\\\"}, \\\"column_selector_options\\\": {\\\"__current_case__\\\": 4, \\\"selected_column_selector_option\\\": \\\"all_columns\\\"}, \\\"header\\\": \\\"true\\\", \\\"infile\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"selected_input_type\\\": \\\"tabular\\\"}\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": null}",
+      "tool_version": "1.0.8.1",
+      "type": "tool",
+      "uuid": "4623fe42-e4ac-4af0-88fc-e811e3fc1799",
+      "workflow_outputs": []
+    },
+    "8": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "errors": null,
+      "id": 8,
+      "input_connections": {
+        "input1": {
+          "id": 2,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Scatterplot with ggplot2",
+      "outputs": [
+        {
+          "name": "output1",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 420,
+        "top": 440
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2",
+      "tool_shed_repository": {
+        "changeset_revision": "87908c76ca8d",
+        "name": "ggplot2_point",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"adv\": \"{\\\"axis_text_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"axis_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"factor\\\": {\\\"__current_case__\\\": 0, \\\"factoring\\\": \\\"Default\\\"}, \\\"gridlinecust\\\": \\\"default\\\", \\\"legend\\\": \\\"yes\\\", \\\"plot_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"points\\\": {\\\"__current_case__\\\": 0, \\\"pointoptions\\\": \\\"default\\\"}, \\\"scaling\\\": {\\\"__current_case__\\\": 0, \\\"plot_scaling\\\": \\\"Automatic\\\"}, \\\"theme\\\": \\\"bw\\\", \\\"transform\\\": \\\"none\\\", \\\"type\\\": \\\"points\\\"}\", \"xlab\": \"\\\"X\\\"\", \"input1\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"title\": \"\\\"Scatter Plot\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"xplot\": \"\\\"1\\\"\", \"yplot\": \"\\\"2\\\"\", \"ylab\": \"\\\"Y\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"out\": \"{\\\"additional_output_format\\\": \\\"none\\\", \\\"dpi_output_dim\\\": \\\"300.0\\\", \\\"height_output_dim\\\": \\\"7.0\\\", \\\"unit_output_dim\\\": \\\"in\\\", \\\"width_output_dim\\\": \\\"7.0\\\"}\"}",
+      "tool_version": "2.2.1+galaxy2",
+      "type": "tool",
+      "uuid": "caba26fb-d235-4ad3-83a5-2a02a6821f57",
+      "workflow_outputs": []
+    },
+    "9": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_numeric_clustering/sklearn_numeric_clustering/1.0.8.1",
+      "errors": null,
+      "id": 9,
+      "input_connections": {
+        "input_types|infile": {
+          "id": 2,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Numeric Clustering",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 420,
+        "top": 680
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_numeric_clustering/sklearn_numeric_clustering/1.0.8.1",
+      "tool_shed_repository": {
+        "changeset_revision": "1dd433d2c92c",
+        "name": "sklearn_numeric_clustering",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"input_types\": \"{\\\"__current_case__\\\": 1, \\\"algorithm_options\\\": {\\\"__current_case__\\\": 7, \\\"options\\\": {\\\"affinity\\\": \\\"euclidean\\\", \\\"linkage\\\": \\\"ward\\\", \\\"n_clusters\\\": \\\"2\\\"}, \\\"selected_algorithm\\\": \\\"AgglomerativeClustering\\\"}, \\\"column_selector_options\\\": {\\\"__current_case__\\\": 4, \\\"selected_column_selector_option\\\": \\\"all_columns\\\"}, \\\"header\\\": \\\"true\\\", \\\"infile\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"selected_input_type\\\": \\\"tabular\\\"}\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": null}",
+      "tool_version": "1.0.8.1",
+      "type": "tool",
+      "uuid": "1abf8463-f8f6-4313-894b-d371baeeacbf",
+      "workflow_outputs": []
+    }
+  },
+  "uuid": "14f73bbe-9ae6-4c09-a8a4-4b15391044bb",
+  "version": 1
+}

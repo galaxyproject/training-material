@@ -1,0 +1,17 @@
+- doc: Test outline for Olympic-Age-Distribution
+  job:
+    Input Dataset Collection:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: 2010 Winter Olympics Vancouver
+        location:  https://zenodo.org/records/18803585/files/olympics-2010-winter.tsv
+      - class: File
+        identifier: olympics-2008-summer
+        location: https://zenodo.org/records/18803585/files/olympics-2008-summer.tsv
+  outputs:
+    summary_statistics:
+      asserts:
+        has_text:
+          text: "stdev"

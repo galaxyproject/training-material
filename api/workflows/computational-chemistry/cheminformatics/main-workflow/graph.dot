@@ -1,0 +1,25 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  11[label="Compound Search"]
+  5 -> 11 [label="outfile"]
+  13[label="Remove duplicated molecules"]
+  5 -> 13 [label="outfile"]
+  19[label="Remove counterions and fragments"]
+  13 -> 19 [label="outfile"]
+  2[label="Online data"]
+  29[label="Filter"]
+  19 -> 29 [label="outfile"]
+  30[label="Compound Convert"]
+  19 -> 30 [label="outfile"]
+  31[label="Molecules to Fingerprints"]
+  19 -> 31 [label="outfile"]
+  39[label="Natural Product"]
+  29 -> 39 [label="outfile"]
+  40[label="Molecules to Fingerprints"]
+  29 -> 40 [label="outfile"]
+  44[label="NxN Clustering"]
+  40 -> 44 [label="outfile"]
+  5[label="Change Title"]
+  2 -> 5 [label="output"]
+}

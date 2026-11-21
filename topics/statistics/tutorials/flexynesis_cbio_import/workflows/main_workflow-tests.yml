@@ -1,0 +1,51 @@
+- doc: Test outline for Flexynesis---get-data-from-Cbioportal
+  job: {}
+  outputs:
+    train data:
+      element_tests:
+        Advanced Cut on data 235:
+          asserts:
+            - that: "has_text_matching"
+              expression: "Hugo_Symbol"
+            - that: "has_text_matching"
+              expression: "A1BG"
+            - that: "has_n_lines"
+              n: "20386"
+        'Flexynesis utils on data 239: binarize':
+          asserts:
+            - that: "has_text_matching"
+              expression: "Hugo_Symbol"
+            - that: "has_text_matching"
+              expression: "ACVRL1"
+            - that: "has_n_lines"
+              n: "174"
+        clin:
+          asserts:
+            - that: "has_text_matching"
+              expression: "PATIENT_ID"
+            - that: "has_n_lines"
+              n: "1757"
+    test data:
+      element_tests:
+        Advanced Cut on data 235:
+          asserts:
+            - that: "has_text_matching"
+              expression: "Hugo_Symbol"
+            - that: "has_text_matching"
+              expression: "A1BG"
+            - that: "has_n_lines"
+              n: "20386"
+        'Flexynesis utils on data 239: binarize':
+          asserts:
+            - that: "has_text_matching"
+              expression: "Hugo_Symbol"
+            - that: "has_text_matching"
+              expression: "ACVRL1"
+            - that: "has_n_lines"
+              n: "174"
+        clin:
+          asserts:
+            - that: "has_text_matching"
+              expression: "PATIENT_ID"
+            - that: "has_n_lines"
+              n: "754"

@@ -1,0 +1,37 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nPoint cloud LAS/LAZ"]
+  1[label="Standardization"]
+  0 -> 1 [label="output"]
+  k83d15133429b453092a6b4375659c96a[color=lightseagreen,label="Output\nstandardized"]
+  1 -> k83d15133429b453092a6b4375659c96a
+  kdd737f4cd36f4e8a924b9c4a93dfe3fb[color=lightseagreen,label="Output\nmetadata"]
+  1 -> kdd737f4cd36f4e8a924b9c4a93dfe3fb
+  kee84fd37a1424313ade6170efc14298c[color=lightseagreen,label="Output\nconvex_hull"]
+  1 -> kee84fd37a1424313ade6170efc14298c
+  2[label="SmartTile: tile and subsample"]
+  1 -> 2 [label="pc_standardized"]
+  k23a23ea111e84fd8a146a3c346aa3c87[color=lightseagreen,label="Output\ntiling_preview"]
+  2 -> k23a23ea111e84fd8a146a3c346aa3c87
+  3[label="Overviews"]
+  1 -> 3 [label="pc_standardized"]
+  k106bb3bb3c024278b9408bedf2e62625[color=lightseagreen,label="Output\ntop_views"]
+  3 -> k106bb3bb3c024278b9408bedf2e62625
+  ke1c3b9050f924682b4dc62d0b0924492[color=lightseagreen,label="Output\nsection_views"]
+  3 -> ke1c3b9050f924682b4dc62d0b0924492
+  4[label="SegmentAnyTree"]
+  2 -> 4 [label="output_tiles_1"]
+  k1fc91bea39cf49888f26a57b7e9658ce[color=lightseagreen,label="Output\nsegmented"]
+  4 -> k1fc91bea39cf49888f26a57b7e9658ce
+  5[label="SmartTile: filter / merge and remap"]
+  4 -> 5 [label="output"]
+  2 -> 5 [label="tile_bounds_json"]
+  1 -> 5 [label="pc_standardized"]
+  k485e29840a2c47e5827598a533701d29[color=lightseagreen,label="Output\noriginals_with_predictions"]
+  5 -> k485e29840a2c47e5827598a533701d29
+  6[label="Potree"]
+  5 -> 6 [label="output_originals_with_dims"]
+  k103bc632ed3a4e66996b5df8614063a7[color=lightseagreen,label="Output\npotree_viewer"]
+  6 -> k103bc632ed3a4e66996b5df8614063a7
+}

@@ -1,0 +1,43 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nreads_fastq"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nreference1_fasta"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nreference2_fasta"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nannotation_gtf"]
+  4[color=lightblue,label="ℹ️ Input Dataset\ngenome_fasta"]
+  5[label="FastQC"]
+  0 -> 5 [label="output"]
+  6[label="Cutadapt"]
+  0 -> 6 [label="output"]
+  7[label="FastQC"]
+  6 -> 7 [label="out1"]
+  8[label="ChiRA collapse"]
+  6 -> 8 [label="out1"]
+  9[label="ChiRA map"]
+  8 -> 9 [label="out"]
+  1 -> 9 [label="output"]
+  2 -> 9 [label="output"]
+  10[label="ChiRA merge"]
+  9 -> 10 [label="mapped_bed"]
+  3 -> 10 [label="output"]
+  1 -> 10 [label="output"]
+  2 -> 10 [label="output"]
+  11[label="ChiRA qauntify"]
+  10 -> 11 [label="merged_bed"]
+  10 -> 11 [label="segments_bed"]
+  12[label="ChiRA extract"]
+  4 -> 12 [label="output"]
+  3 -> 12 [label="output"]
+  11 -> 12 [label="loci"]
+  1 -> 12 [label="output"]
+  2 -> 12 [label="output"]
+  k7182226db48a4ce1882e6bb41091a5d4[color=lightseagreen,label="Output\ninteractions"]
+  12 -> k7182226db48a4ce1882e6bb41091a5d4
+  k011f4c89d15a48779d490146773ce781[color=lightseagreen,label="Output\nchimeric_reads"]
+  12 -> k011f4c89d15a48779d490146773ce781
+  13[label="Query Tabular"]
+  12 -> 13 [label="chimeras"]
+  kf1315db211d14dee9014eafa1fc0f82f[color=lightseagreen,label="Output\ndb"]
+  13 -> kf1315db211d14dee9014eafa1fc0f82f
+}

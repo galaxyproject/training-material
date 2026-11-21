@@ -1,0 +1,17 @@
+---
+- doc: "Test for DIA_MSstats_Training_msstats_input_tabular workflow"
+  job:
+    "PyProphet MSstats input":
+      class: File
+      location: https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
+      filetype: tabular
+    "Comparison matrix":
+      class: File
+      location: https://zenodo.org/record/4307758/files/Comp_matrix_HEK_Ecoli.txt
+      filetype: tabular
+  outputs:
+    "Histogram_Ecoli":
+      asserts:
+        has_size: 
+          value: 7000
+          delta: 2000

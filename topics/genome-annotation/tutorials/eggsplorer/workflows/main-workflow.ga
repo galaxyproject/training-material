@@ -1,0 +1,209 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Downloads the proteome of a bacterial assembly from NCBI, annotates it with eggNOG-mapper and summarises the annotation in an interactive Eggsplorer report.",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-5224-9145",
+            "name": "Vesselin Baev"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "Eggsplorer functional profile of a bacterial genome",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "RefSeq or GenBank assembly accession of a bacterial genome, e.g. GCF_000006765.1 (Pseudomonas aeruginosa PAO1).",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "RefSeq or GenBank assembly accession of a bacterial genome, e.g. GCF_000006765.1 (Pseudomonas aeruginosa PAO1).",
+                    "name": "Assembly accession"
+                }
+            ],
+            "label": "Assembly accession",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 0
+            },
+            "tool_id": null,
+            "tool_state": "{\"parameter_type\": \"text\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "58ab0ec3-5919-4fdf-a2ba-860113428cff",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Download the RefSeq protein sequences of the assembly.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ncbi_datasets/datasets_download_genome/18.39.0+galaxy0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "query|subcommand|text_or_file|accession": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Download proteome",
+            "name": "NCBI Datasets Genomes",
+            "outputs": [
+                {
+                    "name": "genome_data_report",
+                    "type": "tabular"
+                },
+                {
+                    "name": "protein_fasta",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 250,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ncbi_datasets/datasets_download_genome/18.39.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "067dcb71f976",
+                "name": "ncbi_datasets",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"query\": {\"subcommand\": {\"download_by\": \"accession\", \"__current_case__\": 0, \"text_or_file\": {\"text_or_file\": \"text\", \"__current_case__\": 0, \"accession\": {\"__class__\": \"ConnectedValue\"}}}}, \"filters\": {\"reference\": false, \"annotated\": false, \"assembly_level\": null, \"assembly_version\": \"latest\", \"assembly_source\": null, \"chromosomes\": \"\", \"exclude_atypical\": false, \"mag\": null, \"released_before\": \"\", \"released_after\": \"\", \"search\": []}, \"file_choices\": {\"report_columns\": [\"accession\", \"organism-name\", \"assminfo-submitter\", \"assminfo-name\"], \"include\": [\"protein\"], \"decompress\": true}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "18.39.0+galaxy0",
+            "type": "tool",
+            "uuid": "5fb69458-f7ae-4683-a9f2-ba4dc4a7cfc4",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "genome_data_report",
+                    "output_name": "genome_data_report",
+                    "uuid": "12a1d70f-d0fb-402b-8388-1025747e2103"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "Annotate all proteins with eggNOG-mapper (DIAMOND, eggNOG 5.0.2).",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.13+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "ortho_method|input": {
+                    "id": 1,
+                    "output_name": "protein_fasta"
+                }
+            },
+            "inputs": [],
+            "label": "eggNOG-mapper",
+            "name": "eggNOG Mapper",
+            "outputs": [
+                {
+                    "name": "seed_orthologs",
+                    "type": "tabular"
+                },
+                {
+                    "name": "annotations",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 500,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.13+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "02439eb2b37d",
+                "name": "eggnog_mapper",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"annotation_options\": {\"no_annot\": \"\", \"__current_case__\": 0, \"seed_ortholog_evalue\": \"0.001\", \"seed_ortholog_score\": null, \"tax_scope\": null, \"target_orthologs\": \"all\", \"go_evidence\": \"non-electronic\"}, \"eggnog_data\": \"5.0.2\", \"ortho_method\": {\"m\": \"diamond\", \"__current_case__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"input_trans\": {\"itype\": \"proteins\", \"__current_case__\": 0}, \"matrix_gapcosts\": {\"matrix\": \"BLOSUM62\", \"__current_case__\": 2, \"gap_costs\": \"--gapopen 11 --gapextend 1\"}, \"sensmode\": \"sensitive\", \"dmnd_iterate\": false, \"dmnd_ignore_warnings\": false, \"query_cover\": null, \"subject_cover\": null, \"pident\": null, \"evalue\": null, \"score\": \"0.001\"}, \"output_options\": {\"no_file_comments\": true, \"report_orthologs\": false, \"md5\": false}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "2.1.13+galaxy0",
+            "type": "tool",
+            "uuid": "5c492a20-60eb-4d9e-a3a4-5eca56cb2e0d",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "emapper_annotations",
+                    "output_name": "annotations",
+                    "uuid": "b1d71667-38de-4949-90f0-883c9a215d21"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "Interactive HTML report of the eggNOG-mapper annotations, with summary tables.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/eggsplorer/eggsplorer/1.1.0+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "annotations": {
+                    "id": 2,
+                    "output_name": "annotations"
+                }
+            },
+            "inputs": [],
+            "label": "Eggsplorer",
+            "name": "Eggsplorer",
+            "outputs": [
+                {
+                    "name": "report",
+                    "type": "html"
+                },
+                {
+                    "name": "tables",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 750,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/eggsplorer/eggsplorer/1.1.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "8713c7ecec38",
+                "name": "eggsplorer",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"annotations\": {\"__class__\": \"ConnectedValue\"}, \"filters\": {\"max_evalue\": null, \"min_score\": null}, \"kofam_cond\": {\"use_kofam\": \"no\", \"__current_case__\": 0}, \"lang\": \"en\", \"output_tables\": true, \"sample_name\": \"\", \"top_n\": \"25\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "1.1.0+galaxy0",
+            "type": "tool",
+            "uuid": "eb259aa9-4086-4948-ae5a-e2bc9f0e4c23",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "eggsplorer_report",
+                    "output_name": "report",
+                    "uuid": "0510d76e-3988-4401-954c-54df6b8ba8dd"
+                },
+                {
+                    "label": "eggsplorer_tables",
+                    "output_name": "tables",
+                    "uuid": "3eecf8d3-7e88-4e01-8d8c-3da85e2e008c"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "genome-annotation",
+        "prokaryote",
+        "eggsplorer"
+    ],
+    "uuid": "7d0efd07-2322-49f6-84f0-5dd5fcf4e5f7",
+    "version": 1,
+    "release": "0.1"
+}

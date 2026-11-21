@@ -1,0 +1,30 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nInput censored text"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nInput uncensored text "]
+  2[label="Preprocessing of censored text"]
+  0 -> 2 [label="output"]
+  3[label="Preprocessing of uncensored text"]
+  1 -> 3 [label="output"]
+  4[label="Comparison with diff - user version"]
+  2 -> 4 [label="outfile"]
+  3 -> 4 [label="outfile"]
+  5[label="Comparison with diff - computer version"]
+  2 -> 5 [label="outfile"]
+  3 -> 5 [label="outfile"]
+  6[label="Select only censored lines"]
+  5 -> 6 [label="diff_file"]
+  7[label="Compute"]
+  6 -> 7 [label="out_file1"]
+  8[label="Cut"]
+  7 -> 8 [label="out_file1"]
+  9[label="Datamash"]
+  7 -> 9 [label="out_file1"]
+  10[label="Generate a word cloud"]
+  8 -> 10 [label="out_file1"]
+  k0e468eb9b68c4840b5e712cbf29e0c9c[color=lightseagreen,label="Output\noutput_graphic"]
+  10 -> k0e468eb9b68c4840b5e712cbf29e0c9c
+  11[label="Sort"]
+  9 -> 11 [label="out_file"]
+}

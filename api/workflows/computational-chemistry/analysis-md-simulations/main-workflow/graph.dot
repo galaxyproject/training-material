@@ -1,0 +1,21 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nprotein_mdsimulation_dcd"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nprotein_pdb"]
+  2[label="RMSD Analysis"]
+  0 -> 2 [label="output"]
+  1 -> 2 [label="output"]
+  k6de2beaff80e47888598229a1c582757[color=lightseagreen,label="Output\nrmsd_tabular_output"]
+  2 -> k6de2beaff80e47888598229a1c582757
+  3[label="RMSF Analysis"]
+  0 -> 3 [label="output"]
+  1 -> 3 [label="output"]
+  k1f2d715d230a4ec5a509e8ae501e7634[color=lightseagreen,label="Output\nrmsf_tabular_output"]
+  3 -> k1f2d715d230a4ec5a509e8ae501e7634
+  4[label="PCA"]
+  0 -> 4 [label="output"]
+  1 -> 4 [label="output"]
+  k92b7a40f9ffc4f568cf3deec52e7b8b5[color=lightseagreen,label="Output\npca_tabular_output"]
+  4 -> k92b7a40f9ffc4f568cf3deec52e7b8b5
+}

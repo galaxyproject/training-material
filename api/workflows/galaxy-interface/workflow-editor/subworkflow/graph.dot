@@ -1,0 +1,16 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nInput dataset collection"]
+  1[color=lightcoral,label="🛠️ Subworkflow\nworkflow 1"]
+  0 -> 1 [label="output"]
+  k8816092601a6490387371f3d65449e12[color=lightseagreen,label="Output\nFirst lines"]
+  1 -> k8816092601a6490387371f3d65449e12
+  2[color=lightcoral,label="🛠️ Subworkflow\nworkflow 2"]
+  0 -> 2 [label="output"]
+  kf18ca9d2a8bb431786cbbad2ef3d2fba[color=lightseagreen,label="Output\nFirst lines"]
+  2 -> kf18ca9d2a8bb431786cbbad2ef3d2fba
+  3[label="Paste"]
+  1 -> 3 [label="First lines"]
+  2 -> 3 [label="First lines"]
+}

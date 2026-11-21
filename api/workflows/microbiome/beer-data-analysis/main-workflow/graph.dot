@@ -1,0 +1,25 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\ninput"]
+  1[label="FastQC"]
+  0 -> 1 [label="output"]
+  2[label="Porechop"]
+  0 -> 2 [label="output"]
+  3[label="fastp"]
+  2 -> 3 [label="outfile"]
+  4[label="Kraken2"]
+  3 -> 4 [label="out1"]
+  kcc3a0524af9c4145901b7268f0d7ce4b[color=lightseagreen,label="Output\nkraken_report"]
+  4 -> kcc3a0524af9c4145901b7268f0d7ce4b
+  5[label="Filter"]
+  4 -> 5 [label="report_output"]
+  6[label="Filter"]
+  4 -> 6 [label="report_output"]
+  7[label="Krakentools: Convert kraken report file"]
+  4 -> 7 [label="report_output"]
+  kfb469e62a49c4970b08b6d88c7df5c10[color=lightseagreen,label="Output\nkrakentool_report"]
+  7 -> kfb469e62a49c4970b08b6d88c7df5c10
+  8[label="Krona pie chart"]
+  7 -> 8 [label="output"]
+}

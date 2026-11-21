@@ -1,0 +1,733 @@
+{
+   "uuid":"acb08384-9da5-4fd3-aa05-1d1809cb87b4",
+   "tags":[
+      "computational-chemistry"
+   ],
+   "format-version":"0.1",
+   "name":"GROMACS Training Workflow",
+   "version":1,
+   "steps":{
+      "0":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.0",
+         "tool_version":"0.1.0",
+         "outputs":[
+            {
+               "type":"pdb",
+               "name":"output"
+            }
+         ],
+         "workflow_outputs":[
+            {
+               "output_name":"output",
+               "uuid":"6c877d6c-28d4-4f77-8314-dd0f9ed09474",
+               "label":null
+            }
+         ],
+         "input_connections":{
+
+         },
+         "tool_state":"{\"pdb_id\": \"\\\"1aki\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+         "id":0,
+         "tool_shed_repository":{
+            "owner":"bgruening",
+            "changeset_revision":"538790c6c21b",
+            "name":"get_pdb",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"cc9d4f3f-27b3-4a1d-90b4-e48852402f84",
+         "errors":null,
+         "name":"Get PDB file",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":200,
+            "left":200
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.0",
+         "type":"tool"
+      },
+      "1":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
+         "tool_version":"1.1.1",
+         "outputs":[
+            {
+               "type":"input",
+               "name":"output"
+            }
+         ],
+         "workflow_outputs":[
+            {
+               "output_name":"output",
+               "uuid":"6c90bcff-6759-4b2f-b761-9b48374cb527",
+               "label":null
+            }
+         ],
+         "input_connections":{
+            "infile":{
+               "output_name":"output",
+               "id":0
+            }
+         },
+         "tool_state":"{\"lines_before\": \"\\\"0\\\"\", \"regex_type\": \"\\\"-P\\\"\", \"__page__\": null, \"color\": \"\\\"NOCOLOR\\\"\", \"invert\": \"\\\"-v\\\"\", \"case_sensitive\": \"\\\"-i\\\"\", \"__rerun_remap_job_id__\": null, \"url_paste\": \"\\\"HETATM\\\"\", \"lines_after\": \"\\\"0\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+         "id":1,
+         "tool_shed_repository":{
+            "owner":"bgruening",
+            "changeset_revision":"9ff72e942410",
+            "name":"text_processing",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"10503b43-6802-4dd2-bc7c-a378d67ad0ea",
+         "errors":null,
+         "name":"Search in textfiles",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+            {
+               "name":"infile",
+               "description":"runtime parameter for tool Search in textfiles"
+            }
+         ],
+         "position":{
+            "top":200,
+            "left":265.7166748046875
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
+         "type":"tool"
+      },
+      "2":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_setup/gmx_setup/2020.2+galaxy0",
+         "tool_version":"2020.2+galaxy0",
+         "outputs":[
+            {
+               "type":"top",
+               "name":"output1"
+            },
+            {
+               "type":"gro",
+               "name":"output2"
+            },
+            {
+               "type":"itp",
+               "name":"output3"
+            },
+            {
+               "type":"txt",
+               "name":"report"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "pdb_input":{
+               "output_name":"output",
+               "id":1
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"pdb_input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"capture_log\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"water\": \"\\\"spce\\\"\", \"ff\": \"\\\"oplsaa\\\"\", \"ignore_h\": \"\\\"false\\\"\"}",
+         "id":2,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"4da9ee404eab",
+            "name":"gmx_setup",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"aceadf04-1d08-48cb-97c1-23eeb6eb6708",
+         "errors":null,
+         "name":"GROMACS initial setup",
+         "post_job_actions":{
+            "HideDatasetActionoutput3":{
+               "output_name":"output3",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            },
+            "HideDatasetActionoutput2":{
+               "output_name":"output2",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            },
+            "HideDatasetActionoutput1":{
+               "output_name":"output1",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            },
+            "HideDatasetActionreport":{
+               "output_name":"report",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            }
+         },
+         "label":null,
+         "inputs":[
+            {
+               "name":"pdb_input",
+               "description":"runtime parameter for tool GROMACS initial setup"
+            }
+         ],
+         "position":{
+            "top":200,
+            "left":334.66668701171875
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_setup/gmx_setup/2020.2+galaxy0",
+         "type":"tool"
+      },
+      "3":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2020.2+galaxy0",
+         "tool_version":"2020.2+galaxy0",
+         "outputs":[
+            {
+               "type":"gro",
+               "name":"output"
+            }
+         ],
+         "workflow_outputs":[
+            {
+               "output_name":"output",
+               "uuid":"36cb2f15-bdaa-490a-bc46-936964520843",
+               "label":null
+            }
+         ],
+         "input_connections":{
+            "input_file":{
+               "output_name":"output2",
+               "id":2
+            }
+         },
+         "tool_state":"{\"box\": \"{\\\"__current_case__\\\": 0, \\\"config\\\": \\\"true\\\", \\\"dim\\\": \\\"1.0\\\", \\\"type\\\": \\\"cubic\\\"}\", \"__page__\": null, \"capture_log\": \"\\\"false\\\"\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"output_format\": \"\\\"gro\\\"\", \"__rerun_remap_job_id__\": null}",
+         "id":3,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"bfb65cb551d8",
+            "name":"gmx_editconf",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"1950b3f5-3998-4c11-b38b-f70ca0edc4be",
+         "errors":null,
+         "name":"GROMACS structure configuration",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+            {
+               "name":"input_file",
+               "description":"runtime parameter for tool GROMACS structure configuration"
+            }
+         ],
+         "position":{
+            "top":200,
+            "left":412.13330078125
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2020.2+galaxy0",
+         "type":"tool"
+      },
+      "4":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_solvate/gmx_solvate/2020.2+galaxy0",
+         "tool_version":"2020.2+galaxy0",
+         "outputs":[
+            {
+               "type":"gro",
+               "name":"output1"
+            },
+            {
+               "type":"top",
+               "name":"output2"
+            },
+            {
+               "type":"txt",
+               "name":"report"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "top_input":{
+               "output_name":"output1",
+               "id":2
+            },
+            "gro_input":{
+               "output_name":"output",
+               "id":3
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"capture_log\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"gro_input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"conc\": \"\\\"0.0\\\"\", \"water_model\": \"\\\"spc216\\\"\", \"top_input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"neutralise\": \"\\\"true\\\"\"}",
+         "id":4,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"27ea4e1a3f95",
+            "name":"gmx_solvate",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"e8e9b1c0-6885-4ace-bea1-ba54556c93a1",
+         "errors":null,
+         "name":"GROMACS solvation and adding ions",
+         "post_job_actions":{
+            "HideDatasetActionoutput2":{
+               "output_name":"output2",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            },
+            "HideDatasetActionoutput1":{
+               "output_name":"output1",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            },
+            "HideDatasetActionreport":{
+               "output_name":"report",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            }
+         },
+         "label":null,
+         "inputs":[
+            {
+               "name":"gro_input",
+               "description":"runtime parameter for tool GROMACS solvation and adding ions"
+            },
+            {
+               "name":"top_input",
+               "description":"runtime parameter for tool GROMACS solvation and adding ions"
+            }
+         ],
+         "position":{
+            "top":200,
+            "left":494.33331298828125
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_solvate/gmx_solvate/2020.2+galaxy0",
+         "type":"tool"
+      },
+      "5":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_em/gmx_em/2020.2+galaxy0",
+         "tool_version":"2020.2+galaxy0",
+         "outputs":[
+            {
+               "type":"gro",
+               "name":"output1"
+            },
+            {
+               "type":"edr",
+               "name":"output2"
+            },
+            {
+               "type":"txt",
+               "name":"report"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "top_input":{
+               "output_name":"output2",
+               "id":4
+            },
+            "gro_input":{
+               "output_name":"output1",
+               "id":4
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"capture_log\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"gro_input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"top_input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"mdp\": \"{\\\"__current_case__\\\": 1, \\\"coulombtype\\\": \\\"PME\\\", \\\"cutoffscheme\\\": \\\"Verlet\\\", \\\"emstep\\\": \\\"0.01\\\", \\\"emtol\\\": \\\"1000.0\\\", \\\"integrator\\\": \\\"steep\\\", \\\"md_steps\\\": \\\"50000\\\", \\\"mdpfile\\\": \\\"default\\\", \\\"rcoulomb\\\": \\\"1.0\\\", \\\"rlist\\\": \\\"1.0\\\", \\\"rvdw\\\": \\\"1.0\\\"}\"}",
+         "id":5,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"55918daa5651",
+            "name":"gmx_em",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"8912083a-2e9f-4df5-af83-a7f4db5bcc2d",
+         "errors":null,
+         "name":"GROMACS energy minimization",
+         "post_job_actions":{
+            "HideDatasetActionoutput2":{
+               "output_name":"output2",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            },
+            "HideDatasetActionoutput1":{
+               "output_name":"output1",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            },
+            "HideDatasetActionreport":{
+               "output_name":"report",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            }
+         },
+         "label":null,
+         "inputs":[
+            {
+               "name":"top_input",
+               "description":"runtime parameter for tool GROMACS energy minimization"
+            },
+            {
+               "name":"gro_input",
+               "description":"runtime parameter for tool GROMACS energy minimization"
+            }
+         ],
+         "position":{
+            "top":200,
+            "left":576.5499877929688
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_em/gmx_em/2020.2+galaxy0",
+         "type":"tool"
+      },
+      "6":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.2+galaxy0",
+         "tool_version":"2020.2+galaxy0",
+         "outputs":[
+            {
+               "type":"gro",
+               "name":"output1"
+            },
+            {
+               "type":"cpt",
+               "name":"output5"
+            },
+            {
+               "type":"edr",
+               "name":"output6"
+            },
+            {
+               "type":"txt",
+               "name":"report"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "inps|itp_in":{
+               "output_name":"output3",
+               "id":2
+            },
+            "top_input":{
+               "output_name":"output2",
+               "id":4
+            },
+            "gro_input":{
+               "output_name":"output1",
+               "id":5
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"capture_log\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"gro_input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"sets\": \"{\\\"ensemble\\\": \\\"nvt\\\", \\\"mdp\\\": {\\\"__current_case__\\\": 1, \\\"constraints\\\": \\\"none\\\", \\\"coulombtype\\\": \\\"PME\\\", \\\"cutoffscheme\\\": \\\"Verlet\\\", \\\"integrator\\\": \\\"md\\\", \\\"md_steps\\\": \\\"50000\\\", \\\"mdpfile\\\": \\\"default\\\", \\\"rcoulomb\\\": \\\"1.0\\\", \\\"rlist\\\": \\\"1.0\\\", \\\"rvdw\\\": \\\"1.0\\\", \\\"step_length\\\": \\\"0.001\\\", \\\"temperature\\\": \\\"300\\\", \\\"write_freq\\\": \\\"0\\\"}}\", \"top_input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"outps\": \"{\\\"cpt_out\\\": \\\"true\\\", \\\"edr_out\\\": \\\"true\\\", \\\"str\\\": \\\"gro\\\", \\\"tpr_out\\\": \\\"false\\\", \\\"traj\\\": \\\"none\\\", \\\"xvg_out\\\": \\\"false\\\"}\", \"inps\": \"{\\\"cpt_in\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"itp_in\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"ndx_in\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\"}",
+         "id":6,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"a97dcfc23b4b",
+            "name":"gmx_sim",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"c0489564-9908-49c5-add9-8e39f27e398b",
+         "errors":null,
+         "name":"GROMACS simulation",
+         "post_job_actions":{
+            "HideDatasetActionoutput1":{
+               "output_name":"output1",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            },
+            "HideDatasetActionoutput6":{
+               "output_name":"output6",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            },
+            "HideDatasetActionoutput5":{
+               "output_name":"output5",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            },
+            "HideDatasetActionreport":{
+               "output_name":"report",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            }
+         },
+         "label":"NVT equilibration",
+         "inputs":[
+            {
+               "name":"gro_input",
+               "description":"runtime parameter for tool GROMACS simulation"
+            },
+            {
+               "name":"top_input",
+               "description":"runtime parameter for tool GROMACS simulation"
+            },
+            {
+               "name":"inps",
+               "description":"runtime parameter for tool GROMACS simulation"
+            },
+            {
+               "name":"inps",
+               "description":"runtime parameter for tool GROMACS simulation"
+            },
+            {
+               "name":"inps",
+               "description":"runtime parameter for tool GROMACS simulation"
+            }
+         ],
+         "position":{
+            "top":200,
+            "left":658.75
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.2+galaxy0",
+         "type":"tool"
+      },
+      "7":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.2+galaxy0",
+         "tool_version":"2020.2+galaxy0",
+         "outputs":[
+            {
+               "type":"gro",
+               "name":"output1"
+            },
+            {
+               "type":"cpt",
+               "name":"output5"
+            },
+            {
+               "type":"txt",
+               "name":"report"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "inps|itp_in":{
+               "output_name":"output3",
+               "id":2
+            },
+            "top_input":{
+               "output_name":"output2",
+               "id":4
+            },
+            "gro_input":{
+               "output_name":"output1",
+               "id":6
+            },
+            "inps|cpt_in":{
+               "output_name":"output5",
+               "id":6
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"capture_log\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"gro_input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"sets\": \"{\\\"ensemble\\\": \\\"npt\\\", \\\"mdp\\\": {\\\"__current_case__\\\": 1, \\\"constraints\\\": \\\"none\\\", \\\"coulombtype\\\": \\\"PME\\\", \\\"cutoffscheme\\\": \\\"Verlet\\\", \\\"integrator\\\": \\\"md\\\", \\\"md_steps\\\": \\\"50000\\\", \\\"mdpfile\\\": \\\"default\\\", \\\"rcoulomb\\\": \\\"1.0\\\", \\\"rlist\\\": \\\"1.0\\\", \\\"rvdw\\\": \\\"1.0\\\", \\\"step_length\\\": \\\"0.001\\\", \\\"temperature\\\": \\\"300\\\", \\\"write_freq\\\": \\\"0\\\"}}\", \"top_input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"outps\": \"{\\\"cpt_out\\\": \\\"true\\\", \\\"edr_out\\\": \\\"false\\\", \\\"str\\\": \\\"gro\\\", \\\"tpr_out\\\": \\\"false\\\", \\\"traj\\\": \\\"none\\\", \\\"xvg_out\\\": \\\"false\\\"}\", \"inps\": \"{\\\"cpt_in\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"itp_in\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"ndx_in\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\"}",
+         "id":7,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"a97dcfc23b4b",
+            "name":"gmx_sim",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"9e43f021-45db-4200-ad7d-4578837ac09c",
+         "errors":null,
+         "name":"GROMACS simulation",
+         "post_job_actions":{
+            "HideDatasetActionoutput1":{
+               "output_name":"output1",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            },
+            "HideDatasetActionoutput5":{
+               "output_name":"output5",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            },
+            "HideDatasetActionreport":{
+               "output_name":"report",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            }
+         },
+         "label":"NPT equilibration",
+         "inputs":[
+            {
+               "name":"gro_input",
+               "description":"runtime parameter for tool GROMACS simulation"
+            },
+            {
+               "name":"top_input",
+               "description":"runtime parameter for tool GROMACS simulation"
+            },
+            {
+               "name":"inps",
+               "description":"runtime parameter for tool GROMACS simulation"
+            },
+            {
+               "name":"inps",
+               "description":"runtime parameter for tool GROMACS simulation"
+            },
+            {
+               "name":"inps",
+               "description":"runtime parameter for tool GROMACS simulation"
+            }
+         ],
+         "position":{
+            "top":200,
+            "left":734.4666748046875
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.2+galaxy0",
+         "type":"tool"
+      },
+      "8":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.2+galaxy0",
+         "tool_version":"2020.2+galaxy0",
+         "outputs":[
+            {
+               "type":"gro",
+               "name":"output1"
+            },
+            {
+               "type":"xtc",
+               "name":"output4"
+            },
+            {
+               "type":"txt",
+               "name":"report"
+            }
+         ],
+         "workflow_outputs": [
+            {
+               "label": "xtc_output",
+               "output_name": "output4",
+               "uuid": "027305f5-213b-40af-8e2b-c376d5d2e294"
+            },
+            {
+               "label": "gro_output",
+               "output_name": "output1",
+               "uuid": "e745fd4c-f607-4215-84e4-c62587c8c07a"
+            }
+         ],
+         "input_connections":{
+            "top_input":{
+               "output_name":"output2",
+               "id":4
+            },
+            "gro_input":{
+               "output_name":"output1",
+               "id":7
+            },
+            "inps|cpt_in":{
+               "output_name":"output5",
+               "id":7
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"capture_log\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"gro_input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"sets\": \"{\\\"ensemble\\\": \\\"nvt\\\", \\\"mdp\\\": {\\\"__current_case__\\\": 1, \\\"constraints\\\": \\\"none\\\", \\\"coulombtype\\\": \\\"PME\\\", \\\"cutoffscheme\\\": \\\"Verlet\\\", \\\"integrator\\\": \\\"md\\\", \\\"md_steps\\\": \\\"500000\\\", \\\"mdpfile\\\": \\\"default\\\", \\\"rcoulomb\\\": \\\"1.0\\\", \\\"rlist\\\": \\\"1.0\\\", \\\"rvdw\\\": \\\"1.0\\\", \\\"step_length\\\": \\\"0.001\\\", \\\"temperature\\\": \\\"300\\\", \\\"write_freq\\\": \\\"0\\\"}}\", \"top_input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"outps\": \"{\\\"cpt_out\\\": \\\"false\\\", \\\"edr_out\\\": \\\"false\\\", \\\"str\\\": \\\"gro\\\", \\\"tpr_out\\\": \\\"false\\\", \\\"traj\\\": \\\"xtc\\\", \\\"xvg_out\\\": \\\"false\\\"}\", \"inps\": \"{\\\"cpt_in\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"itp_in\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"ndx_in\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\"}",
+         "id":8,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"a97dcfc23b4b",
+            "name":"gmx_sim",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"13266213-d546-4b13-9cf4-7c46186b23cd",
+         "errors":null,
+         "name":"GROMACS simulation",
+         "post_job_actions":{
+            "HideDatasetActionoutput1":{
+               "output_name":"output1",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            },
+            "HideDatasetActionreport":{
+               "output_name":"report",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            },
+            "HideDatasetActionoutput4":{
+               "output_name":"output4",
+               "action_type":"HideDatasetAction",
+               "action_arguments":{
+
+               }
+            }
+         },
+         "label":"MD simulation",
+         "inputs":[
+            {
+               "name":"gro_input",
+               "description":"runtime parameter for tool GROMACS simulation"
+            },
+            {
+               "name":"top_input",
+               "description":"runtime parameter for tool GROMACS simulation"
+            },
+            {
+               "name":"inps",
+               "description":"runtime parameter for tool GROMACS simulation"
+            },
+            {
+               "name":"inps",
+               "description":"runtime parameter for tool GROMACS simulation"
+            },
+            {
+               "name":"inps",
+               "description":"runtime parameter for tool GROMACS simulation"
+            }
+         ],
+         "position":{
+            "top":200,
+            "left":810.1666870117188
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.2+galaxy0",
+         "type":"tool"
+      }
+   },
+   "annotation":"Running molecular dynamics simulations using GROMACS",
+   "a_galaxy_workflow":"true"
+}

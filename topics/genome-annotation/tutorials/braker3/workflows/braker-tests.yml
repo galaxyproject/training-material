@@ -1,0 +1,82 @@
+- doc: Test outline for braker.ga
+  job:
+    Genome sequence masked:
+      class: File
+      location: https://zenodo.org/records/14770765/files/genome.fasta
+      filetype: fasta
+    Alignments from RNA-seq:
+      class: File
+      location: https://zenodo.org/records/14770765/files/RNASeq.bam
+      filetype: bam
+    Protein sequences:
+      class: File
+      location: https://zenodo.org/records/14770765/files/protein_sequences.fasta
+      filetype: fasta
+    BUSCO lineage: 'mucorales_odb10'
+
+  
+  outputs:
+    busco sum genome:
+      asserts:
+        - has_text:
+            text: "BUSCO version is: 5.8.0"
+            text: "mucorales_odb10"
+    busco table genome:
+      asserts:
+        - has_text:
+            text: "BUSCO version is: 5.8.0 "
+            text: "mucorales_odb10"
+    busco missing genome:
+      asserts:
+        - has_n_lines:
+            n: 1211
+        - has_text:
+            text: "BUSCO version is: 5.8.0"
+            text: "mucorales_odb10"
+    busco gff genome:
+      asserts:
+        - has_n_lines:
+            n: 5255
+        - has_text:
+            text: "gff-version 3"
+            text: "miniprot"
+    
+    braker:
+      asserts:
+        - has_n_lines:
+            n: 15236
+        - has_text:
+            text: "AUGUSTUS"
+            text: "scaffold_100"   
+    
+    pep:
+      asserts:
+        - has_n_lines:
+            n: 10215
+      
+    busco missing pep:
+      asserts:
+        - has_text:
+            text: "BUSCO version is: 5.8.0"
+            text: "mucorales_odb10"   
+    busco table pep:
+      asserts:
+        - has_text:
+            text: "BUSCO version is: 5.8.0"
+            text: "mucorales_odb10"     
+    busco sum pep:
+      asserts:
+        - has_text:
+            text: "BUSCO version is: 5.8.0"
+            text: "mucorales_odb10"
+    busco gff pep:
+      asserts:
+        - has_text:
+            text: "gff-version 3"
+
+    omark detail sum:
+      asserts:
+        - has_n_lines:
+            n: 63
+        - has_text:
+            text: "Mucorineae"

@@ -1,0 +1,276 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "This workflow is executing a BiaPy workflow using a YAML file where the model selection is predefined.",
+    "comments": [
+        {
+            "child_steps": [
+                1,
+                2,
+                0
+            ],
+            "color": "orange",
+            "data": {
+                "title": "User Input"
+            },
+            "id": 0,
+            "position": [
+                0,
+                0
+            ],
+            "size": [
+                240,
+                422.6
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                4
+            ],
+            "color": "lime",
+            "data": {
+                "title": "3D-rendering"
+            },
+            "id": 1,
+            "position": [
+                650,
+                0
+            ],
+            "size": [
+                240,
+                204.5
+            ],
+            "type": "frame"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Organization",
+            "name": "Riccardo Massei"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "BiaPy",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Dataset to test your model on",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Dataset to test your model on",
+                    "name": "Input the test data"
+                }
+            ],
+            "label": "Input the test data",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 20,
+                "top": 40
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\", \"fields\": null, \"column_definitions\": null}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "36aa6849-f682-475b-accc-5fe4ff04c8a7",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "A BiaPy YAML pre-configured file",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "A BiaPy YAML pre-configured file",
+                    "name": "Input a BiaPy YAML configuration file"
+                }
+            ],
+            "label": "Input a BiaPy YAML configuration file",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 20,
+                "top": 180
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "8a8b5e9e-afea-4305-bec4-b3f9e909116b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Ground truth for the input test data",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Ground truth for the input test data",
+                    "name": "Input the image ground truth"
+                }
+            ],
+            "label": "Input the image ground truth",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 20,
+                "top": 320
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": true, \"tag\": null, \"collection_type\": \"list\", \"fields\": null, \"column_definitions\": null}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "80f42893-605a-4b1f-a0f2-ada6ff51f838",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/biapy/biapy/3.6.8+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "mode_selection|config_path": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "mode_selection|test_sec|gt_test": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "mode_selection|test_sec|raw_test": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Build a workflow with BiaPy",
+                    "name": "mode_selection"
+                },
+                {
+                    "description": "runtime parameter for tool Build a workflow with BiaPy",
+                    "name": "mode_selection"
+                }
+            ],
+            "label": null,
+            "name": "Build a workflow with BiaPy",
+            "outputs": [
+                {
+                    "name": "predictions_raw",
+                    "type": "input"
+                },
+                {
+                    "name": "predictions_post_proc",
+                    "type": "input"
+                },
+                {
+                    "name": "test_metrics",
+                    "type": "input"
+                },
+                {
+                    "name": "config_file",
+                    "type": "yaml"
+                }
+            ],
+            "position": {
+                "left": 370,
+                "top": 90
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/biapy/biapy/3.6.8+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "8dab52928e70",
+                "name": "biapy",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"mode_selection\": {\"selected_mode\": \"custom_cfg\", \"__current_case__\": 0, \"config_path\": {\"__class__\": \"ConnectedValue\"}, \"biapy_model_path\": {\"__class__\": \"RuntimeValue\"}, \"train_sec\": {\"raw_train\": {\"__class__\": \"RuntimeValue\"}, \"gt_train\": {\"__class__\": \"RuntimeValue\"}}, \"test_sec\": {\"raw_test\": {\"__class__\": \"ConnectedValue\"}, \"gt_test\": {\"__class__\": \"ConnectedValue\"}}}, \"selected_outputs\": [\"raw\", \"post_proc\", \"metrics\"], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "3.6.8+galaxy0",
+            "type": "tool",
+            "uuid": "ba5751de-d2a7-4d8e-9d32-8f42c5fbb9e4",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "predictions_post_proc",
+                    "output_name": "predictions_post_proc",
+                    "uuid": "40a9aa77-8541-4b12-91e6-a6e98af013ea"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/libcarna_render/libcarna_render/0.2.0+galaxy2",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "intensities": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "mask|image": {
+                    "id": 3,
+                    "output_name": "predictions_post_proc"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Render 3-D image data",
+                    "name": "mask"
+                }
+            ],
+            "label": null,
+            "name": "Render 3-D image data",
+            "outputs": [
+                {
+                    "name": "html",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 670,
+                "top": 40
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/libcarna_render/libcarna_render/0.2.0+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "8fa86f0ebca2",
+                "name": "libcarna_render",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"axes\": \"XYZ\", \"camera\": {\"fov\": \"90.0\", \"distance\": \"100.0\", \"z_near\": \"10.0\", \"z_far\": \"1000.0\"}, \"colorbar\": true, \"colormap\": {\"name\": \"gist_grey\", \"__current_case__\": 76, \"ramp\": {\"enabled\": \"false\", \"__current_case__\": 1}}, \"height\": \"450\", \"intensities\": {\"__class__\": \"ConnectedValue\"}, \"mask\": {\"enabled\": \"true\", \"__current_case__\": 1, \"image\": {\"__class__\": \"ConnectedValue\"}, \"color\": \"#00ff00\"}, \"mode\": {\"name\": \"mip\", \"__current_case__\": 0}, \"sample_rate\": \"800\", \"sample_rate_override\": \"0\", \"units\": \"raw\", \"video\": {\"frames\": \"200\", \"fps\": \"25\"}, \"width\": \"800\", \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.2.0+galaxy2",
+            "type": "tool",
+            "uuid": "774d4924-7444-4fff-92da-607deeea67ac",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "html",
+                    "output_name": "html",
+                    "uuid": "07011470-6b7a-4460-8e2b-728b08c1e77d"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "imaging"
+    ],
+    "uuid": "07a63ae7-7109-4c54-977c-3b76b1c8393f",
+    "version": 13
+}

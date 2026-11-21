@@ -1,0 +1,47 @@
+---
+name: "assembly"
+type: "use"
+topic_type: technology
+title: "Assembly"
+summary: "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone."
+docker_image: "quay.io/galaxy/assembly-training"
+edam_ontology: ["topic_0196"]
+
+requirements:
+  -
+    type: "internal"
+    topic_name: introduction
+  -
+    type: "internal"
+    topic_name: sequence-analysis
+    tutorials:
+      - quality-control
+
+
+editorial_board:
+  - delphine-l
+  - tflowers15
+  - nekrut
+
+subtopics:
+  - id: introduction
+    title: "Introduction"
+    description: "Start here if you are new to genome assembly in Galaxy"
+  - id: short-read-assembly
+    title: "Short Read Assembly"
+    description: "These tutorials cover genome assembly using short reads"
+    crosstopic_tutorials:
+      - topic: microbiome
+        tutorial: metagenomics-assembly
+  - id: hybrid-assembly
+    title: "Hybrid Assembly using Short and Long Reads"
+    description: "These tutorials cover hybrid genome assembly using both short and long reads"
+  - id: pacbio-assembly
+    title: "Assembly using PacBio Reads"
+    description: "These tutorials cover genome assembly using PacBio reads"
+  - id: assembly-cleaning
+    title: "Cleaning Genome Assembly"
+    description: "These tutorials cover how to clean and decontaminate a genome assembly"
+  - id: assembly-quality
+    title: "Assessing Genome Assembly Quality"
+    description: "These tutorials cover how to assess the quality of a genome assembly"

@@ -1,0 +1,62 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[label="EGA Download Client"]
+  k85672f3a155649b6be092e6c81721fb3[color=lightseagreen,label="Output\nEGA Download Client: authorized datasets"]
+  0 -> k85672f3a155649b6be092e6c81721fb3
+  1[label="EGA Download Client"]
+  kacd2bcf04b9d47439034716e73d4824f[color=lightseagreen,label="Output\nList of files in EGAD00001008392"]
+  1 -> kacd2bcf04b9d47439034716e73d4824f
+  2[color=lightblue,label="ℹ️ Input Dataset\npedigree"]
+  3[label="Search in textfiles"]
+  1 -> 3 [label="dataset_file_list"]
+  k6d5d135ea37349389374019a09f45a51[color=lightseagreen,label="Output\nList of Case 5 VCFs"]
+  3 -> k6d5d135ea37349389374019a09f45a51
+  4[label="EGA Download Client"]
+  3 -> 4 [label="output"]
+  kbdce7169390b4adb93055550d5d70a73[color=lightseagreen,label="Output\nCase 5 VCFs.gz"]
+  4 -> kbdce7169390b4adb93055550d5d70a73
+  5[label="Convert compressed file to uncompressed."]
+  4 -> 5 [label="downloaded_file_collection"]
+  k82b71cdcd8134c778ff3fa59e1725709[color=lightseagreen,label="Output\nCase 5 VCFs"]
+  5 -> k82b71cdcd8134c778ff3fa59e1725709
+  6[label="Column Regex Find And Replace"]
+  5 -> 6 [label="output1"]
+  k5e1ff158cf8a4dc89c22b987a9f5ac27[color=lightseagreen,label="Output\nCase 5 VCFs (Fixed Header and Chr)"]
+  6 -> k5e1ff158cf8a4dc89c22b987a9f5ac27
+  7[label="bcftools norm"]
+  6 -> 7 [label="out_file1"]
+  k96b34c8dfa9248cbb01fc05364deba5d[color=lightseagreen,label="Output\nCase 5 Normalized VCFs"]
+  7 -> k96b34c8dfa9248cbb01fc05364deba5d
+  8[label="Filter"]
+  7 -> 8 [label="output_file"]
+  ka8539eb98bc3473ba27f201c3acf5539[color=lightseagreen,label="Output\nCase 5 Normalized VCFs (Removed <NON_REF>)"]
+  8 -> ka8539eb98bc3473ba27f201c3acf5539
+  9[label="bcftools merge"]
+  8 -> 9 [label="out_file1"]
+  kb5c479b2e58a4fe2b1cffc64476c8192[color=lightseagreen,label="Output\nCase 5 Merged VCF"]
+  9 -> kb5c479b2e58a4fe2b1cffc64476c8192
+  10[label="SnpEff eff:"]
+  9 -> 10 [label="output_file"]
+  kcd7b49414f4c46318ad53411e60fbbd9[color=lightseagreen,label="Output\nCase 5 SnpEff Annotated vcf"]
+  10 -> kcd7b49414f4c46318ad53411e60fbbd9
+  11[label="Convert uncompressed file to compressed"]
+  10 -> 11 [label="snpeff_output"]
+  k6e5e1084b5e14daf8f3bbd3868a52a25[color=lightseagreen,label="Output\nSnpEff Annotated vcf_bgzip"]
+  11 -> k6e5e1084b5e14daf8f3bbd3868a52a25
+  12[label="gene.iobio visualisation"]
+  11 -> 12 [label="output1"]
+  11 -> 12 [label="output1"]
+  11 -> 12 [label="output1"]
+  k0b30f4e0732844798a56bbf828fcfdba[color=lightseagreen,label="Output\nCase 5 gene.iobio results"]
+  12 -> k0b30f4e0732844798a56bbf828fcfdba
+  13[label="Case 5 GEMINI Database"]
+  11 -> 13 [label="output1"]
+  2 -> 13 [label="output"]
+  k8a1964d9607c4dd3a2dc0f9a68dbb681[color=lightseagreen,label="Output\nGEMINI Database"]
+  13 -> k8a1964d9607c4dd3a2dc0f9a68dbb681
+  14[label="Case 5 GEMINI Inheritance pattern"]
+  13 -> 14 [label="outfile"]
+  k960ef978089c429281b5731965c72a0d[color=lightseagreen,label="Output\nCase 5 GEMINI results"]
+  14 -> k960ef978089c429281b5731965c72a0d
+}
