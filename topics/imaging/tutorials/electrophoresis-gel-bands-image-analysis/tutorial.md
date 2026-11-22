@@ -58,7 +58,7 @@ Recent advances such as **GelGenie** ({% cite Aquilina2025 %}) further highlight
 
 # Data preparation
 
-The example dataset can be downloaded from here [Electrophoresis gel dataset](https://github.com/galaxyproject/training-material/raw/main/topics/imaging/images/electrophoresis-gel-bands-image-analysis/Image.jpg).
+The example dataset can be downloaded from here [Electrophoresis gel dataset]({% link topics/imaging/images/electrophoresis-gel-bands-image-analysis/Image.jpg %}).
 
 ![Electrophoresis Gel](../../images/electrophoresis-gel-bands-image-analysis/Image.jpg)
 
