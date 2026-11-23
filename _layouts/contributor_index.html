@@ -242,21 +242,21 @@ layout: base
 				</ul>
 				{% endif %}
 
-                {% unless entity.github == false %}
+
                 <br><br>
-		{% unless entity.funder %}
 
 <h3> Your Contributor Card </h3>
 
 <!-- contributor card -->
 <div class="card mb-3" style="max-width: 540px;">
   <div class="row g-0">
-    <div class="col-md-4" style="padding-right: 0;">
+    <div class="col-md-4" style="padding-right: 0; margin: auto;">
       {{ entity | fetch_entity_avatar: page.contributor, 200 }}
     </div>
     <div class="col-md-8" style="padding-left: 0;">
       <div class="card-body">
         <h5 class="card-title">{% if entity.orcid %}<a href="https://orcid.org/{{entity.orcid}}" style="color: white">{% icon orcid %}</a>{% endif %} {{ entity.short_name | default: entity.name }}</h5>
+        {% if entity.short_name %}<p class="card-text">{{entity.name}}</p> {% endif %}
         {% assign maintains = page.editors | where_exp: "item", "item.layout != 'learning-pathway'" %}
         {% assign maintains_num = maintains | size %}
         {% if maintains_num > 0 %}<p class="card-text">Editorial board member for {% for res in maintains %}{{res.title}}{% unless forloop.last %}, {% endunless %}{% endfor %}</p>{% endif %}
@@ -269,8 +269,9 @@ layout: base
 </div>
 <!-- end contributor card -->
 
-                <h3> GitHub Activity</h4>
-                <a href="https://github.com/galaxyproject/training-material/issues?q=+is%3Aissue+author%3A{{page.contributor}}">{% icon github %} Issues Reported</a>
+{% unless entity.github == false %}
+<h3> GitHub Activity</h4>
+    <a href="https://github.com/galaxyproject/training-material/issues?q=+is%3Aissue+author%3A{{page.contributor}}">{% icon github %} Issues Reported</a>
 
 		{% if page.gh_prs_count > 0 %}
 		<h4>{{ page.gh_prs_count }} Merged Pull Requests</h4>
@@ -327,8 +328,8 @@ layout: base
 		</ul>
 		{% endif %}
 
-                {% endunless %}
-		{% endunless %}
+{% endunless %}
+
 
 				{% if page.news_count > 0 %}
 				<h3>News</h3>
