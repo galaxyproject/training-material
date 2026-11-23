@@ -60,7 +60,7 @@ Recent advances such as **GelGenie** ({% cite Aquilina2025 %}) further highlight
 
 The example dataset can be downloaded from here [Electrophoresis gel dataset]({% link topics/imaging/images/electrophoresis-gel-bands-image-analysis/Image.jpg %}).
 
-![Electrophoresis Gel](../../images/electrophoresis-gel-bands-image-analysis/Image.jpg)
+![Electrophoresis Gel]({% link topics/imaging/images/electrophoresis-gel-bands-image-analysis/Image.jpg %})
 
 This image is from {% cite Ohgane2019 %}.
 
