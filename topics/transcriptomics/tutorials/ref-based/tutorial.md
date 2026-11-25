@@ -515,12 +515,12 @@ The BAM file contains information for all our reads, making it difficult to insp
 
 > <hands-on-title>Inspection of mapping results with JBrowse2</hands-on-title>
 >
-> 1. {% tool [JBrowse2](toolshed.g2.bx.psu.edu/repos/fubar/jbrowse2/jbrowse2/3.6.5+galaxy1) %} with the following parameters:
+> 1. {% tool [JBrowse2](toolshed.g2.bx.psu.edu/repos/fubar/jbrowse2/jbrowse2/3.7.0+galaxy2) %} with the following parameters:
 >    - *"Action"*: `New JBrowse Instance`
 >    - In *"Genome Assembly"*:
 >        - {% icon param-repeat %} *"Insert Genome Assembly"*
 >            - *"Reference genome to display"*: `Use a built-in genome`
->                - *"Select a reference genome"*: `Fly (Drosophila melanogaster): dm6 Full`
+>                - *"Select a reference genome"*: `Fly (Drosophila melanogaster): dm6 Full (alias for dm6)`
 >            - *"Default region to display"*: `chr4:540000..560000`
 >            - In *"Track Category"*:
 >                - {% icon param-repeat %} *"Insert Track Category"*
@@ -1157,7 +1157,7 @@ We will reformat the output of **STAR** to be similar to the output of **feature
 > 2. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
 >    - *"Cut columns"*: `c1,c2`
 >    - *"Delimited by"*: `Tab`
->    - {% icon param-collection %} *"From"*: `Select last on collection N` (output of the **Select last** {% icon tool %})
+>    - {% icon param-collection %} *"From"*: `Remove beginning on collection N` (output of the **Remove beginning** {% icon tool %})
 >
 > 3. Rename the collection `FeatureCount-like files`
 {: .hands_on}
@@ -1257,7 +1257,7 @@ Here we counted reads mapped to genes for two samples. It is really interesting 
 > {{ page.zenodo_link }}/files/GSM461182.fastqsanger
 > ```
 >
-> For the single-end data, there is no need to flatten the collection before the **Falco** step. The parameters of all tools are the same except **STAR** for which you can set `Length of the genomic sequence around annotated junctions` to 74 as one dataset has reads of 75bp (others are 44bp and 45bp) and **FeatureCount** were your data are not paired any more.
+> For the single-end data, there is no need to flatten the collection before the **Falco** step. The parameters of all tools are the same except **STAR** for which you can set `Length of the genomic sequence around annotated junctions` to 74 as one dataset has reads of 75bp (others are 44bp and 45bp) and **FeatureCount** where your data are not paired any more.
 {: .hands_on}
 
 # Analysis of the differential gene expression
