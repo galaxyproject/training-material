@@ -1606,10 +1606,6 @@ module Gtn
                                                                                                          root_dir: 'news')
     end
 
-    def self.enumerate_all
-      enumerate_type(/.*/)
-    end
-
     ##
     # GTN:014 - please do not use : colon in your filename.
     # GTN:013 - Please fix this symlink
