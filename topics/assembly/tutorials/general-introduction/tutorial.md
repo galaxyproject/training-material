@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "An Introduction to Genome Assembly"
+title: "An 'Introduction' to Genome Assembly"
 subtopic: introduction
 zenodo_link: 'https://zenodo.org/record/582600'
 
