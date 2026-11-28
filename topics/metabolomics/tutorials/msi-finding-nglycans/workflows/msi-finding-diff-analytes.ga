@@ -1,0 +1,884 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "Mass spectrometry imaging: Finding differential analytes",
+  "format-version": "0.1",
+  "name": "MSI Finding Diff Analytes",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [],
+      "label": "treated",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 445.683349609375,
+        "top": 324.8666687011719
+      },
+      "tool_id": null,
+      "tool_state": "{}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "337046f2-275b-4fc6-a661-16de8e6be533",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "924c77fb-2ed6-4cb2-81bc-dea777294df0"
+        }
+      ]
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [],
+      "label": "control",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 442.95001220703125,
+        "top": 407.2833251953125
+      },
+      "tool_id": null,
+      "tool_state": "{}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "e5ee3457-2418-42ca-855e-b033b15d1eec",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "78357d0f-3571-45a2-9c8c-a06ca31a1c9f"
+        }
+      ]
+    },
+    "10": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_classification/cardinal_classification/1.12.1.3",
+      "errors": null,
+      "id": 10,
+      "input_connections": {
+        "infile": {
+          "id": 9,
+          "output_name": "outfile_imzml"
+        },
+        "type_cond|annotation_file": {
+          "id": 4,
+          "output_name": "pixel_annotations"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "MSI classification",
+      "outputs": [
+        {
+          "name": "classification_images",
+          "type": "pdf"
+        },
+        {
+          "name": "mzfeatures",
+          "type": "tabular"
+        },
+        {
+          "name": "pixeloutput",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1704.300048828125,
+        "top": 659.8166809082031
+      },
+      "post_job_actions": {
+        "HideDatasetActionpixeloutput": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "pixeloutput"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_classification/cardinal_classification/1.12.1.3",
+      "tool_shed_repository": {
+        "changeset_revision": "47fc5b518ffc",
+        "name": "cardinal_classification",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"output_rdata\": \"\\\"false\\\"\", \"__page__\": null, \"type_cond\": \"{\\\"__current_case__\\\": 0, \\\"annotation_file\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"column_fold\\\": null, \\\"column_response\\\": \\\"3\\\", \\\"column_x\\\": \\\"1\\\", \\\"column_y\\\": \\\"2\\\", \\\"method_cond\\\": {\\\"__current_case__\\\": 2, \\\"class_method\\\": \\\"spatialShrunkenCentroids\\\", \\\"ssc_analysis_cond\\\": {\\\"__current_case__\\\": 1, \\\"ssc_method\\\": \\\"ssc_analysis\\\"}, \\\"ssc_kernel_method\\\": \\\"adaptive\\\", \\\"ssc_r\\\": \\\"2\\\", \\\"ssc_s\\\": \\\"0\\\"}, \\\"tabular_header\\\": \\\"true\\\", \\\"type_method\\\": \\\"training\\\"}\", \"__rerun_remap_job_id__\": null, \"centroids\": \"\\\"true\\\"\", \"processed_cond\": \"{\\\"__current_case__\\\": 0, \\\"processed_file\\\": \\\"no_processed\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
+      "tool_version": null,
+      "type": "tool",
+      "uuid": "95932b54-da4a-4625-b22e-0e0ff9bdd5bc",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "mzfeatures",
+          "uuid": "59b45729-bf4b-44ab-8544-c8c1cb4cbcdf"
+        },
+        {
+          "label": null,
+          "output_name": "classification_images",
+          "uuid": "4576bca8-6d7b-4a63-a368-da7ac4982a48"
+        }
+      ]
+    },
+    "11": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_segmentations/cardinal_segmentations/1.12.1.3",
+      "errors": null,
+      "id": 11,
+      "input_connections": {
+        "infile": {
+          "id": 9,
+          "output_name": "outfile_imzml"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "MSI segmentation",
+      "outputs": [
+        {
+          "name": "segmentationimages",
+          "type": "pdf"
+        },
+        {
+          "name": "mzfeatures",
+          "type": "tabular"
+        },
+        {
+          "name": "pixeloutput",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1991.316650390625,
+        "top": 255.76666259765625
+      },
+      "post_job_actions": {
+        "HideDatasetActionmzfeatures": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "mzfeatures"
+        },
+        "HideDatasetActionpixeloutput": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "pixeloutput"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_segmentations/cardinal_segmentations/1.12.1.3",
+      "tool_shed_repository": {
+        "changeset_revision": "9f7d1ec01767",
+        "name": "cardinal_segmentations",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"output_rdata\": \"\\\"false\\\"\", \"setseed\": \"\\\"1\\\"\", \"__page__\": null, \"image_type\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"svg_pixelimage\": \"\\\"false\\\"\", \"centroids\": \"\\\"true\\\"\", \"colours\": \"[{\\\"__index__\\\": 0, \\\"feature_color\\\": \\\"#4f81bd\\\"}, {\\\"__index__\\\": 1, \\\"feature_color\\\": \\\"#f79646\\\"}, {\\\"__index__\\\": 2, \\\"feature_color\\\": \\\"#92d050\\\"}, {\\\"__index__\\\": 3, \\\"feature_color\\\": \\\"#c00000\\\"}]\", \"processed_cond\": \"{\\\"__current_case__\\\": 0, \\\"processed_file\\\": \\\"no_processed\\\"}\", \"segm_cond\": \"{\\\"__current_case__\\\": 0, \\\"pca_method\\\": \\\"irlba\\\", \\\"pca_ncomp\\\": \\\"2\\\", \\\"pca_scale\\\": \\\"false\\\", \\\"segmentationtool\\\": \\\"pca\\\"}\", \"infile\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
+      "tool_version": null,
+      "type": "tool",
+      "uuid": "68ad8111-fad2-4642-889b-ab9c3a59f427",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "segmentationimages",
+          "uuid": "dcc9a3e6-e63d-450b-bea1-636e9ddc091d"
+        }
+      ]
+    },
+    "12": {
+      "annotation": "",
+      "content_id": "Filter1",
+      "errors": null,
+      "id": 12,
+      "input_connections": {
+        "input": {
+          "id": 10,
+          "output_name": "mzfeatures"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Filter",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 911.5,
+        "top": 925.6333312988281
+      },
+      "post_job_actions": {
+        "HideDatasetActionout_file1": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "out_file1"
+        }
+      },
+      "tool_id": "Filter1",
+      "tool_state": "{\"input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__rerun_remap_job_id__\": null, \"header_lines\": \"\\\"1\\\"\", \"cond\": \"\\\"c7>0 and c9<0.05 and c5==\\\\\\\"treated1\\\\\\\"\\\"\", \"__page__\": null}",
+      "tool_version": null,
+      "type": "tool",
+      "uuid": "06aa9e2c-9242-4611-bf6b-e8ab692bc8b9",
+      "workflow_outputs": []
+    },
+    "13": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/join_files_on_column_fuzzy/join_files_on_column_fuzzy/1.0.1",
+      "errors": null,
+      "id": 13,
+      "input_connections": {
+        "f1": {
+          "id": 12,
+          "output_name": "out_file1"
+        },
+        "f2": {
+          "id": 2,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Join two files",
+      "outputs": [
+        {
+          "name": "merged_file",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1086.88330078125,
+        "top": 952.0666809082031
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/join_files_on_column_fuzzy/join_files_on_column_fuzzy/1.0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "22ec3c1a20cd",
+        "name": "join_files_on_column_fuzzy",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"distance\": \"\\\"300.0\\\"\", \"f2\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"f1\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"merge_mode_select\": \"\\\"closest\\\"\", \"add_distance\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"header\": \"\\\"true\\\"\", \"units\": \"\\\"ppm\\\"\", \"c2\": \"\\\"1\\\"\", \"c1\": \"\\\"1\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": null,
+      "type": "tool",
+      "uuid": "5b9259e3-b894-4889-8ace-b6fe932770aa",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "merged_file",
+          "uuid": "3fd228c9-f759-4668-a883-e9f5fa11b7c0"
+        }
+      ]
+    },
+    "14": {
+      "annotation": "",
+      "content_id": "Summary_Statistics1",
+      "errors": null,
+      "id": 14,
+      "input_connections": {
+        "input": {
+          "id": 13,
+          "output_name": "merged_file"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Summary Statistics",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1328.0999755859375,
+        "top": 927.6166687011719
+      },
+      "post_job_actions": {},
+      "tool_id": "Summary_Statistics1",
+      "tool_state": "{\"input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__rerun_remap_job_id__\": null, \"cond\": \"\\\"c12\\\"\", \"__page__\": null}",
+      "tool_version": null,
+      "type": "tool",
+      "uuid": "510cfc59-bf52-4f8a-920f-d5437da29f78",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "out_file1",
+          "uuid": "c76d062a-6f36-4e88-a02a-8951f7b4c17e"
+        }
+      ]
+    },
+    "15": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/1.12.1.2",
+      "errors": null,
+      "id": 15,
+      "input_connections": {
+        "calibrant_file": {
+          "id": 13,
+          "output_name": "merged_file"
+        },
+        "infile": {
+          "id": 3,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "MSI mz images",
+      "outputs": [
+        {
+          "name": "plots",
+          "type": "pdf"
+        }
+      ],
+      "position": {
+        "left": 1334.066650390625,
+        "top": 1030.4666442871094
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/1.12.1.2",
+      "tool_shed_repository": {
+        "changeset_revision": "56b3b7d5f2b5",
+        "name": "cardinal_mz_images",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"calibrant_header\": \"\\\"true\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"image_contrast\": \"\\\"suppression\\\"\", \"image_smoothing\": \"\\\"none\\\"\", \"image_type\": \"\\\"true\\\"\", \"name_column\": \"\\\"11\\\"\", \"__rerun_remap_job_id__\": null, \"svg_pixelimage\": \"\\\"false\\\"\", \"calibrant_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"centroids\": \"\\\"false\\\"\", \"filename\": \"\\\"\\\"\", \"colorkey\": \"\\\"true\\\"\", \"processed_cond\": \"{\\\"__current_case__\\\": 0, \\\"processed_file\\\": \\\"no_processed\\\"}\", \"strip\": \"\\\"true\\\"\", \"__page__\": null, \"overlay_cond\": \"{\\\"__current_case__\\\": 0, \\\"overlay_selection\\\": \\\"no_overlay\\\"}\", \"plusminus_dalton\": \"\\\"0.25\\\"\", \"mz_column\": \"\\\"1\\\"\"}",
+      "tool_version": null,
+      "type": "tool",
+      "uuid": "d2ef59b6-ad5f-46ed-9342-2f49a2f98920",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "svg_output",
+          "uuid": "a3d13a98-d1d8-452d-9427-82745744f53a"
+        },
+        {
+          "label": null,
+          "output_name": "plots",
+          "uuid": "61a511da-3c35-45e2-a23e-d34ce4626297"
+        }
+      ]
+    },
+    "16": {
+      "annotation": "",
+      "content_id": "Grep1",
+      "errors": null,
+      "id": 16,
+      "input_connections": {
+        "input": {
+          "id": 13,
+          "output_name": "merged_file"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Select",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1258.36669921875,
+        "top": 1172.8166809082031
+      },
+      "post_job_actions": {},
+      "tool_id": "Grep1",
+      "tool_state": "{\"__page__\": null, \"input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"invert\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"pattern\": \"\\\"(1663\\\\\\\\.)|(1905\\\\\\\\.)|(2304\\\\\\\\.)\\\"\"}",
+      "tool_version": null,
+      "type": "tool",
+      "uuid": "28905577-0117-4139-9071-350eacf4ccfa",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "out_file1",
+          "uuid": "783b4618-d785-43a8-a190-de80a699272f"
+        }
+      ]
+    },
+    "17": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/1.12.1.2",
+      "errors": null,
+      "id": 17,
+      "input_connections": {
+        "calibrant_file": {
+          "id": 16,
+          "output_name": "out_file1"
+        },
+        "infile": {
+          "id": 3,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "MSI mz images",
+      "outputs": [
+        {
+          "name": "plots",
+          "type": "pdf"
+        }
+      ],
+      "position": {
+        "left": 1462.9666748046875,
+        "top": 1160.4166564941406
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/1.12.1.2",
+      "tool_shed_repository": {
+        "changeset_revision": "56b3b7d5f2b5",
+        "name": "cardinal_mz_images",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"calibrant_header\": \"\\\"false\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"image_contrast\": \"\\\"suppression\\\"\", \"image_smoothing\": \"\\\"none\\\"\", \"image_type\": \"\\\"true\\\"\", \"name_column\": \"\\\"11\\\"\", \"__rerun_remap_job_id__\": null, \"svg_pixelimage\": \"\\\"false\\\"\", \"calibrant_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"centroids\": \"\\\"false\\\"\", \"filename\": \"\\\"\\\"\", \"colorkey\": \"\\\"true\\\"\", \"processed_cond\": \"{\\\"__current_case__\\\": 0, \\\"processed_file\\\": \\\"no_processed\\\"}\", \"strip\": \"\\\"true\\\"\", \"__page__\": null, \"overlay_cond\": \"{\\\"__current_case__\\\": 1, \\\"colours\\\": [{\\\"__index__\\\": 0, \\\"feature_color\\\": \\\"#1f497d\\\"}, {\\\"__index__\\\": 1, \\\"feature_color\\\": \\\"#00b050\\\"}, {\\\"__index__\\\": 2, \\\"feature_color\\\": \\\"#ff0000\\\"}], \\\"overlay_selection\\\": \\\"yes_overlay\\\"}\", \"plusminus_dalton\": \"\\\"0.25\\\"\", \"mz_column\": \"\\\"1\\\"\"}",
+      "tool_version": null,
+      "type": "tool",
+      "uuid": "16498e12-6e7a-415c-9b34-9f4b1c64131d",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "plots",
+          "uuid": "bf27c260-9168-498e-ab18-9324b74fedad"
+        }
+      ]
+    },
+    "2": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 2,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "Glycan_IDs"
+        }
+      ],
+      "label": "Glycan_IDs",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 449.91668701171875,
+        "top": 1052.3666687011719
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"Glycan_IDs\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "78e307cf-92b5-4d1b-89d7-0ebeb7c845b7",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "a028d3d6-38e3-43f7-a023-321178108dc7"
+        }
+      ]
+    },
+    "3": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 3,
+      "input_connections": {},
+      "inputs": [],
+      "label": "all_files",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 447,
+        "top": 1146.7167053222656
+      },
+      "tool_id": null,
+      "tool_state": "{}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "1f30f371-a9c5-4638-a9bd-a69d7a7ee1ec",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "07af2e13-4f7d-4454-8644-4d8cda30eb70"
+        }
+      ]
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_combine/cardinal_combine/1.12.1.3",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "infiles": [
+          {
+            "id": 1,
+            "output_name": "output"
+          },
+          {
+            "id": 0,
+            "output_name": "output"
+          }
+        ]
+      },
+      "inputs": [],
+      "label": null,
+      "name": "MSI combine",
+      "outputs": [
+        {
+          "name": "outfile_imzml",
+          "type": "imzml"
+        },
+        {
+          "name": "QC_overview",
+          "type": "pdf"
+        },
+        {
+          "name": "pixel_annotations",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 637.4666748046875,
+        "top": 337.5500030517578
+      },
+      "post_job_actions": {
+        "HideDatasetActionQC_overview": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "QC_overview"
+        },
+        "HideDatasetActionpixel_annotations": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "pixel_annotations"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_combine/cardinal_combine/1.12.1.3",
+      "tool_shed_repository": {
+        "changeset_revision": "48c07268f341",
+        "name": "cardinal_combine",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"infiles\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"annotation_cond\": \"{\\\"__current_case__\\\": 0, \\\"annotation_tabular\\\": \\\"no_annotation\\\"}\", \"__rerun_remap_job_id__\": null, \"combine_conditional\": \"{\\\"__current_case__\\\": 0, \\\"combine_method\\\": \\\"automatic_combine\\\"}\", \"centroids\": \"\\\"false\\\"\", \"processed_cond\": \"{\\\"__current_case__\\\": 0, \\\"processed_file\\\": \\\"no_processed\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"imzml_output\": \"\\\"imzml_format\\\"\"}",
+      "tool_version": null,
+      "type": "tool",
+      "uuid": "57b0fcdb-c511-43bf-b8af-7aafdaff0d6d",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "outfile_imzml",
+          "uuid": "cdc8f02b-39b1-465b-b725-b0c2b69a5b74"
+        }
+      ]
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_preprocessing/cardinal_preprocessing/1.12.1.3",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "infile": {
+          "id": 4,
+          "output_name": "outfile_imzml"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "MSI preprocessing",
+      "outputs": [
+        {
+          "name": "outfile_imzml",
+          "type": "imzml"
+        },
+        {
+          "name": "QC_overview",
+          "type": "pdf"
+        }
+      ],
+      "position": {
+        "left": 886.0499877929688,
+        "top": 199.98333740234375
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_preprocessing/cardinal_preprocessing/1.12.1.3",
+      "tool_shed_repository": {
+        "changeset_revision": "141a9288be9c",
+        "name": "cardinal_preprocessing",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"methods\": \"[{\\\"__index__\\\": 0, \\\"methods_conditional\\\": {\\\"__current_case__\\\": 0, \\\"preprocessing_method\\\": \\\"Normalization\\\"}}, {\\\"__index__\\\": 1, \\\"methods_conditional\\\": {\\\"__current_case__\\\": 2, \\\"methods_for_smoothing\\\": {\\\"__current_case__\\\": 0, \\\"sd_gaussian\\\": \\\"1.0\\\", \\\"smoothing_method\\\": \\\"gaussian\\\"}, \\\"preprocessing_method\\\": \\\"Smoothing\\\", \\\"window_smoothing\\\": \\\"4.0\\\"}}, {\\\"__index__\\\": 2, \\\"methods_conditional\\\": {\\\"__current_case__\\\": 1, \\\"blocks_baseline\\\": \\\"500\\\", \\\"preprocessing_method\\\": \\\"Baseline_reduction\\\", \\\"spar_baseline\\\": \\\"1.0\\\"}}]\", \"__rerun_remap_job_id__\": null, \"centroids\": \"\\\"false\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"processed_cond\": \"{\\\"__current_case__\\\": 0, \\\"processed_file\\\": \\\"no_processed\\\"}\", \"imzml_output\": \"\\\"imzml_format\\\"\"}",
+      "tool_version": null,
+      "type": "tool",
+      "uuid": "93149694-469a-4a76-8690-ddf691665e55",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "outfile_rdata",
+          "uuid": "613b051e-88d7-46b0-9532-a118b3adb4aa"
+        },
+        {
+          "label": null,
+          "output_name": "outfile_imzml",
+          "uuid": "8718b21e-a330-4a57-9548-e9257819bb45"
+        },
+        {
+          "label": null,
+          "output_name": "QC_overview",
+          "uuid": "3c709575-ac09-47d3-a750-2b3082805e72"
+        }
+      ]
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/1.12.1.3",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "infile": {
+          "id": 4,
+          "output_name": "outfile_imzml"
+        },
+        "tabular_annotation|annotation_file": {
+          "id": 4,
+          "output_name": "pixel_annotations"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool MSI Qualitycontrol",
+          "name": "calibrant_file"
+        }
+      ],
+      "label": null,
+      "name": "MSI Qualitycontrol",
+      "outputs": [
+        {
+          "name": "QC_report",
+          "type": "pdf"
+        }
+      ],
+      "position": {
+        "left": 899.6666870117188,
+        "top": 552.4833374023438
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/1.12.1.3",
+      "tool_shed_repository": {
+        "changeset_revision": "3b7a35d50ebf",
+        "name": "cardinal_quality_report",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"calibrant_header\": \"\\\"false\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"calibrantratio\": \"[]\", \"__page__\": null, \"name_column\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null, \"tabular_annotation\": \"{\\\"__current_case__\\\": 0, \\\"annotation_file\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"column_names\\\": \\\"3\\\", \\\"column_x\\\": \\\"1\\\", \\\"column_y\\\": \\\"2\\\", \\\"load_annotation\\\": \\\"yes_annotation\\\", \\\"tabular_header\\\": \\\"true\\\"}\", \"centroids\": \"\\\"false\\\"\", \"calibrant_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"processed_cond\": \"{\\\"__current_case__\\\": 0, \\\"processed_file\\\": \\\"no_processed\\\"}\", \"do_pca\": \"\\\"true\\\"\", \"filename\": \"\\\"\\\"\", \"plusminus_ppm\": \"\\\"200.0\\\"\", \"mz_column\": \"\\\"\\\"\"}",
+      "tool_version": null,
+      "type": "tool",
+      "uuid": "238e69ed-38e9-451b-84c1-cdd050930672",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "QC_report",
+          "uuid": "64239ff1-1dea-4482-80c7-648aa899f3ab"
+        }
+      ]
+    },
+    "7": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maldi_quant_preprocessing/maldi_quant_preprocessing/1.18.0.3",
+      "errors": null,
+      "id": 7,
+      "input_connections": {
+        "infile": {
+          "id": 5,
+          "output_name": "outfile_imzml"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "MALDIquant preprocessing",
+      "outputs": [
+        {
+          "name": "outfile_imzml",
+          "type": "imzml"
+        },
+        {
+          "name": "plots",
+          "type": "pdf"
+        }
+      ],
+      "position": {
+        "left": 1155.5999755859375,
+        "top": 299.2833251953125
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maldi_quant_preprocessing/maldi_quant_preprocessing/1.18.0.3",
+      "tool_shed_repository": {
+        "changeset_revision": "71411ac28268",
+        "name": "maldi_quant_preprocessing",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"methods\": \"[{\\\"__index__\\\": 0, \\\"methods_conditional\\\": {\\\"__current_case__\\\": 4, \\\"allow_nomatch\\\": \\\"true\\\", \\\"empty_nomatch\\\": \\\"true\\\", \\\"halfWindowSize\\\": \\\"4\\\", \\\"method\\\": \\\"Align\\\", \\\"peak_method\\\": \\\"MAD\\\", \\\"reference_for_alignment\\\": {\\\"__current_case__\\\": 0, \\\"align_ref\\\": \\\"no_reference\\\", \\\"min_frequency\\\": \\\"0.8\\\"}, \\\"remove_empty\\\": \\\"true\\\", \\\"snr\\\": \\\"5\\\", \\\"tolerance\\\": \\\"0.0002\\\", \\\"warping_method\\\": \\\"lowess\\\"}}]\", \"__rerun_remap_job_id__\": null, \"export_processed\": \"\\\"true\\\"\", \"restriction_conditional\": \"{\\\"__current_case__\\\": 1, \\\"restriction\\\": \\\"no_restriction\\\"}\", \"infile\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
+      "tool_version": null,
+      "type": "tool",
+      "uuid": "683d836c-d991-45e6-8c31-fc93ecda0e84",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "outfile_imzml",
+          "uuid": "75b9894a-95d8-4f18-b65a-f4f679b0fa57"
+        },
+        {
+          "label": null,
+          "output_name": "plots",
+          "uuid": "eedcbadd-90f2-420c-bfcc-7aaaca296813"
+        }
+      ]
+    },
+    "8": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maldi_quant_peak_detection/maldi_quant_peak_detection/1.18.0.4",
+      "errors": null,
+      "id": 8,
+      "input_connections": {
+        "infile": {
+          "id": 7,
+          "output_name": "outfile_imzml"
+        },
+        "tabular_annotation|annotation_file": {
+          "id": 4,
+          "output_name": "pixel_annotations"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "MALDIquant peak detection",
+      "outputs": [
+        {
+          "name": "outfile_imzml",
+          "type": "imzml"
+        },
+        {
+          "name": "plots",
+          "type": "pdf"
+        },
+        {
+          "name": "masspeaks",
+          "type": "tabular"
+        },
+        {
+          "name": "intensity_matrix",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1422.449951171875,
+        "top": 398.5833435058594
+      },
+      "post_job_actions": {
+        "HideDatasetActionintensity_matrix": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "intensity_matrix"
+        },
+        "HideDatasetActionmasspeaks": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "masspeaks"
+        },
+        "HideDatasetActionoutfile_imzml": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "outfile_imzml"
+        },
+        "HideDatasetActionplots": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "plots"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maldi_quant_peak_detection/maldi_quant_peak_detection/1.18.0.4",
+      "tool_shed_repository": {
+        "changeset_revision": "e9300ef37403",
+        "name": "maldi_quant_peak_detection",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"methods\": \"[{\\\"__index__\\\": 0, \\\"methods_conditional\\\": {\\\"__current_case__\\\": 0, \\\"halfWindowSize\\\": \\\"4\\\", \\\"method\\\": \\\"Peak_detection\\\", \\\"peak_method\\\": \\\"MAD\\\", \\\"snr\\\": \\\"5\\\", \\\"use_annotations\\\": \\\"true\\\"}}, {\\\"__index__\\\": 1, \\\"methods_conditional\\\": {\\\"__current_case__\\\": 1, \\\"distance\\\": \\\"1.00235\\\", \\\"method\\\": \\\"monoisotopic_peaks\\\", \\\"minCor\\\": \\\"0.4\\\", \\\"size\\\": \\\"2:5\\\", \\\"tolerance\\\": \\\"0.0002\\\"}}, {\\\"__index__\\\": 2, \\\"methods_conditional\\\": {\\\"__current_case__\\\": 3, \\\"bin_method\\\": \\\"strict\\\", \\\"bin_tolerance\\\": \\\"0.0002\\\", \\\"method\\\": \\\"Binning\\\"}}, {\\\"__index__\\\": 3, \\\"methods_conditional\\\": {\\\"__current_case__\\\": 4, \\\"filter_annot_groups\\\": \\\"false\\\", \\\"mergeWhitelists\\\": \\\"false\\\", \\\"method\\\": \\\"Filtering\\\", \\\"minFrequency\\\": \\\"0.01\\\", \\\"minNumber\\\": \\\"1.0\\\"}}]\", \"tabular_annotation\": \"{\\\"__current_case__\\\": 0, \\\"annotation_file\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"column_names\\\": \\\"3\\\", \\\"column_x\\\": \\\"1\\\", \\\"column_y\\\": \\\"2\\\", \\\"load_annotation\\\": \\\"yes_annotation\\\", \\\"tabular_header\\\": \\\"true\\\"}\", \"__rerun_remap_job_id__\": null, \"centroids\": \"\\\"false\\\"\", \"restriction_conditional\": \"{\\\"__current_case__\\\": 1, \\\"restriction\\\": \\\"no_restriction\\\"}\", \"infile\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
+      "tool_version": null,
+      "type": "tool",
+      "uuid": "f7a813fe-46b7-4d07-ab39-ff8e92d758f1",
+      "workflow_outputs": []
+    },
+    "9": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_preprocessing/cardinal_preprocessing/1.12.1.3",
+      "errors": null,
+      "id": 9,
+      "input_connections": {
+        "infile": {
+          "id": 5,
+          "output_name": "outfile_imzml"
+        },
+        "methods_0|methods_conditional|methods_for_reduction|ref_type|mz_tabular": {
+          "id": 8,
+          "output_name": "intensity_matrix"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "MSI preprocessing",
+      "outputs": [
+        {
+          "name": "outfile_imzml",
+          "type": "imzml"
+        },
+        {
+          "name": "QC_overview",
+          "type": "pdf"
+        }
+      ],
+      "position": {
+        "left": 1714.3499755859375,
+        "top": 253.23333740234375
+      },
+      "post_job_actions": {
+        "HideDatasetActionQC_overview": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "QC_overview"
+        },
+        "HideDatasetActionoutfile_imzml": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "outfile_imzml"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_preprocessing/cardinal_preprocessing/1.12.1.3",
+      "tool_shed_repository": {
+        "changeset_revision": "141a9288be9c",
+        "name": "cardinal_preprocessing",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"methods\": \"[{\\\"__index__\\\": 0, \\\"methods_conditional\\\": {\\\"__current_case__\\\": 6, \\\"methods_for_reduction\\\": {\\\"__current_case__\\\": 2, \\\"peaks_type\\\": \\\"height\\\", \\\"reduction_method\\\": \\\"peaks\\\", \\\"ref_type\\\": {\\\"__current_case__\\\": 0, \\\"feature_column\\\": \\\"1\\\", \\\"feature_header\\\": \\\"true\\\", \\\"mz_tabular\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"reference_datatype\\\": \\\"table\\\"}}, \\\"preprocessing_method\\\": \\\"Data_reduction\\\"}}]\", \"__rerun_remap_job_id__\": null, \"centroids\": \"\\\"false\\\"\", \"imzml_output\": \"\\\"imzml_format\\\"\", \"processed_cond\": \"{\\\"__current_case__\\\": 0, \\\"processed_file\\\": \\\"no_processed\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
+      "tool_version": null,
+      "type": "tool",
+      "uuid": "39ce220d-93ae-4e68-9951-c8fb6db9eaec",
+      "workflow_outputs": []
+    }
+  },
+  "tags": [
+    "metabolomics"
+  ],
+  "uuid": "477a22e1-4946-482c-99aa-77ab9815a45d",
+  "version": 10
+}

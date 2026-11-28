@@ -1,0 +1,375 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "",
+  "creator": [{"class": "Person", "identifier":"0000-0001-6585-3619", "name": "Kaivan Kamali"}],
+  "format-version": "0.1",
+  "license": "CC-BY-4.0",
+  "name": "Intro_To_CNN_v1.0.11.0",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "X_test"
+        }
+      ],
+      "label": "X_test",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 0,
+        "top": 0
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "67fe95aa-be8d-4ce8-89a3-844c55d4edf9",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "X_train"
+        }
+      ],
+      "label": "X_train",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 0,
+        "top": 120
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "cf3a589c-9683-47d0-a4b3-f56046633552",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 2,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "y_test"
+        }
+      ],
+      "label": "y_test",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 0,
+        "top": 240
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "5d37d651-f5c9-4af6-9ff1-211d7a145a30",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 3,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "y_train"
+        }
+      ],
+      "label": "y_train",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 0,
+        "top": 360
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "ec126ab6-12b4-4559-9ade-321d6e5f37dd",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/1.0.10.0",
+      "errors": null,
+      "id": 4,
+      "input_connections": {},
+      "inputs": [],
+      "label": null,
+      "name": "Create a deep learning model architecture",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "json"
+        }
+      ],
+      "position": {
+        "left": 0,
+        "top": 480
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/1.0.10.0",
+      "tool_shed_repository": {
+        "changeset_revision": "f22a9297440f",
+        "name": "keras_model_config",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"model_selection\": {\"model_type\": \"sequential\", \"__current_case__\": 0, \"input_shape\": \"(784, )\", \"layers\": [{\"__index__\": 0, \"layer_selection\": {\"layer_type\": \"Reshape\", \"__current_case__\": 4, \"target_shape\": \"(28,28,1)\"}}, {\"__index__\": 1, \"layer_selection\": {\"layer_type\": \"Conv2D\", \"__current_case__\": 13, \"filters\": \"64\", \"kernel_size\": \"3\", \"activation\": \"relu\", \"kwargs\": \"\"}}, {\"__index__\": 2, \"layer_selection\": {\"layer_type\": \"MaxPooling2D\", \"__current_case__\": 30, \"pool_size\": \"(2, 2)\", \"strides\": \"\", \"kwargs\": \"\"}}, {\"__index__\": 3, \"layer_selection\": {\"layer_type\": \"Conv2D\", \"__current_case__\": 13, \"filters\": \"32\", \"kernel_size\": \"3\", \"activation\": \"relu\", \"kwargs\": \"\"}}, {\"__index__\": 4, \"layer_selection\": {\"layer_type\": \"MaxPooling2D\", \"__current_case__\": 30, \"pool_size\": \"(2, 2)\", \"strides\": \"\", \"kwargs\": \"\"}}, {\"__index__\": 5, \"layer_selection\": {\"layer_type\": \"Flatten\", \"__current_case__\": 3, \"data_format\": \"channels_last\"}}, {\"__index__\": 6, \"layer_selection\": {\"layer_type\": \"Dense\", \"__current_case__\": 0, \"units\": \"10\", \"activation\": \"softmax\", \"kwargs\": \"\"}}]}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.10.0",
+      "type": "tool",
+      "uuid": "8c464b6c-cc0e-4424-beda-40e0093975fa",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.10.0",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "infile": {
+          "id": 3,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool To categorical",
+          "name": "infile"
+        }
+      ],
+      "label": null,
+      "name": "To categorical",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 220,
+        "top": 0
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.10.0",
+      "tool_shed_repository": {
+        "changeset_revision": "61634a87efc7",
+        "name": "sklearn_to_categorical",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"header0\": false, \"infile\": {\"__class__\": \"RuntimeValue\"}, \"num_classes\": \"10\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.10.0",
+      "type": "tool",
+      "uuid": "ba49ed1a-45e9-4e2a-b8c6-13f52f02b7d9",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/1.0.10.0",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "mode_selection|infile_json": {
+          "id": 4,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Create deep learning model",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "h5mlm"
+        }
+      ],
+      "position": {
+        "left": 220,
+        "top": 120
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/1.0.10.0",
+      "tool_shed_repository": {
+        "changeset_revision": "66d7efc06000",
+        "name": "keras_model_builder",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"mode_selection\": {\"mode_type\": \"train_model\", \"__current_case__\": 0, \"infile_json\": {\"__class__\": \"ConnectedValue\"}, \"learning_type\": \"KerasGClassifier\", \"compile_params\": {\"loss\": \"categorical_crossentropy\", \"optimizer_selection\": {\"optimizer_type\": \"Adam\", \"__current_case__\": 4, \"optimizer_options\": {\"learning_rate\": \"0.001\", \"beta_1\": \"0.9\", \"beta_2\": \"0.999\", \"epsilon\": \"1e-07\", \"amsgrad\": false}}, \"metrics\": [\"categorical_accuracy\"]}, \"fit_params\": {\"epochs\": \"10\", \"batch_size\": \"500\", \"steps_per_epoch\": null, \"validation_split\": \"0.1\", \"validation_steps\": null, \"callbacks\": [{\"__index__\": 0, \"callback_selection\": {\"callback_type\": \"None\", \"__current_case__\": 0}}], \"verbose\": \"1\"}, \"random_seed\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.10.0",
+      "type": "tool",
+      "uuid": "ec1d0be7-1b66-4c2a-a23b-836adf18e5a3",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "7": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.11.0",
+      "errors": null,
+      "id": 7,
+      "input_connections": {
+        "experiment_schemes|infile_estimator": {
+          "id": 6,
+          "output_name": "outfile"
+        },
+        "input_options|infile1": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "input_options|infile2": {
+          "id": 5,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Deep learning training and evaluation",
+      "outputs": [
+        {
+          "name": "outfile_result",
+          "type": "tabular"
+        },
+        {
+          "name": "outfile_object",
+          "type": "h5mlm"
+        }
+      ],
+      "position": {
+        "left": 440,
+        "top": 0
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.11.0",
+      "tool_shed_repository": {
+        "changeset_revision": "2af1346e68c9",
+        "name": "keras_train_and_eval",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"input\", \"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"experiment_schemes\": {\"selected_exp_scheme\": \"train_val\", \"__current_case__\": 0, \"infile_estimator\": {\"__class__\": \"ConnectedValue\"}, \"hyperparams_swapping\": {\"param_set\": [{\"__index__\": 0, \"sp_name\": null, \"sp_value\": \"\"}]}, \"test_split\": {\"split_algos\": {\"shuffle\": \"simple\", \"__current_case__\": 1, \"test_size\": \"0.2\", \"random_state\": null}}, \"metrics\": {\"scoring\": {\"primary_scoring\": \"accuracy\", \"__current_case__\": 1, \"secondary_scoring\": null}}}, \"input_options\": {\"selected_input\": \"tabular\", \"__current_case__\": 0, \"infile1\": {\"__class__\": \"ConnectedValue\"}, \"header1\": false, \"column_selector_options_1\": {\"selected_column_selector_option\": \"all_columns\", \"__current_case__\": 4}, \"infile2\": {\"__class__\": \"ConnectedValue\"}, \"header2\": false, \"column_selector_options_2\": {\"selected_column_selector_option2\": \"all_columns\", \"__current_case__\": 4}}, \"save\": [\"save_estimator\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.11.0",
+      "type": "tool",
+      "uuid": "8981c4b2-4ae6-4e37-8c28-af3b29fd0fd1",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "8": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.11.0",
+      "errors": null,
+      "id": 8,
+      "input_connections": {
+        "infile_estimator": {
+          "id": 7,
+          "output_name": "outfile_object"
+        },
+        "input_options|infile1": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Model Prediction",
+      "outputs": [
+        {
+          "name": "outfile_predict",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 660,
+        "top": 0
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.11.0",
+      "tool_shed_repository": {
+        "changeset_revision": "25b46af53232",
+        "name": "model_prediction",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"infile_estimator\": {\"__class__\": \"ConnectedValue\"}, \"input_options\": {\"selected_input\": \"tabular\", \"__current_case__\": 0, \"infile1\": {\"__class__\": \"ConnectedValue\"}, \"header1\": false, \"column_selector_options_1\": {\"selected_column_selector_option\": \"all_columns\", \"__current_case__\": 4}}, \"method\": \"predict\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.11.0",
+      "type": "tool",
+      "uuid": "1b6afdbe-45fa-4e54-993b-065167ddadfc",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "9": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.11.0",
+      "errors": null,
+      "id": 9,
+      "input_connections": {
+        "plotting_selection|infile_predicted": {
+          "id": 8,
+          "output_name": "outfile_predict"
+        },
+        "plotting_selection|infile_true": {
+          "id": 2,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Machine Learning Visualization Extension",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "html"
+        }
+      ],
+      "position": {
+        "left": 880,
+        "top": 0
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.11.0",
+      "tool_shed_repository": {
+        "changeset_revision": "8334dc98c48e",
+        "name": "ml_visualization_ex",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"plotting_selection\": {\"plot_type\": \"classification_confusion_matrix\", \"__current_case__\": 6, \"infile_true\": {\"__class__\": \"ConnectedValue\"}, \"header_true\": false, \"column_selector_options_true\": {\"selected_column_selector_option\": \"all_columns\", \"__current_case__\": 4}, \"infile_predicted\": {\"__class__\": \"ConnectedValue\"}, \"header_predicted\": true, \"title\": \"Confusion matrix between true and predicted labels\", \"plot_format\": \"png\", \"plot_color\": \"Greens\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.11.0",
+      "type": "tool",
+      "uuid": "1ade33c6-a159-4294-a1d6-eca914ee600e",
+      "when": null,
+      "workflow_outputs": []
+    }
+  },
+  "tags": [],
+  "uuid": "115b2b2b-1046-48ca-a9d8-eebbdcc778d6",
+  "version": 1
+}

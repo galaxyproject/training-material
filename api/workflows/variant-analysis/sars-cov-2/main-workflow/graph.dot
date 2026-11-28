@@ -1,0 +1,41 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nNC_045512.2 fasta file"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nSRA Manifest"]
+  2[label="Faster Download and Extract Reads in FASTQ"]
+  1 -> 2 [label="output"]
+  3[label="fastp"]
+  2 -> 3 [label="list_paired"]
+  4[label="Map with BWA-MEM"]
+  3 -> 4 [label="output_paired_coll"]
+  0 -> 4 [label="output"]
+  5[label="MarkDuplicates"]
+  4 -> 5 [label="bam_output"]
+  6[label="Realign reads"]
+  5 -> 6 [label="outFile"]
+  0 -> 6 [label="output"]
+  7[label="Samtools stats"]
+  5 -> 7 [label="outFile"]
+  8[label="Insert indel qualities"]
+  6 -> 8 [label="realigned"]
+  0 -> 8 [label="output"]
+  k2ca7c89b999f41dc8037e54e25959a7e[color=lightseagreen,label="Output\nRealigned Alignments with Indel Qualities"]
+  8 -> k2ca7c89b999f41dc8037e54e25959a7e
+  9[label="Call variants"]
+  8 -> 9 [label="output"]
+  0 -> 9 [label="output"]
+  10[label="SnpEff eff:"]
+  9 -> 10 [label="variants"]
+  11[label="SnpSift Extract Fields"]
+  10 -> 11 [label="snpeff_output"]
+  k06259137eaa5404a923c70ee5f1d89d4[color=lightseagreen,label="Output\nSnpSift tabular output"]
+  11 -> k06259137eaa5404a923c70ee5f1d89d4
+  12[label="MultiQC"]
+  3 -> 12 [label="report_json"]
+  7 -> 12 [label="output"]
+  5 -> 12 [label="metrics_file"]
+  10 -> 12 [label="csvFile"]
+  k758ffde57ddd482a88b21504f8335488[color=lightseagreen,label="Output\nMultiQC Report PE"]
+  12 -> k758ffde57ddd482a88b21504f8335488
+}

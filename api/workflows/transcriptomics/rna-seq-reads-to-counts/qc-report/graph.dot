@@ -1,0 +1,17 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nReference genes"]
+  1[color=lightblue,label="ℹ️ Input Collection\nBAM files"]
+  2[label="Infer Experiment"]
+  1 -> 2 [label="output"]
+  0 -> 2 [label="output"]
+  3[label="MarkDuplicates"]
+  1 -> 3 [label="output"]
+  4[label="Samtools idxstats"]
+  1 -> 4 [label="output"]
+  5[label="MultiQC"]
+  2 -> 5 [label="output"]
+  3 -> 5 [label="metrics_file"]
+  4 -> 5 [label="output"]
+}

@@ -1,0 +1,15 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nmouse_kidney_cut.i"]
+  1[color=lightblue,label="ℹ️ Input Dataset\ninternal calibrants.tab"]
+  2[label="MSI data exporter"]
+  0 -> 2 [label="output"]
+  3[label="MSI Qualitycontrol"]
+  1 -> 3 [label="output"]
+  0 -> 3 [label="output"]
+  4[label="Sort"]
+  2 -> 4 [label="feature_output"]
+  5[label="Select"]
+  2 -> 5 [label="pixel_output"]
+}

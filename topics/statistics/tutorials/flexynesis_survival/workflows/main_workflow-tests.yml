@@ -1,0 +1,120 @@
+- doc: Test outline for Final---Survival-Markers-of-Lower-Grade
+  job:
+    clinical_train:
+      class: File
+      location: https://zenodo.org/records/16287482/files/train-clin_BMscRNAseq.tabular
+      filetype: tabular
+    clinical_test:
+      class: File
+      location: https://zenodo.org/records/16287482/files/test-clin_BMscRNAseq.tabular
+      filetype: tabular
+    omics1_train:
+      class: File
+      location: https://zenodo.org/records/16287482/files/train-RNA_BMscRNAseq.tabular
+      filetype: tabular
+    omics1_test:
+      class: File
+      location: https://zenodo.org/records/16287482/files/test-RNA_BMscRNAseq.tabular
+      filetype: tabular
+    omics2_train:
+      class: File
+      location: https://zenodo.org/records/16287482/files/train-ADT_BMscRNAseq.tabular
+      filetype: tabular
+    omics2_test:
+      class: File
+      location: https://zenodo.org/records/16287482/files/test-ADT_BMscRNAseq.tabular
+      filetype: tabular
+  outputs:
+    Cox and KM plots:
+      element_tests:
+        clin_km_km_risk_subtypes:
+          asserts:
+            - that: "has_image_center_of_mass"
+              center_of_mass: "970,730"
+              eps: "30"
+            - that: "has_image_channels"
+              channels: "3"
+            - that: "has_image_height"
+              height: "1460"
+              delta: "20"
+            - that: "has_image_width"
+              width: "1940"
+              delta: "20"
+        job.feature_importance.IntegratedGradients_cox_hazard_ratios:
+          asserts:
+            - that: "has_image_center_of_mass"
+              center_of_mass: "970,730"
+              eps: "30"
+            - that: "has_image_channels"
+              channels: "3"
+            - that: "has_image_height"
+              height: "1460"
+              delta: "20"
+            - that: "has_image_width"
+              width: "1940"
+              delta: "20"
+    flexynesis output:
+      element_tests:
+        job.embeddings_test:
+          asserts:
+            - that: "has_text_matching"
+              expression: "ID\tE0\tE1"
+            - that: "has_text_matching"
+              expression: "TCGA-28-5208"
+        job.embeddings_train:
+          asserts:
+            - that: "has_text_matching"
+              expression: "ID\tE0\tE1"
+            - that: "has_text_matching"
+              expression: "TCGA-06-0650"
+        job.feature_importance.GradientShap:
+          asserts:
+            - that: "has_text_matching"
+              expression: "target_variable\ttarget_class\ttarget_class_label\tlayer\tname\timportance\texplainer"
+            - that: "has_text_matching"
+              expression: "GradientShap"
+        job.feature_importance.IntegratedGradients:
+          asserts:
+            - that: "has_text_matching"
+              expression: "target_variable\ttarget_class\ttarget_class_label\tlayer\tname\timportance\texplainer"
+            - that: "has_text_matching"
+              expression: "IntegratedGradients"
+        job.feature_logs.cna:
+          asserts:
+            - that: "has_text_matching"
+              expression: "feature\tna_percent\tvariance\tselected_cleanup\tlaplacian_score\tselected_laplacian"
+            - that: "has_text_matching"
+              expression: "A1BG"
+        job.feature_logs.mut:
+          asserts:
+            - that: "has_text_matching"
+              expression: "feature\tna_percent\tvariance\tselected_cleanup\tlaplacian_score\tselected_laplacian"
+            - that: "has_text_matching"
+              expression: "A1BG"
+        job.predicted_labels:
+          asserts:
+            - that: "has_text_matching"
+              expression: "sample_id\tvariable\tclass_label\tprobability\tknown_label\tpredicted_label\tsplit\tmethod"
+            - that: "has_text_matching"
+              expression: "DirectPred"
+        job.stats:
+          asserts:
+            - that: "has_text_matching"
+              expression: "method\tvar\tvariable_type\tmetric\tvalue"
+            - that: "has_text_matching"
+              expression: "cindex"
+    High-Low_risk_groups_embedding_pca_plot:
+      element_tests:
+        embeddings_pca_risk_groups:
+          asserts:
+            - that: "has_image_center_of_mass"
+              center_of_mass: "970,730"
+              eps: "30"
+            - that: "has_image_channels"
+              channels: "3"
+            - that: "has_image_height"
+              height: "1460"
+              delta: "20"
+            - that: "has_image_width"
+              width: "1940"
+              delta: "20"

@@ -1,0 +1,266 @@
+{
+  "uuid": "49fe1574-a987-4086-b0dc-0a0ca2c8b7c8",
+  "tags": [
+    "ml",
+    "statistics"
+  ],
+  "format-version": "0.1",
+  "name": "Regression GradientBoosting",
+  "version": 2,
+  "steps": {
+    "0": {
+      "tool_id": null,
+      "tool_version": null,
+      "outputs": [],
+      "workflow_outputs": [
+        {
+          "output_name": "output",
+          "uuid": "335110c2-934f-42dc-a686-833e327aa245",
+          "label": null
+        }
+      ],
+      "input_connections": {},
+      "tool_state": "{}",
+      "id": 0,
+      "uuid": "e6c70e79-d455-454c-bccd-f5589583c830",
+      "errors": null,
+      "name": "Input dataset",
+      "label": "body_fat_test",
+      "inputs": [],
+      "position": {
+        "top": 160,
+        "left": 130
+      },
+      "annotation": "",
+      "content_id": null,
+      "type": "data_input"
+    },
+    "1": {
+      "tool_id": null,
+      "tool_version": null,
+      "outputs": [],
+      "workflow_outputs": [
+        {
+          "output_name": "output",
+          "uuid": "b4c5cb03-3664-48c1-8605-ea4c5bc4ae41",
+          "label": null
+        }
+      ],
+      "input_connections": {},
+      "tool_state": "{}",
+      "id": 1,
+      "uuid": "708bdce8-5d2a-43d0-bf72-c3f5e7cd7e33",
+      "errors": null,
+      "name": "Input dataset",
+      "label": "body_fat_train",
+      "inputs": [],
+      "position": {
+        "top": 247,
+        "left": 137
+      },
+      "annotation": "",
+      "content_id": null,
+      "type": "data_input"
+    },
+    "2": {
+      "tool_id": null,
+      "tool_version": null,
+      "outputs": [],
+      "workflow_outputs": [
+        {
+          "output_name": "output",
+          "uuid": "df37899e-c4f9-483f-91b8-3c01c96b34d8",
+          "label": null
+        }
+      ],
+      "input_connections": {},
+      "tool_state": "{}",
+      "id": 2,
+      "uuid": "d4347e45-accc-4ff0-ab63-c68dc470dc0a",
+      "errors": null,
+      "name": "Input dataset",
+      "label": "body_fat_test_labels",
+      "inputs": [],
+      "position": {
+        "top": 287,
+        "left": 530
+      },
+      "annotation": "",
+      "content_id": null,
+      "type": "data_input"
+    },
+    "3": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.1",
+      "tool_version": null,
+      "outputs": [
+        {
+          "type": "zip",
+          "name": "outfile_fit"
+        }
+      ],
+      "workflow_outputs": [
+        {
+          "output_name": "outfile_fit",
+          "uuid": "0744a05e-6fa3-4170-84f9-76154dc93e41",
+          "label": null
+        }
+      ],
+      "input_connections": {
+        "selected_tasks|selected_algorithms|input_options|infile2": {
+          "output_name": "output",
+          "id": 1
+        },
+        "selected_tasks|selected_algorithms|input_options|infile1": {
+          "output_name": "output",
+          "id": 1
+        }
+      },
+      "tool_state": "{\"__page__\": null, \"selected_tasks\": \"{\\\"__current_case__\\\": 1, \\\"selected_algorithms\\\": {\\\"__current_case__\\\": 5, \\\"input_options\\\": {\\\"__current_case__\\\": 0, \\\"column_selector_options_1\\\": {\\\"__current_case__\\\": 3, \\\"col1\\\": \\\"target\\\", \\\"selected_column_selector_option\\\": \\\"all_but_by_header_name\\\"}, \\\"column_selector_options_2\\\": {\\\"__current_case__\\\": 2, \\\"col2\\\": \\\"target\\\", \\\"selected_column_selector_option2\\\": \\\"by_header_name\\\"}, \\\"header1\\\": \\\"true\\\", \\\"header2\\\": \\\"true\\\", \\\"infile1\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"infile2\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"selected_input\\\": \\\"tabular\\\"}, \\\"options\\\": {\\\"alpha\\\": \\\"0.9\\\", \\\"criterion\\\": \\\"friedman_mse\\\", \\\"learning_rate\\\": \\\"0.1\\\", \\\"loss\\\": \\\"ls\\\", \\\"max_depth\\\": \\\"3\\\", \\\"max_leaf_nodes\\\": \\\"\\\", \\\"min_impurity_decrease\\\": \\\"0.0\\\", \\\"min_samples_leaf\\\": \\\"1.0\\\", \\\"min_samples_split\\\": \\\"2.0\\\", \\\"min_weight_fraction_leaf\\\": \\\"0.0\\\", \\\"n_estimators\\\": \\\"100\\\", \\\"presort\\\": \\\"auto\\\", \\\"random_state\\\": \\\"\\\", \\\"select_max_features\\\": {\\\"__current_case__\\\": 0, \\\"max_features\\\": \\\"auto\\\"}, \\\"subsample\\\": \\\"1.0\\\", \\\"verbose\\\": \\\"0\\\", \\\"warm_start\\\": \\\"false\\\"}, \\\"selected_algorithm\\\": \\\"GradientBoostingRegressor\\\"}, \\\"selected_task\\\": \\\"train\\\"}\", \"__rerun_remap_job_id__\": null}",
+      "id": 3,
+      "tool_shed_repository": {
+        "owner": "bgruening",
+        "changeset_revision": "af0523c606a7",
+        "name": "sklearn_ensemble",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "42790459-3ce7-437c-abae-89d24f08f6ee",
+      "errors": null,
+      "name": "Ensemble methods",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [],
+      "position": {
+        "top": 390,
+        "left": 259
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.1",
+      "type": "tool"
+    },
+    "4": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.1",
+      "tool_version": null,
+      "outputs": [
+        {
+          "type": "tabular",
+          "name": "outfile_predict"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "selected_tasks|infile_data": {
+          "output_name": "output",
+          "id": 0
+        },
+        "selected_tasks|infile_model": {
+          "output_name": "outfile_fit",
+          "id": 3
+        }
+      },
+      "tool_state": "{\"__page__\": null, \"selected_tasks\": \"{\\\"__current_case__\\\": 0, \\\"header\\\": \\\"true\\\", \\\"infile_data\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"infile_model\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"prediction_options\\\": {\\\"__current_case__\\\": 0, \\\"prediction_option\\\": \\\"predict\\\"}, \\\"selected_task\\\": \\\"load\\\"}\", \"__rerun_remap_job_id__\": null}",
+      "id": 4,
+      "tool_shed_repository": {
+        "owner": "bgruening",
+        "changeset_revision": "af0523c606a7",
+        "name": "sklearn_ensemble",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "fe67126f-a6d2-4f58-87f8-be1d6aa8110f",
+      "errors": null,
+      "name": "Ensemble methods",
+      "post_job_actions": {
+        "HideDatasetActionoutfile_predict": {
+          "output_name": "outfile_predict",
+          "action_type": "HideDatasetAction",
+          "action_arguments": {}
+        }
+      },
+      "label": null,
+      "inputs": [
+        {
+          "name": "selected_tasks",
+          "description": "runtime parameter for tool Ensemble methods"
+        },
+        {
+          "name": "selected_tasks",
+          "description": "runtime parameter for tool Ensemble methods"
+        }
+      ],
+      "position": {
+        "top": 140,
+        "left": 484
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.1",
+      "type": "tool"
+    },
+    "5": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1",
+      "tool_version": null,
+      "outputs": [
+        {
+          "type": "html",
+          "name": "output_actual_vs_pred"
+        },
+        {
+          "type": "html",
+          "name": "output_scatter_plot"
+        },
+        {
+          "type": "html",
+          "name": "output_residual_plot"
+        }
+      ],
+      "workflow_outputs": [
+        {
+          "output_name": "output_scatter_plot",
+          "uuid": "cf1a5f94-f79d-4d13-b142-c3e20e25b658",
+          "label": "output_scatter_plot"
+        },
+        {
+          "output_name": "output_actual_vs_pred",
+          "uuid": "e86ba3fd-3f85-4ba9-ad66-4c1e5caa875a",
+          "label": "output_actual_vs_pred"
+        },
+        {
+          "output_name": "output_residual_plot",
+          "uuid": "2cbc04d3-d2d9-4623-b63d-51f1b024d611",
+          "label": "output_residual_plot"
+        }
+      ],
+      "input_connections": {
+        "infile_output": {
+          "output_name": "outfile_predict",
+          "id": 4
+        },
+        "infile_input": {
+          "output_name": "output",
+          "id": 2
+        }
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile_output\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"infile_input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
+      "id": 5,
+      "tool_shed_repository": {
+        "owner": "bgruening",
+        "changeset_revision": "389227fa1864",
+        "name": "plotly_regression_performance_plots",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "2e33d8c7-79aa-4c07-b3f6-fd3c0bc67b74",
+      "errors": null,
+      "name": "Plot actual vs predicted curves and residual plots",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [],
+      "position": {
+        "top": 246,
+        "left": 810.5
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1",
+      "type": "tool"
+    }
+  },
+  "annotation": "Machine learning: classification and regression",
+  "a_galaxy_workflow": "true"
+}

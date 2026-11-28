@@ -1,0 +1,252 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "gpu_jupytool",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "IPynb notebook"
+                }
+            ],
+            "label": "IPynb notebook",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0.0,
+                "top": 49.46180725097656
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "9ddc6af5-38e4-4e13-9376-3540a8f94afb",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Filter",
+                    "name": "input"
+                }
+            ],
+            "label": "train_rows",
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 6.90972900390625,
+                "top": 166.4757080078125
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "new_train_rows"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"c3==0\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "25b59910-1d66-4248-98a4-0a3e23193551",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "09c60184-4418-4a83-8d7c-eeac4cdca49e"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "test_rows"
+                }
+            ],
+            "label": "test_rows",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 3.923614501953125,
+                "top": 293.4548645019531
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "48752f10-3b93-4721-aac6-9217c9285e24",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "test_rows_labels"
+                }
+            ],
+            "label": "test_rows_labels",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2.986114501953125,
+                "top": 389.4618225097656
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "d4e139b9-c90d-49b0-9600-dae8de4c04e5",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "interactive_tool_ml_jupyter_notebook",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "mode|ipynb": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "user_inputs_0|input_type|input_value": {
+                    "id": 1,
+                    "output_name": "out_file1"
+                },
+                "user_inputs_1|input_type|input_value": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "user_inputs_2|input_type|input_value": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool GPU enabled Interactive Jupyter Notebook for Machine Learning",
+                    "name": "mode"
+                }
+            ],
+            "label": null,
+            "name": "GPU enabled Interactive Jupyter Notebook for Machine Learning",
+            "outputs": [
+                {
+                    "name": "output_collection",
+                    "type": "input"
+                },
+                {
+                    "name": "jupyter_notebook",
+                    "type": "ipynb"
+                }
+            ],
+            "position": {
+                "left": 307.3437805175781,
+                "top": 0.0
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput_collection": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output_collection"
+                },
+                "ChangeDatatypeActionoutput_dataset": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output_dataset"
+                }
+            },
+            "tool_id": "interactive_tool_ml_jupyter_notebook",
+            "tool_state": "{\"mode\": {\"mode_select\": \"previous\", \"__current_case__\": 1, \"ipynb\": {\"__class__\": \"RuntimeValue\"}, \"run_it\": \"true\"}, \"user_inputs\": [{\"__index__\": 0, \"input_name\": \"train\", \"description\": \"\", \"input_type\": {\"input_type_selector\": \"dataset\", \"__current_case__\": 0, \"input_value\": {\"__class__\": \"RuntimeValue\"}}}, {\"__index__\": 1, \"input_name\": \"test\", \"description\": \"\", \"input_type\": {\"input_type_selector\": \"dataset\", \"__current_case__\": 0, \"input_value\": {\"__class__\": \"RuntimeValue\"}}}, {\"__index__\": 2, \"input_name\": \"testlabels\", \"description\": \"\", \"input_type\": {\"input_type_selector\": \"dataset\", \"__current_case__\": 0, \"input_value\": {\"__class__\": \"RuntimeValue\"}}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2",
+            "type": "tool",
+            "uuid": "b0563c69-10cd-4024-b5de-309c828b8ea2",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_collection",
+                    "uuid": "fe942416-e111-40c9-8b90-1102348a5b2c"
+                },
+                {
+                    "label": null,
+                    "output_name": "jupyter_notebook",
+                    "uuid": "5a38221b-92db-4b48-9b4f-a5c8ecd6f8af"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "output_collection"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 617.9861755371094,
+                "top": 52.44792175292969
+            },
+            "post_job_actions": {},
+            "tool_id": "Cut1",
+            "tool_state": "{\"columnList\": \"c1\", \"delimiter\": \"C\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "0909fb62-c832-4d1d-9d95-5b8ebac25dae",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "fd1c2370-a25e-41d3-8351-fb3aae79c394"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "efb8233c-a1b0-4415-9e08-93e639229263",
+    "version": 71
+}

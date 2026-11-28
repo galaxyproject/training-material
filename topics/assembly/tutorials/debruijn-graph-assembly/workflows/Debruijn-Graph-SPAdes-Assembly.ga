@@ -1,0 +1,238 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0002-6606-5953",
+            "name": "Tristan Reynolds"
+        },
+        {
+            "class": "Person",
+            "identifier": "0000-0001-6421-3484",
+            "name": "Delphine Lariviere"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "Debruijn Graph SPAdes Assembly",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Input Paired Reads Collection"
+                }
+            ],
+            "label": "Input Paired Reads Collection",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 127.14948000154314
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list:paired\", \"fields\": null}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "0ab59c70-23fc-412c-807a-9425f2b2bffe",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/nml/spades/spades/4.2.0+galaxy0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "singlePaired|input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SPAdes",
+                    "name": "arf"
+                },
+                {
+                    "description": "runtime parameter for tool SPAdes",
+                    "name": "arf"
+                },
+                {
+                    "description": "runtime parameter for tool SPAdes",
+                    "name": "arf"
+                },
+                {
+                    "description": "runtime parameter for tool SPAdes",
+                    "name": "arf"
+                },
+                {
+                    "description": "runtime parameter for tool SPAdes",
+                    "name": "arf"
+                },
+                {
+                    "description": "runtime parameter for tool SPAdes",
+                    "name": "singlePaired"
+                }
+            ],
+            "label": null,
+            "name": "SPAdes",
+            "outputs": [
+                {
+                    "name": "out_ag",
+                    "type": "fastg"
+                },
+                {
+                    "name": "out_ags",
+                    "type": "txt"
+                },
+                {
+                    "name": "out_cn",
+                    "type": "fasta"
+                },
+                {
+                    "name": "out_l",
+                    "type": "txt"
+                },
+                {
+                    "name": "out_sc",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 412.08847253156,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/spades/spades/4.2.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "822954de3f59",
+                "name": "spades",
+                "owner": "nml",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"additional_reads\": {\"selector\": \"false\", \"__current_case__\": 1}, \"arf\": {\"nanopore\": {\"__class__\": \"RuntimeValue\"}, \"pacbio\": {\"__class__\": \"RuntimeValue\"}, \"sanger\": {\"__class__\": \"RuntimeValue\"}, \"trusted_contigs\": {\"__class__\": \"RuntimeValue\"}, \"untrusted_contigs\": {\"__class__\": \"RuntimeValue\"}}, \"cov_cond\": {\"cov_cutoff\": \"auto\", \"__current_case__\": 1}, \"kmer_cond\": {\"kmer_sel\": \"manual\", \"__current_case__\": 1, \"manual\": \"33,55,91\"}, \"mode_sel\": null, \"operation_mode\": \"--only-assembler\", \"optional_output\": [\"ag\", \"ags\", \"cn\", \"sc\", \"l\"], \"phred_offset\": \"auto\", \"singlePaired\": {\"sPaired\": \"paired_collection\", \"__current_case__\": 2, \"input\": {\"__class__\": \"ConnectedValue\"}, \"type_paired\": \"pe\", \"orientation\": \"fr\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.2.0+galaxy0",
+            "type": "tool",
+            "uuid": "1fb5bbcd-4637-4d77-bce9-085c2d7dc237",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "spades_log",
+                    "output_name": "out_l",
+                    "uuid": "145aa1c9-a301-4086-a5db-3585ae4eccc2"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "dataset": {
+                    "id": 1,
+                    "output_name": "out_cn"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Fasta Statistics",
+            "outputs": [
+                {
+                    "name": "stats",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 917.1560664592081,
+                "top": 50.65125641210639
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1",
+            "tool_shed_repository": {
+                "changeset_revision": "9c620a950d3a",
+                "name": "fasta_stats",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"dataset\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "9db1cf0d-7096-4acb-a4bb-fed202ea5d47",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "fasta_stats_spades",
+                    "output_name": "stats",
+                    "uuid": "82078745-3e6a-4108-bc7e-1210da700556"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_file": {
+                    "id": 1,
+                    "output_name": "out_ags"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Bandage Image",
+                    "name": "input_file"
+                }
+            ],
+            "label": null,
+            "name": "Bandage Image",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "jpg"
+                }
+            ],
+            "position": {
+                "left": 932.6594844279581,
+                "top": 267.14429840429386
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4",
+            "tool_shed_repository": {
+                "changeset_revision": "ddddce450736",
+                "name": "bandage",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"fontsize\": null, \"height\": \"1000\", \"input_file\": {\"__class__\": \"RuntimeValue\"}, \"lengths\": false, \"names\": false, \"nodewidth\": null, \"output_format\": \"png\", \"width\": null, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2022.09+galaxy4",
+            "type": "tool",
+            "uuid": "beb48d11-2774-48e2-819e-3d30f69f8a44",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "outfile",
+                    "output_name": "outfile",
+                    "uuid": "29bc1ed3-4b96-4fd0-a498-567ba075979a"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "assembly"
+    ],
+    "uuid": "000fc2d1-be4c-46ea-a316-7d097bf47501",
+    "version": 5
+}

@@ -1,0 +1,872 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "XCMS and RAMClustR based workflow for data processing and annotation using library matching via matchms.",
+    "creator": [
+        {
+            "class": "Organization",
+            "email": "mailto:GalaxyToolsDevelopmentandDeployment@space.muni.cz",
+            "name": "RECETOX"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "GC MS using XCMS",
+    "steps": {
+        "0": {
+            "annotation": "List of retention indexed reference compounds. Either a table with columns `rt` and `ri` or an MSP with retention time and index metadata.",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "List of retention indexed reference compounds. Either a table with columns `rt` and `ri` or an MSP with retention time and index metadata.",
+                    "name": "Reference compound list (alkanes)"
+                }
+            ],
+            "label": "Reference compound list (alkanes)",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 511.8500061035156,
+                "height": 82.20001220703125,
+                "left": 160.0833282470703,
+                "right": 360.0833282470703,
+                "top": 429.6499938964844,
+                "width": 200,
+                "x": 160.0833282470703,
+                "y": 429.6499938964844
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "6f1c04f5-126f-4ad2-bc25-b1c4b6efce5d",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Spectral library to use for annotation in MSP or MGF format.",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Spectral library to use for annotation in MSP or MGF format.",
+                    "name": "Reference spectra"
+                }
+            ],
+            "label": "Reference spectra",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 616.8332977294922,
+                "height": 82.19999694824219,
+                "left": 482.1000061035156,
+                "right": 682.1000061035156,
+                "top": 534.63330078125,
+                "width": 200,
+                "x": 482.1000061035156,
+                "y": 534.63330078125
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "64a5eec1-54ef-4fc2-93c5-f6ab70ce1614",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Sample metadata sheet, containing sample name, type (QC, blank, sample, etc.), batch number and injection order.",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Sample metadata sheet, containing sample name, type (QC, blank, sample, etc.), batch number and injection order.",
+                    "name": "sample_metadata.tsv"
+                }
+            ],
+            "label": "sample_metadata.tsv",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 489.8500061035156,
+                "height": 82.20001220703125,
+                "left": -1541.933349609375,
+                "right": -1341.933349609375,
+                "top": 407.6499938964844,
+                "width": 200,
+                "x": -1541.933349609375,
+                "y": 407.6499938964844
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "494c83fe-4407-4123-b56e-0a211f97fea2",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "Mass spectrometry data to be processed in the workflow. Please ensure the format is supported by msconvert and only use the peak picking option if the input data was acquired in profile mode.",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Mass spectrometry data to be processed in the workflow. Please ensure the format is supported by msconvert and only use the peak picking option if the input data was acquired in profile mode.",
+                    "name": "Input Dataset Collection"
+                }
+            ],
+            "label": "Input Dataset Collection",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 105.85000610351562,
+                "height": 82.20001220703125,
+                "left": -2407,
+                "right": -2207,
+                "top": 23.649993896484375,
+                "width": 200,
+                "x": -2407,
+                "y": 23.649993896484375
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "2e362408-24c5-46e1-861c-74b825a5feaf",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "msconvert",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "mzml"
+                }
+            ],
+            "position": {
+                "bottom": 176.23333740234375,
+                "height": 113.60000610351562,
+                "left": -2125,
+                "right": -1925,
+                "top": 62.633331298828125,
+                "width": 200,
+                "x": -2125,
+                "y": 62.633331298828125
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2",
+            "tool_shed_repository": {
+                "changeset_revision": "6153e8ada1ee",
+                "name": "msconvert",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"data_processing\": {\"peak_picking\": {\"pick_peaks\": \"true\", \"__current_case__\": 1, \"pick_peaks_ms_levels\": \"1-\", \"pick_peaks_algorithm\": \"vendor\"}, \"precursor_refinement\": {\"use_mzrefinement\": \"false\", \"__current_case__\": 0}, \"charge_state_calculation\": {\"charge_state_calculation_method\": \"false\", \"__current_case__\": 0}, \"thresholds\": [], \"filter_mz_windows\": {\"do_mzwindow_filter\": \"false\", \"__current_case__\": 0}, \"etd_filtering\": {\"do_etd_filtering\": \"false\", \"__current_case__\": 0}, \"ms2denoise\": {\"denoise\": \"false\", \"__current_case__\": 1}, \"ms2deisotope\": \"false\", \"demultiplex\": {\"demultiplex_on\": \"false\", \"__current_case__\": 1}}, \"filtering\": {\"activation\": \"false\", \"indices\": [], \"scan_numbers\": [], \"strip_it\": \"false\", \"filter_ms_levels\": {\"do_ms_level_filter\": \"false\", \"__current_case__\": 0}, \"polarity\": \"false\", \"analyzer\": \"false\"}, \"general_options\": {\"combineIonMobilitySpectra\": \"false\", \"scan_summing\": {\"do_scan_summing\": \"false\", \"__current_case__\": 0}, \"simAsSpectra\": \"false\", \"srmAsSpectra\": \"false\", \"acceptZeroLengthSpectra\": \"false\", \"ignoreUnknownInstrumentError\": \"false\", \"multi_run_output\": {\"do_multi_run_output\": \"false\", \"__current_case__\": 0, \"runIndexSet\": \"0\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"license_agreement\": \"true\", \"output_type\": \"mzML\", \"settings\": {\"mz_encoding\": \"64\", \"intensity_encoding\": \"32\", \"binary_compression\": \"zlib\", \"gzip_compression\": \"false\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.20287.2",
+            "type": "tool",
+            "uuid": "22ad3fd2-183b-4b5e-970b-710e1909e4c4",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MSnbase readMSData",
+            "outputs": [
+                {
+                    "name": "xsetRData",
+                    "type": "rdata.msnbase.raw"
+                },
+                {
+                    "name": "sampleMetadata",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 335.25,
+                "height": 225.60000610351562,
+                "left": -1841.949951171875,
+                "right": -1641.949951171875,
+                "top": 109.64999389648438,
+                "width": 200,
+                "x": -1841.949951171875,
+                "y": 109.64999389648438
+            },
+            "post_job_actions": {
+                "HideDatasetActionsampleMetadata": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "sampleMetadata"
+                },
+                "HideDatasetActionxsetRData": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "xsetRData"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "11ab2081bd4a",
+                "name": "msnbase_readmsdata",
+                "owner": "lecorguille",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.16.1+galaxy0",
+            "type": "tool",
+            "uuid": "65804cad-6e15-42be-baad-c33e00e5d880",
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "image": {
+                    "id": 5,
+                    "output_name": "xsetRData"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "xcms findChromPeaks (xcmsSet)",
+            "outputs": [
+                {
+                    "name": "xsetRData",
+                    "type": "rdata.xcms.findchrompeaks"
+                },
+                {
+                    "name": "log",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 305.6333312988281,
+                "height": 256,
+                "left": -1549.9833984375,
+                "right": -1349.9833984375,
+                "top": 49.633331298828125,
+                "width": 200,
+                "x": -1549.9833984375,
+                "y": 49.633331298828125
+            },
+            "post_job_actions": {
+                "HideDatasetActionlog": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "log"
+                },
+                "HideDatasetActionxsetRData": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "xsetRData"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "b02d1992a43a",
+                "name": "xcms_xcmsset",
+                "owner": "lecorguille",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"file_load_section\": {\"file_load_conditional\": {\"file_load_select\": \"no\", \"__current_case__\": 0}}, \"filterSection\": {\"filterAcquisitionNum\": \"\", \"filterRt\": \"\", \"filterMz\": \"\"}, \"image\": {\"__class__\": \"ConnectedValue\"}, \"methods\": {\"method\": \"CentWave\", \"__current_case__\": 0, \"ppm\": \"3.0\", \"peakwidth\": \"1,30\", \"CentWaveAdv\": {\"snthresh\": \"10\", \"prefilter\": \"3,500\", \"mzCenterFun\": \"wMean\", \"integrate\": \"1\", \"mzdiff\": \"-0.001\", \"fitgauss\": \"false\", \"noise\": \"1000\", \"verboseColumns\": \"false\", \"peaklist\": \"false\", \"CentWaveAdvROI\": {\"roiList\": {\"__class__\": \"RuntimeValue\"}, \"firstBaselineCheck\": \"true\", \"roiScales\": \"\"}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.12.0+galaxy0",
+            "type": "tool",
+            "uuid": "f36545dd-0755-4fde-8ec8-43ee2c6d3626",
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "images": {
+                    "id": 6,
+                    "output_name": "xsetRData"
+                },
+                "sampleMetadata": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "xcms findChromPeaks Merger",
+            "outputs": [
+                {
+                    "name": "xsetRData",
+                    "type": "rdata.xcms.findchrompeaks"
+                }
+            ],
+            "position": {
+                "bottom": 416.4499969482422,
+                "height": 184.8000030517578,
+                "left": -1235.9166259765625,
+                "right": -1035.9166259765625,
+                "top": 231.64999389648438,
+                "width": 200,
+                "x": -1235.9166259765625,
+                "y": 231.64999389648438
+            },
+            "post_job_actions": {
+                "HideDatasetActionxsetRData": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "xsetRData"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "5bd125a3f3b0",
+                "name": "xcms_merge",
+                "owner": "lecorguille",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"file_load_section\": {\"file_load_conditional\": {\"file_load_select\": \"no\", \"__current_case__\": 0}}, \"images\": {\"__class__\": \"ConnectedValue\"}, \"sampleMetadata\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.12.0+galaxy0",
+            "type": "tool",
+            "uuid": "150d7388-a919-4992-96e7-9d1b9fc2815e",
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "image": {
+                    "id": 7,
+                    "output_name": "xsetRData"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "xcms groupChromPeaks (group)",
+            "outputs": [
+                {
+                    "name": "xsetRData",
+                    "type": "rdata.xcms.group"
+                },
+                {
+                    "name": "plotChromPeakDensity",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 308.4499969482422,
+                "height": 184.8000030517578,
+                "left": -943.9000244140625,
+                "right": -743.9000244140625,
+                "top": 123.64999389648438,
+                "width": 200,
+                "x": -943.9000244140625,
+                "y": 123.64999389648438
+            },
+            "post_job_actions": {
+                "HideDatasetActionplotChromPeakDensity": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "plotChromPeakDensity"
+                },
+                "HideDatasetActionxsetRData": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "xsetRData"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d45a786cbc40",
+                "name": "xcms_group",
+                "owner": "lecorguille",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"file_load_section\": {\"file_load_conditional\": {\"file_load_select\": \"no\", \"__current_case__\": 0}}, \"image\": {\"__class__\": \"ConnectedValue\"}, \"methods\": {\"method\": \"PeakDensity\", \"__current_case__\": 0, \"bw\": \"3.0\", \"minFraction\": \"0.9\", \"minSamples\": \"1\", \"binSize\": \"0.01\", \"PeakDensityAdv\": {\"maxFeatures\": \"50\"}}, \"peaklist\": {\"peaklistBool\": \"false\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.12.0+galaxy0",
+            "type": "tool",
+            "uuid": "72cbf19d-51c9-41d6-8f54-3699eec0ccf4",
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_retcor/abims_xcms_retcor/3.12.0+galaxy0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "image": {
+                    "id": 8,
+                    "output_name": "xsetRData"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "xcms adjustRtime (retcor)",
+            "outputs": [
+                {
+                    "name": "xsetRData",
+                    "type": "rdata.xcms.retcor"
+                },
+                {
+                    "name": "rawVSadjustedPdf",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 292.0500030517578,
+                "height": 164.40000915527344,
+                "left": -665.9166870117188,
+                "right": -465.91668701171875,
+                "top": 127.64999389648438,
+                "width": 200,
+                "x": -665.9166870117188,
+                "y": 127.64999389648438
+            },
+            "post_job_actions": {
+                "HideDatasetActionrawVSadjustedPdf": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "rawVSadjustedPdf"
+                },
+                "HideDatasetActionxsetRData": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "xsetRData"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_retcor/abims_xcms_retcor/3.12.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "aa252eec9229",
+                "name": "xcms_retcor",
+                "owner": "lecorguille",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"file_load_section\": {\"file_load_conditional\": {\"file_load_select\": \"no\", \"__current_case__\": 0}}, \"image\": {\"__class__\": \"ConnectedValue\"}, \"methods\": {\"method\": \"PeakGroups\", \"__current_case__\": 0, \"minFraction\": \"0.7\", \"extraPeaks\": \"1\", \"smooth_cond\": {\"smooth\": \"loess\", \"__current_case__\": 0, \"PeakGroupsSmoothLoessAdv\": {\"span\": \"0.2\", \"family\": \"gaussian\"}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.12.0+galaxy0",
+            "type": "tool",
+            "uuid": "6f5b23a4-da9b-4b08-9804-4e3bdac88bb4",
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "image": {
+                    "id": 9,
+                    "output_name": "xsetRData"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "xcms groupChromPeaks (group)",
+            "outputs": [
+                {
+                    "name": "xsetRData",
+                    "type": "rdata.xcms.group"
+                },
+                {
+                    "name": "plotChromPeakDensity",
+                    "type": "pdf"
+                },
+                {
+                    "name": "variableMetadata",
+                    "type": "tabular"
+                },
+                {
+                    "name": "dataMatrix",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 389.6499938964844,
+                "height": 266,
+                "left": -377.91668701171875,
+                "right": -177.91668701171875,
+                "top": 123.64999389648438,
+                "width": 200,
+                "x": -377.91668701171875,
+                "y": 123.64999389648438
+            },
+            "post_job_actions": {
+                "HideDatasetActiondataMatrix": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "dataMatrix"
+                },
+                "HideDatasetActionplotChromPeakDensity": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "plotChromPeakDensity"
+                },
+                "HideDatasetActionvariableMetadata": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "variableMetadata"
+                },
+                "HideDatasetActionxsetRData": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "xsetRData"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d45a786cbc40",
+                "name": "xcms_group",
+                "owner": "lecorguille",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"file_load_section\": {\"file_load_conditional\": {\"file_load_select\": \"no\", \"__current_case__\": 0}}, \"image\": {\"__class__\": \"ConnectedValue\"}, \"methods\": {\"method\": \"PeakDensity\", \"__current_case__\": 0, \"bw\": \"3.0\", \"minFraction\": \"0.9\", \"minSamples\": \"1\", \"binSize\": \"0.01\", \"PeakDensityAdv\": {\"maxFeatures\": \"50\"}}, \"peaklist\": {\"peaklistBool\": \"true\", \"__current_case__\": 0, \"convertRTMinute\": \"true\", \"numDigitsMZ\": \"4\", \"numDigitsRT\": \"0\", \"intval\": \"into\", \"naTOzero\": \"false\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.12.0+galaxy0",
+            "type": "tool",
+            "uuid": "7d26bd46-273c-4ef1-b179-aef0be71ff87",
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "image": {
+                    "id": 10,
+                    "output_name": "xsetRData"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "xcms fillChromPeaks (fillPeaks)",
+            "outputs": [
+                {
+                    "name": "xsetRData",
+                    "type": "rdata.xcms.fillpeaks"
+                },
+                {
+                    "name": "variableMetadata",
+                    "type": "tabular"
+                },
+                {
+                    "name": "dataMatrix",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 357.25,
+                "height": 235.60000610351562,
+                "left": -122.89999389648438,
+                "right": 77.10000610351562,
+                "top": 121.64999389648438,
+                "width": 200,
+                "x": -122.89999389648438,
+                "y": 121.64999389648438
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "26d77e9ceb49",
+                "name": "xcms_fillpeaks",
+                "owner": "lecorguille",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"Adv\": {\"expandMz\": \"0\", \"expandRt\": \"0\", \"ppm\": \"0\"}, \"file_load_section\": {\"file_load_conditional\": {\"file_load_select\": \"no\", \"__current_case__\": 0}}, \"image\": {\"__class__\": \"ConnectedValue\"}, \"peaklist\": {\"peaklistBool\": \"True\", \"convertRTMinute\": \"true\", \"numDigitsMZ\": \"4\", \"numDigitsRT\": \"0\", \"intval\": \"into\", \"naTOzero\": \"true\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.12.0+galaxy0",
+            "type": "tool",
+            "uuid": "fae0d093-7931-4f4c-97da-09a93087d66d",
+            "workflow_outputs": [
+                {
+                    "label": "Feature (peak) intensities",
+                    "output_name": "dataMatrix",
+                    "uuid": "940c7549-1bae-4ddd-9e92-75fc7d2c8eef"
+                },
+                {
+                    "label": "Feature (peak) metadata (mz, rt, ...)",
+                    "output_name": "variableMetadata",
+                    "uuid": "9f910e82-e7a5-4201-b944-1845ba6aa2e9"
+                },
+                {
+                    "label": "xcmsObj (XCMSnExp)",
+                    "output_name": "xsetRData",
+                    "uuid": "5bab8f28-4df1-4397-af04-168546bd0e52"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.2.4+galaxy2",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "filetype|xcms|input_xcms": {
+                    "id": 11,
+                    "output_name": "xsetRData"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool RAMClustR",
+                    "name": "extras"
+                }
+            ],
+            "label": null,
+            "name": "RAMClustR",
+            "outputs": [
+                {
+                    "name": "spec_abundance",
+                    "type": "csv"
+                },
+                {
+                    "name": "mass_spectra_merged",
+                    "type": "msp"
+                }
+            ],
+            "position": {
+                "bottom": 333.8500061035156,
+                "height": 215.20001220703125,
+                "left": 152.10000610351562,
+                "right": 352.1000061035156,
+                "top": 118.64999389648438,
+                "width": 200,
+                "x": 152.10000610351562,
+                "y": 118.64999389648438
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.2.4+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "2ec9253a647e",
+                "name": "ramclustr",
+                "owner": "recetox",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"clustering\": {\"linkage\": \"average\", \"minModuleSize\": \"5\", \"hmax\": \"0.9\", \"deepSplit\": \"false\"}, \"extras\": {\"rt_only_low_n\": \"true\", \"replace_zeros\": \"true\", \"ExpDes\": {\"__class__\": \"RuntimeValue\"}}, \"filetype\": {\"type_choice\": \"xcms\", \"__current_case__\": 0, \"xcms\": {\"input_xcms\": {\"__class__\": \"ConnectedValue\"}, \"usePheno\": \"true\"}, \"required\": {\"st\": null, \"sr\": \"0.7\", \"cor_method\": \"pearson\", \"maxt\": \"10.0\"}}, \"msp_output_details\": {\"merge_msp\": \"true\", \"mzdec\": \"6\"}, \"normalisation\": {\"normalisation_method\": {\"normalize\": \"none\", \"__current_case__\": 3}}, \"performance\": {\"blocksize\": \"2000\", \"mult\": \"5\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.4+galaxy2",
+            "type": "tool",
+            "uuid": "2410e8b8-d629-4798-950d-e3d865a6aa72",
+            "workflow_outputs": [
+                {
+                    "label": "Deconvoluted spectra",
+                    "output_name": "mass_spectra_merged",
+                    "uuid": "92fac5e6-1578-4e52-ac9d-2982e19a5b88"
+                },
+                {
+                    "label": "Feature (spectra) intensities",
+                    "output_name": "spec_abundance",
+                    "uuid": "f7657c17-6293-4fbb-b014-28009d495de7"
+                }
+            ]
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.4+galaxy1",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "query_section|query": {
+                    "id": 12,
+                    "output_name": "mass_spectra_merged"
+                },
+                "reference_section|reference": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "RIAssigner",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 466.6499938964844,
+                "height": 144,
+                "left": 450.08331298828125,
+                "right": 650.0833129882812,
+                "top": 322.6499938964844,
+                "width": 200,
+                "x": 450.08331298828125,
+                "y": 322.6499938964844
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.4+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "c702620c22b1",
+                "name": "riassigner",
+                "owner": "recetox",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"method\": \"kovats\", \"query_section\": {\"query\": {\"__class__\": \"ConnectedValue\"}, \"query_rt_units\": \"seconds\"}, \"reference_section\": {\"reference\": {\"__class__\": \"ConnectedValue\"}, \"reference_rt_units\": \"seconds\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.4+galaxy1",
+            "type": "tool",
+            "uuid": "e626eac6-354c-4117-bd98-2203cb2d177b",
+            "workflow_outputs": [
+                {
+                    "label": "Retention indexed spectra",
+                    "output_name": "output",
+                    "uuid": "7ec6ce02-5d83-48ab-ba0a-94976db297e5"
+                }
+            ]
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/recetox/matchms_similarity/matchms_similarity/0.20.0+galaxy0",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "queries": {
+                    "id": 13,
+                    "output_name": "output"
+                },
+                "symmetric|references": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool matchms similarity",
+                    "name": "queries"
+                },
+                {
+                    "description": "runtime parameter for tool matchms similarity",
+                    "name": "symmetric"
+                }
+            ],
+            "label": null,
+            "name": "matchms similarity",
+            "outputs": [
+                {
+                    "name": "similarity_scores",
+                    "type": "json"
+                }
+            ],
+            "position": {
+                "bottom": 534.3999938964844,
+                "height": 164.39999389648438,
+                "left": 805,
+                "right": 1005,
+                "top": 370,
+                "width": 200,
+                "x": 805,
+                "y": 370
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/recetox/matchms_similarity/matchms_similarity/0.20.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "e5010b19d64d",
+                "name": "matchms_similarity",
+                "owner": "recetox",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"array_type\": \"numpy\", \"metric\": {\"similarity_metric\": \"CosineGreedy\", \"__current_case__\": 0, \"algorithm\": {\"tolerance\": \"0.03\", \"mz_power\": \"0.0\", \"intensity_power\": \"1.0\"}}, \"queries\": {\"__class__\": \"RuntimeValue\"}, \"ri_filtering\": {\"is_true\": \"true\", \"__current_case__\": 0, \"tolerance\": \"20.0\"}, \"symmetric\": {\"is_symmetric\": \"false\", \"__current_case__\": 0, \"references\": {\"__class__\": \"RuntimeValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.20.0+galaxy0",
+            "type": "tool",
+            "uuid": "2c42471c-f9e2-43e7-977c-2207bedbf416",
+            "workflow_outputs": [
+                {
+                    "label": "CosineGreedy scores of input dataset(s)",
+                    "output_name": "similarity_scores",
+                    "uuid": "024327f7-13b8-4ce9-8708-9f430d7ceedf"
+                }
+            ]
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.20.0+galaxy0",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "scores": {
+                    "id": 14,
+                    "output_name": "similarity_scores"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool matchms scores formatter",
+                    "name": "scores"
+                }
+            ],
+            "label": null,
+            "name": "matchms scores formatter",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tsv"
+                }
+            ],
+            "position": {
+                "bottom": 506.3999938964844,
+                "height": 154.39999389648438,
+                "left": 1175,
+                "right": 1375,
+                "top": 352,
+                "width": 200,
+                "x": 1175,
+                "y": 352
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.20.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "1b09315a3f87",
+                "name": "matchms_formatter",
+                "owner": "recetox",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"scores\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.20.0+galaxy0",
+            "type": "tool",
+            "uuid": "64da39ef-4625-4598-978d-e38bbbc2f007",
+            "workflow_outputs": [
+                {
+                    "label": "matchms_scores",
+                    "output_name": "output",
+                    "uuid": "8a767006-4b3c-41ba-bea5-18fd100ce930"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "GC-MS",
+        "Metabolomics",
+        "Expospomics"
+    ],
+    "uuid": "09268786-9962-4fc2-9363-1e5a11c2da33",
+    "version": 2
+}

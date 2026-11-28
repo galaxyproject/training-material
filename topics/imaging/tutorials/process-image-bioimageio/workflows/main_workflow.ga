@@ -1,0 +1,497 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "comments": [
+        {
+            "child_steps": [
+                3,
+                4,
+                5,
+                6,
+                7
+            ],
+            "color": "turquoise",
+            "data": {
+                "title": "Post-processing"
+            },
+            "id": 2,
+            "position": [
+                550,
+                20
+            ],
+            "size": [
+                990,
+                330
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                2,
+                0,
+                1
+            ],
+            "color": "yellow",
+            "data": {
+                "title": "Using the BioImage.IO Model"
+            },
+            "id": 0,
+            "position": [
+                0,
+                0
+            ],
+            "size": [
+                510,
+                351
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                9,
+                8
+            ],
+            "color": "pink",
+            "data": {
+                "title": "Visualization"
+            },
+            "id": 1,
+            "position": [
+                290,
+                450
+            ],
+            "size": [
+                240,
+                353.6
+            ],
+            "type": "frame"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-5857-1477",
+            "name": "Diana Chiang Jurado",
+            "url": "https://github.com/dianichj/"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0003-1323-3762",
+            "name": "Leonid Kostrykin"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "Image prediction with BioImage.IO model (imported from uploaded file)",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "This PyTorch [.pt] file is located in our Galaxy repository under the ML model/bioimaging-models directory.",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "This PyTorch [.pt] file is located in our Galaxy repository under the ML model/bioimaging-models directory.",
+                    "name": "BioImage.IO Model"
+                }
+            ],
+            "label": "BioImage.IO Model",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 20,
+                "top": 40
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "e4e2d80d-2b74-4de4-a942-c593fe31a13f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Input image required for inference with the ML model. Ensure that the image is of the same biological type the model was trained on or is designed to process. The tool only accepts image files in TIFF or PNG format.",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Input image required for inference with the ML model. Ensure that the image is of the same biological type the model was trained on or is designed to process. The tool only accepts image files in TIFF or PNG format.",
+                    "name": "Image for Prediction"
+                }
+            ],
+            "label": "Image for Prediction",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 20,
+                "top": 150
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "961198c2-7f46-4ddf-aabb-a14b5c68af19",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy3",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input_image_file": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "input_imaging_model": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Process image with BioImage.IO model",
+            "name": "Process image using a BioImage.IO model",
+            "outputs": [
+                {
+                    "name": "output_predicted_image",
+                    "type": "tiff"
+                },
+                {
+                    "name": "output_predicted_image_matrix",
+                    "type": "npy"
+                }
+            ],
+            "position": {
+                "left": 270,
+                "top": 40
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/bioimage_inference/bioimage_inference/2.4.1+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "d5233b9d32bb",
+                "name": "bioimage_inference",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_image_file\": {\"__class__\": \"ConnectedValue\"}, \"input_image_input_axes\": \"bcyx\", \"input_image_input_size\": \"256,256,1,1\", \"input_imaging_model\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.4.1+galaxy3",
+            "type": "tool",
+            "uuid": "ba3c27c5-0ff4-4a90-8c52-b9e117984b8d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.2.3+galaxy1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "output_predicted_image"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Split image along axes",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 570,
+                "top": 70
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/split_image/ip_split_image/2.2.3+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "73d7a4ffc03d",
+                "name": "split_image",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"axis\": \"Q\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"squeeze\": false, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.2.3+galaxy1",
+            "type": "tool",
+            "uuid": "5df86c70-5b40-4709-b301-71daef50372e",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 820,
+                "top": 70
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tiff"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"by_index\", \"__current_case__\": 2, \"index\": \"0\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "acc648b8-da85-4a66-bf8f-a3c77db01eae",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "__EXTRACT_DATASET__",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Extract dataset",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "data"
+                }
+            ],
+            "position": {
+                "left": 820,
+                "top": 210
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tiff"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__EXTRACT_DATASET__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"which\": {\"which_dataset\": \"by_index\", \"__current_case__\": 2, \"index\": \"1\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "47da526b-eb89-4050-9d36-728352adb5ac",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_math/image_math/1.26.4+galaxy2",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "inputs_0|image": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "inputs_1|image": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Process images using arithmetic expressions",
+            "outputs": [
+                {
+                    "name": "result",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 1070,
+                "top": 70
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_math/image_math/1.26.4+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "48fa3ac55df2",
+                "name": "image_math",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"expression\": \"foreground - boundaries\", \"inputs\": [{\"__index__\": 0, \"image\": {\"__class__\": \"ConnectedValue\"}, \"name\": \"foreground\"}, {\"__index__\": 1, \"image\": {\"__class__\": \"ConnectedValue\"}, \"name\": \"boundaries\"}], \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.26.4+galaxy2",
+            "type": "tool",
+            "uuid": "ef6e9413-f3dd-406e-849d-c820c2a08dde",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "result"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Threshold image",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 1320,
+                "top": 70
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "699a5e9146b3",
+                "name": "2d_auto_threshold",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert_output\": false, \"th_method\": {\"method_id\": \"manual\", \"__current_case__\": 0, \"threshold\": \"0.6\", \"block_size\": \"0\", \"offset\": \"0\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.1+galaxy3",
+            "type": "tool",
+            "uuid": "6652a1d0-636c-4c16-b281-2ff8a9ca6224",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Convert binary image to label map",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 310,
+                "top": 670
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "984358e43242",
+                "name": "binary2labelimage",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"mode\": {\"mode_selector\": \"cca\", \"__current_case__\": 0}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.5+galaxy0",
+            "type": "tool",
+            "uuid": "a40995a2-c1a4-46b3-948b-f329ac68a9a0",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.4+galaxy4",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "method_option|im1": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "method_option|im2": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Overlay images",
+                    "name": "method_option"
+                },
+                {
+                    "description": "runtime parameter for tool Overlay images",
+                    "name": "method_option"
+                }
+            ],
+            "label": null,
+            "name": "Overlay images",
+            "outputs": [
+                {
+                    "name": "out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 310,
+                "top": 490
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.4+galaxy4",
+            "tool_shed_repository": {
+                "changeset_revision": "ca362a9bfa20",
+                "name": "overlay_images",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"method_option\": {\"method\": \"seg_contour\", \"__current_case__\": 2, \"im1\": {\"__class__\": \"ConnectedValue\"}, \"im2\": {\"__class__\": \"ConnectedValue\"}, \"thickness\": \"2\", \"color\": \"#ff0000\", \"show_label\": false, \"label_color\": \"#ffff00\"}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.4+galaxy4",
+            "type": "tool",
+            "uuid": "86fc2e2d-98fc-480a-92eb-61aac5202272",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "out_png",
+                    "output_name": "out_png",
+                    "uuid": "beb76f8f-00d4-41dc-9409-8241dbdb1f01"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "imaging"
+    ],
+    "uuid": "def09cf1-bd3b-420b-9b4e-b6d10f8992ce",
+    "version": 2
+}

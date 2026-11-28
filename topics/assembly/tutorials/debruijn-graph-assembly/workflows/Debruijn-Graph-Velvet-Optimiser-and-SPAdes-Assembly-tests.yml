@@ -1,0 +1,37 @@
+- doc: Test outline for Debruijn-Graph-Velvet-Optimiser-and-SPAdes-Assembly
+  job:
+    mutant_R1.fastq:
+      class: File
+      location: https://zenodo.org/record/582600/files/mutant_R1.fastq
+      filetype: fastqsanger
+    mutant_R2.fastq:
+      class: File
+      location: https://zenodo.org/record/582600/files/mutant_R2.fastq
+      filetype: fastqsanger
+    Input Paired Reads Collection:
+      class: Collection
+      collection_type: list:paired
+      elements:
+      - class: Collection
+        type: paired
+        identifier: mutant
+        elements:
+        - class: File
+          identifier: forward
+          location: https://zenodo.org/record/582600/files/mutant_R1.fastq
+        - class: File
+          identifier: reverse
+          location: https://zenodo.org/record/582600/files/mutant_R2.fastq
+  outputs:
+    spades_log:
+      asserts:
+        has_text_matching:
+          expression: 'Assembly parameters'
+    fasta_stats_spades:
+      asserts:
+        has_text_matching:
+          expression: 'GC_content'
+    fasta_stats_velvet:
+      asserts:
+        has_text_matching:
+          expression: 'GC_content'

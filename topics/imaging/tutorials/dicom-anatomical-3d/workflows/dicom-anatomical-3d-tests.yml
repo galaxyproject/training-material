@@ -1,0 +1,36 @@
+- doc: Test outline for "Segmentation of Anatomical Structures in Medical Images" workflow
+  job:
+    bones_threshold_huv: 120
+    y_tol_bones_px: 6
+    dicom_series:
+      class: Collection
+      collection_type: list
+      elements:
+        - class: File
+          identifier: '5213'
+          path: test-data/dicom_series/5213
+        - class: File
+          identifier: '5243'
+          path: test-data/dicom_series/5243
+        - class: File
+          identifier: '5273'
+          path: test-data/dicom_series/5273
+        - class: File
+          identifier: '5303'
+          path: test-data/dicom_series/5303
+        - class: File
+          identifier: '5363'
+          path: test-data/dicom_series/5363
+        - class: File
+          identifier: '5393'
+          path: test-data/dicom_series/5393
+        - class: File
+          identifier: '5423'
+          path: test-data/dicom_series/5423
+  outputs:
+    segm_bones:
+      asserts:
+        has_image_depth: 7
+    segm_aorticbif:
+      asserts:
+        has_image_depth: 7

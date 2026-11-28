@@ -1,0 +1,46 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nmutant_R1.fastq"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nmutant_R2.fastq"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nwildtype.fna"]
+  3[label="FastQC"]
+  0 -> 3 [label="output"]
+  k22a51e6e2e5f4415a127e0b1c179a1b1[color=lightseagreen,label="Output\nfastqc_html"]
+  3 -> k22a51e6e2e5f4415a127e0b1c179a1b1
+  k51ec8c05eb47435991200eca1a6d5c2f[color=lightseagreen,label="Output\nfastqc_txt"]
+  3 -> k51ec8c05eb47435991200eca1a6d5c2f
+  4[label="FastQC"]
+  1 -> 4 [label="output"]
+  5[label="FASTQ interlacer"]
+  0 -> 5 [label="output"]
+  1 -> 5 [label="output"]
+  k225edf5f3b904f84a38a5c786000a3fc[color=lightseagreen,label="Output\noutput_pairs"]
+  5 -> k225edf5f3b904f84a38a5c786000a3fc
+  kdae90093ae964bb2824dc92b61585096[color=lightseagreen,label="Output\noutput_singles"]
+  5 -> kdae90093ae964bb2824dc92b61585096
+  6[label="MultiQC"]
+  3 -> 6 [label="text_file"]
+  4 -> 6 [label="text_file"]
+  k85e3704a859d4657b3d79b67e4981d21[color=lightseagreen,label="Output\nmultiqc_stats"]
+  6 -> k85e3704a859d4657b3d79b67e4981d21
+  kfab7e06a604e4432b0edb63157a8643b[color=lightseagreen,label="Output\nmultiqc_report"]
+  6 -> kfab7e06a604e4432b0edb63157a8643b
+  7[label="velveth"]
+  5 -> 7 [label="outfile_pairs"]
+  k607a214d91374e739b73954c79678937[color=lightseagreen,label="Output\nvelveth_out"]
+  7 -> k607a214d91374e739b73954c79678937
+  8[label="velvetg"]
+  7 -> 8 [label="out_file1"]
+  kb0cf3779619942c9963fa733559f90bb[color=lightseagreen,label="Output\nvelvet_contigs"]
+  8 -> kb0cf3779619942c9963fa733559f90bb
+  k54926701ccae4143b649b7e08e1c6a8e[color=lightseagreen,label="Output\nvelvet_stats"]
+  8 -> k54926701ccae4143b649b7e08e1c6a8e
+  9[label="Quast"]
+  2 -> 9 [label="output"]
+  8 -> 9 [label="contigs"]
+  k0babe9594d6348389e184526b3dd0db5[color=lightseagreen,label="Output\nquast_report_html"]
+  9 -> k0babe9594d6348389e184526b3dd0db5
+  kf41c43c4763c42bcb36e9ea76e7752c2[color=lightseagreen,label="Output\nquast_report_pdf"]
+  9 -> kf41c43c4763c42bcb36e9ea76e7752c2
+}

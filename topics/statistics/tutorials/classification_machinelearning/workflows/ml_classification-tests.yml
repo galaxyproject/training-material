@@ -1,0 +1,19 @@
+- doc: Test outline for ml_classification
+  job:
+    train_rows.csv:
+      class: File
+      path: https://zenodo.org/record/3738729/files/train_rows.csv
+      filetype: tabular
+    test_rows_labels.csv:
+      class: File
+      path: https://zenodo.org/record/3738729/files/test_rows_labels.csv
+      filetype: csv
+    test_rows.csv:
+      class: File
+      path: https://zenodo.org/record/3738729/files/test_rows.csv
+      filetype: tabular
+  outputs:
+    output_prf:
+      asserts:
+        has_text:
+          text: "html"

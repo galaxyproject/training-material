@@ -1,0 +1,511 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "From Fastqs to VCFs and BAMs",
+    "format-version": "0.1",
+    "name": "From Fastqs to VCFs and BAMs",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Single-End FASTQs"
+                }
+            ],
+            "label": "Single-End FASTQs",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 579.2166595458984,
+                "height": 89.09999084472656,
+                "left": 689.4000244140625,
+                "right": 909.4000244140625,
+                "top": 490.1166687011719,
+                "width": 220,
+                "x": 689.4000244140625,
+                "y": 490.1166687011719
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "30a3c256-5d21-4219-b23e-58c8f3842387",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Paired-End FASTQs"
+                }
+            ],
+            "label": "Paired-End FASTQs",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 688.2166900634766,
+                "height": 89.09999084472656,
+                "left": 697.4000244140625,
+                "right": 917.4000244140625,
+                "top": 599.11669921875,
+                "width": 220,
+                "x": 697.4000244140625,
+                "y": 599.11669921875
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list:paired\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "c04ddfda-2349-4857-8cae-b3d84dcbf9e7",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Mycobacterium_tuberculosis_ancestral_reference.gbk"
+                }
+            ],
+            "label": "Mycobacterium_tuberculosis_ancestral_reference.gbk",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 732.6500244140625,
+                "height": 111.5333251953125,
+                "left": 1351.4000244140625,
+                "right": 1571.4000244140625,
+                "top": 621.11669921875,
+                "width": 220,
+                "x": 1351.4000244140625,
+                "y": 621.11669921875
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "67484edc-af0a-4a41-8170-c78853b51319",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "readtype|fastq_in": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Trimmomatic",
+            "outputs": [
+                {
+                    "name": "fastq_out",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 592.2166595458984,
+                "height": 100.09999084472656,
+                "left": 983.4000244140625,
+                "right": 1203.4000244140625,
+                "top": 492.1166687011719,
+                "width": 220,
+                "x": 983.4000244140625,
+                "y": 492.1166687011719
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1",
+            "tool_shed_repository": {
+                "changeset_revision": "d94aff5ee623",
+                "name": "trimmomatic",
+                "owner": "pjbriggs",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"illuminaclip\": {\"do_illuminaclip\": \"false\", \"__current_case__\": 1}, \"operations\": [{\"__index__\": 0, \"operation\": {\"name\": \"SLIDINGWINDOW\", \"__current_case__\": 0, \"window_size\": \"4\", \"required_quality\": \"30\"}}, {\"__index__\": 1, \"operation\": {\"name\": \"MINLEN\", \"__current_case__\": 1, \"minlen\": \"20\"}}], \"output_err\": \"false\", \"output_logs\": \"false\", \"readtype\": {\"single_or_paired\": \"se\", \"__current_case__\": 0, \"fastq_in\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.38.1",
+            "type": "tool",
+            "uuid": "91899b6e-1f22-45de-a6bc-acd43adac9fb",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "fastq_out",
+                    "uuid": "c206129e-10b1-4c90-8404-ee4540c7216a"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "readtype|fastq_pair": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Trimmomatic",
+            "outputs": [
+                {
+                    "name": "fastq_out_paired",
+                    "type": "input"
+                },
+                {
+                    "name": "fastq_out_unpaired",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 815.9500274658203,
+                "height": 199.8333282470703,
+                "left": 986.4000244140625,
+                "right": 1206.4000244140625,
+                "top": 616.11669921875,
+                "width": 220,
+                "x": 986.4000244140625,
+                "y": 616.11669921875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1",
+            "tool_shed_repository": {
+                "changeset_revision": "d94aff5ee623",
+                "name": "trimmomatic",
+                "owner": "pjbriggs",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"illuminaclip\": {\"do_illuminaclip\": \"false\", \"__current_case__\": 1}, \"operations\": [{\"__index__\": 0, \"operation\": {\"name\": \"SLIDINGWINDOW\", \"__current_case__\": 0, \"window_size\": \"4\", \"required_quality\": \"30\"}}, {\"__index__\": 1, \"operation\": {\"name\": \"MINLEN\", \"__current_case__\": 1, \"minlen\": \"20\"}}], \"output_err\": \"false\", \"output_logs\": \"false\", \"readtype\": {\"single_or_paired\": \"collection\", \"__current_case__\": 2, \"fastq_pair\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.38.1",
+            "type": "tool",
+            "uuid": "ee71335f-30af-4fd7-a121-bf108ffd5e0a",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "fastq_out_paired",
+                    "uuid": "11fba967-c0af-4c4d-9d25-08edfec51758"
+                },
+                {
+                    "label": null,
+                    "output_name": "fastq_out_unpaired",
+                    "uuid": "b71f679d-b409-4154-9185-533fad7b45b4"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/3.2",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "fastq_input|fastq_input1": {
+                    "id": 3,
+                    "output_name": "fastq_out"
+                },
+                "ref": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Mapping and variant calling of SINGLE END FASTQs with snippy",
+            "name": "snippy",
+            "outputs": [
+                {
+                    "name": "snpvcf",
+                    "type": "vcf"
+                },
+                {
+                    "name": "snptab",
+                    "type": "tabular"
+                },
+                {
+                    "name": "snpsbam",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "bottom": 731.1166687011719,
+                "height": 332,
+                "left": 1665.4000244140625,
+                "right": 1885.4000244140625,
+                "top": 399.1166687011719,
+                "width": 220,
+                "x": 1665.4000244140625,
+                "y": 399.1166687011719
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/3.2",
+            "tool_shed_repository": {
+                "changeset_revision": "c9a8ef2aa380",
+                "name": "snippy",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"mapqual\": \"60\", \"mincov\": \"10\", \"minfrac\": \"0.1\", \"rgid\": \"\", \"bwaopt\": \"\"}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 1, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}}, \"outputs\": [\"outvcf\", \"outtab\", \"outbam\"], \"ref\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.2",
+            "type": "tool",
+            "uuid": "e38af720-1ae1-4f32-9e9d-562d0d040a85",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "snpsbam",
+                    "uuid": "4c15e214-85dd-4c43-b36a-3e482ab62879"
+                },
+                {
+                    "label": null,
+                    "output_name": "snpvcf",
+                    "uuid": "60968620-b9b0-4481-a17d-33229edb91e2"
+                },
+                {
+                    "label": null,
+                    "output_name": "snptab",
+                    "uuid": "128c6ded-1206-4f88-b93d-9254a37f8f25"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "fastq_input|fastq_input": {
+                    "id": 4,
+                    "output_name": "fastq_out_paired"
+                },
+                "reference_source|ref_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Mapping and variant calling of PAIRED END FASTQs with snippy",
+            "name": "snippy",
+            "outputs": [
+                {
+                    "name": "snpvcf",
+                    "type": "vcf"
+                },
+                {
+                    "name": "snptab",
+                    "type": "tabular"
+                },
+                {
+                    "name": "snpsbam",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "bottom": 1091.11669921875,
+                "height": 332,
+                "left": 1667.4000244140625,
+                "right": 1887.4000244140625,
+                "top": 759.11669921875,
+                "width": 220,
+                "x": 1667.4000244140625,
+                "y": 759.11669921875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d220115f882b",
+                "name": "snippy",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"mapqual\": \"60\", \"mincov\": \"10\", \"minfrac\": \"0.1\", \"minqual\": \"100.0\", \"rgid\": \"\", \"bwaopt\": \"\", \"rename_cons\": \"false\"}, \"fastq_input\": {\"fastq_input_selector\": \"paired_collection\", \"__current_case__\": 2, \"fastq_input\": {\"__class__\": \"ConnectedValue\"}}, \"outputs\": [\"outvcf\", \"outtab\", \"outbam\"], \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.6.0+galaxy0",
+            "type": "tool",
+            "uuid": "18f42bea-16ad-4db6-9c80-26fae71d99de",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "snptab",
+                    "uuid": "6c7b8b74-395f-4326-bd62-e334cad878ca"
+                },
+                {
+                    "label": null,
+                    "output_name": "snpsbam",
+                    "uuid": "9eb3bc09-5277-48d3-a1d4-cf652d29e0d2"
+                },
+                {
+                    "label": null,
+                    "output_name": "snpvcf",
+                    "uuid": "7df12aa8-7a33-4985-83c4-5aeae5db29fd"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "__MERGE_COLLECTION__",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "inputs_0|input": {
+                    "id": 5,
+                    "output_name": "snpvcf"
+                },
+                "inputs_1|input": {
+                    "id": 6,
+                    "output_name": "snpvcf"
+                }
+            },
+            "inputs": [],
+            "label": "Merge PE/SE VCFs in a single collection with all samples",
+            "name": "Merge collections",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 685.8166656494141,
+                "height": 244.6999969482422,
+                "left": 2111.39990234375,
+                "right": 2331.39990234375,
+                "top": 441.1166687011719,
+                "width": 220,
+                "x": 2111.39990234375,
+                "y": 441.1166687011719
+            },
+            "post_job_actions": {},
+            "tool_id": "__MERGE_COLLECTION__",
+            "tool_state": "{\"advanced\": {\"conflict\": {\"duplicate_options\": \"keep_first\", \"__current_case__\": 3}}, \"inputs\": [{\"__index__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "6110c068-756d-4b45-96e1-5f2334c1cf35",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "351b8679-eea7-4a76-8840-f5e34f6c4162"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "__MERGE_COLLECTION__",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "inputs_0|input": {
+                    "id": 5,
+                    "output_name": "snpsbam"
+                },
+                "inputs_1|input": {
+                    "id": 6,
+                    "output_name": "snpsbam"
+                }
+            },
+            "inputs": [],
+            "label": "Merge PE/SE BAMs in a single collection with all samples (Part the workflow \"Identifying DR with TB-profiler)",
+            "name": "Merge collections",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 1082.683349609375,
+                "height": 289.566650390625,
+                "left": 2094.39990234375,
+                "right": 2314.39990234375,
+                "top": 793.11669921875,
+                "width": 220,
+                "x": 2094.39990234375,
+                "y": 793.11669921875
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "__MERGE_COLLECTION__",
+            "tool_state": "{\"advanced\": {\"conflict\": {\"duplicate_options\": \"keep_first\", \"__current_case__\": 3}}, \"inputs\": [{\"__index__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "3f9afab8-4b25-4866-bee7-0dd46d20f102",
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.3.5+galaxy2",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input1": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool TB Variant Filter",
+                    "name": "input1"
+                }
+            ],
+            "label": null,
+            "name": "TB Variant Filter",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "bottom": 574.6499938964844,
+                "height": 122.5333251953125,
+                "left": 2418.39990234375,
+                "right": 2638.39990234375,
+                "top": 452.1166687011719,
+                "width": 220,
+                "x": 2418.39990234375,
+                "y": 452.1166687011719
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.3.5+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "e7aff4a85df5",
+                "name": "tb_variant_filter",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filter_options\": {\"show_filter_options\": \"no\", \"__current_case__\": 1}, \"filters\": [\"region_filter\", \"close_to_indel_filter\", \"min_depth_filter\"], \"input1\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.5+galaxy2",
+            "type": "tool",
+            "uuid": "83df9492-d224-420e-8434-24a1a32b9da8",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output1",
+                    "uuid": "682b8412-8ca5-42c6-bcf2-c5795629471d"
+                }
+            ]
+        }
+    },
+    "tags": ["evolution"],
+    "uuid": "68f12c33-efab-48f1-915d-904e01309f56",
+    "version": 2
+}

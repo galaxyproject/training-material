@@ -1,0 +1,17 @@
+- doc: Simplified and reduced data test for mRNA-Seq-BY-COVID-Pipeline-Counts
+  job:
+    mRNA-Seq Reads:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: SRR15462516
+        location: https://usegalaxy.eu/api/datasets/4838ba20a6d867652814eec1964233cd/display?to_ext=fastqsanger.gz
+    UCSC Genome:
+      class: File
+      location: https://usegalaxy.eu/api/datasets/4838ba20a6d8676568345cfa521d0ddb/display?to_ext=bed
+  outputs:
+    html_report:
+      asserts:
+        has_text:
+          text: "MultiQC"

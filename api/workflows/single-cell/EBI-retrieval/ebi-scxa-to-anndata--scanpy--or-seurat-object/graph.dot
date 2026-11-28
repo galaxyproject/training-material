@@ -1,0 +1,33 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightgreen,label="ℹ️ Input Parameter\nSC-Atlas experiment accession"]
+  1[label="EBI SCXA Data Retrieval"]
+  0 -> 1 [label="output"]
+  2[label="Rename batch numbers"]
+  1 -> 2 [label="design_tsv"]
+  3[label="Mito genes check"]
+  1 -> 3 [label="genes_tsv"]
+  kb0762cfd58bd4c39ae412dca4289c541[color=lightseagreen,label="Output\nMito genes check"]
+  3 -> kb0762cfd58bd4c39ae412dca4289c541
+  4[label="Rename cell metadata headers"]
+  2 -> 4 [label="out_file1"]
+  5[label="Create AnnData"]
+  1 -> 5 [label="barcode_tsv"]
+  4 -> 5 [label="outfile"]
+  1 -> 5 [label="genes_tsv"]
+  1 -> 5 [label="matrix_mtx"]
+  k938cd59461cf4037a58bc09c065db505[color=lightseagreen,label="Output\nAnnData object"]
+  5 -> k938cd59461cf4037a58bc09c065db505
+  6[label="Seurat Read10x"]
+  1 -> 6 [label="barcode_tsv"]
+  1 -> 6 [label="genes_tsv"]
+  1 -> 6 [label="matrix_mtx"]
+  4 -> 6 [label="outfile"]
+  kc24e9d83c17540a29c36eeb486fe323e[color=lightseagreen,label="Output\nSeurat object"]
+  6 -> kc24e9d83c17540a29c36eeb486fe323e
+  7[label="AnnData Operations"]
+  5 -> 7 [label="output_h5ad"]
+  kb47f801fbedb4136a5e9378a815a1799[color=lightseagreen,label="Output\nMito-counted AnnData for downstream analysis"]
+  7 -> kb47f801fbedb4136a5e9378a815a1799
+}

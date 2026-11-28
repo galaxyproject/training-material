@@ -1,0 +1,25 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\noriginal_image"]
+  1[color=lightgreen,label="ℹ️ Input Parameter\nChannel selection"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nsegmented image"]
+  3[label="Split image along axes"]
+  0 -> 3 [label="output"]
+  4[label="Generate ISCC-CODE"]
+  2 -> 4 [label="output"]
+  5[label="Extract dataset"]
+  3 -> 5 [label="output"]
+  1 -> 5 [label="output"]
+  6[label="Parse parameter value"]
+  4 -> 6 [label="output_file"]
+  7[label="Otsu"]
+  5 -> 7 [label="output"]
+  k3322121366f9453fb2a3d69fcdaa7eb3[color=lightseagreen,label="Output\notsu_segmented"]
+  7 -> k3322121366f9453fb2a3d69fcdaa7eb3
+  8[label="Verify ISCC-CODE"]
+  6 -> 8 [label="text_param"]
+  7 -> 8 [label="output"]
+  k4edb36767cb64c65a49709d71fb8caa9[color=lightseagreen,label="Output\nISCC-code"]
+  8 -> k4edb36767cb64c65a49709d71fb8caa9
+}

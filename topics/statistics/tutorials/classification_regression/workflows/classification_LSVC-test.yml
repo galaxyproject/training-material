@@ -1,0 +1,28 @@
+---
+- doc: Test Linear SVC classifier workflow
+  job:
+    breast-w_train:
+      class: File
+      location: https://zenodo.org/record/3248907/files/breast-w_train.tsv
+      filetype: tabular
+    breast-w_test:
+      class: File
+      location: https://zenodo.org/record/3248907/files/breast-w_test.tsv
+      filetype: tabular
+    breast-w_targets:
+      class: File
+      location: https://zenodo.org/record/3248907/files/breast-w_targets.tsv
+      filetype: tabular
+  outputs:
+    output_roc:
+      asserts:
+        has_text:
+          text: '<html>'
+    output_confusion:
+      asserts:
+        has_text:
+          text: '<html>'
+    output_prf:
+      asserts:
+        has_text:
+          text: '<html>'

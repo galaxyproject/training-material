@@ -1,0 +1,36 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nMAPseq OTU tables"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nOTU table metadata"]
+  2[label="Query Tabular"]
+  0 -> 2 [label="output"]
+  3[label="Text reformatting"]
+  0 -> 3 [label="output"]
+  4[label="Text reformatting"]
+  2 -> 4 [label="output"]
+  5[label="Collapse Collection"]
+  3 -> 5 [label="outfile"]
+  6[label="Column join"]
+  4 -> 6 [label="outfile"]
+  7[label="Text reformatting"]
+  5 -> 7 [label="output"]
+  8[label="Text reformatting"]
+  6 -> 8 [label="tabular_output"]
+  k5ffe64d60b4147f3b408a72cfe5251fa[color=lightseagreen,label="Output\nOTU table"]
+  8 -> k5ffe64d60b4147f3b408a72cfe5251fa
+  9[label="Query Tabular"]
+  7 -> 9 [label="outfile"]
+  k804604a6e6d74e47b7aa68c856ba70d6[color=lightseagreen,label="Output\nTaxonomy table"]
+  9 -> k804604a6e6d74e47b7aa68c856ba70d6
+  10[label="ampvis2 load"]
+  1 -> 10 [label="output"]
+  8 -> 10 [label="outfile"]
+  9 -> 10 [label="output"]
+  k912ae38efedf48db86755bd59a542747[color=lightseagreen,label="Output\nAmpvis2 object"]
+  10 -> k912ae38efedf48db86755bd59a542747
+  ka38b999027734f8187530d0926cde18d[color=lightseagreen,label="Output\nAmpvis2 metadata table"]
+  10 -> ka38b999027734f8187530d0926cde18d
+  k6d5472539859456aa73d3b19e7956b87[color=lightseagreen,label="Output\nAmpvis2 taxonomy table"]
+  10 -> k6d5472539859456aa73d3b19e7956b87
+}

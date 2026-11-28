@@ -1,0 +1,19 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightgreen,label="ℹ️ Input Parameter\nAssembly accession"]
+  1[label="Download proteome"]
+  0 -> 1 [label="output"]
+  k12a1d70fd0fb402b83881025747e2103[color=lightseagreen,label="Output\ngenome_data_report"]
+  1 -> k12a1d70fd0fb402b83881025747e2103
+  2[label="eggNOG-mapper"]
+  1 -> 2 [label="protein_fasta"]
+  kb1d7166738de494990f0883c9a215d21[color=lightseagreen,label="Output\nemapper_annotations"]
+  2 -> kb1d7166738de494990f0883c9a215d21
+  3[label="Eggsplorer"]
+  2 -> 3 [label="annotations"]
+  k0510d76e39884401954c54df6b8ba8dd[color=lightseagreen,label="Output\neggsplorer_report"]
+  3 -> k0510d76e39884401954c54df6b8ba8dd
+  k3eecf8d37e884e018d8c3da85e2e008c[color=lightseagreen,label="Output\neggsplorer_tables"]
+  3 -> k3eecf8d37e884e018d8c3da85e2e008c
+}

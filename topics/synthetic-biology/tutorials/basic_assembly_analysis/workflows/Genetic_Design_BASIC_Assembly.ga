@@ -1,0 +1,410 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Design plasmids encoding predicted pathways by using the BASIC assembly method.",
+    "format-version": "0.1",
+    "name": "Genetic Design (BASIC Assembly)",
+    "tags": ["synthetic-biology"],
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Pathway (SBML)"
+                }
+            ],
+            "label": "Pathway (SBML)",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 314.8000030517578,
+                "height": 61.80000305175781,
+                "left": 239,
+                "right": 439,
+                "top": 253,
+                "width": 200,
+                "x": 239,
+                "y": 253
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "1adcdfe9-4e38-4d09-8d9f-ee7b8e089a26",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Host taxon ID"
+                }
+            ],
+            "label": "Host taxon ID",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "bottom": 404.8000030517578,
+                "height": 61.80000305175781,
+                "left": 241,
+                "right": 441,
+                "top": 343,
+                "width": 200,
+                "x": 241,
+                "y": 343
+            },
+            "tool_id": null,
+            "tool_state": "{\"default\": 83333, \"parameter_type\": \"integer\", \"optional\": true}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "59aef08a-be1d-4967-85fe-c497f948471c",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Comma separated values",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Comma separated values",
+                    "name": "Enzyme taxon IDs"
+                }
+            ],
+            "label": "Enzyme taxon IDs",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "bottom": 517.1999969482422,
+                "height": 82.19999694824219,
+                "left": 241,
+                "right": 441,
+                "top": 435,
+                "width": 200,
+                "x": 241,
+                "y": 435
+            },
+            "tool_id": null,
+            "tool_state": "{\"parameter_type\": \"text\", \"optional\": true}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "37fa5d18-c5dc-42f0-be7c-88bdd6205d74",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Linkers and user parts"
+                }
+            ],
+            "label": "Linkers and user parts",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 628.1999969482422,
+                "height": 82.19999694824219,
+                "left": 243,
+                "right": 443,
+                "top": 546,
+                "width": 200,
+                "x": 243,
+                "y": 546
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "1e990d43-4095-4d45-a8e8-ccc1a905b283",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 4,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "DNA-Bot settings"
+                }
+            ],
+            "label": "DNA-Bot settings",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 852.1999969482422,
+                "height": 82.19999694824219,
+                "left": 246,
+                "right": 446,
+                "top": 770,
+                "width": 200,
+                "x": 246,
+                "y": 770
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": true}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "d797586c-cfd7-4c33-be64-28354ad76b22",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "Performs enzyme selection from a reaction query.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/tduigou/selenzy/selenzy-wrapper/0.2.0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "adv|enzyme_taxIDs": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "adv|host_taxID": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "pathway": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Selenzyme",
+                    "name": "pathway"
+                }
+            ],
+            "label": "Selenzyme",
+            "name": "Selenzyme",
+            "outputs": [
+                {
+                    "name": "uniprot_ids",
+                    "type": "xml"
+                },
+                {
+                    "name": "uniprot_ids_csv",
+                    "type": "csv"
+                }
+            ],
+            "position": {
+                "bottom": 508.1999969482422,
+                "height": 225.1999969482422,
+                "left": 553,
+                "right": 753,
+                "top": 283,
+                "width": 200,
+                "x": 553,
+                "y": 283
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/tduigou/selenzy/selenzy-wrapper/0.2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "34a9d136a5bf",
+                "name": "selenzy",
+                "owner": "tduigou",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"host_taxID\": {\"__class__\": \"ConnectedValue\"}, \"enzyme_taxIDs\": {\"__class__\": \"ConnectedValue\"}, \"nb_ids\": \"-1\", \"nb_targets\": \"500\", \"direction\": \"0.0\", \"NoMSA\": \"true\"}, \"pathway\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "2136d777-a9ec-4904-a88e-155e40aaf22a",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "uniprot_ids_csv",
+                    "uuid": "33768258-3781-4bd1-802c-e4b14cdca234"
+                },
+                {
+                    "label": "Uniprot IDs",
+                    "output_name": "uniprot_ids",
+                    "uuid": "54b833fa-ec4f-458a-b085-23211f4e56ca"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "Extracts enzyme IDs from rpSBML files.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/tduigou/rpbasicdesign/rpbasicdesign/0.3.4",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "adv|parts_files": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "rpsbml_file": {
+                    "id": 5,
+                    "output_name": "uniprot_ids"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool BasicDesign",
+                    "name": "adv"
+                },
+                {
+                    "description": "runtime parameter for tool BasicDesign",
+                    "name": "rpsbml_file"
+                }
+            ],
+            "label": "BasicDesign",
+            "name": "BasicDesign",
+            "outputs": [
+                {
+                    "name": "sbol_dir",
+                    "type": "input"
+                },
+                {
+                    "name": "Constructs",
+                    "type": "csv"
+                },
+                {
+                    "name": "User parts plate",
+                    "type": "csv"
+                },
+                {
+                    "name": "Biolegio plate",
+                    "type": "csv"
+                }
+            ],
+            "position": {
+                "bottom": 646.8000030517578,
+                "height": 214.8000030517578,
+                "left": 816,
+                "right": 1016,
+                "top": 432,
+                "width": 200,
+                "x": 816,
+                "y": 432
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/tduigou/rpbasicdesign/rpbasicdesign/0.3.4",
+            "tool_shed_repository": {
+                "changeset_revision": "de9f53630349",
+                "name": "rpbasicdesign",
+                "owner": "tduigou",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"parts_files\": {\"__class__\": \"RuntimeValue\"}, \"lms_id\": \"LMS\", \"lmp_id\": \"LMP\", \"cds_permutation\": \"true\"}, \"backbone_id\": \"BASIC_SEVA_37_CmR-p15A.1\", \"rpsbml_file\": {\"__class__\": \"RuntimeValue\"}, \"sample_size\": \"88\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "7a2617aa-2e4a-4214-b497-1a8102b85f8b",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "Constructs",
+                    "uuid": "afe416d0-ee9e-467b-81e0-b8a64f1251ac"
+                },
+                {
+                    "label": null,
+                    "output_name": "User parts plate",
+                    "uuid": "2283c57e-2fa0-4177-95b9-64373f21d044"
+                },
+                {
+                    "label": null,
+                    "output_name": "sbol_dir",
+                    "uuid": "81404f3f-327e-4c80-8ec7-c833ae5414fb"
+                },
+                {
+                    "label": null,
+                    "output_name": "Biolegio plate",
+                    "uuid": "2d455fed-880e-4ab5-b15d-c1c7d789147a"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "DNA assembly using BASIC on OpenTrons.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/tduigou/dnabot/dnabot/3.1.0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "adv|default_settings_file": {
+                    "id": 4,
+                    "output_name": "output"
+                },
+                "construct_file": {
+                    "id": 6,
+                    "output_name": "Constructs"
+                },
+                "plate_files": [
+                    {
+                        "id": 6,
+                        "output_name": "User parts plate"
+                    },
+                    {
+                        "id": 6,
+                        "output_name": "Biolegio plate"
+                    }
+                ]
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool DNA-Bot",
+                    "name": "adv"
+                },
+                {
+                    "description": "runtime parameter for tool DNA-Bot",
+                    "name": "construct_file"
+                },
+                {
+                    "description": "runtime parameter for tool DNA-Bot",
+                    "name": "plate_files"
+                }
+            ],
+            "label": "DNA-Bot",
+            "name": "DNA-Bot",
+            "outputs": [
+                {
+                    "name": "dnabot_scripts",
+                    "type": "tar"
+                }
+            ],
+            "position": {
+                "bottom": 728.8000030517578,
+                "height": 194.8000030517578,
+                "left": 1073,
+                "right": 1273,
+                "top": 534,
+                "width": 200,
+                "x": 1073,
+                "y": 534
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/tduigou/dnabot/dnabot/3.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "de6812daba39",
+                "name": "dnabot",
+                "owner": "tduigou",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"default_settings_file\": {\"__class__\": \"RuntimeValue\"}, \"etoh_well\": \"A11\", \"soc_column\": \"1\"}, \"construct_file\": {\"__class__\": \"RuntimeValue\"}, \"plate_files\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "c09c99e4-5e0c-4c04-9f9b-3c30183d3816",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "dnabot_scripts",
+                    "uuid": "ce5be4f0-48fb-45f0-84ad-15348645c950"
+                }
+            ]
+        }
+    },
+    "uuid": "02032914-81a7-4767-9138-2a9ac8ab6bbc",
+    "version": 0
+}

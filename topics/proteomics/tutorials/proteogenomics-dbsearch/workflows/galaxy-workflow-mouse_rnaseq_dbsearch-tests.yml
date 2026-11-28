@@ -1,0 +1,43 @@
+- doc: Test outline for galaxy-workflow-mouse_rnaseq_dbsearch.ga
+  job:
+    Uniprot_cRAP_SAV_indel_translatedbed.FASTA:
+      class: File
+      location: https://zenodo.org/records/15359565/files/Uniprot_cRAP_SAV_indel_translatedbed.fasta
+      filetype: fasta
+    MGF Collection:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f4
+        location: https://zenodo.org/records/13270741/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f4.mgf
+        filetype: mgf
+      - class: File
+        identifier: Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f5
+        location: https://zenodo.org/records/13270741/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f5.mgf
+        filetype: mgf
+      - class: File
+        identifier: Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f8
+        location: https://zenodo.org/records/13270741/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f8.mgf
+        filetype: mgf
+      - class: File
+        identifier: Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f9
+        location: https://zenodo.org/records/13270741/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f9.mgf?download=1
+        filetype: mgf
+    Reference Protein Accessions:
+      class: File
+      location: https://zenodo.org/records/13270741/files/Reference_Protein_Accessions.tabular
+      filetype: tabular
+
+  outputs:
+    Removing reference proteins:
+      asserts:
+        - has_text:
+            text: "Q9JKY0"
+            text: "H3BKT0"
+
+    Selecting sequence with length >6 and <30:
+      asserts:
+        - has_text:
+            text: "AAAISTSR PSM=2108"
+            text: "AALADVLR PSM=4321"

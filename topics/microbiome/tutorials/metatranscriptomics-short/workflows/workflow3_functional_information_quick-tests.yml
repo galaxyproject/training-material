@@ -1,0 +1,20 @@
+---
+- doc: Test the workflow
+  job:
+      Predicted taxon relative abundances:
+      class: File
+      location: https://zenodo.org/record/4776250/files/T1A_MetaPhlAn_Predicted_taxon_relative_abundances.tabular
+      filetype: fastqsanger
+      Gene Family abundance:
+      class: File
+      location: https://zenodo.org/record/4776250/files/T1A_HUMAnN_Gene_families_and_their_abundance.tabular
+      filetype: fastqsanger
+      Pathway abundance:
+      class: File
+      location: https://zenodo.org/record/4776250/files/T1A_HUMAnN_Pathways_and_their_abundance.tabular
+      filetype: fastqsanger
+  outputs:
+    Combined MetaPhlAn and HUMAnN output:
+        asserts:
+          has_text:
+            text: "Acetivibrio"

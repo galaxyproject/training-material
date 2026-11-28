@@ -1,0 +1,489 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "Workflow for the first half of the \"Bulk RNA Deconvolution with MuSiC\" tutorial.",
+  "comments": [
+    {
+      "child_steps": [
+        10,
+        4
+      ],
+      "color": "pink",
+      "data": {
+        "title": "MuSiC - Deconvolution"
+      },
+      "id": 1,
+      "position": [
+        797.1,
+        311.7946832153121
+      ],
+      "size": [
+        482.8,
+        331.4
+      ],
+      "type": "frame"
+    },
+    {
+      "child_steps": [
+        7,
+        9,
+        5,
+        8,
+        6
+      ],
+      "color": "blue",
+      "data": {
+        "title": "Building the Expression Set objects"
+      },
+      "id": 0,
+      "position": [
+        259.48113902888974,
+        0
+      ],
+      "size": [
+        502,
+        759
+      ],
+      "type": "frame"
+    }
+  ],
+  "format-version": "0.1",
+  "license": "MIT",
+  "name": "MuSiC: Deconvolution",
+  "report": {
+    "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+  },
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "scRNA Assay Tabular"
+        }
+      ],
+      "label": "scRNA Assay Tabular",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 1.2366847048153744,
+        "top": 158.38883771019155
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "e52b10f5-bdde-4b42-aee1-a259a7653190",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "scRNA Phenotype Tabular"
+        }
+      ],
+      "label": "scRNA Phenotype Tabular",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 0,
+        "top": 264.4800424288345
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "b6ce0332-6b6a-4cd9-a0d5-5f8d58a855c3",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 2,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "Bulk RNA Assay Tabular"
+        }
+      ],
+      "label": "Bulk RNA Assay Tabular",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 0.15947378162077186,
+        "top": 382.01990496679537
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "1694b9d5-0db2-4e93-b542-03d137b968ae",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 3,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "Bulk RNA Phenotype Tabular"
+        }
+      ],
+      "label": "Bulk RNA Phenotype Tabular",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 5.492747209771736,
+        "top": 494.9931775618105
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "3720c7a7-2883-40df-b5ec-35bae0c33690",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 4,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "Cell Types List"
+        }
+      ],
+      "label": "Cell Types List",
+      "name": "Input parameter",
+      "outputs": [],
+      "position": {
+        "left": 817.002692399355,
+        "top": 541.357357276171
+      },
+      "tool_id": null,
+      "tool_state": "{\"parameter_type\": \"text\", \"optional\": false}",
+      "tool_version": null,
+      "type": "parameter_input",
+      "uuid": "7bf54fb5-200e-4fb2-9f7d-90ba5116dbeb",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "exprs_file": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "pdata_file": {
+          "id": 1,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Construct Expression Set Object",
+      "outputs": [
+        {
+          "name": "out_txt",
+          "type": "txt"
+        },
+        {
+          "name": "out_rds",
+          "type": "rdata"
+        }
+      ],
+      "position": {
+        "left": 281.11145859540704,
+        "top": 193.6759463745118
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4",
+      "tool_shed_repository": {
+        "changeset_revision": "48f0fb3061b1",
+        "name": "music_construct_eset",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"annotation\": null, \"expdata\": {\"name\": \"\", \"lab\": \"\", \"contact\": \"\", \"title\": \"\", \"abstract\": \"\", \"url\": \"\", \"other\": [{\"__index__\": 0, \"field\": \"notes\", \"comment\": \"Created in Galaxy\"}]}, \"exprs_file\": {\"__class__\": \"ConnectedValue\"}, \"metadata\": [], \"pdata_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "0.1.1+galaxy4",
+      "type": "tool",
+      "uuid": "c977a039-b654-4f9a-9406-06866c06745f",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "exprs_file": {
+          "id": 2,
+          "output_name": "output"
+        },
+        "pdata_file": {
+          "id": 3,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Construct Expression Set Object",
+      "outputs": [
+        {
+          "name": "out_txt",
+          "type": "txt"
+        },
+        {
+          "name": "out_rds",
+          "type": "rdata"
+        }
+      ],
+      "position": {
+        "left": 277.8400487142159,
+        "top": 419.4586019787689
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4",
+      "tool_shed_repository": {
+        "changeset_revision": "48f0fb3061b1",
+        "name": "music_construct_eset",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"annotation\": null, \"expdata\": {\"name\": \"\", \"lab\": \"\", \"contact\": \"\", \"title\": \"\", \"abstract\": \"\", \"url\": \"\", \"other\": [{\"__index__\": 0, \"field\": \"notes\", \"comment\": \"Created in Galaxy\"}]}, \"exprs_file\": {\"__class__\": \"ConnectedValue\"}, \"metadata\": [], \"pdata_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "0.1.1+galaxy4",
+      "type": "tool",
+      "uuid": "464cb3a3-6619-4ae3-98d8-657a2f0a6a12",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "7": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy4",
+      "errors": null,
+      "id": 7,
+      "input_connections": {
+        "rds_eset": {
+          "id": 5,
+          "output_name": "out_rds"
+        }
+      },
+      "inputs": [],
+      "label": "Extract Cell Types",
+      "name": "Inspect Expression Set Object",
+      "outputs": [
+        {
+          "name": "out_tab",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 540.7875737884788,
+        "top": 40.0382979453558
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy4",
+      "tool_shed_repository": {
+        "changeset_revision": "fde4c972e7c5",
+        "name": "music_inspect_eset",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"inspector\": \"fData\", \"rds_eset\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "0.1.1+galaxy4",
+      "type": "tool",
+      "uuid": "1d1e7d01-45bb-4995-8380-d95d30c5c071",
+      "when": null,
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "out_tab",
+          "uuid": "81b26ba9-32e3-43a6-b1e1-4c5655538be9"
+        }
+      ]
+    },
+    "8": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy4",
+      "errors": null,
+      "id": 8,
+      "input_connections": {
+        "rds_eset": {
+          "id": 5,
+          "output_name": "out_rds"
+        }
+      },
+      "inputs": [],
+      "label": "Extract General Info (scrna)",
+      "name": "Inspect Expression Set Object",
+      "outputs": [
+        {
+          "name": "out_tab",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 541.4470560817157,
+        "top": 170.47539065599267
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy4",
+      "tool_shed_repository": {
+        "changeset_revision": "fde4c972e7c5",
+        "name": "music_inspect_eset",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"inspector\": \"print\", \"rds_eset\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "0.1.1+galaxy4",
+      "type": "tool",
+      "uuid": "9202bf69-9497-4574-9de4-b0387486b3af",
+      "when": null,
+      "workflow_outputs": []
+    },
+    "9": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy4",
+      "errors": null,
+      "id": 9,
+      "input_connections": {
+        "rds_eset": {
+          "id": 6,
+          "output_name": "out_rds"
+        }
+      },
+      "inputs": [],
+      "label": "Extract General Info (Bulk)",
+      "name": "Inspect Expression Set Object",
+      "outputs": [
+        {
+          "name": "out_tab",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 521.4813002926044,
+        "top": 625.8904103386584
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy4",
+      "tool_shed_repository": {
+        "changeset_revision": "fde4c972e7c5",
+        "name": "music_inspect_eset",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"inspector\": \"print\", \"rds_eset\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "0.1.1+galaxy4",
+      "type": "tool",
+      "uuid": "c49d1e7b-af28-436d-a136-28713ff4106a",
+      "when": null,
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "out_tab",
+          "uuid": "1f24824b-6b75-4509-8fb1-2af378f54534"
+        }
+      ]
+    },
+    "10": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy4",
+      "errors": null,
+      "id": 10,
+      "input_connections": {
+        "bulk_eset": {
+          "id": 6,
+          "output_name": "out_rds"
+        },
+        "do|celltypes": {
+          "id": 4,
+          "output_name": "output"
+        },
+        "scrna_eset": {
+          "id": 5,
+          "output_name": "out_rds"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool MuSiC Deconvolution",
+          "name": "do"
+        }
+      ],
+      "label": "Music: Estimate Cell Proportions",
+      "name": "MuSiC Deconvolution",
+      "outputs": [
+        {
+          "name": "props",
+          "type": "input"
+        },
+        {
+          "name": "summaries",
+          "type": "input"
+        },
+        {
+          "name": "out_pdf",
+          "type": "pdf"
+        }
+      ],
+      "position": {
+        "left": 1059.8293847944933,
+        "top": 351.8111830837978
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy4",
+      "tool_shed_repository": {
+        "changeset_revision": "8cd2ecfa2e61",
+        "name": "music_deconvolution",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"bulk_eset\": {\"__class__\": \"ConnectedValue\"}, \"do\": {\"method\": \"estimateprops\", \"__current_case__\": 0, \"est_methods\": [\"MuSiC\", \"NNLS\"], \"celltypes_label\": \"cellType\", \"samples_label\": \"sampleID\", \"celltypes\": {\"__class__\": \"ConnectedValue\"}, \"phenotype_factors\": \"\", \"phenotype_factors_always_exclude\": \"sampleID,SubjectName\", \"disease_factor\": {\"use\": \"yes\", \"__current_case__\": 1, \"phenotype_scrna_target\": \"beta\", \"phenotype_target\": \"hba1c\", \"phenotype_target_threshold\": \"6.5\", \"sample_disease_group\": \"T2D\", \"sample_disease_group_scale\": \"5\"}, \"maxyscale\": null}, \"scrna_eset\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "0.1.1+galaxy4",
+      "type": "tool",
+      "uuid": "4ddccd45-8474-4d44-8223-ecde7ea26c95",
+      "when": null,
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "out_pdf",
+          "uuid": "1262e4d1-7601-451a-b6a6-89b7f950cf7e"
+        }
+      ]
+    }
+  },
+  "tags": [
+    "Transcriptomics",
+    "Single-cell",
+    "GTN",
+    "Galaxy"
+  ],
+  "uuid": "9ace88c8-5f6b-4177-857c-ffe1dc3146da",
+  "version": 24
+}

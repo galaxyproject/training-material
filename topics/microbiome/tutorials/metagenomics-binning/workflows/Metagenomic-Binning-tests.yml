@@ -1,0 +1,31 @@
+- doc: Test outline for Assembly-of-metagenomic-sequencing-data
+  job:
+    Trimmed reads:
+      class: Collection
+      collection_type: list:paired
+      elements:
+      - class: Collection
+        type: paired
+        identifier: ERR2231567
+        elements:
+        - class: File
+          identifier: forward
+          path: https://zenodo.org/records/17660820/files/reads_forward.fastqsanger.gz
+        - class: File
+          identifier: reverse
+          path: https://zenodo.org/records/17660820/files/reads_reverse.fastqsanger.gz
+    Assemblies:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: ERR2231567
+        path: https://zenodo.org/records/17660820/files/MEGAHIT_contigs.fasta
+
+  outputs:
+    final:
+      asserts:
+        has_text:
+          text: "binette_bin1"
+        has_text:
+          text: "16.69"

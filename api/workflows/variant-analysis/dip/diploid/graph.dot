@@ -1,0 +1,21 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nGIAB-Ashkenazim-Trio-hg19.bam"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nGIAB-Ashkenazim-Trio.tabular"]
+  2[label="FreeBayes"]
+  0 -> 2 [label="output"]
+  3[label="VcfAllelicPrimitives:"]
+  2 -> 3 [label="output_vcf"]
+  4[label="SnpEff eff:"]
+  3 -> 4 [label="out_file1"]
+  5[label="GEMINI load"]
+  4 -> 5 [label="snpeff_output"]
+  1 -> 5 [label="output"]
+  6[label="GEMINI_query2"]
+  5 -> 6 [label="outfile"]
+  7[label="GEMINI_db_info"]
+  5 -> 7 [label="outfile"]
+  8[label="GEMINI_query1"]
+  5 -> 8 [label="outfile"]
+}

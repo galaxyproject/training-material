@@ -1,0 +1,25 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nscRNA Assay Tabular"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nscRNA Phenotype Tabular"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nBulk RNA Assay Tabular"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nBulk RNA Phenotype Tabular"]
+  4[color=lightgreen,label="ℹ️ Input Parameter\nCell Types List"]
+  5[label="Construct Expression Set Object"]
+  0 -> 5 [label="output"]
+  1 -> 5 [label="output"]
+  6[label="Construct Expression Set Object"]
+  2 -> 6 [label="output"]
+  3 -> 6 [label="output"]
+  7[label="Extract Cell Types"]
+  5 -> 7 [label="out_rds"]
+  8[label="Extract General Info scrna"]
+  5 -> 8 [label="out_rds"]
+  9[label="Extract General Info Bulk"]
+  6 -> 9 [label="out_rds"]
+  10[label="Music: Estimate Cell Proportions"]
+  6 -> 10 [label="out_rds"]
+  4 -> 10 [label="output"]
+  5 -> 10 [label="out_rds"]
+}

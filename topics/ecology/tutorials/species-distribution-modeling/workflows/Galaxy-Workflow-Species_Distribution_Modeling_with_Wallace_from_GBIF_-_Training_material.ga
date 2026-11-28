@@ -1,0 +1,249 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "Species distribution modeling",
+  "format-version": "0.1",
+  "name": "Species Distribution Modeling With Wallace From GBIF - Training Material",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/spocc_occ/spocc_occ/0.9.0",
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [],
+      "label": null,
+      "name": "Get species occurrences data",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 200,
+        "top": 240
+      },
+      "post_job_actions": {
+        "HideDatasetActionoutput": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/spocc_occ/spocc_occ/0.9.0",
+      "tool_shed_repository": {
+        "changeset_revision": "f9d76a46799a",
+        "name": "spocc_occ",
+        "owner": "ecology",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"sname\": \"\\\"chrysemys picta\\\"\", \"from\": \"[\\\"gbif\\\"]\", \"__rerun_remap_job_id__\": null, \"limit\": \"\\\"10000\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "0.9.0",
+      "type": "tool",
+      "uuid": "f0207968-0fdd-45ec-907c-a6e35627a1d7",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": "interactive_tool_wallace",
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [],
+      "label": null,
+      "name": "Wallace",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 1077.5,
+        "top": 400.5
+      },
+      "post_job_actions": {},
+      "tool_id": "interactive_tool_wallace",
+      "tool_state": "{}",
+      "tool_version": "0.1",
+      "type": "tool",
+      "uuid": "fe5c0b4c-b5ee-4c41-8145-bd9e610fd066",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "outfile",
+          "uuid": "c9ce6982-0192-413d-a476-71c45c15ce4b"
+        }
+      ]
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+        "input": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Cut",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 420,
+        "top": 240
+      },
+      "post_job_actions": {
+        "HideDatasetActionoutput": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "0a8c6b61f0f4",
+        "name": "text_processing",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"complement\": \"\\\"\\\"\", \"cut_type_options\": \"{\\\"__current_case__\\\": 0, \\\"cut_element\\\": \\\"-f\\\", \\\"list\\\": [\\\"1\\\", \\\"2\\\", \\\"3\\\", \\\"51\\\"]}\", \"delimiter\": \"\\\"\\\"\", \"input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.1.0",
+      "type": "tool",
+      "uuid": "26486c2c-a080-48f7-b60e-6e85ee910918",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "Filter1",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "input": {
+          "id": 2,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Filter",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 640,
+        "top": 240
+      },
+      "post_job_actions": {
+        "HideDatasetActionout_file1": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "out_file1"
+        }
+      },
+      "tool_id": "Filter1",
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"cond\": \"\\\"c4=='US'\\\"\", \"input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"header_lines\": \"\\\"1\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.1.0",
+      "type": "tool",
+      "uuid": "dabbfd53-9f01-4144-9b25-4954eccefd66",
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "tabular_to_csv",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "tabular": {
+          "id": 3,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Convert tabular to CSV",
+      "outputs": [
+        {
+          "name": "csv",
+          "type": "csv"
+        }
+      ],
+      "position": {
+        "left": 860,
+        "top": 240
+      },
+      "post_job_actions": {
+        "HideDatasetActioncsv": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "csv"
+        }
+      },
+      "tool_id": "tabular_to_csv",
+      "tool_state": "{\"tabular\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.0.0",
+      "type": "tool",
+      "uuid": "4ca68666-5877-4a45-9180-e56ed7a625d1",
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.2",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "infile": {
+          "id": 4,
+          "output_name": "csv"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Replace",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1080,
+        "top": 240
+      },
+      "post_job_actions": {
+        "HideDatasetActionoutfile": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "outfile"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.2",
+      "tool_shed_repository": {
+        "changeset_revision": "0a8c6b61f0f4",
+        "name": "text_processing",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"caseinsensitive\": \"\\\"false\\\"\", \"searchwhere\": \"{\\\"__current_case__\\\": 0, \\\"searchwhere_select\\\": \\\"line\\\"}\", \"find_pattern\": \"\\\"\\\\\\\"\\\\\\\"\\\\\\\"\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"global\": \"\\\"true\\\"\", \"is_regex\": \"\\\"false\\\"\", \"skip_first_line\": \"\\\"false\\\"\", \"replace_pattern\": \"\\\"\\\\\\\"\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"wholewords\": \"\\\"false\\\"\"}",
+      "tool_version": "1.1.2",
+      "type": "tool",
+      "uuid": "21ab0297-60d3-4e0b-9d99-10e84191c22e",
+      "workflow_outputs": []
+    }
+  },
+  "tags": [
+    "ecology"
+  ],
+  "uuid": "a77ddd3a-1c49-4b53-b16e-3c70e3eac194",
+  "version": 1
+}

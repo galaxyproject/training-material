@@ -1,0 +1,98 @@
+- doc: Test the Metaproteomics GTN workflow
+  job:
+    # Input 1: Protein sequence database (FASTA)
+    'Sixgill generated protein FASTA File':
+      location: https://zenodo.org/record/839701/files/FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.fasta
+      class: File
+      filetype: fasta
+
+    # Input 2: Dataset collection of MGF MS/MS files (Bering Strait samples)
+    'Dataset Collection of Bering Strait MGF Files':
+      class: Collection
+      collection_type: list
+      elements:
+        - identifier: 2016_Jan_12_QE2_45
+          location: https://zenodo.org/record/839701/files/2016_Jan_12_QE2_45.mgf
+          class: File
+          filetype: mgf
+        - identifier: 2016_Jan_12_QE2_46
+          location: https://zenodo.org/record/839701/files/2016_Jan_12_QE2_46.mgf
+          class: File
+          filetype: mgf
+        - identifier: 2016_Jan_12_QE2_47
+          location: https://zenodo.org/record/839701/files/2016_Jan_12_QE2_47.mgf
+          class: File
+          filetype: mgf
+
+    # Input 3: Gene Ontology terms tabular file
+    'Gene Ontology Terms Selected':
+      location: https://zenodo.org/record/839701/files/Gene_Ontology_Terms.tabular
+      class: File
+      filetype: tabular
+
+  outputs:
+    # SearchGUI archive output
+    'Search GUI on input dataset(s)':
+      asserts:
+        has_size:
+          min: 1000
+
+    # PeptideShaker mzIdentML output
+    'Peptide Shaker on input dataset(s): mzidentML file':
+      asserts:
+        has_text:
+          text: "MzIdentML"
+
+    # Query Tabular: selected peptides
+    'Query Tabular Select Peptides':
+      asserts:
+        has_n_columns:
+          n: 1
+
+    # Unipept pept2prot: protein-level assignments with GO references
+    'Unipept pept2prot':
+      asserts:
+        has_text:
+          text: "go_references"
+
+    # Unipept lca: lowest common ancestor taxonomy
+    'Unipept lca':
+      asserts:
+        has_n_columns:
+          n: 8
+
+    # Query Tabular: Genera | PSMs | Peptides summary
+    'Genera | PSMs | Peptides':
+      asserts:
+        has_n_columns:
+          n: 3
+
+    # Query Tabular: GO Pop2Prot SQLite DB
+    'Go Pop2Prot DB':
+      asserts:
+        has_size:
+          min: 1000
+
+    # SQLite to tabular: GO Biological Processes
+    'GO Terms: Biological Processes':
+      asserts:
+        has_n_columns:
+          n: 4
+        has_text:
+          text: "biological_process"
+
+    # SQLite to tabular: GO Molecular Functions
+    'GO Terms: Molecular Functions':
+      asserts:
+        has_n_columns:
+          n: 4
+        has_text:
+          text: "molecular_function"
+
+    # SQLite to tabular: GO Cellular Localization
+    'GO Terms: Cellular Localization':
+      asserts:
+        has_n_columns:
+          n: 4
+        has_text:
+          text: "cellular_component"

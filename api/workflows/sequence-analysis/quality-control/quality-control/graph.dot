@@ -1,0 +1,28 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nreads_2"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nreads_1"]
+  2[label="FastQC"]
+  0 -> 2 [label="output"]
+  k1f4fad7b11e74ec5b73d835080c47e70[color=lightseagreen,label="Output\nreads_2_fastqc"]
+  2 -> k1f4fad7b11e74ec5b73d835080c47e70
+  3[label="Cutadapt"]
+  1 -> 3 [label="output"]
+  k12a1bc96cfdd4ed8b062433833e09aee[color=lightseagreen,label="Output\nreads_1_cutadapt"]
+  3 -> k12a1bc96cfdd4ed8b062433833e09aee
+  4[label="FastQC"]
+  1 -> 4 [label="output"]
+  k12e19f0b102a44709bc8e362bb4e2c91[color=lightseagreen,label="Output\nreads_1_fastqc"]
+  4 -> k12e19f0b102a44709bc8e362bb4e2c91
+  5[label="Cutadapt"]
+  1 -> 5 [label="output"]
+  0 -> 5 [label="output"]
+  kb7c138cc10d04bd0b960a3b5e60f29cd[color=lightseagreen,label="Output\nreads_cutadapt"]
+  5 -> kb7c138cc10d04bd0b960a3b5e60f29cd
+  6[label="MultiQC"]
+  4 -> 6 [label="text_file"]
+  2 -> 6 [label="text_file"]
+  kfa7f541db9be4283afa18398d89f345e[color=lightseagreen,label="Output\nmultiqc"]
+  6 -> kfa7f541db9be4283afa18398d89f345e
+}

@@ -1,0 +1,16 @@
+---
+- doc: Test for the workflow
+  job:
+    input:
+      class: File
+      location: https://zenodo.org/record/7093173/files/ABJ044_c38189e89895cdde6770a18635db438c8a00641b.fastq
+      filetype: fastqsanger
+  outputs:
+    kraken_report:
+      asserts:
+        has_text:
+          text: 'Saccharomyces cerevisiae'
+    krakentool_report:
+      asserts:
+        has_text:
+          text: 's__Saccharomyces_cerevisiae'

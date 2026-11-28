@@ -1,0 +1,19 @@
+- doc: Test outline for MultiGSEA
+  job:
+    transcriptome.tsv:
+      class: File
+      location: https://zenodo.org/records/14216972/files/transcriptome.tsv
+      filetype: tabular
+    proteome.tsv:
+      class: File
+      location: https://zenodo.org/records/14216972/files/proteome.tsv
+      filetype: tabular
+    metabolome.tsv:
+      class: File
+      location: https://zenodo.org/records/14216972/files/metabolome.tsv
+      filetype: mothur.axes
+  outputs:
+    Filtered output:
+      asserts:
+        has_text:
+          text: "amino"

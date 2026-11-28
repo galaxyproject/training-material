@@ -1,0 +1,21 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nHeterologous pathways"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nChassis where to produce target from"]
+  2[color=lightgreen,label="ℹ️ Input Parameter\nCell compartment ID"]
+  3[color=lightgreen,label="ℹ️ Input Parameter\nBiomass reaction ID"]
+  4[label="Flux balance analysis"]
+  3 -> 4 [label="output"]
+  2 -> 4 [label="output"]
+  1 -> 4 [label="output"]
+  0 -> 4 [label="output"]
+  5[label="Thermo"]
+  4 -> 5 [label="pathway_with_fba"]
+  6[label="Score Pathway"]
+  5 -> 6 [label="pathway_with_thermo"]
+  7[label="Rank Pathways"]
+  6 -> 7 [label="scored_pathway"]
+  k8111f52558454ac2a1d6c4bfd218cf3f[color=lightseagreen,label="Output\nRanked Pathways"]
+  7 -> k8111f52558454ac2a1d6c4bfd218cf3f
+}

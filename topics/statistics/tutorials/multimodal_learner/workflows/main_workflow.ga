@@ -1,0 +1,197 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Train and evaluate a HANCOCK recurrence model with Multimodal Learner",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-4403-6684",
+            "name": "Paulo Cilas Morais Lyra Junior"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0009-0005-4322-3401",
+            "name": "Junhao Qiu"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0009-0007-1912-8644",
+            "name": "Khai Dang"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-9722-3977",
+            "name": "Alyssa Pybus"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-4583-5226",
+            "name": "Jeremy Goecks"
+        }
+    ],
+    "doi": [
+        "https://doi.org/10.5281/zenodo.18603388"
+    ],
+    "format-version": "0.1",
+    "license": "AGPL-3.0-or-later",
+    "name": "GLEAM Multimodal Learner - HANCOCK recurrence prediction",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "HANCOCK Train split"
+                }
+            ],
+            "label": "HANCOCK Train split",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 33.9453125,
+                "top": 0.0
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "a8e99e0d-1365-476b-ad42-5a8ed519fa4f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "HANCOCK Test split"
+                }
+            ],
+            "label": "HANCOCK Test split",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 12.359375,
+                "top": 160.23046875
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "63cda27a-b342-42f6-a77c-1f3bb6be15e5",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "ZIP archive containing CD3/CD8 images"
+                }
+            ],
+            "label": "ZIP archive containing CD3/CD8 images",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0.0,
+                "top": 324.2890625
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "3961ebd0-b987-47ee-bdc0-dcdb052b7ea8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/goeckslab/multimodal_learner/multimodal_learner/0.1.5",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input_csv": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "test_dataset_conditional|input_test": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "use_images_conditional|images_zip_repeat_0|images_zip": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Multimodal Learner",
+                    "name": "input_csv"
+                },
+                {
+                    "description": "runtime parameter for tool Multimodal Learner",
+                    "name": "test_dataset_conditional"
+                }
+            ],
+            "label": null,
+            "name": "Multimodal Learner",
+            "outputs": [
+                {
+                    "name": "output_html",
+                    "type": "html"
+                },
+                {
+                    "name": "output_config",
+                    "type": "yaml"
+                },
+                {
+                    "name": "output_json",
+                    "type": "json"
+                }
+            ],
+            "position": {
+                "left": 510.83203125,
+                "top": 91.140625
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/goeckslab/multimodal_learner/multimodal_learner/0.1.5",
+            "tool_shed_repository": {
+                "changeset_revision": "3719606b94af",
+                "name": "multimodal_learner",
+                "owner": "goeckslab",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"backbone_text\": \"google/electra-base-discriminator\", \"customize_defaults_conditional\": {\"customize_defaults\": true, \"__current_case__\": 0, \"validation_size\": \"0.2\", \"split_probabilities\": \"0.7 0.1 0.2\", \"cross_validation\": false, \"num_folds\": \"5\", \"epochs\": null, \"learning_rate\": null, \"batch_size\": null, \"threshold\": \"0.25\", \"hyperparameters\": null}, \"deterministic\": false, \"eval_metric\": \"roc_auc\", \"input_csv\": {\"__class__\": \"RuntimeValue\"}, \"preset\": \"medium_quality\", \"random_seed\": \"42\", \"sample_id_selector\": {\"use_sample_id\": \"no\", \"__current_case__\": 1}, \"target_column\": \"Target\", \"test_dataset_conditional\": {\"has_test_dataset\": true, \"__current_case__\": 0, \"input_test\": {\"__class__\": \"RuntimeValue\"}}, \"time_limit\": null, \"use_images_conditional\": {\"use_images\": true, \"__current_case__\": 0, \"images_zip_repeat\": [{\"__index__\": 0, \"images_zip\": {\"__class__\": \"RuntimeValue\"}}], \"backbone_image\": \"caformer_b36.sail_in22k_ft_in1k\", \"missing_image_strategy\": false}, \"__page__\": 0, \"__rerun_remap_job_id__\": null}",
+            "tool_uuid": null,
+            "tool_version": "0.1.5",
+            "type": "tool",
+            "uuid": "bd97bd95-d453-493e-9532-8b6a13c2caa4",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [
+        "statistics",
+        "multimodal",
+        "Machine Learning",
+        "GLEAM"
+    ],
+    "uuid": "74e77b62-e24c-46b2-b142-2a64a05cf7b3",
+    "version": 0
+}

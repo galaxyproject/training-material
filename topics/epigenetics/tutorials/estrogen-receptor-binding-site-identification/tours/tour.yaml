@@ -1,0 +1,1034 @@
+﻿---
+id: chipseq-estrogen-receptor-binding-site-identification
+name: Identification of the binding sites of the Estrogen receptor
+description: >-
+  The goal of this tutorial is to identify the binding sites of the Estrogen
+  receptor, a transcription factor known to be associated with different types
+  of breast cancer. This exercise uses the dataset from the Nature publication
+  by <a href="https://www.ncbi.nlm.nih.gov/pubmed/22217937">Ross-Inness et al.,
+  2012</a>.
+title_default: ''
+steps:
+  - title: Introduction
+    content: >-
+      The goal of this tutorial is to identify the binding sites of the Estrogen
+      receptor, a transcription factor known to be associated with different
+      types of breast cancer. This exercise uses the dataset from the Nature
+      publication by <a
+      href="https://www.ncbi.nlm.nih.gov/pubmed/22217937">Ross-Inness et al.,
+      2012</a>. <br><br>To this end, ChIP-seq was performed in breast cancer
+      cells from 4 patients of different outcomes (good and poor). For each
+      ChIP-seq experiment there is a matching technical control, i.e. there are
+      8 samples in total.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      Half of which are the so-called ‘input’ samples for which the same
+      treatment as the ChIP-seq samples was done except for the
+      immunoprecipitation step. The input files are used to identify potential
+      sequencing bias, like open chromatin or GC bias. <br><br>Because of the
+      long processing time for the large original files, we have downsampled the
+      original data and provide already processed data for subsequent steps.
+    backdrop: true
+  - title: Quality control and treatment of the sequences
+    content: >-
+      The first step of any ChIP-Seq data analysis is quality control of the raw
+      sequencing data.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Quality control
+    content: >-
+      We provide the <a
+      href="https://zenodo.org/record/892432/files/patient1_input_good_outcome.fastq">input
+      data</a> on <a href="https://zenodo.org/record/892432">Zenodo</a>.
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the link here.<br> Load the example dataset into your history from
+      Zenodo: <a
+      href="https://zenodo.org/record/892432/files/patient1_input_good_outcome.fastq">patient1_input_good_outcome</a>
+    placement: right
+    textinsert: 'https://zenodo.org/record/892432/files/patient1_input_good_outcome.fastq'
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data and edit datatype
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded dataset is in the history, but its names corresponds to the
+      link. We want to rename them it to something meaningful.<br><br> <ul>
+        <li>Click on the pencil icon beside the file to "Edit Attributes"</li>
+        <li>Change the name in "Name" to get only the name of the sample</li>
+        <li>Click on "Datatype" in the central panel and set to <b>fastqsanger</b></li>
+      </ul>
+    position: left
+  - title: Inspecting the data
+    element: '.history-right-panel .list-items > *:first'
+    content: Inspect the file by clicking on the eye icon
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How are the DNA sequences stored?</li>
+        <li>What are the other entries?</li>
+      </ul>
+    backdrop: false
+  - title: Quality control
+    element: '#tool-search-query'
+    content: Search for FastQC tool
+    placement: right
+    textinsert: FastQC
+  - title: Quality control
+    element: '#tool-search'
+    content: Click on the "FastQC" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.69"]
+        .tool-old-link
+  - title: Quality control
+    element: '#tool-search'
+    content: |-
+      Execute the tool on the input data with
+      <ul>
+        <li>“Short read data from your current history” to the imported file</li>
+      </ul>
+    position: left
+  - title: Inspect the result
+    element: '.history-right-panel .list-items > *:first'
+    content: Inspect the generated files
+    position: left
+  - title: Quality control
+    content: >-
+      It is often necessary to trim sequenced read, for example, to get rid of
+      bases that were sequenced with high uncertainty (= low quality bases).
+    backdrop: true
+  - title: Quality control
+    element: '#tool-search-query'
+    content: Search for Trim Galore! tool
+    placement: right
+    textinsert: Trim Galore
+  - title: Quality control
+    element: '#tool-search'
+    content: Click on the "Trim Galore!" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftrim_galore%2Ftrim_galore%2F0.4.3.1"]
+        .tool-old-link
+  - title: Quality control
+    element: '#tool-search'
+    content: |-
+      Execute the tool on the input data with
+      <ul>
+        <li>“Is this library paired- or single-end?” to <b>Single-end</b></li>
+        <li>“Reads in FASTQ format” to the imported file</li>
+        <li>“Trim Galore! advanced settings” to <b>Full parameter list</b></li>
+        <li>“Trim low-quality ends from reads” to <b>15</b></li>
+        <li>“Overlap with adapter sequence required to trim a sequence” to <b>3</b></li>
+      </ul>
+    position: left
+  - title: Importing data from a data library
+    content: >-
+      If your FASTQ files cannot be selected, you might check whether their
+      format is FASTQ with Sanger-scaled quality values (fastqsanger). You can
+      edit the data type by clicking on the pencil symbol.
+    backdrop: true
+  - title: Mapping of the reads
+    content: >-
+      In order to figure where the sequenced DNA fragments originated from in
+      the genome, the short reads must be aligned to the reference genome. This
+      is equivalent to solving a jigsaw puzzles, but unfortunately, not all
+      pieces are unique. In principle, you could do a BLAST analysis to figure
+      out where the sequenced pieces fit best in the known genome. Aligning
+      millions of short sequences this way may, however, take a couple of weeks.
+    backdrop: true
+  - title: Running Bowtie2
+    content: >-
+      Nowadays, there are many read alignment programs for shotgun sequenced
+      DNA, Bowtie2 being one of them.
+    backdrop: true
+  - title: Mapping
+    element: '#tool-search-query'
+    content: Search for Bowtie2 tool
+    placement: right
+    textinsert: Bowtie2
+  - title: Mapping
+    element: '#tool-search'
+    content: Click on the "Bowtie2" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbowtie2%2Fbowtie2%2F2.3.2.2"]
+        .tool-old-link
+  - title: Mapping
+    element: '#tool-search'
+    content: |-
+      Execute the tool on the input data with
+      <ul>
+        <li>“Is this library paired- or single-end?” to <b>Single-end</b></li>
+        <li>“FASTA/Q file” to the Trim Galore! output with the trimmed reads</li>
+        <li>“Will you select a reference genome from your history or use a built-in index?” to <b>Use a built-in genome index</b></li>
+        <li>“Select reference genome” to <b>Human (Homo sapiens): hg18</b></li>
+      </ul>
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How many reads where mapped?</li>
+      </ul>
+    backdrop: false
+  - title: Mapping
+    content: >-
+      The read alignment step with bowtie2 resulted in a compressed, binary file
+      (BAM) that is not human-readable. It’s like the zipped version of a text
+      file.
+
+      <br><br>We will show you two ways to inspect the file:
+
+      <ul>
+        <li>Visualization using a Genome Browser</li>
+        <li>Converting the binary format into its text file equivalent</li>
+      </ul>
+    backdrop: true
+  - title: Visualization of the reads in IGV
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      <ul>
+        <li>Click on the <b>display with IGV local</b> to load the reads into the IGV browser</li>
+        <li>Zoom at the start of chromosome 11 (or <b>chr11:1,562,200-1,591,483</b>)</li>
+    position: left
+  - title: Questions
+    content: >-
+      The reads have a direction: they are mapped to the forward or reverse
+      strand, respectively. When hovering over a read, extra information is
+      displayed
+
+      <ul>
+        <li>Some reads have colored lines included. What is this?</li>
+      </ul>
+    backdrop: false
+  - title: IGV browser
+    content: >-
+      Because the number of reads over a region can be quite large, the IGV
+      browser by default only allows to see the reads that fall into a small
+      window. This behaviour can be changed in the IGV preferences panel.
+    backdrop: true
+  - title: Inspection of the SAM format
+    content: >-
+      As mentioned above, you can convert the binary BAM file into a simple (but
+      large!) text file, which is called a <a
+      href="https://en.wikipedia.org/wiki/SAM_(file_format)">SAM</a> (Sequence
+      Alignment Map) file.
+    backdrop: true
+  - title: Conversion into a SAM file
+    element: '#tool-search-query'
+    content: Search for BAM-to-SAM tool
+    placement: right
+    textinsert: BAM-to-SAM
+  - title: Conversion into a SAM file
+    element: '#tool-search'
+    content: Click on the "BAM-to-SAM" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbam_to_sam%2Fbam_to_sam%2F2.0.1"]
+        .tool-old-link
+  - title: Conversion into a SAM file
+    element: '#tool-search'
+    content: |-
+      Execute the tool on the input data with
+      <ul>
+        <li>“BAM File to Convert” to the file generated by Bowtie2</li>
+        <li>“Header options” to <b>Include header in SAM output</b></li>
+      </ul>
+    position: left
+  - title: Inspecting the data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Inspect the file by clicking on the eye icon <br><br>A SAM file is a file
+      with
+        <ul>
+          <li>A header with the chromosome names and lengths</li>
+          <li>A file content as a tabular file with the location and other information of each read found in the FASTQ file and the mapping information</li>
+        </ul>
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>Which information do you find in a SAM/BAM file? What is the additional information compared to a FASTQ file.</li>
+      </ul>
+    backdrop: false
+  - title: ChIP-seq Quality Control
+    content: >-
+      We already checked the quality of the raw sequencing reads in the first
+      step. Now we would like to test the quality of the ChIP-seq preparation,
+      to know if your ChIP-seq samples are more enriched than the control
+      (input) samples.
+    backdrop: true
+  - title: Correlation between samples
+    content: >-
+      To assess the similarity between the replicates of the ChIP and the input,
+      respectively, it is a common technique to calculate the correlation of
+      read counts on different regions for all different samples. We expect that
+      the replicates of the ChIP-seq experiments should be clustered more
+      closely to each other than the replicates of the input sample. That is,
+      because the input samples should not have enriched regions included -
+      remember the immuno-precipitation step was skiped during the sample
+      preparation.
+    backdrop: true
+  - title: Correlation between samples
+    content: >-
+      To compute the correlation between the samples we are going to to use the
+      QC modules of deepTools (http://deeptools.readthedocs.io/), a software
+      package for the QC, processing and analysis of NGS data. Before computing
+      the correlation a time consuming step is required, which is to compute the
+      read coverage over a large number of regions from each BAM file. For this
+      we will use the tool <b>multiBamSummary</b>
+
+      <br><br>To do that, we need at first to catch up for all our samples and
+      re-run the previous steps (quality control and mapping) on each sample. To
+      save time, we already did that and we can now work directly on the BAM
+      files of the 8 samples
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: Create new history.
+    placement: left
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to umport the 8 BAM files. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the links here.<br> Load the example dataseta into your history
+      from <a href="https://doi.org/10.5281/zenodo.892432">Zenodo</a>: <ul>
+        <li><a href="https://zenodo.org/record/892432/files/patient1_ChIP_ER_good_outcome.bam">patient1_ChIP_ER_good_outcome.bam</a></li>
+        <li><a href="https://zenodo.org/record/892432/files/patient1_input_good_outcome.bam">patient1_input_good_outcome.bam</a></li>
+        <li><a href="https://zenodo.org/record/892432/files/patient2_ChIP_ER_good_outcome.bam">patient2_ChIP_ER_good_outcome.bam</a></li>
+        <li><a href="https://zenodo.org/record/892432/files/patient2_input_good_outcome.bam">patient2_input_good_outcome.bam</a></li>
+        <li><a href="https://zenodo.org/record/892432/files/patient3_ChIP_ER_poor_outcome.bam">patient3_ChIP_ER_poor_outcome.bam</a></li>
+        <li><a href="https://zenodo.org/record/892432/files/patient3_input_poor_outcome.bam">patient3_input_poor_outcome.bam</a></li>
+        <li><a href="https://zenodo.org/record/892432/files/patient4_ChIP_ER_poor_outcome.bam">patient4_ChIP_ER_poor_outcome.bam</a></li>
+        <li><a href="https://zenodo.org/record/892432/files/patient4_input_poor_outcome.bam">patient4_input_poor_outcome.bam</a></li>
+      </ul>
+    placement: right
+    textinsert: |-
+      https://zenodo.org/record/892432/files/patient1_ChIP_ER_good_outcome.bam
+      https://zenodo.org/record/892432/files/patient1_input_good_outcome.bam
+      https://zenodo.org/record/892432/files/patient2_ChIP_ER_good_outcome.bam
+      https://zenodo.org/record/892432/files/patient2_input_good_outcome.bam
+      https://zenodo.org/record/892432/files/patient3_ChIP_ER_poor_outcome.bam
+      https://zenodo.org/record/892432/files/patient3_input_poor_outcome.bam
+      https://zenodo.org/record/892432/files/patient4_ChIP_ER_poor_outcome.bam
+      https://zenodo.org/record/892432/files/patient4_input_poor_outcome.bam
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Correlation between samples
+    element: '#tool-search-query'
+    content: Search for multiBamSummary tool
+    placement: right
+    textinsert: multiBamSummary
+  - title: Correlation between samples
+    element: '#tool-search'
+    content: Click on the "multiBamSummary" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_multi_bam_summary%2Fdeeptools_multi_bam_summary%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: Correlation between samples
+    element: '#tool-search'
+    content: >-
+      Execute the tool on the input data with
+
+      <ul>
+        <li>“Sample order matters” to <b>No</b></li>
+        <li>“Bam file” to the 8 imported BAM files</li>
+        <li>“Choose computation mode” to <b>Bins</b></li>
+        <li>“Bin size in bp” to <b>100</b></li>
+        This corresponds to the length of the fragments that were sequenced; it is not the read length!
+        <li>“Distance between bins” to <b>500000</b> (to reduce the computation time for the tutorial)</li>
+        <li>“Region of the genome to limit the operation to” to <b>chr1</b> (to reduce the computation time for the tutorial)</li>
+      </ul>
+
+      Using these parameters, the tool will take bins of 100 bp separated by
+      500,000. For each bin the overlapping reads in each sample will be
+      computed
+    position: left
+  - title: Correlation between samples
+    element: '#tool-search-query'
+    content: Search for plotCorrelation tool
+    placement: right
+    textinsert: plotCorrelation
+  - title: Correlation between samples
+    element: '#tool-search'
+    content: Click on the "plotCorrelation" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_plot_correlation%2Fdeeptools_plot_correlation%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: Correlation between samples
+    element: '#tool-search'
+    content: >-
+      Execute the tool on the input data with
+
+      <ul>
+        <li>“Matrix file from the multiBamSummary tool” to the generated multiBamSummary output</li>
+      </ul>
+
+      To compute and visualize the sample correlation we use plotCorrelation
+      from deepTools. This is a fast process that allows the user to quickly try
+      different color combinations and outputs. Feel free to try different
+      parameters.
+
+      More information on these two tools can be found at the <a
+      href="https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html">deepTools
+      documentation page</a>.
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How are your samples clustered? Does that correspond to your expectations?</li>
+      </ul>
+    backdrop: false
+  - title: IP strength estimation
+    content: >-
+      To evaluate the quality of the immuno-precipitation step, we can compute
+      the IP strength. It determines how well the signal in the ChIP-seq sample
+      can be differentiated from the background distribution of reads in the
+      control sample. To do that we take the data for one Patient and compare
+      the input sample and the ChIP-seq sample.
+    backdrop: true
+  - title: IP strength estimation
+    element: '#tool-search-query'
+    content: Search for plotFingerprint tool
+    placement: right
+    textinsert: plotFingerprint
+  - title: IP strength estimation
+    element: '#tool-search'
+    content: Click on the "plotFingerprint" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_plot_fingerprint%2Fdeeptools_plot_fingerprint%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: IP strength estimation
+    element: '#tool-search'
+    content: |-
+      Execute the tool with
+      <ul>
+        <li>“Sample order matters” to <b>No</b></li>
+        <li>“Bam file” to <b>patient1_input_good_outcome</b> and <b>patient1_ChIP_ER_good_outcome</b></li>
+        <li>“Region of the genome to limit the operation to” to <b>chr1</b></li>
+      </ul>
+    position: left
+  - title: IP strength estimation
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The plotFingerprint tool generates a fingerprint plot. You need to
+      intepret it to know the IP strength. <a
+      href="https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html">Check
+      documentation</a> for further details.
+    placement: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What do you think about the quality of the IP for this experiment?</li>
+      </ul>
+    backdrop: false
+  - title: Optionally
+    content: Run the same analysis on data of the 3 other patients
+    backdrop: true
+  - title: Normalization
+    content: >-
+      We would like to know where the binding sites of the estrogen receptor are
+      located. For this we need to extract which parts of the genome have been
+      enriched (more reads mapped) within the samples that underwent
+      immunoprecipitation.
+
+      <br><br>For the normalization we have two options.
+
+      <ul>
+        <li>Normalization by sequencing depth</li>
+        <li>Normalization by input file</li>
+      </ul>
+    backdrop: true
+  - title: Generation of coverage files normalized by sequencing depth
+    content: >-
+      We first need to make the samples comparable. Indeed, the different
+      samples have usually a different sequencing depth, i.e. a different number
+      of reads. These differences can bias the interpretation of the number of
+      reads mapped to a specific genome region.
+    backdrop: true
+  - title: Coverage file normalization
+    element: '#tool-search-query'
+    content: Search for IdxStats tool
+    placement: right
+    textinsert: IdxStats
+  - title: Coverage file normalization
+    element: '#tool-search'
+    content: Click on the "IdxStats" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fsamtools_idxstats%2Fsamtools_idxstats%2F2.0.1"]
+        .tool-old-link
+  - title: Coverage file normalization
+    element: '#tool-search'
+    content: |-
+      Execute the tool with
+      <ul>
+        <li>“BAM file” to “Multiple datasets”: <b>patient1_input_good_outcome</b> and <b>patient1_ChIP_ER_good_outcome</b></li>
+      </ul>
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What is the output of this tool?</li>
+        <li>How many reads has been mapped on chr2 for the input and for the ChIP-seq samples?</li>
+      </ul>
+    backdrop: false
+  - title: Coverage file normalization
+    element: '#tool-search-query'
+    content: Search for bamCoverage tool
+    placement: right
+    textinsert: bamCoverage
+  - title: Coverage file normalization
+    element: '#tool-search'
+    content: Click on the "bamCoverage" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_bam_coverage%2Fdeeptools_bam_coverage%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: Coverage file normalization
+    element: '#tool-search'
+    content: |-
+      Execute the tool with
+      <ul>
+        <li>“BAM file” to “Multiple datasets”: <b>patient1_input_good_outcome</b> and <b>patient1_ChIP_ER_good_outcome</b></li>
+        <li>“Bin size in bases” to <b>25</b></li>
+        <li>“Scaling/Normalization method” to <b>Normalize coverage to 1x</b></li>
+        <li>“Effective genome size” to <b>hg19 (2451960000)</b></li>
+        <li>“Coverage file format” to <b>bedgraph</b></li>
+      </ul>
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What are the different columns of a <b>bedgraph</b> file?</li>
+      </ul>
+    backdrop: false
+  - title: Coverage file normalization
+    element: '#tool-search-query'
+    content: >-
+      Run bamCoverage tool with the same parameters but to generate a bigWig
+      output file
+    placement: right
+    textinsert: bamCoverage
+  - title: Coverage file normalization
+    element: '#tool-search'
+    content: Click on the "bamCoverage" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_bam_coverage%2Fdeeptools_bam_coverage%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: Coverage file normalization
+    element: '#tool-search'
+    content: |-
+      Execute the tool with
+      <ul>
+        <li>“BAM file” to “Multiple datasets”: <b>patient1_input_good_outcome</b> and <b>patient1_ChIP_ER_good_outcome</b></li>
+        <li>“Bin size in bases” to <b>25</b></li>
+        <li>“Scaling/Normalization method” to <b>Normalize coverage to 1x</b></li>
+        <li>“Effective genome size” to <b>hg19 (2451960000)</b></li>
+        <li>“Coverage file format” to <b>bigWig</b></li>
+      </ul>
+    position: left
+  - title: IGV
+    element: '.history-right-panel .list-items > *:first'
+    content: Inspect both signal coverages (input and ChIP samples) in IGV
+    placement: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What is a bigWig file?</li>
+      </ul>
+    backdrop: false
+  - title: Generation of input-normalized coverage files and their visualization
+    content: >-
+      To extract only the information induced by the immunoprecipitation, we
+      normalize for each patient the coverage file for the sample that underwent
+      immunoprecipitation by the coverage file for the input sample. Here we use
+      the tool bamCompare which compare 2 BAM files while caring for sequencing
+      depth normalization.
+    backdrop: true
+  - title: Generation of input-normalized coverage files
+    element: '#tool-search-query'
+    content: Search for bamCompare tool
+    placement: right
+    textinsert: bamCompare
+  - title: Generation of input-normalized coverage files
+    element: '#tool-search'
+    content: Click on the "bamCompare" tool to open itre
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_bam_compare%2Fdeeptools_bam_compare%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: Generation of input-normalized coverage files
+    element: '#tool-search'
+    content: |-
+      Execute the tool with
+      <ul>
+        <li>“First BAM file (e.g. treated sample)” to <b>patient1_ChIP_ER_good_outcome</b></li>
+        <li>“Second BAM file (e.g. control sample)” to <b>patient1_input_good_outcome</b></li>
+        <li>“Bin size in bases” to <b>50</b></li>
+        <li>“How to compare the two files” to <b>Compute log2 of the number of reads ratio</b></li>
+        <li>“Coverage file format” to <b>bedgraph</b></li>
+        <li>“Region of the genome to limit the operation to” to <b>chr11</b> (to reduce the computation time for the tutorial)</li>
+      </ul>
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What does mean a positive or a negative value in the 4th column?</li>
+      </ul>
+    backdrop: false
+  - title: Generation of input-normalized coverage files
+    element: '#tool-search-query'
+    content: Run bamCompare tool with the same parameters but bigWig output
+    placement: right
+    textinsert: bamCompare
+  - title: Generation of input-normalized coverage files
+    element: '#tool-search'
+    content: Click on the "bamCompare" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_bam_compare%2Fdeeptools_bam_compare%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: Generation of input-normalized coverage files
+    element: '#tool-search'
+    content: |-
+      Execute the tool with
+      <ul>
+        <li>“First BAM file (e.g. treated sample)” to <b>patient1_ChIP_ER_good_outcome</b></li>
+        <li>“Second BAM file (e.g. control sample)” to <b>patient1_input_good_outcome</b></li>
+        <li>“Bin size in bases” to <b>50</b></li>
+        <li>“How to compare the two files” to <b>Compute log2 of the number of reads ratio</b></li>
+        <li>“Coverage file format” to <b>bigWig</b></li>
+        <li>“Region of the genome to limit the operation to” to <b>chr11</b> (to reduce the computation time for the tutorial)</li>
+      </ul>
+    position: left
+  - title: IGV
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Inspect the log2 ratio. Remember that the bigWig file contains only the
+      signal on chromosome 11!
+    placement: left
+  - title: Detecting enriched regions (peak calling)
+    content: >-
+      We can also call the enriched regions, or peaks, found in the ChIP-seq
+      samples.
+    backdrop: true
+  - title: Peak calling
+    element: '#tool-search-query'
+    content: Search for MACS2 callpeak tool
+    placement: right
+    textinsert: MACS2 callpeak
+  - title: Peak calling
+    element: '#tool-search'
+    content: Click on the "MACS2 callpeak" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmacs2%2Fmacs2_callpeak%2F2.1.1.20160309.0"]
+        .tool-old-link
+  - title: Peak calling
+    element: '#tool-search'
+    content: |-
+      Execute the tool with
+      <ul>
+        <li>“ChIP-Seq Treatment File” to <b>patient1_ChIP_ER_good_outcome</b></li>
+        <li>“ChIP-Seq Control File” to <b>patient1_input_good_outcome</b></li>
+        <li>“Effective genome size” to <b>H. sapiens (2,451,960,000)</b></li>
+        <li>“Outputs” to <b>Summary page (html)</b></li>
+      </ul>
+    position: left
+  - title: Comments
+    content: >-
+      The advanced options may be adjusted, depending of the samples. If your
+      ChIP-seq experiment targets regions of broad enrichment, e.g.
+      non-punctuate histone modifications, select calling of broad regions. If
+      your sample has a low duplication rate (e.g. below 10%), you might keep
+      all duplicate reads (tags). Otherwise, you might use the ‘auto’ option to
+      estimate the maximal allowed number of duplicated reads per genomic
+      location.
+    backdrop: false
+  - title: IGV
+    element: '.history-right-panel .list-items > *:first'
+    content: Inspect with the signal coverage and log2 ratio tracks
+    placement: left
+  - title: Peak calling
+    content: >-
+      The called peak regions can be filtered by, e.g. fold change, FDR and
+      region length for further downstream analysis.
+    backdrop: true
+  - title: Plot the signal on the peaks between samples
+    content: >-
+      Plotting your region of interest will involve using two tools from the
+      deepTools suite.
+
+      <br><br><ul>
+        <li>computeMatrix : Computes the signal on given regions, using the bigwig coverage files from different samples.</li>
+        <li>plotHeatmap : Plots heatMap of the signals using the computeMatrix output.</li>
+      </ul>
+
+      Optionally, you can also use plotProfileto create a profile plot using to
+      computeMatrix output.
+    backdrop: true
+  - title: Visualization of the coverage
+    element: '#tool-search-query'
+    content: Search for UCSC Main tool
+    placement: right
+    textinsert: UCSC Main
+  - title: Visualization of the coverage
+    element: '#tool-search'
+    content: Click on the "UCSC Main" tool to open it
+    placement: right
+  - title: Visualization of the coverage
+    element: '#tool-search'
+    content: |-
+      Execute the tool with
+      <ul>
+        <li>“assembly” to <b>hg18</b></li>
+        <li>“track” to <b>RefSeq genes</b></li>
+        <li>“region” to <b>position</b> with <b>chr11</b></li>
+        <li>“output format” to <b>BED</b></li>
+        <li>“Send output to” to <b>Galaxy</b></li>
+      </ul>
+    position: left
+  - title: Visualization of the coverage
+    element: '#tool-search-query'
+    content: Search for computeMatrix tool
+    placement: right
+    textinsert: computeMatrix
+  - title: Visualization of the coverage
+    element: '#tool-search'
+    content: Click on the "computeMatrix" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_compute_matrix%2Fdeeptools_compute_matrix%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: Visualization of the coverage
+    element: '#tool-search'
+    content: >-
+      Execute the tool with
+
+      <ul>
+        <li>“Regions to plot” to the imported UCSC file</li>
+        <li>“Score file” to the bigwig file generated by bamCompare</li>
+        <li>“computeMatrix has two main output options” to <b>scale-regions</b></li>
+        This option stretches or shrinks all regions in the BED file (here: genes) to the same length (bp) as indicated by the user
+        <li>“Show advanced options” to <b>yes</b></li>
+        <li>“Convert missing values to 0?” to <b>Yes</b></li>
+      </ul>
+
+      This tool prepares a file with scores per genomic region, which is
+      required as input for the next tool.
+    position: left
+  - title: Visualization of the coverage
+    element: '#tool-search-query'
+    content: Search for plotHeatmap tool
+    placement: right
+    textinsert: plotHeatmap
+  - title: Visualization of the coverage
+    element: '#tool-search'
+    content: Click on the "plotHeatmap" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_plot_heatmap%2Fdeeptools_plot_heatmap%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: Visualization of the coverage
+    element: '#tool-search'
+    content: |-
+      Execute the tool with
+      <ul>
+        <li>“Matrix file from the computeMatrix tool” to the generated matrix</li>
+        <li>“Show advanced options” to <b>yes</b></li>
+        <li>“Did you compute the matrix with more than one groups of regions?” to the correct setting</li>
+      </ul>
+    position: left
+  - title: Additional Quality control. GC bias assessment
+    content: >-
+      A common problem of PCR-based protocols is the observation that GC-rich
+      regions tend to be amplified more readily than GC-poor regions. We need to
+      check that our samples do not have more reads from regions of the genome
+      with high GC.
+
+      <br><br>For practical reasons, we will focus here only on one of our BAM
+      files. With real data you should repeat these steps for all your samples.
+    backdrop: true
+  - title: Questions
+    content: >-
+      Can you guess why it makes more sense to check the input files for GC
+      bias?
+    backdrop: false
+  - title: GC bias assessment
+    element: '#tool-search-query'
+    content: Search for computeGCbias tool
+    placement: right
+    textinsert: computeGCbias
+  - title: GC bias assessment
+    element: '#tool-search'
+    content: Click on the "computeGCbias" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_compute_gc_bias%2Fdeeptools_compute_gc_bias%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: GC bias assessment
+    element: '#tool-search'
+    content: |-
+      Execute the tool with
+      <ul>
+        <li>“BAM file” to <b>patient1_input_good_outcome</b></li>
+        <li>“Reference genome” to <b>locally cached</b></li>
+        <li>“Using reference genome” to <b>Human (Homo sapiens): hg18</b></li>
+        <li>“Effective genome size” to <b>hg19 (2451960000)</b></li>
+        <li>“Fragment length used for the sequencing” to <b>300</b></li>
+        <li>“Region of the genome to limit the operation to” to <b>chr1</b> (to reduce the computation time for the tutorial)</li>
+      </ul>
+    position: left
+  - title: Questions
+    content: Does this dataset have a GC bias?
+    backdrop: false
+  - title: plotting multiple samples
+    element: '#tool-search-query'
+    content: Search for bamCompare tool
+    placement: right
+    textinsert: bamCompare
+  - title: plotting multiple samples
+    element: '#tool-search'
+    content: Click on the "bamCompare" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_bam_compare%2Fdeeptools_bam_compare%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: plotting multiple samples
+    element: '#tool-search'
+    content: |-
+      Execute the tool with
+      <ul>
+        <li>“First BAM file (e.g. treated sample)” to <b>patient1_ChIP_ER_good_outcome, patient2_ChIP_ER_good_outcome, patient3_ChIP_ER_good_outcome, patient4_ChIP_ER_good_outcome</b></li>
+        <li>“Second BAM file (e.g. control sample)” to <b>patient1_input_good_outcome, patient2_input_good_outcome, patient3_input_good_outcome, patient4_input_good_outcome</b></li>
+        <li>“Bin size in bases” to <b>50</b></li>
+        <li>“How to compare the two files” to <b>Compute log2 of the number of reads ratio</b></li>
+        <li>“Coverage file format” to <b>bedgraph</b></li>
+        <li>“Region of the genome to limit the operation to” to <b>chr11</b> (to reduce the computation time for the tutorial)</li>
+      </ul>
+    position: left
+  - title: Peak calling
+    element: '#tool-search-query'
+    content: Search for MACS2 callpeak tool
+    placement: right
+    textinsert: MACS2 callpeak
+  - title: Peak calling
+    element: '#tool-search'
+    content: Click on the "MACS2 callpeak" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fmacs2%2Fmacs2_callpeak%2F2.1.1.20160309.0"]
+        .tool-old-link
+  - title: Peak calling
+    element: '#tool-search'
+    content: |-
+      Execute the tool with
+      <ul>
+        <li>“ChIP-Seq Treatment File” to <b>patient2_ChIP_ER_good_outcome</b></li>
+        <li>“ChIP-Seq Control File” to <b>patient2_input_good_outcome</b></li>
+        <li>“Effective genome size” to <b>H. sapiens (2,451,960,000)</b></li>
+        <li>“Outputs” to <b>Summary page (html)</b></li>
+      </ul>
+    position: left
+  - title: Concatenate
+    element: '#tool-search-query'
+    content: >-
+      Concatenate the outputs (summits in BED) from patient1 and patient2 using
+      tool Concatenate
+    placement: right
+    textinsert: Concatenate
+  - title: Concatenate
+    element: '#tool-search'
+    content: Click on the "Concatenate" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fconcat%2Fgops_concat_1%2F1.0.1"]
+        .tool-old-link
+  - title: Concatenate
+    element: '#tool-search'
+    content: >-
+      Execute the tool and concatenate the outputs (summits in BED) from
+      patient1 and patient2
+    position: left
+  - title: SortBED
+    element: '#tool-search-query'
+    content: Search for the tool SortBED
+    placement: right
+    textinsert: SortBED
+  - title: SortBED
+    element: '#tool-search'
+    content: Click on the "SortBED" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbedtools%2Fbedtools_sortbed%2F2.26.0.0"]
+        .tool-old-link
+  - title: SortBED
+    element: '#tool-search'
+    content: Run the tool with default settings to sort the output.
+    position: left
+  - title: MergeBED
+    element: '#tool-search-query'
+    content: Search for the tool MergeBED
+    placement: right
+    textinsert: MergeBED
+  - title: MergeBED
+    element: '#tool-search'
+    content: Click on the "MergeBED" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fbedtools%2Fbedtools_mergebed%2F2.26.0.0"]
+        .tool-old-link
+  - title: MergeBED
+    element: '#tool-search'
+    content: Run the tool with default settings to merge the overlapping intervals.
+    position: left
+  - title: plotting multiple samples
+    element: '#tool-search-query'
+    content: Search for computeMatrix tool
+    placement: right
+    textinsert: computeMatrix
+  - title: plotting multiple samples
+    element: '#tool-search'
+    content: Click on the "computeMatrix" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_compute_matrix%2Fdeeptools_compute_matrix%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: plotting multiple samples
+    element: '#tool-search'
+    content: >-
+      Execute the tool with
+
+      <ul>
+        <li>Regions to plot: select the merged bed from above</li>
+        <li>“Score file” to the bigwig file generated by bamCompare</li>
+        <li>“computeMatrix has two main output options” to <b>scale-regions</b></li>
+        <li>“Show advanced options” to <b>yes</b></li>
+        <li>“Convert missing values to 0?” to <b>Yes</b></li>
+        <li>Output option: reference-point</li>
+        <li>The reference point for the plotting: center of region</li>
+        <li>Distance upstream of the start site of the regions defined in the region file : 3000</li>
+        <li>Distance downstream of the end site of the given regions: 3000</li>
+      </ul>
+
+      With this option, it considers only those genomic positions before
+      (downstream) and/or after (upstream) a reference point (e.g. TSS, which
+      corresponds to the annotated gene start in our case)
+    position: left
+  - title: plotting multiple samples
+    element: '#tool-search-query'
+    content: Search for plotHeatmap tool
+    placement: right
+    textinsert: plotHeatmap
+  - title: plotting multiple samples
+    element: '#tool-search'
+    content: Click on the "plotHeatmap" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Fdeeptools_plot_heatmap%2Fdeeptools_plot_heatmap%2F2.5.1.1.0"]
+        .tool-old-link
+  - title: plotting multiple samples
+    element: '#tool-search'
+    content: |-
+      Execute the tool with
+      <ul>
+        <li>“Matrix file from the computeMatrix tool” to the generated matrix</li>
+        <li>“Show advanced options” to <b>yes</b></li>
+        <li>“Did you compute the matrix with more than one groups of regions?” to No, I used only one group</li>
+        <li>“Clustering algorithm” to Kmeans clustering Inspect the output</li>
+      </ul>
+    position: left
+  - title: Key points
+    content: |-
+      <ul>
+        <li>ChIP-seq data requires multiple methods of quality assessment to ensure that the data is of high quality.</li>
+        <li>Multiple normalization methods exists depending on the availability of input data.</li>
+        <li>Heatmaps containing all genes of an organism can be easily plotted given a BED file and a coverage file.</li>
+      </ul>
+    backdrop: true

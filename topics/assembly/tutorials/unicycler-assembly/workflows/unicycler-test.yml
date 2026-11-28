@@ -1,0 +1,28 @@
+---
+- doc: Test the unicycler assembly workflow
+  job:
+    'Forward reads':
+      location: https://zenodo.org/api/files/0b6b7422-42dc-489e-9567-a9de12c6972e/illumina_f.fq
+      class: File
+      filetype: fastqsanger
+    'Reverse Reads':
+      location: https://zenodo.org/api/files/0b6b7422-42dc-489e-9567-a9de12c6972e/illumina_r.fq
+      class: File
+      filetype: fastqsanger
+    'Long Reads':
+      location: https://zenodo.org/api/files/0b6b7422-42dc-489e-9567-a9de12c6972e/minion_2d.fq
+      class: File
+      filetype: fastqsanger
+  outputs:
+    ffn:
+      asserts:
+        has_text:
+          text: ">PROKKA_00010 chromosomal replication initiator protein DnaA; DNA-binding transcriptional dual regulator"
+    gbk:
+      asserts:
+        has_line:
+          line: '     CDS             70..1404'
+    tbl:
+      asserts:
+        has_text:
+          text: '			product	DNA polymerase III, holoenzyme'

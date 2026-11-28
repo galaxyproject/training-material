@@ -1,0 +1,27 @@
+- doc: Test outline for CS3_Filter,-Plot-and-Explore-Single-cell-RNA-seq-Data
+  job:
+    Mito-counted AnnData:
+      class: File
+      path: https://zenodo.org/record/7053673/files/Mito-counted_AnnData
+      filetype: h5ad
+  outputs:
+    Final cell annotated object:
+      asserts:
+        has_h5_keys:
+            keys: "obs/cell_type"
+            keys: "obs/genotype"
+            keys: "var/dispersions"
+            keys: "uns/louvain"
+            keys: "uns/umap"
+    Markers - genotype - named:
+      asserts:
+        has_n_lines:
+          value: 101
+        has_n_columns:
+          value: 9
+    Markers - cluster - named:
+      asserts:
+        has_n_lines:
+          value: 401
+        has_n_columns:
+          value: 9

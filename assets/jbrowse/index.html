@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>JBrowse</title>
+    <script type="text/javascript">
+        window.onerror=function(msg){
+            if( document.body )
+                document.body.setAttribute("JSError",msg);
+        }
+        if(window.process&&process.versions&&process.versions.electron) {
+            window.electronRequire = require;
+            delete window.require;
+        }
+    </script>
+    <style>
+        html, body, div.jbrowse {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <script type="text/javascript" src="dist/main.bundle.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <div class="jbrowse" id="GenomeBrowser" data-config='"allowCrossOriginDataRoot": false, "cacheBuster": true'>
+      <div id="LoadingScreen" style="padding: 50px;">
+        <h1>Loading...</h1>
+      </div>
+    </div>
+    <div style="display: none">JBrowseDefaultMainPage</div>
+  </body>
+</html>

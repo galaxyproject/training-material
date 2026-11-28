@@ -1,0 +1,519 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "Regional GAM",
+  "format-version": "0.1",
+  "name": "Regional GAM Workflow",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "regionalGAM.csv"
+        }
+      ],
+      "label": "regionalGAM.csv",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 200
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"regionalGAM.csv\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "83dea6ec-6810-4bf2-aebc-96bda6cae9d5",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.1",
+      "errors": null,
+      "id": 1,
+      "input_connections": {
+        "infile": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Text reformatting",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 420,
+        "top": 200
+      },
+      "post_job_actions": {
+        "HideDatasetActionoutfile": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "outfile"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.1",
+      "tool_shed_repository": {
+        "changeset_revision": "0a8c6b61f0f4",
+        "name": "text_processing",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"code\": \"\\\" NR == 1 { print }\\\\n /NLBMS/ { print }\\\\n\\\"\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
+      "tool_version": "1.1.1",
+      "type": "tool",
+      "uuid": "4942c60e-a864-4fa3-9f95-a0b8f0d78c2e",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "Count1",
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+        "input": {
+          "id": 1,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Count",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 640,
+        "top": 200
+      },
+      "post_job_actions": {
+        "HideDatasetActionout_file1": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "out_file1"
+        }
+      },
+      "tool_id": "Count1",
+      "tool_state": "{\"__page__\": null, \"sorting\": \"\\\"value\\\"\", \"column\": \"[\\\"1\\\"]\", \"__rerun_remap_job_id__\": null, \"delim\": \"\\\"T\\\"\", \"input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.0.3",
+      "type": "tool",
+      "uuid": "f463797c-e73d-4917-becb-5cee0a071758",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/regionalgam_flight_curve/regionalgam_flight_curve/1.5",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "count_file": {
+          "id": 2,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Flight curve",
+          "name": "count_file"
+        }
+      ],
+      "label": null,
+      "name": "Flight curve",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 647.5,
+        "top": 353
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/regionalgam_flight_curve/regionalgam_flight_curve/1.5",
+      "tool_shed_repository": {
+        "changeset_revision": "fff507f00b2b",
+        "name": "regionalgam_flight_curve",
+        "owner": "ecology",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"count_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"minoccur\": \"\\\"2\\\"\", \"minvisit\": \"\\\"3\\\"\"}",
+      "tool_version": "1.5",
+      "type": "tool",
+      "uuid": "9888f224-3126-484f-9f4b-d36e84e55661",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "be6e75b5-827e-4df2-ac2c-8ea7be70290e"
+        }
+      ]
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/regionalgam_ab_index/regionalgam_ab_index/1.5",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "count_file": {
+          "id": 2,
+          "output_name": "out_file1"
+        },
+        "input2": {
+          "id": 3,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Abundance index",
+          "name": "count_file"
+        },
+        {
+          "description": "runtime parameter for tool Abundance index",
+          "name": "input2"
+        }
+      ],
+      "label": null,
+      "name": "Abundance index",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 858.5,
+        "top": 113
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/regionalgam_ab_index/regionalgam_ab_index/1.5",
+      "tool_shed_repository": {
+        "changeset_revision": "d0ee713d4758",
+        "name": "regionalgam_ab_index",
+        "owner": "ecology",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"count_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}",
+      "tool_version": "1.5",
+      "type": "tool",
+      "uuid": "dc2f9ebc-b152-448d-aa10-59f7a9887b1a",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "36b93f0d-fd21-42c6-8a46-9e050494e8b7"
+        }
+      ]
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy1",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "input1": {
+          "id": 3,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Scatterplot w ggplot2",
+      "outputs": [
+        {
+          "name": "output1",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 937,
+        "top": 316
+      },
+      "post_job_actions": {
+        "HideDatasetActionoutput1": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output1"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy1",
+      "tool_shed_repository": {
+        "changeset_revision": "9cec81e1b90e",
+        "name": "ggplot2_point",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"adv\": \"{\\\"axis_text_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"axis_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"factor\\\": {\\\"__current_case__\\\": 1, \\\"colororder\\\": \\\"1\\\", \\\"colors\\\": \\\"Set3\\\", \\\"factorcol\\\": \\\"2\\\", \\\"factoring\\\": \\\"Single\\\"}, \\\"gridlinecust\\\": \\\"default\\\", \\\"legend\\\": \\\"yes\\\", \\\"plot_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"points\\\": {\\\"__current_case__\\\": 0, \\\"pointoptions\\\": \\\"default\\\"}, \\\"scaling\\\": {\\\"__current_case__\\\": 0, \\\"plot_scaling\\\": \\\"Automatic\\\"}, \\\"theme\\\": \\\"bw\\\", \\\"transform\\\": \\\"none\\\", \\\"type\\\": \\\"lines\\\"}\", \"xlab\": \"\\\"Day number\\\"\", \"input1\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"title\": \"\\\"Pyronia tithonus phenology stacked visualization\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"xplot\": \"\\\"4\\\"\", \"yplot\": \"\\\"6\\\"\", \"ylab\": \"\\\"nm value\\\"\", \"chromInfo\": \"\\\"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"out\": \"{\\\"additional_output_format\\\": \\\"none\\\", \\\"dpi_output_dim\\\": \\\"300.0\\\", \\\"height_output_dim\\\": \\\"7.0\\\", \\\"unit_output_dim\\\": \\\"in\\\", \\\"width_output_dim\\\": \\\"7.0\\\"}\"}",
+      "tool_version": "2.2.1+galaxy1",
+      "type": "tool",
+      "uuid": "d207f46d-5ff4-45a0-9e16-c1fbd2354550",
+      "workflow_outputs": []
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/regionalgam_glmmpql/regionalgam_glmmpql/1.5",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "ab_indices": {
+          "id": 4,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Expected temporal trend",
+          "name": "ab_indices"
+        }
+      ],
+      "label": null,
+      "name": "Expected temporal trend",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "png"
+        },
+        {
+          "name": "output2",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1220,
+        "top": 271
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/regionalgam_glmmpql/regionalgam_glmmpql/1.5",
+      "tool_shed_repository": {
+        "changeset_revision": "f3e1b6d244a6",
+        "name": "regionalgam_glmmpql",
+        "owner": "ecology",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"ab_indices\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}",
+      "tool_version": "1.5",
+      "type": "tool",
+      "uuid": "ad3dce5b-8b1a-4e59-8958-d78662fead44",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output2",
+          "uuid": "1644d118-1263-4d3c-82b0-7920f81005a1"
+        },
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "823a7af6-9901-4a64-a79b-757f05b210c0"
+        }
+      ]
+    },
+    "7": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/regionalgam_gls/regionalgam_gls/1.5",
+      "errors": null,
+      "id": 7,
+      "input_connections": {
+        "ab_indices": {
+          "id": 4,
+          "output_name": "output"
+        },
+        "collated_index": {
+          "id": 6,
+          "output_name": "output2"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Model temporal trend",
+          "name": "ab_indices"
+        },
+        {
+          "description": "runtime parameter for tool Model temporal trend",
+          "name": "collated_index"
+        }
+      ],
+      "label": null,
+      "name": "Model temporal trend",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "txt"
+        },
+        {
+          "name": "output2",
+          "type": "rdata"
+        }
+      ],
+      "position": {
+        "left": 1447.5,
+        "top": 126
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/regionalgam_gls/regionalgam_gls/1.5",
+      "tool_shed_repository": {
+        "changeset_revision": "a79f5f0f17ad",
+        "name": "regionalgam_gls",
+        "owner": "ecology",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"ab_indices\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"collated_index\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": null}",
+      "tool_version": "1.5",
+      "type": "tool",
+      "uuid": "55136322-da2c-42df-ad78-cdb3e2d1562e",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output2",
+          "uuid": "e1db80b9-7d64-402c-b6c8-5d0e712648b9"
+        },
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "fc01949f-66e0-468d-8732-78ac000b08b4"
+        }
+      ]
+    },
+    "8": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/regionalgam_autocor_acf/regionalgam_autocor_acf/1.5",
+      "errors": null,
+      "id": 8,
+      "input_connections": {
+        "gls_model": {
+          "id": 7,
+          "output_name": "output2"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Autocorrelation test",
+          "name": "gls_model"
+        }
+      ],
+      "label": null,
+      "name": "Autocorrelation test",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "png"
+        },
+        {
+          "name": "output_res_values",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 1639.5,
+        "top": 319
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/regionalgam_autocor_acf/regionalgam_autocor_acf/1.5",
+      "tool_shed_repository": {
+        "changeset_revision": "b416a363a2d5",
+        "name": "regionalgam_autocor_acf",
+        "owner": "ecology",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"gls_model\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "1.5",
+      "type": "tool",
+      "uuid": "45087faf-9c32-4504-b1a9-f8848991df0d",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output_res_values",
+          "uuid": "5ac64d1e-17f3-4893-b23f-7f93708b4e84"
+        },
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "83ccc28e-916a-4085-8ca6-5a3d85882b0f"
+        }
+      ]
+    },
+    "9": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/regionalgam_plot_trend/regionalgam_plot_trend/1.5",
+      "errors": null,
+      "id": 9,
+      "input_connections": {
+        "ab_indices": {
+          "id": 4,
+          "output_name": "output"
+        },
+        "gls_model": {
+          "id": 7,
+          "output_name": "output2"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Plot abundance",
+          "name": "ab_indices"
+        },
+        {
+          "description": "runtime parameter for tool Plot abundance",
+          "name": "gls_model"
+        }
+      ],
+      "label": null,
+      "name": "Plot abundance",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "png"
+        },
+        {
+          "name": "output_tsv",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1956.5,
+        "top": 187
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/regionalgam_plot_trend/regionalgam_plot_trend/1.5",
+      "tool_shed_repository": {
+        "changeset_revision": "58ecd15e6836",
+        "name": "regionalgam_plot_trend",
+        "owner": "ecology",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"ab_indices\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"gls_model\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "1.5",
+      "type": "tool",
+      "uuid": "56614a2f-c2fa-4384-b5ba-d74de867452c",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "2d99abe9-e7de-4dc0-b999-0c696906e3b5"
+        },
+        {
+          "label": null,
+          "output_name": "output_tsv",
+          "uuid": "e7cea5ca-9935-4654-a44f-7a31997234fe"
+        }
+      ]
+    }
+  },
+  "tags": [
+    "ecology"
+  ],
+  "uuid": "f4c9c0e9-5b41-4bb2-be97-5616bb30599f",
+  "version": 1
+}

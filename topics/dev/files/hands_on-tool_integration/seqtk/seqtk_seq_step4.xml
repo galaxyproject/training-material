@@ -1,0 +1,51 @@
+<tool id="seqtk_seq" name="Convert FASTQ to FASTA (seqtk)" version="0.1.0">
+    <requirements>
+        <requirement type="package" version="1.2">seqtk</requirement>
+    </requirements>
+    <stdio>
+        <exit_code range="1:" />
+    </stdio>
+    <command><![CDATA[
+        seqtk seq -a "$input1" > "$output1"
+    ]]></command>
+    <inputs>
+        <param type="data" name="input1" format="fastq" />
+    </inputs>
+    <outputs>
+        <data name="output1" format="fasta" />
+    </outputs>
+    <tests>
+        <test>
+            <param name="input1" value="2.fastq"/>
+            <output name="output1" file="2.fasta"/>
+        </test>
+    </tests>
+    <help><![CDATA[
+
+Seqtk is a fast and lightweight tool for processing sequences in the FASTA or FASTQ format.
+
+Usage:   seqtk seq [options] <in.fq>|<in.fa>
+
+Options: -q INT    mask bases with quality lower than INT [0]
+         -X INT    mask bases with quality higher than INT [255]
+         -n CHAR   masked bases converted to CHAR; 0 for lowercase [0]
+         -l INT    number of residues per line; 0 for 2^32-1 [0]
+         -Q INT    quality shift: ASCII-INT gives base quality [33]
+         -s INT    random seed (effective with -f) [11]
+         -f FLOAT  sample FLOAT fraction of sequences [1]
+         -M FILE   mask regions in BED or name list FILE [null]
+         -L INT    drop sequences with length shorter than INT [0]
+         -c        mask complement region (effective with -M)
+         -r        reverse complement
+         -A        force FASTA output (discard quality)
+         -C        drop comments at the header lines
+         -N        drop sequences containing ambiguous bases
+         -1        output the 2n-1 reads only
+         -2        output the 2n reads only
+         -V        shift quality by '(-Q) - 33'
+         -U        convert all bases to uppercases
+         -S        strip of white spaces in sequences
+
+    ]]></help>
+    <citations></citations>
+</tool>

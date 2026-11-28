@@ -1,0 +1,27 @@
+- doc: Test RNA-RNA interactome workflow
+  job:
+    reads_fastq:
+      class: File
+      location: https://zenodo.org/record/3709188/files/SRR2413302.100k.fastq.gz
+    reference1_fasta:
+      class: File
+      location: https://zenodo.org/record/3709188/files/miRNA_mature.fa.gz
+    reference2_fasta:
+      class: File
+      location: https://zenodo.org/record/3709188/files/transcriptome.fa.gz
+    annotation_gtf:
+      class: File
+      location: https://zenodo.org/record/3709188/files/whole_transcriptome.gff.gz
+      filetype: gff3.gz
+    genome_fasta:
+      class: File
+      location: https://zenodo.org/record/3709188/files/Mus_musculus.GRCm38.dna.fa.gz
+  outputs:
+    chimeric_reads:
+      asserts:
+        has_line:
+          line: '31132|TGTTG|1	mmu-miR-9-3p	ENSMUST00000033965	MIMAT0000143	ENSMUSG00000031561	mmu-miR-9-3p	Tenm3	miRNA	3_prime_UTR	0	22	+	23	8313	8341	+	8918	1,22,23,50,50	13:83738857:83738879:+	8:48228252:48228280:-	13:83738857:83738879:+	8:48228252:48228315:-	59	1226	398.10	19.73	1.0	1.0	1.0	AUAAAGCUAGAUAACCGAAAGU&AAGACAACUUUUUUUUUUUUUCUGAAUGACCUUAAAGGUGAUCGGCUUUAAAGAAUAUGUUUA	.(((((((.(((.(((..(((.&..............................)))...))).)))))))))).............	2&31	-13.4'
+    interactions:
+      asserts:
+        has_line:
+          line: '2	10	122985641	122985663	-	2	75989508	75989525	-	CUGCGCAAGCUACUGCCUUGCU	CAUCCAAGGAAGGCAGC	............(((((((.((&......)).))))))).	-14.2	CUGCCUUGCU	AGGAAGGCAG	13&7	10	122985653	122985663	-	2	75989514	75989524	-	96.10	1544.00	1640.1	1.0	1.0	1.0	miRNA	3_prime_UTR	mmu-let-7i-3p	ENSMUST00000124825'

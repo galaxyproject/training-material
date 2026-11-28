@@ -1,0 +1,284 @@
+---
+id: assembly-general-intro
+name: Assembly introduction
+description: >-
+  In this tour we will perform a basic de novo assembly of a short read set
+  using the Velvet assembler. For more details check out De Bruijn Graph
+  Assembly tutorial.
+title_default: assembly-general-intro
+steps:
+  - title: Genome assembly with Velvet
+    content: >-
+      Velvet is one of a number of de novo assemblers that use short read sets
+      as input (e.g. Illumina Reads), and the assembly method is based on de
+      Bruijn graphs. For information about Velvet see this <a
+      href="https://en.wikipedia.org/wiki/Velvet_assembler">link</a>.
+    backdrop: true
+  - title: Genome assembly with Velvet
+    content: >-
+      In this tour we will perform a basic de novo assembly of a short read set
+      using the Velvet assembler. For more in-depth view checkout the <a
+      href="">De Bruijn Graph Assembly tutorial</a>.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload new data first. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the link here.<br> The input is available on <a
+      href="https://doi.org/10.5281/zenodo.582600">Zenodo</a>. Right click on
+      the fastq file and then "Copy Link Address"
+    placement: right
+    textinsert: |-
+      https://zenodo.org/record/582600/files/mutant_R1.fastq
+      https://zenodo.org/record/582600/files/mutant_R2.fastq
+  - title: Uploading the input data. Format
+    content: Do not forget to set the input format to 'fastqsanger'
+    backdrop: true
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data and adjust the datatype
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded datasets are in the history, but their names correspond to
+      the link. We want to rename them into mutant_R1 and mutant_R2<br><br> For
+      each dataset: <ol>
+        <li>Click on the pencil icon beside the file to "Edit Attributes"</li>
+        <li>Change the name in "Name" to get only the name of the sample</li>
+      </ol>
+    position: left
+  - title: FASTQ files
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Click on the View Data button (the Eye icon) next to one of the FASTQ
+      sequence files
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What are four key features of a FASTQ file?</li>
+        <li>What is the main difference between a FASTQ and a FASTA file?</li>
+      </ul>
+    backdrop: true
+  - title: Assembly
+    content: >-
+      The read set for today is from an imaginary Staphylococcus aureus
+      bacterium with a miniature genome. The whole genome shotgun method used to
+      sequence our mutant strain read set. It was produced on an Illumina DNA
+      sequencing instrument.
+
+      <br>The files we need for assembly are the mutant_R1.fastq and
+      mutant_R2.fastq.<ul>
+        <li>The reads are paired-end.</li>
+        <li>Each read is 150 bases long.</li>
+        <li>The number of bases sequenced is equivalent to 19x the genome sequence of the wildtype strain. (Read coverage 19x - rather low!).</li>
+      </ul>
+    backdrop: true
+  - title: Evaluating sequences
+    content: >-
+      To estimate sequence quality and treatments to do on the data we will use
+      FastQC open-source tool. For each studied indicators, FastQC providing a
+      quick overview to tell in which areas there may be problems.
+    backdrop: true
+  - title: Estimating quality with FastQC
+    element: '#tool-search-query'
+    content: Search for FastQC tool
+    placement: right
+    textinsert: fastQC
+  - title: Estimating quality with FastQC
+    element: '#tool-search'
+    content: Click on the "FastQC" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.69"]
+  - title: Estimating quality with FastQC
+    element: '#tool-search'
+    content: Execute the tool on the input data with default settings.
+    position: left
+  - title: Estimating quality with FastQC
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Some of the important outputs of FastQC for our purposes are:<ul>
+
+      <li>Basic Statistics: Sequence length: will be important in setting
+      maximum k-mer size value for assembly</li>
+
+      <li>Basic Statistics: Encoding: Quality encoding type: important for
+      quality trimming software</li>
+
+      <li>Basic Statistics: % GC: high GC organisms don’t tend to assemble well
+      and may have an uneven read coverage distribution.</li>
+
+      <li>Basic Statistics: Total sequences: Total number of reads: gives you an
+      idea of coverage.</li>
+
+      </ul>
+    position: left
+  - title: Step 11. Estimating quality with FastQC
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Some of the important outputs of FastQC for our purposes are:<ul>
+
+      <li>Per base sequence quality: Dips in quality near the beginning, middle
+      or end of the reads: determines possible trimming/cleanup methods and
+      parameters and may indicate technical problems with the sequencing
+      process/machine run.</li>
+
+      <li>Per base N content: Presence of large numbers of Ns in reads: may
+      point to poor quality sequencing run. You would need to trim these reads
+      to remove Ns.</li>
+
+      <li>Kmer content: Presence of highly recurring k-mers: may point to
+      contamination of reads with barcodes or adapter sequences.</li>
+
+      </ul>
+    position: left
+  - title: Questions. Estimating quality with FastQC
+    content: |-
+      Inspect the FastQC report on the webpage  <ul>
+        <li>What does the y-axis represent in Figure "Sequence quality per base generated by FastQC"?</li>
+        <li>Why is the quality score decreasing across the length of the reads?</li>
+      </ul>
+    backdrop: true
+  - title: Estimating quality with FastQC
+    content: >-
+      Although we have warnings for two outputs (per base sequence content; Kmer
+      content), we can ignore these for now.
+    backdrop: true
+  - title: Assemble reads with Velvet
+    content: >-
+      We will perform a de novo assembly of the mutant FASTQ reads into long
+      contiguous sequences (in FASTA format) using the Velvet short read
+      assembler.
+
+      <br>Velvet requires the user to input a value of k (k-mer size) for the
+      assembly process. K-mers are fragments of sequence reads. Small k-mers
+      will give greater connectivity, but large k-mers will give better
+      specificity. We will discuss this more later.
+    backdrop: true
+  - title: Assemble reads with Velvet
+    element: '#tool-search-query'
+    content: Search for velvet tool
+    placement: right
+    textinsert: velvet
+  - title: Assemble reads with Velvet
+    element: '#tool-search'
+    content: Click on the "velvet" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fsimon-gladman%2Fvelvetoptimiser%2Fvelvet%2F0.1.0"]
+  - title: Assemble reads with Velvet
+    element: '#tool-search'
+    content: |-
+      Execute the tool with  <ul>
+        <li>K-mer: 29</li>
+        <li>Input file type: Fastq</li>
+        <li>Single or paired end reads: Paired</li>
+        <li>Select first set of reads: mutant_R1.fastq</li>
+        <li>Select second set of reads: mutant_R2.fastq</li>
+      </ul>
+    position: left
+  - title: Assemble reads with Velvet
+    element: '.history-right-panel .list-items > *:first'
+    content: Now inspect each of the outputs.
+    position: left
+  - title: Assemble reads with Velvet. The contigs file
+    content: >-
+      The Contigs file will show each contig with the k-mer length and k-mer
+      coverage listed as part of the header (however, these are just called
+      length and coverage).<ul>
+        <li>K-mer length: For the value of k chosen in the assembly, a measure of how many k-mers overlap (by 1 bp each overlap) to give this length.</li>
+        <li>K-mer coverage: For the value of k chosen in the assembly, a measure of how many k-mers overlap each base position (in the assembly).</li>
+    backdrop: false
+  - title: Assemble reads with Velvet. The Contigs stats file
+    content: >-
+      The Contigs stats file will show a list of these k-mer lengths and k-mer
+      coverages.
+    backdrop: false
+  - title: Collect some statistics on the contigs
+    content: We will now collect some basic statistics on our assembly.
+    backdrop: true
+  - title: Collect fasta statistics on the contigs
+    element: '#tool-search-query'
+    content: Search for fasta statistics tool
+    placement: right
+    textinsert: fasta statistics
+  - title: Collect fasta statistics on the contigs
+    element: '#tool-search'
+    content: Click on the "fasta statistics" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fsimon-gladman%2Ffasta_stats%2Ffasta-stats%2F1.0.0"]
+  - title: Collect fasta statistics on the contigs
+    element: '#center-panel'
+    content: Execute the tool on the input data with default settings.
+    position: left
+  - title: Collect fasta statistics on the contigs
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      Inspect the output<ul>
+        <li>Click on the eye ("View data") on the right of the file name in the history</li>
+        <li>Inspect the content of the file on the middle</li>
+      </ul>
+    position: left
+  - title: Collect fasta statistics on the contigs
+    content: |-
+      Inspect the output<ul>
+        <li>num_seq: the number of contigs in the FASTA file</li>
+        <li>num_bp: the number of assembled bases. Roughly proportional to genome size.</li>
+        <li>len_max: the biggest contig.</li>
+        <li>len_N50: N50 is a contig size. If contigs were ordered from small to large, half of all the nucleotides will be in contigs this size or larger.</li>
+      </ul>
+    backdrop: true
+  - title: Discussion
+    content: >-
+      We have completed an assembly on this data set for a number of k values
+      ranging from 29 to 101.
+    backdrop: true
+  - title: Questions
+    content: |-
+      Answer the following questions<ul>
+        <li>Are there any distinct features in the charts?</li>
+        <li>Does it look like one assembly might be better than some of the others? 3.</li>
+      </ul>
+    backdrop: true
+  - title: Key points
+    content: |-
+      <ul>
+        <li>We assembled some Illumina fastq reads into contigs using a short read assembler called Velvet</li>
+        <li>We showed what effect one of the key assembly parameters, the k-mer size, has on the assembly</li>
+        <li>It looks as though there are some exploitable patterns in the metric data vs the k-mer size.</li>
+      </ul>
+    backdrop: true

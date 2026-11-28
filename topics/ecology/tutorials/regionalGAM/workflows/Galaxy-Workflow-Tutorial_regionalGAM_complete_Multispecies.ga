@@ -1,0 +1,666 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "Regional GAM",
+  "format-version": "0.1",
+  "name": "Tutorial regionalGAM Complete Multispecies",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv?download=1"
+        }
+      ],
+      "label": null,
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 10,
+        "top": 10
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv?download=1\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "bc1199dc-030f-4c14-82da-23739830f179",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/mnhn65mo/csv_to_tabular/csv2tab_R/0.1",
+      "errors": null,
+      "id": 1,
+      "input_connections": {
+        "input1": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "CSV to Tabular",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 230,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/mnhn65mo/csv_to_tabular/csv2tab_R/0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "b735ac78702b",
+        "name": "csv_to_tabular",
+        "owner": "mnhn65mo",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"input1\": \"null\", \"sep\": \"\\\",\\\"\", \"__rerun_remap_job_id__\": null, \"header\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "0.1",
+      "type": "tool",
+      "uuid": "c58a8691-9bfc-45b0-be41-7e4ff8acce37",
+      "workflow_outputs": []
+    },
+    "10": {
+      "annotation": "",
+      "content_id": "Count1",
+      "errors": null,
+      "id": 10,
+      "input_connections": {
+        "input": {
+          "id": 8,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Count",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1330,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "Count1",
+      "tool_state": "{\"__page__\": null, \"sorting\": \"\\\"value\\\"\", \"column\": \"[\\\"2\\\"]\", \"__rerun_remap_job_id__\": null, \"delim\": \"\\\"T\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.0.2",
+      "type": "tool",
+      "uuid": "2fb7bcdb-2e31-42e5-8d2d-c413b30e890d",
+      "workflow_outputs": []
+    },
+    "11": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0",
+      "errors": null,
+      "id": 11,
+      "input_connections": {
+        "input": {
+          "id": 8,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Column Regex Find And Replace",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1330,
+        "top": 250
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0",
+      "tool_shed_repository": {
+        "changeset_revision": "209b7c5ee9d7",
+        "name": "regex_find_replace",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"field\": \"\\\"2\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\", \"checks\": \"[{\\\"__index__\\\": 0, \\\"replacement\\\": \\\"-\\\\\\\\1\\\", \\\"pattern\\\": \\\"(20[0-9][0-9])\\\"}]\"}",
+      "tool_version": "1.0.0",
+      "type": "tool",
+      "uuid": "135f56c2-cf6c-4fc0-9dd7-afc66f720c91",
+      "workflow_outputs": []
+    },
+    "12": {
+      "annotation": "",
+      "content_id": "Count1",
+      "errors": null,
+      "id": 12,
+      "input_connections": {
+        "input": {
+          "id": 9,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Count",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1330,
+        "top": 130
+      },
+      "post_job_actions": {},
+      "tool_id": "Count1",
+      "tool_state": "{\"__page__\": null, \"sorting\": \"\\\"value\\\"\", \"column\": \"[\\\"2\\\"]\", \"__rerun_remap_job_id__\": null, \"delim\": \"\\\"T\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.0.2",
+      "type": "tool",
+      "uuid": "c044200f-2558-4e91-8d2c-9b90877f8526",
+      "workflow_outputs": []
+    },
+    "13": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0",
+      "errors": null,
+      "id": 13,
+      "input_connections": {
+        "input": {
+          "id": 9,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Column Regex Find And Replace",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1330,
+        "top": 370
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0",
+      "tool_shed_repository": {
+        "changeset_revision": "209b7c5ee9d7",
+        "name": "regex_find_replace",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"field\": \"\\\"2\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\", \"checks\": \"[{\\\"__index__\\\": 0, \\\"replacement\\\": \\\"-\\\\\\\\1\\\", \\\"pattern\\\": \\\"(20[0-9][0-9])\\\"}]\"}",
+      "tool_version": "1.0.0",
+      "type": "tool",
+      "uuid": "86b61aac-99f4-42ff-8040-d31cb5d2dae7",
+      "workflow_outputs": []
+    },
+    "14": {
+      "annotation": "",
+      "content_id": "mergeCols1",
+      "errors": null,
+      "id": 14,
+      "input_connections": {
+        "input1": {
+          "id": 11,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Merge Columns",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1550,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "mergeCols1",
+      "tool_state": "{\"__page__\": null, \"input1\": \"null\", \"__rerun_remap_job_id__\": null, \"col2\": \"\\\"2\\\"\", \"col1\": \"\\\"3\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\", \"columns\": \"[]\"}",
+      "tool_version": "1.0.1",
+      "type": "tool",
+      "uuid": "791264f8-68e7-48df-98d1-a7dc4b9bff22",
+      "workflow_outputs": []
+    },
+    "15": {
+      "annotation": "",
+      "content_id": "mergeCols1",
+      "errors": null,
+      "id": 15,
+      "input_connections": {
+        "input1": {
+          "id": 13,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Merge Columns",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1550,
+        "top": 130
+      },
+      "post_job_actions": {},
+      "tool_id": "mergeCols1",
+      "tool_state": "{\"__page__\": null, \"input1\": \"null\", \"__rerun_remap_job_id__\": null, \"col2\": \"\\\"2\\\"\", \"col1\": \"\\\"3\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\", \"columns\": \"[]\"}",
+      "tool_version": "1.0.1",
+      "type": "tool",
+      "uuid": "3ad79d90-dbea-4b05-a2e7-3d977d22997d",
+      "workflow_outputs": []
+    },
+    "16": {
+      "annotation": "",
+      "content_id": "Remove beginning1",
+      "errors": null,
+      "id": 16,
+      "input_connections": {
+        "input": {
+          "id": 14,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Remove beginning",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1770,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "Remove beginning1",
+      "tool_state": "{\"input\": \"null\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\", \"num_lines\": \"\\\"1\\\"\", \"__page__\": null}",
+      "tool_version": "1.0.0",
+      "type": "tool",
+      "uuid": "bc526f1c-afeb-474d-aaee-9335d58fa0cb",
+      "workflow_outputs": []
+    },
+    "17": {
+      "annotation": "",
+      "content_id": "Remove beginning1",
+      "errors": null,
+      "id": 17,
+      "input_connections": {
+        "input": {
+          "id": 15,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Remove beginning",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1770,
+        "top": 130
+      },
+      "post_job_actions": {},
+      "tool_id": "Remove beginning1",
+      "tool_state": "{\"input\": \"null\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\", \"num_lines\": \"\\\"1\\\"\", \"__page__\": null}",
+      "tool_version": "1.0.0",
+      "type": "tool",
+      "uuid": "31c2efc0-8464-4207-8cb1-418166903a2a",
+      "workflow_outputs": []
+    },
+    "18": {
+      "annotation": "",
+      "content_id": "Paste1",
+      "errors": null,
+      "id": 18,
+      "input_connections": {
+        "input1": {
+          "id": 16,
+          "output_name": "out_file1"
+        },
+        "input2": {
+          "id": 17,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Paste",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1990,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "Paste1",
+      "tool_state": "{\"input2\": \"null\", \"__page__\": null, \"input1\": \"null\", \"__rerun_remap_job_id__\": null, \"delimiter\": \"\\\"T\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.0.0",
+      "type": "tool",
+      "uuid": "305f3be2-c1d5-4f6a-8ea9-ee67a9b0bcf2",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0",
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+        "input": {
+          "id": 1,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Column Regex Find And Replace",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 450,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0",
+      "tool_shed_repository": {
+        "changeset_revision": "209b7c5ee9d7",
+        "name": "regex_find_replace",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"field\": \"\\\"2\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\", \"checks\": \"[{\\\"__index__\\\": 0, \\\"replacement\\\": \\\"\\\", \\\"pattern\\\": \\\"(\\\\\\\\.[0-9]+)\\\"}]\"}",
+      "tool_version": "1.0.0",
+      "type": "tool",
+      "uuid": "9c1a88cf-83fe-4763-a487-1fdef5c041ef",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "Count1",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "input": {
+          "id": 2,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Count",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 670,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "Count1",
+      "tool_state": "{\"__page__\": null, \"sorting\": \"\\\"largest\\\"\", \"column\": \"[\\\"1\\\"]\", \"__rerun_remap_job_id__\": null, \"delim\": \"\\\"T\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.0.2",
+      "type": "tool",
+      "uuid": "9585f0d1-9996-4121-9772-37de24250f59",
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "Filter1",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "input": {
+          "id": 2,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Filter",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 670,
+        "top": 130
+      },
+      "post_job_actions": {},
+      "tool_id": "Filter1",
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"cond\": \"\\\"c1=='\\\\\\\"Aglais io\\\\\\\"'\\\"\", \"input\": \"null\", \"header_lines\": \"\\\"1\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.1.0",
+      "type": "tool",
+      "uuid": "3af6c2d6-ea4d-4264-bb50-60012cad0d68",
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "Filter1",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "input": {
+          "id": 2,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Filter",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 670,
+        "top": 250
+      },
+      "post_job_actions": {},
+      "tool_id": "Filter1",
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"cond\": \"\\\"c1=='\\\\\\\"Pyronia tithonus\\\\\\\"'\\\"\", \"input\": \"null\", \"header_lines\": \"\\\"1\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.1.0",
+      "type": "tool",
+      "uuid": "3fbb5102-34b9-4b7f-bb5f-e79cce0710f0",
+      "workflow_outputs": []
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/mnhn65mo/tabular_to_csv/tab2csv_R/0.1",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "input1": {
+          "id": 4,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Tabular to CSV",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "csv"
+        }
+      ],
+      "position": {
+        "left": 890,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/mnhn65mo/tabular_to_csv/tab2csv_R/0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "659820e2aa61",
+        "name": "tabular_to_csv",
+        "owner": "mnhn65mo",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"input1\": \"null\", \"sep\": \"\\\",\\\"\", \"__rerun_remap_job_id__\": null, \"header\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "0.1",
+      "type": "tool",
+      "uuid": "c3d10d55-2b6d-42c6-a258-9dd44880274a",
+      "workflow_outputs": []
+    },
+    "7": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/mnhn65mo/tabular_to_csv/tab2csv_R/0.1",
+      "errors": null,
+      "id": 7,
+      "input_connections": {
+        "input1": {
+          "id": 5,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Tabular to CSV",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "csv"
+        }
+      ],
+      "position": {
+        "left": 890,
+        "top": 130
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/mnhn65mo/tabular_to_csv/tab2csv_R/0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "659820e2aa61",
+        "name": "tabular_to_csv",
+        "owner": "mnhn65mo",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"input1\": \"null\", \"sep\": \"\\\",\\\"\", \"__rerun_remap_job_id__\": null, \"header\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "0.1",
+      "type": "tool",
+      "uuid": "d3f0ccb5-9dbb-4e87-8e93-8df852dfce17",
+      "workflow_outputs": []
+    },
+    "8": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/mnhn65mo/regionalgam/flight-curve/1.0.0",
+      "errors": null,
+      "id": 8,
+      "input_connections": {
+        "input": {
+          "id": 6,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Flight curve",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1110,
+        "top": 10
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/mnhn65mo/regionalgam/flight-curve/1.0.0",
+      "tool_shed_repository": {
+        "changeset_revision": "0e7066603eab",
+        "name": "regionalgam",
+        "owner": "mnhn65mo",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"input\": \"null\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": null}",
+      "tool_version": "1.0.0",
+      "type": "tool",
+      "uuid": "9ff0e156-026e-4529-aa92-f107fa5c27bc",
+      "workflow_outputs": []
+    },
+    "9": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/mnhn65mo/regionalgam/flight-curve/1.0.0",
+      "errors": null,
+      "id": 9,
+      "input_connections": {
+        "input": {
+          "id": 7,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Flight curve",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1110,
+        "top": 130
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/mnhn65mo/regionalgam/flight-curve/1.0.0",
+      "tool_shed_repository": {
+        "changeset_revision": "0e7066603eab",
+        "name": "regionalgam",
+        "owner": "mnhn65mo",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"input\": \"null\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__page__\": null}",
+      "tool_version": "1.0.0",
+      "type": "tool",
+      "uuid": "a5388086-0396-4a11-9a40-e4bdf50e3794",
+      "workflow_outputs": []
+    }
+  },
+  "tags": [
+    "ecology"
+  ],
+  "uuid": "b70ff62a-48ca-4e7e-9709-4171ed9124c4"
+}

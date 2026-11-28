@@ -1,0 +1,26 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nref_genome_chromFa.tar"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nPopulation_map.txt"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nBarcodes_SRR034310.tabular"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nSRR034310.fastq"]
+  4[label="Stacks: process radtags"]
+  2 -> 4 [label="output"]
+  3 -> 4 [label="output"]
+  5[label="Stacks: process radtags"]
+  2 -> 5 [label="output"]
+  3 -> 5 [label="output"]
+  6[label="Stacks: process radtags"]
+  2 -> 6 [label="output"]
+  3 -> 6 [label="output"]
+  7[label="Map with BWA for Illumina"]
+  0 -> 7 [label="output"]
+  4 -> 7 [label="demultiplexed"]
+  8[label="Stacks: reference map"]
+  7 -> 8 [label="output"]
+  1 -> 8 [label="output"]
+  9[label="Stacks: populations"]
+  8 -> 9 [label="all_output"]
+  1 -> 9 [label="output"]
+}

@@ -1,0 +1,199 @@
+---
+id: genetic-map-rad-seq
+name: RAD-Seq to construct genetic maps
+description: >-
+  This tutorial is based on the analysis originally described in <a href="http://www.genetics.org/content/188/4/799">publication</a>. We will analyze real RAD sequencing data to extract useful information, such as genotypes and haplotypes to generate input files for downstream genetic map creation.
+title_default: genetic-map-rad-seq
+steps:
+  - title: Introduction
+    content: >-
+      In this tutorial we will analyze real RAD sequencing data to extract useful information, such as genotypes and haplotypes to generate input files for downstream genetic map creation.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      This tutorial is based on the analysis originally described in <a href="http://www.genetics.org/content/188/4/799">publication</a>. Further information about the pipeline is available from a <a href="http://catchenlab.life.illinois.edu/stacks">dedicated page of the official STACKS website</a>. Authors describe that they developed a genetic map in the spotted gar and present here data from a single linkage group. The gar genetic map is an F1 pseudotest cross between two parents and 94 of their F1 progeny. They took the markers that appeared in one of the linkage groups and worked backwards to provide the raw reads from all of the stacks contributing to that linkage group.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      We here proposed to re-analyze these data at least until genotypes determination. Data are already clean so you don’t have to demultiplex it using barcode information through <b>Process Radtags</b> tool.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Uploading the new data
+    content: >-
+      The original data is available at <a href="http://catchenlab.life.illinois.edu/stacks/">STACKS website</a> and the subset used here is findable on <a href="https://zenodo.org/record/1219888#.WtZlK5c6-00">Zenodo</a>.
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the links here from <a
+      href="https://zenodo.org/record/1219888#.WtZlK5c6-00">zenodo</a>.
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded data is in the history, but its name corresponds to the link.
+      We want to rename them it to something meaningful.<br><br><ul>
+        <li>Click on the pencil icon beside the file to "Edit Attributes"</li>
+        <li>Change the name in "Name" to get only the name of the sample</li>
+      </ul>
+    position: left
+  - title: Building loci using STACKS
+    content: >-
+      Run <b>Stacks: De novo map</b> Galaxy tool. This program will run <b>ustacks</b>, <b>cstacks</b>, and <b>sstacks</b> on each individual, accounting for the alignments of each read.
+    backdrop: true
+  - title: Building loci using STACKS
+    element: '#tool-search-query'
+    content: Search for "Stacks de novo map" tool
+    placement: right
+    textinsert: Stacks de novo map
+  - title: Building loci using STACKS
+    element: '#tool-search'
+    content: Click on the "Stacks de novo map" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fstacks_denovomap%2Fstacks_denovomap%2F1.46.0"]
+        .tool-old-link
+  - title: Building loci using STACKS
+    element: '#tool-search'
+    content: |-
+      Execute the tool with parameters:
+      <ul>
+        <li>"Select your usage" to `Genetic map'</li>
+        <li>"Files containing parent sequences" to corresponding `male` and `female`</li>
+        <li>"Files containing progeny sequences" to 20 progeny sequences, e.g. 'progeny_1'</li>
+        <li>Click on "Assembly options"</li>
+        <li>"Minimum number of identical raw reads required to create a stack" to `3`</li>
+        <li>"Minimum number of identical, raw reads required to create a stack in 'progeny' individuals" to `3`</li>
+        <li>"Number of mismatches allowed between loci when building the catalog" to `3`</li>
+        <li>"Remove, or break up, highly repetitive RAD-Tags in the ustacks program" to 'Yes'</li>
+      </ul>
+    position: left
+  - title: Building loci using STACKS
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Once Stacks has completed running, you will see 5 new data collections and 8 datasets.
+    position: left
+  - title: Building loci using STACKS
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Investigate the output files: <b>result.log</b> and <b>catalog.*</b> (snps, alleles and tags).
+    position: left
+  - title: Building loci using STACKS
+    content: >-
+      Looking at the first file, <b>denovo_map.log</b>, you can see the command line used and the start as end execution time.
+      Then are the different STACKS steps.
+    backdrop: false
+  - title: Questions
+    content: >-
+      <ul>
+        <li>In cstacks part, there is a line "425 loci in a catalog". Can you identify the meanning of the number 425?</li>
+        <li>Looking at the catalog.tags file, identify specific and shared loci from each individual. Count nuber of catalog loci coming from the first individual, from the second and thus find on both parents.</li>
+      </ul>
+    backdrop: false
+  - title: Building loci using STACKS
+    content: >-
+      Endly, <b>genotypes</b> is executed. It searches for markers identified on the parents and the associate progenies haplotypes. If the first parent have a GA (ex: aatggtgtGgtccctcgtAc) and AC (ex: aatggtgtAgtccctcgtCc) haplotypes, and the second parent only a GA (ex: aatggtgtGgtccctcgtAc) haplotype, STACKS declare a ab/aa marker for this locus. Genotypes program then associate GA to a and AC to b and then scan progeny to determine which haplotype is found on each of them.
+    backdrop: false
+  - title: Building loci using STACKS
+    content: >-
+      Finally, 447 loci, markers, are kept to generate the <b>batch_1.genotypess_1.tsv</b> file. 459 loci are stored on the observed haplotype file <b>batch_1.haplotypes_1.tsv</b>.
+    backdrop: false
+  - title: Building loci using STACKS
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Now examine <b>sample1.snps</b> and <b>sample2.snps</b>
+    position: left
+  - title: Building loci using STACKS
+    content: >-
+      Catalog_ID (= catalog Stacks_ID) is composed by the <b>Stack_ID</b> from the “reference” individual, here sample1, but number is different from sample2 <b>Stack_ID</b>. Thus, in the <b>catalog.alleles.tsv</b>, the Stack_ID numbered 3 correspond to the Stack_ID number 16 from sample2!
+    backdrop: false
+  - title: Building loci using STACKS
+    content: >-
+      Considering catalog SNPs 27 & 28, on the 302 catalog locus, and corresponding catalog haplotypes, 3 on the 4 possible (AA, AT, GT but no GA).
+      Heterozygoty is observed on each parent (one ab, the other ac) and we have 19 genotypes on the 22 individuals.
+    backdrop: false
+  - title: Building loci using STACKS
+    content: >-
+      We then can see that Stack_ID 330 for female correspond to the 39 for male.
+    backdrop: false
+  - title: Genotypes determination
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Re-Run the last step Stacks: genotypes, trying different options.
+    position: left
+  - title: Building loci using STACKS
+    element: '#tool-search'
+    content: |-
+      Re-run the tool, the parameters should be as followed:
+      <ul>
+        <li>"Output from previous Stacks pipeline steps (e.g. denovo_map or refmap)" to `Output dataset 'all_output' from step XX'</li>
+        <li>Click on "Genotyping options"</li>
+        <li>"Make automated corrections to the data" to 'Yes'</li>
+        <li>"Minimum number of reads required at a stack to call a homozygous genotype" to '5'</li>
+        <li>"Heterozygote minor allele minimum frequency" to `0.05`</li>
+        <li>"Heterozygote minor allele maximum frequency" to `0.1`</li>
+      </ul>
+    position: left
+  - title: Building loci using STACKS
+    content: >-
+      You can re-run Stacks: genotypes modifying the number of genotyped progeny to consider a marker and thus be more or less stringent. Compare results.
+    backdrop: true
+  - title: Genotypes.tsv files
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Inspect Genotypes.tsv files.
+      One line by locus, one column by individual (aa, ab, AB if automatic correction applied, bb, bc, …) with observed genotype for each locus
+    position: left
+  - title: Genotypes.txt files
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      One line by individual, and for each individual, for each catalog locus, genotype
+    position: left
+  - title: Haplotypes.tsv files
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      One line by locus, one column by individual (aa, ab, AB if automatic correction applied, bb, bc, …) with observed genotype for each locus
+    position: left
+  - title: Questions
+    content: >-
+      <ul>
+        <li>The use of the deleverage algorithm allows to not consider loci obtained from merging more than 3 stacks. Why 3 if biologically, you are waiting something related to 2 for diploid organisms?</li>
+        <li>Re-execute Stacks: De novo map pipeline modifying the p-value treshold for the SNP model. What is the difference regarding to unverified haplotypes ?</li>
+      </ul>
+    backdrop: false
+  - title: Conclusion
+    content: >-
+      In this tutorial, we have analyzed real RAD sequencing data to extract useful information, such as genotypes and haplotypes to generate input files for downstream genetic map creation.
+    backdrop: true

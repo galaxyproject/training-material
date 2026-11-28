@@ -1,0 +1,19 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nCollection of VCFs to analyze"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nReference genome of the MTBC ancestor"]
+  2[label="Filter TB variants"]
+  0 -> 2 [label="output"]
+  3[label="Generate the complete genome of each of the samples"]
+  2 -> 3 [label="output1"]
+  1 -> 3 [label="output"]
+  kce5dd7a2c33d46b49f0268c2bdfcf31a[color=lightseagreen,label="Output\n#{input_file}"]
+  3 -> kce5dd7a2c33d46b49f0268c2bdfcf31a
+  4[label="Concatenate genomes to build a MSA"]
+  3 -> 4 [label="output_file"]
+  5[label="Keep only variable positions"]
+  4 -> 5 [label="out_file1"]
+  6[label="Calculate SNP distances"]
+  5 -> 6 [label="output_fasta"]
+}
